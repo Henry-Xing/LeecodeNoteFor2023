@@ -37,3 +37,26 @@ Learning Time: 2:00-6:00 7:30-10:30 7h
   - how?
 
 ### date: 2022/11/12
+```python
+def checkInclusion(s1: str, s2: str) -> bool:
+    n1 = len(s1)
+    n2 = len(s2)
+
+    temp = list(s1).copy()
+
+    for i in range(n2):
+        if i <= n2 - n1:
+            for j in range(n1):
+                print(temp, i, i+j, s2[i+j])
+                if s2[i+j] in temp:
+                    temp.remove(s2[i+j])
+                else:
+                    temp = list(s1).copy()
+                    break
+                if not temp:
+                    return True
+        else:
+            return False
+
+    return False if temp else True
+  ```
