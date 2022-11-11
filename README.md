@@ -8,7 +8,7 @@ task link: https://ke.qq.com/course/package/31104?flowToken=1039500
 Learning Time: 2:00-6:00 7:30-10:30 7h
 
 
-### date: 2022/11/11
+### date: 2022/11/11 数组字符串
 
 - question: input/output基础 link: https://www.nowcoder.com/test/27976983/summary#question
 
@@ -164,6 +164,7 @@ class Solution:
 ``` py
 # python code
 # 如果题目指出字符串只有a-z最好使用26长度的数组
+# 字典也可以进行排序 sorted(dic, key=some key)
 class Solution:
     def sortString(self, s: str) -> str:
         alpha = [0] * 26
@@ -193,7 +194,74 @@ class Solution:
 
 ```
 
-### date: 2022/11/12
+### date: 2022/11/12 双指针
+
+- question: LC283 移动零 link: https://leetcode.cn/problems/move-zeroes/
+    - answer:
+```python
+```
+
+```java
+```
+
+- question: LC26 删除有序数组中的重复元素 link: https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
+    - answer:
+```python
+```
+
+```java
+```
+
+- question: LC80 删除排序数组中的重复元素二 link: https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/
+    - answer:
+```python
+```
+
+```java
+```
+
+- question: LC27 移除元素 link: https://leetcode.cn/problems/remove-element/
+    - answer:
+```python
+```
+
+```java
+```
+
+- question: LC344 反转字符串 link: https://leetcode.cn/problems/reverse-string/
+    - answer:
+```python
+```
+
+```java
+```
+
+- question: LC125 验证回文串 link: https://leetcode.cn/problems/valid-palindrome/
+    - answer:
+```python
+```
+
+```java
+```
+
+- question: LC11 盛最多水的容器 link: https://leetcode.cn/problems/container-with-most-water/
+    - answer:
+```python
+```
+
+```java
+```
+
+- question: LC1480 一维数组的动态和（前缀和） link: https://leetcode.cn/problems/running-sum-of-1d-array/
+    - answer:
+```python
+```
+
+```java
+```
+
+- question: LC238 除自身以外数组的乘积 link: https://leetcode.cn/problems/product-of-array-except-self/
+    - answer:
 ```python
 ```
 
