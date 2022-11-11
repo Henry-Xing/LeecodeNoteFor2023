@@ -126,15 +126,6 @@ class Solution:
             ans.extend([chr(i + ord("a"))] * minFreq[i])
 
         return ans
-
-        # freq = Counter(words[0])
-
-        # for word in words:
-        #     freq &= Counter(word)
-
-        # return list(freq.elements())
-
-        return list(reduce(lambda x, y: x & y, map(collections.Counter, words)).elements())
 ```
 ```python
 # python code
