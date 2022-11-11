@@ -10,11 +10,9 @@ Learning Time: 2:00-6:00 7:30-10:30 7h
 
 ## date: 2022/11/11 数组字符串
 
-### question: input/output基础
+- question: input/output基础 link: https://www.nowcoder.com/test/27976983/summary#question
 
--  link: https://www.nowcoder.com/test/27976983/summary#question
-
-    - ACM模式下Java代码格式
+- ACM模式下Java代码格式
 
 ```java
 import java.util.Scanner;
@@ -30,7 +28,7 @@ public class Main {
   }
 ```
 
-    - ACM模式下JavaScript(V8)代码格式
+- ACM模式下JavaScript(V8)代码格式
 
 ```javaScript
 //从控制台输入
@@ -39,9 +37,9 @@ let res = str
 print(res);//或使用console.log(res)
 ```
 
-    - ACM模式下JavaScript(Node)代码格式
+- ACM模式下JavaScript(Node)代码格式
 
-        - 单行
+- 单行
 
 ```js
 const readline = require('readline')
@@ -57,8 +55,7 @@ rl.on('line', function(line) {
 })
 
 ```
-
-        - 多行输入
+- 多行输入
 
 ```js
 const readline = require('readline');
