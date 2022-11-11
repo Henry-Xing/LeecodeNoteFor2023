@@ -109,7 +109,51 @@ class Solution:
 - answer:
 - answer:
 ``` py
+# python code
+class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        # simple version
+        minFreq = [float("inf")] * 26
 
+        for word in words:
+            freq = [0] * 26
+            for latter in word:
+                freq[ord(latter) - ord("a")] += 1
+            
+            for i in range(26):
+                minFreq[i] = min(minFreq[i], freq[i])
+        
+        ans = []
+        for i in range(26):
+            ans.extend([chr(i + ord("a"))] * minFreq[i])
+
+        return ans
+
+        # freq = Counter(words[0])
+
+        # for word in words:
+        #     freq &= Counter(word)
+
+        # return list(freq.elements())
+
+        return list(reduce(lambda x, y: x & y, map(collections.Counter, words)).elements())
+```
+```python
+class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        # enhanced version
+        # Counter to create a dic about the string count the freq for every char
+        freq = Counter(words[0])
+
+        for word in words:
+            freq &= Counter(word)
+
+        # Counter.elements() returns value keys, if "a":3 then "a a a"
+        return list(freq.elements())
+
+        # more enhanced version
+        # reduce叠加遍历 reduce(function, list)
+        # return list(reduce(lambda x, y: x & y, map(collections.Counter, words)).elements())
 ```
 
 ``` java
