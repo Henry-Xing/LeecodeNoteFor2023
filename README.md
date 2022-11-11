@@ -23,6 +23,7 @@ for line in sys.stdin:
     # line.split() return a list
     print(a[0][::-1])
 ```
+
     - java code
 ``` java
 
