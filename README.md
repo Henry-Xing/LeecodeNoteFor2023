@@ -13,7 +13,7 @@ Learning Time: 2:00-6:00 7:30-10:30 7h
 - question: input/output基础 link: https://www.nowcoder.com/test/27976983/summary#question
 
 - question: HJ12 字符串反转 link: https://www.nowcoder.com/practice/e45e078701ab4e4cb49393ae30f1bb04?tpId=37&tqId=21235&ru=/exam/oj
-- answer:
+    - answer:
 ``` python
 # python code
 import sys
@@ -29,7 +29,7 @@ for line in sys.stdin:
 ```
 
 - question: HJ68 成绩排序 link: https://www.nowcoder.com/practice/8e400fd9905747e4acc2aeed7240978b?tpId=37&tqId=21291&ru=/exam/oj
-- answer:
+    - answer:
 ``` python
 # python code
 import sys
@@ -58,7 +58,7 @@ for s in score:
 
 
 - question: LC442 数组中重复的数据 link: https://leetcode.cn/problems/find-all-duplicates-in-an-array/
-- answer:
+    - answer:
 ``` py
 # python code
 class Solution:
@@ -82,8 +82,7 @@ class Solution:
 ```
 
 - question: LC448 找到所有数组中消失的数字 link: https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/
-- answer:
-- answer:
+    - answer:
 ``` py
 # python code
 # 如果遍历1—len(nums)+1，去寻找对应值在nums出现与否会超时。
@@ -106,8 +105,7 @@ class Solution:
 ```
 
 - question: LC1002 查找共用字符 link: https://leetcode.cn/problems/find-common-characters/
-- answer:
-- answer:
+    - answer:
 ``` py
 # python code
 class Solution:
@@ -139,6 +137,7 @@ class Solution:
         return list(reduce(lambda x, y: x & y, map(collections.Counter, words)).elements())
 ```
 ```python
+# python code
 class Solution:
     def commonChars(self, words: List[str]) -> List[str]:
         # enhanced version
@@ -161,10 +160,33 @@ class Solution:
 ```
 
 - question: LC1370 上升下降字符串 link: https://leetcode.cn/problems/increasing-decreasing-string/
-- answer:
-- answer:
+    - answer:
 ``` py
+# python code
+# 如果题目指出字符串只有a-z最好使用26长度的数组
+class Solution:
+    def sortString(self, s: str) -> str:
+        alpha = [0] * 26
+        # count for s
+        for l in s:
+            alpha[ord(l)-ord("a")] += 1
+        
+        ans = []
 
+        while len(ans) < len(s):
+            # start from min
+            for i in range(26):
+                if alpha[i]:
+                    ans.append(chr(i + ord("a")))
+                    alpha[i] -= 1
+            # start from max
+            for i in range(26):
+                if alpha[26-i-1]:
+                    ans.append(chr(26-i-1 + ord("a")))
+                    alpha[26-i-1] -= 1
+        
+        # "".join(list) can get a string combination
+        return "".join(ans)
 ```
 
 ``` java
