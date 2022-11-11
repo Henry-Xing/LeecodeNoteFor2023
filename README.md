@@ -14,11 +14,13 @@ Learning Time: 2:00-6:00 7:30-10:30 7h
 
 - question: HJ12 字符串反转 link: https://www.nowcoder.com/practice/e45e078701ab4e4cb49393ae30f1bb04?tpId=37&tqId=21235&ru=/exam/oj
 - answer:
+- python code
 ``` python
 import sys
-# 逆序遍历数组 <=> 切片stride = -1
+# 逆序遍历数组 <=> 切片stride = -1 <=> list[start: end: stride]
 for line in sys.stdin:
     a = line.split()
+    # line.split() return a list
     print(a[0][::-1])
 ```
 
