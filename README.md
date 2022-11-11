@@ -85,7 +85,19 @@ class Solution:
 - answer:
 - answer:
 ``` py
+# python code
+# 不允许使用额外空间，利用nums充当字典，先遍历nums，nums中的值作为key，改变对应key的value为负值以此标记此值是否出现过，最后筛选value大于0的key则是没出现过的key。
+class Solution:
+    def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
+        # get n from nums as the key to reverse nums[n]
+        for n in nums:
+            # because the value appeared is negative, use abs to get positive value
+            nums[abs(n)-1] = - abs(nums[abs(n)-1])
 
+        # python一行赋值list [目标值 循环方式 条件]
+        ans = [n+1 for n in range(len(nums)) if nums[n] > 0]
+        
+        return ans
 ```
 
 ``` java
