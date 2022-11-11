@@ -30,23 +30,75 @@ for line in sys.stdin:
 
 - question: HJ68 成绩排序 link: https://www.nowcoder.com/practice/8e400fd9905747e4acc2aeed7240978b?tpId=37&tqId=21291&ru=/exam/oj
 - answer:
-  - how?
+``` python
+# python code
+import sys
+# read one line only
+n = int(input())
+# Python三目运算符
+order = True if int(input()) == 0 else False
+
+score = []
+for line in sys.stdin:
+    s = line.split()
+    score.append([s[0], int(s[1])])
+
+# 按照key排序, 默认排序为升序, reverse是否逆序.
+score.sort(key=lambda x: x[1], reverse=order) 
+
+# print(*s) 可以直接将list打印出来且间隔为一个空格.
+for s in score:
+    # print(*s)
+    print(s[0], s[1])
+```
+
+``` java
+
+```
+
 
 - question: LC442 数组中重复的数据 link: https://leetcode.cn/problems/find-all-duplicates-in-an-array/
 - answer:
-  - how?
+``` py
+
+```
+
+``` java
+
+```
 
 - question: LC448 找到所有数组中消失的数字 link: https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/
 - answer:
-  - how?
+- answer:
+``` py
+
+```
+
+``` java
+
+```
 
 - question: LC1002 查找共用字符 link: https://leetcode.cn/problems/find-common-characters/
 - answer:
-  - how?
+- answer:
+``` py
+
+```
+
+``` java
+
+```
 
 - question: LC1370 上升下降字符串 link: https://leetcode.cn/problems/increasing-decreasing-string/
 - answer:
-  - how?
+- answer:
+``` py
+
+```
+
+``` java
+
+```
 
 ### date: 2022/11/12
 ```python
