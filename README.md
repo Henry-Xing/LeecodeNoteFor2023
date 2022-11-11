@@ -8,12 +8,85 @@ task link: https://ke.qq.com/course/package/31104?flowToken=1039500
 Learning Time: 2:00-6:00 7:30-10:30 7h
 
 
-### date: 2022/11/11 数组字符串
+## date: 2022/11/11 数组字符串
 
-- question: input/output基础 link: https://www.nowcoder.com/test/27976983/summary#question
+### question: input/output基础
+
+-  link: https://www.nowcoder.com/test/27976983/summary#question
+
+ACM模式下Java代码格式
+
+```java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+      //从控制台输入
+      Scanner scanner = new Scanner(System.in);
+      String str = scanner.nextLine();
+      String res = "";
+      System.out.Println(res);
+    }
+  }
+```
+
+ACM模式下JavaScript(V8)代码格式
+
+```javaScript
+//从控制台输入
+const str = readline();
+let res = str
+print(res);//或使用console.log(res)
+```
+
+ACM模式下JavaScript(Node)代码格式
+
+单行
+
+```js
+const readline = require('readline')
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
+
+rl.on('line', function(line) {
+      let res = line
+      console.log(res)
+})
+
+```
+
+多行输入
+
+```js
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+
+const inputArr = [];
+rl.on('line', function(line){
+    inputArr.push(line);//将输入流转换为数字类型保存到inputArr中
+}).on('close', function(){
+    sortScore(inputArr);//调用解决函数并输出
+})
+
+//解决函数
+function sortScore(inputArr) {
+    
+}
+
+```
+
+
 
 - question: HJ12 字符串反转 link: https://www.nowcoder.com/practice/e45e078701ab4e4cb49393ae30f1bb04?tpId=37&tqId=21235&ru=/exam/oj
     - answer:
+
 ``` python
 # python code
 import sys
@@ -24,9 +97,22 @@ for line in sys.stdin:
     print(a[0][::-1])
 ```
 
-``` java
-123
-    231
+``` js
+// Js code
+const readline = require("readline");
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output:process.stdout
+})
+
+rl.on("line", function line(line) {
+    let res = ""
+    for (var i = line.length - 1; i >= 0; i--) {
+        res += line[i];
+    }
+    console.log(res)
+});
 ```
 
 - question: HJ68 成绩排序 link: https://www.nowcoder.com/practice/8e400fd9905747e4acc2aeed7240978b?tpId=37&tqId=21291&ru=/exam/oj
@@ -53,7 +139,50 @@ for s in score:
     print(s[0], s[1])
 ```
 
-``` java
+``` js
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+//js遇到多行输入问题时，首先用rl.on('line', function(line){})逐行读取字符串存入inputArr中，随后在.on('close', function())中用特定函数对inputArr处理
+const inputArr = [];
+rl.on('line', function(line){
+    inputArr.push(line);//将输入流转换为数字类型保存到inputArr中
+}).on('close', function(){
+    sortScore(inputArr);//调用解决函数并输出
+})
+
+//解决函数 
+function sortScore(inputArr) {
+    let studentNum = inputArr[0];
+    let flag = parseInt(inputArr[1]);
+    let students = [];
+
+    // push the students into the array
+    // js 的数组可以存json类型的数据，即键值对
+    for (let i = 0; i < studentNum; i++) {
+        var line = inputArr[2+i].split(" ");
+        var name = line[0];
+        var score = parseInt(line[1]);
+        students.push({"name":name, "score":score, "index":i});
+    }
+
+    // sort the array
+    // js sort默认情况是按照从小到大排序，如果数据是json键值对，那么需要编写sort的回调函数来定义顺序规则，升序s1-s2，降序s2-s1。json数据可用.name的方法进行比较
+    if (flag == 0) {
+        students.sort((s1, s2) => {
+            return s2.score - s1.score || s1.index - s2.index
+        })
+    } else if (flag == 1) {
+        students.sort((s1, s2) => {
+            return s1.score - s2.score
+        })
+    }
+    for (var student of students) {
+        console.log(student.name + " " + student.score);
+    }
+}
 
 ```
 
@@ -80,7 +209,20 @@ class Solution:
 ```
 
 ``` java
-
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDuplicates = function(nums) {
+    let res =[];
+    nums.sort();
+    for (let i = 1; i < nums.length; i++) {
+        if (nums[i] == nums[i-1]) {
+            res.push(nums[i]);
+        }
+    }
+    return res;
+};
 ```
 
 - question: LC448 找到所有数组中消失的数字 link: https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/
@@ -102,8 +244,27 @@ class Solution:
         return ans
 ```
 
-``` java
-
+``` js
+/**
+ * 使用Js set不能存储重复值的特性以及set.has()方法判断nums中的缺失值
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDisappearedNumbers = function(nums) {
+    let set = new Set();
+    let res = [];
+    // add nums into the set
+    for (let i = 0; i < nums.length; i++) {
+        set.add(nums[i]);
+    }
+    // vertify every num from [1,n] if they are existed in the set
+    for (let i = 1; i <= nums.length; i++) {
+        if (!set.has(i)) {
+            res.push(i);
+        } 
+    }
+    return res;
+};
 ```
 
 - question: LC1002 查找共用字符 link: https://leetcode.cn/problems/find-common-characters/
