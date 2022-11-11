@@ -41,7 +41,7 @@ print(res);//或使用console.log(res)
 
     - ACM模式下JavaScript(Node)代码格式
 
-单行
+        - 单行
 
 ```js
 const readline = require('readline')
@@ -58,7 +58,7 @@ rl.on('line', function(line) {
 
 ```
 
-    - 多行输入
+        - 多行输入
 
 ```js
 const readline = require('readline');
