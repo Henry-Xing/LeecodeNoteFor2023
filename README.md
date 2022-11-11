@@ -25,7 +25,7 @@ for line in sys.stdin:
 ```
 
 ``` java
-
+123
 ```
 
 - question: HJ68 成绩排序 link: https://www.nowcoder.com/practice/8e400fd9905747e4acc2aeed7240978b?tpId=37&tqId=21291&ru=/exam/oj
@@ -59,6 +59,7 @@ for s in score:
 
 - question: LC442 数组中重复的数据 link: https://leetcode.cn/problems/find-all-duplicates-in-an-array/
     - answer:
+
 ``` py
 # python code
 class Solution:
