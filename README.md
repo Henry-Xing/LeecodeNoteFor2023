@@ -60,7 +60,21 @@ for s in score:
 - question: LC442 数组中重复的数据 link: https://leetcode.cn/problems/find-all-duplicates-in-an-array/
 - answer:
 ``` py
+# python code
+class Solution:
+    def findDuplicates(self, nums: List[int]) -> List[int]:
+        # store freq
+        dic = {}
+        # store ans
+        ans = []
 
+        for n in nums:
+            # record freq, get value from dic according to key and default value is 0
+            dic[n] = dic.get(n, 0) + 1
+            if dic[n] > 1:
+                ans.append(n)
+        
+        return ans
 ```
 
 ``` java
