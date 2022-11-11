@@ -86,6 +86,7 @@ class Solution:
 - answer:
 ``` py
 # python code
+# 如果遍历1—len(nums)+1，去寻找对应值在nums出现与否会超时。
 # 不允许使用额外空间，利用nums充当字典，先遍历nums，nums中的值作为key，改变对应key的value为负值以此标记此值是否出现过，最后筛选value大于0的key则是没出现过的key。
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
