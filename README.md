@@ -308,6 +308,7 @@ class Solution:
 
 ``` java
 
+
 ```
 
 - question: LC1370 上升下降字符串 link: https://leetcode.cn/problems/increasing-decreasing-string/
@@ -350,6 +351,27 @@ class Solution:
 - question: LC283 移动零 link: https://leetcode.cn/problems/move-zeroes/
     - answer:
 ```python
+# python code
+# like quick sort
+# 双指针，右指针指向的位置不为0时与左之指针交换
+# 可以保持相对顺序，如果两者都不为0时，同时右移一格，并不会交换不为0的值。
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        
+        left, right = 0,0
+
+        while right < n:
+            # 不为零可以写作 if nums[right]:
+            if nums[right] != 0:
+                nums[right], nums[left] = nums[left], nums[right]
+                left += 1
+            right += 1
+
+        return nums
 ```
 
 ```java
@@ -358,6 +380,22 @@ class Solution:
 - question: LC26 删除有序数组中的重复元素 link: https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
     - answer:
 ```python
+# python code
+# 双指针，左指针记录唯一元素，如果重复，右指针右移直到不重复。
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+
+        left, right = 0,0
+
+        while right < len(nums):
+            if not nums[right] == nums[left]:
+                nums[left + 1] = nums[right]
+                left += 1
+            
+            right += 1
+
+
+        return left + 1
 ```
 
 ```java
