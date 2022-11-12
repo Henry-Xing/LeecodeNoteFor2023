@@ -8,7 +8,7 @@ task link: https://ke.qq.com/course/package/31104?flowToken=1039500
 Learning Time: 2:00-6:00 7:30-10:30 7h
 
 
-## date: 2022/11/11 数组字符串
+## 数组字符串
 
 - question: input/output基础 link: https://www.nowcoder.com/test/27976983/summary#question
 
@@ -346,7 +346,7 @@ class Solution:
 
 ```
 
-### date: 2022/11/12 双指针
+### 双指针
 
 - question: LC283 移动零 link: https://leetcode.cn/problems/move-zeroes/
     - answer:
