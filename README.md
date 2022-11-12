@@ -8,13 +8,11 @@ task link: https://ke.qq.com/course/package/31104?flowToken=1039500
 Learning Time: 2:00-6:00 7:30-10:30 7h
 
 
-## date: 2022/11/11 数组字符串
+## 数组字符串
 
-### question: input/output基础
+- question: input/output基础 link: https://www.nowcoder.com/test/27976983/summary#question
 
--  link: https://www.nowcoder.com/test/27976983/summary#question
-
-ACM模式下Java代码格式
+- ACM模式下Java代码格式
 
 ```java
 import java.util.Scanner;
@@ -30,7 +28,7 @@ public class Main {
   }
 ```
 
-ACM模式下JavaScript(V8)代码格式
+- ACM模式下JavaScript(V8)代码格式
 
 ```javaScript
 //从控制台输入
@@ -39,9 +37,9 @@ let res = str
 print(res);//或使用console.log(res)
 ```
 
-ACM模式下JavaScript(Node)代码格式
+- ACM模式下JavaScript(Node)代码格式
 
-单行
+- 单行
 
 ```js
 const readline = require('readline')
@@ -57,8 +55,7 @@ rl.on('line', function(line) {
 })
 
 ```
-
-多行输入
+- 多行输入
 
 ```js
 const readline = require('readline');
@@ -384,6 +381,7 @@ var commonChars = function(words) {
     return res;
 };
 
+
 ```
 
 - question: LC1370 上升下降字符串 link: https://leetcode.cn/problems/increasing-decreasing-string/
@@ -464,11 +462,32 @@ var sortString = function(s) {
 };
 ```
 
-### date: 2022/11/12 双指针
+### 双指针
 
 - question: LC283 移动零 link: https://leetcode.cn/problems/move-zeroes/
     - answer:
 ```python
+# python code
+# like quick sort
+# 双指针，右指针指向的位置不为0时与左之指针交换
+# 可以保持相对顺序，如果两者都不为0时，同时右移一格，并不会交换不为0的值。
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        
+        left, right = 0,0
+
+        while right < n:
+            # 不为零可以写作 if nums[right]:
+            if nums[right] != 0:
+                nums[right], nums[left] = nums[left], nums[right]
+                left += 1
+            right += 1
+
+        return nums
 ```
 
 ```java
@@ -477,6 +496,22 @@ var sortString = function(s) {
 - question: LC26 删除有序数组中的重复元素 link: https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
     - answer:
 ```python
+# python code
+# 双指针，左指针记录唯一元素，如果重复，右指针右移直到不重复。
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+
+        left, right = 0,0
+
+        while right < len(nums):
+            if not nums[right] == nums[left]:
+                nums[left + 1] = nums[right]
+                left += 1
+            
+            right += 1
+
+
+        return left + 1
 ```
 
 ```java
