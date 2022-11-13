@@ -385,17 +385,20 @@ class Solution:
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
 
-        left, right = 0,0
+        left, right = 1,1
 
         while right < len(nums):
-            if not nums[right] == nums[left]:
-                nums[left + 1] = nums[right]
+            # 用加法不太好，容易超出范围，最好用减法
+            # if not nums[right] == nums[left]:
+            #     nums[left + 1] = nums[right]
+            if nums[right] != nums[left - 1]
+                nums[left] = nums[right]
                 left += 1
             
             right += 1
 
-
-        return left + 1
+        # left最终指向需要数组的后一格
+        return left
 ```
 
 ```java
@@ -404,6 +407,24 @@ class Solution:
 - question: LC80 删除排序数组中的重复元素二 link: https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/
     - answer:
 ```python
+# python code
+# 有个重复的就去检查前第几个数，并且双指针初始化时要相应改变。同时，用减法可以避免out of index的问题。
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        left, right = 2,2
+
+        while right < n:
+
+            if nums[right] != nums[left - 2]:
+                nums[left] = nums[right]
+                left += 1
+
+            right += 1
+
+        # left最终指向需要数组的后一格
+        return left
 ```
 
 ```java
@@ -412,6 +433,24 @@ class Solution:
 - question: LC27 移除元素 link: https://leetcode.cn/problems/remove-element/
     - answer:
 ```python
+# python code
+# 所有删除元素且不占用额外空间，都可以使用交换的方式。
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+
+        n = len(nums)
+
+        left, right = 0,0
+
+        while right < n:
+            if nums[right] != val:
+                nums[left], nums[right] = nums[right], nums[left]
+                left += 1
+
+            right += 1
+
+        return left
+
 ```
 
 ```java
@@ -420,6 +459,24 @@ class Solution:
 - question: LC344 反转字符串 link: https://leetcode.cn/problems/reverse-string/
     - answer:
 ```python
+# easy to swap
+# 双指针，一个开头， 一个结尾
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        
+        n = len(s)
+
+        right, left = 0, n-1
+        
+        while right < left:
+            s[right], s[left] = s[left], s[right]
+            right += 1
+            left -= 1
+
+        return s 
 ```
 
 ```java
