@@ -8,7 +8,7 @@ task link: https://ke.qq.com/course/package/31104?flowToken=1039500
 Learning Time: 2:00-6:00 7:30-10:30 7h
 
 
-## date: 2022/11/11 数组字符串
+## 数组字符串
 
 - question: input/output基础 link: https://www.nowcoder.com/test/27976983/summary#question
 
@@ -307,6 +307,79 @@ class Solution:
 ```
 
 ``` java
+// 自己的思路
+//  * @param {string[]}
+//  * @return {string[]}
+//  */
+// var commonChars = function(words) {
+//     let res = [];
+//     let firstMap = new Map()
+//     for (let j = 0; j < words[0].length; j++) {
+//         if (firstMap.has(words[0][j])) {
+//             firstMap.set(words[0][j], firstMap.get(words[0][j]) + 1 );
+//         } else {
+//             firstMap.set(words[0][j], 1);
+//         }
+//     }
+//     for (let i = 0; i < words.length; i++ ) {
+//         let map = new Map();
+//         let word = words[i];
+//         for (let j = 0; j < word.length; j++) {
+//             if (map.has(words[0][j])) {
+//                 map.set(words[0][j], firstMap.get(words[0][j]) + 1 );
+//             } else {
+//                 map.set(words[0][j], 1);
+//             }
+//         }
+//         firstSet = res = testSame(map, firstMap);
+//     }
+//     return res;
+// };
+
+// function testSame(map1, map2){
+//     let res = new Map();
+//     const iterator = map1.values();
+
+//     for(let pair1 of map1) {
+//         console.log("pair1 is ", pair1.key,  pair1.value)
+//         for (let pair2 of map2) {
+//             if (pair1.key == pair2.key) {
+//                 res.set(pair1, (pair1.value > pair2.value)?pair2.value:pair2.value)
+//             }
+//         }
+//     }
+//     return res;
+// }
+
+/**
+ * @param {string[]} words
+ * @return {string[]}
+ */
+//主要思路为建立一个26个字母组成的arr来记录每单个单词的字母出现顺序，然后将arr放入arrlist当中，最后遍历arraylist26遍，每遍确定一个字母的数量，然后把对应数量的数组置于res结果数组中。
+var commonChars = function(words) {
+    let res = [];
+    let arrayList = [];
+    for (let word of words) {
+        let array = new Array(26).fill(0); //.fill可以批量填充数组的值
+        for (let char of word) {
+            array[char.charCodeAt() - "a".charCodeAt()]++; //charCodeAt可以找对应字母deASCII码
+        }
+        arrayList.push(array);
+    }
+
+    for (let i = 0; i<26; i++) {
+        let min = 100;
+        for (let arr of arrayList) {
+            if (arr[i] < min) {
+                min = arr[i]
+            }
+        }
+        for (let j = 0; j < min; j++) {
+            res.push(String.fromCharCode(i + "a".charCodeAt()));
+        }
+    }
+    return res;
+};
 
 
 ```
@@ -342,11 +415,57 @@ class Solution:
         return "".join(ans)
 ```
 
-``` java
+``` js
+/**
+ * @param {string} s
+ * @return {string}
+ */
 
+//  main idea: 使用数组的index作为字母键值对的key，Value作为字母出现的次数，将字符串s中的字母进行录入到数组。录入后，使用do while 语句先将26个元素遍历一遍，搞出第一遍的顺序，遍历时减少对应数组的value值，同时如果value依然大于0，就代表还要继续遍历，unfinish就是变为true。然后在while中以unfinish作为条件继续遍历。要实现反向顺序，就要使用另外一个boolean变量 inorder进行操作，默认正序，每轮遍历自目前，都要将此值反转。
+var sortString = function(s) {
+    let res = [];
+    let alphaList = new Array(26).fill(0);
+    let unfinish;
+    let inorder = true;
+    // add the data into alphaList
+    for(let char of s) {
+        alphaList[char.charCodeAt() - "a".charCodeAt()]++;
+    }
+    // 
+    do {
+        unfinish = false;
+        if (inorder) {
+            inorder = !inorder;
+            for (let i = 0; i < 26; i ++) {
+                if (alphaList[i]>0) {
+                    res.push(String.fromCharCode("a".charCodeAt() + i));
+                    alphaList[i]--;
+                }
+                if (alphaList[i]>0) {
+                    unfinish = true;
+                }
+            }
+        } else {
+            inorder = !inorder;
+            for (let i = 25; i >= 0; i --) {
+                if (alphaList[i]>0) {
+                    res.push(String.fromCharCode("a".charCodeAt() + i));
+                    alphaList[i]--;
+                }
+                if (alphaList[i]>0) {
+                    unfinish = true;
+                }
+            }
+        }
+    } while (unfinish)
+    return res.join("");
+};
+
+// 借鉴
+// unfinish 和 inorder不必要，可以使用(res.length=s.length)对循环进行判断
 ```
 
-### date: 2022/11/12 双指针
+### 双指针
 
 - question: LC283 移动零 link: https://leetcode.cn/problems/move-zeroes/
     - answer:
@@ -375,6 +494,34 @@ class Solution:
 ```
 
 ```java
+// /**
+//  * @param {number[]} nums
+//  * @return {void} Do not return anything, modify nums in-place instead.
+//  */
+// // 方法1：使用双指针，两个指针全部从0到len, 左指针是代表按顺序的数组全部元素，思想是一位一位往里面填非零的数。右指针遍历数组查看非零的数，并将非零的数与左指针数值交换。
+// var moveZeroes = function(nums) {
+//     let res = [];
+//     let zeros = [];
+//     let left = 0;
+//     for (let i = 0; i < nums.length; i ++) {
+//         if (nums[i] !== 0) {
+//             let temp = nums[i];
+//             nums[i] = nums[left];
+//             nums[left] = temp;
+//             left++;
+//         }
+//     }
+// };
+
+// 方法2：使用slice删除0元素，同时在数组后面补0
+var moveZeroes = function(nums) {
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === 0) {
+            nums.slice(0, i).concat(nums.slice(i+1, nums.length));
+            nums.push(0);
+        }
+    }
+};
 ```
 
 - question: LC26 删除有序数组中的重复元素 link: https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
@@ -402,6 +549,24 @@ class Solution:
 ```
 
 ```java
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+ var removeDuplicates = function(nums) {
+    let left = 1;
+    while (left < nums.length) {
+        if (nums[left] != nums[left - 1]) {
+            left++;
+        } else {
+            let len = 1;
+            while (nums[left-1] == nums[left+len]) {
+                len++;
+            }
+            nums.splice(left, len);
+        }
+    }
+};
 ```
 
 - question: LC80 删除排序数组中的重复元素二 link: https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/
