@@ -650,6 +650,24 @@ class Solution:
 - question: LC125 验证回文串 link: https://leetcode.cn/problems/valid-palindrome/
     - answer:
 ```python
+# python code
+# 重点在于处理字符串，去除空格用str.strip()，去除别的字符用str.isalnum()，只包含数字和字母时返回TRUE。
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+
+        s = "".join(ch.lower() for ch in s if ch.isalnum())
+
+        left, right = 0, len(s)-1
+
+        while left < right:
+            if s[left] != s[right]:
+                return False
+            
+            left += 1
+            right -= 1
+
+            
+        return True
 ```
 
 ```java
@@ -658,6 +676,27 @@ class Solution:
 - question: LC11 盛最多水的容器 link: https://leetcode.cn/problems/container-with-most-water/
     - answer:
 ```python
+# python code
+# 双指针，一头一尾，每次找最短边向内收缩直到双指针相遇。
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        n = len(height)
+
+        left, right = 0, n-1
+        v = 0
+
+        while left < right:
+
+            temp = min(height[left], height[right]) * (right - left)
+            
+            v = max(v, temp)
+
+            if height[left] < height[right]:
+                left += 1
+            else:
+                right -= 1
+        
+        return v
 ```
 
 ```java
@@ -666,6 +705,15 @@ class Solution:
 - question: LC1480 一维数组的动态和（前缀和） link: https://leetcode.cn/problems/running-sum-of-1d-array/
     - answer:
 ```python
+# python code
+# 当前项等于前一项加上自己。
+class Solution:
+    def runningSum(self, nums: List[int]) -> List[int]:
+
+        for i in range(1, len(nums)):
+            nums[i] += nums[i-1]
+        
+        return nums
 ```
 
 ```java
@@ -674,6 +722,29 @@ class Solution:
 - question: LC238 除自身以外数组的乘积 link: https://leetcode.cn/problems/product-of-array-except-self/
     - answer:
 ```python
+# python code
+# 除自身外的除数分两部分，一部分是左边所有数相乘，一部分是右边所有数相乘，最后两边相乘。
+# 计算单边是，分开计算，叠加会更高效
+# 只用一个数组来存储可以节省空间，但要考虑到最左边和最右边的点，初始化为1。
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        ans = [0] * n
+
+        ans[0] = 1 
+        
+        for i in range(1, n):
+            ans[i] = ans[i-1] * nums[i-1]
+        
+        r = 1
+        
+        # for i in reversed(range(length)):
+        # reversed 可以使得 i 从n到0进行遍历
+        for i in range(1, n+1):
+            ans[n-i] = ans[n-i] * r
+            r *= nums[n-i]
+
+        return ans
 ```
 
 ```java
