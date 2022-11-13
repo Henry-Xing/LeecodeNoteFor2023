@@ -787,7 +787,7 @@ class Solution:
 ```java
 ```
 
-- question: LC163 缺失的区间 link: https://blog.csdn.net/ft_sunshine/article/details/103445054
+- question: LC163 缺失的区间(vip) link: https://blog.csdn.net/ft_sunshine/article/details/103445054
     - answer:
 ```python
 # python code
