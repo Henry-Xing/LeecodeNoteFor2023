@@ -460,6 +460,9 @@ var sortString = function(s) {
     } while (unfinish)
     return res.join("");
 };
+
+// 借鉴
+// unfinish 和 inorder不必要，可以使用(res.length=s.length)对循环进行判断
 ```
 
 ### 双指针
@@ -491,6 +494,34 @@ class Solution:
 ```
 
 ```java
+// /**
+//  * @param {number[]} nums
+//  * @return {void} Do not return anything, modify nums in-place instead.
+//  */
+// // 方法1：使用双指针，两个指针全部从0到len, 左指针是代表按顺序的数组全部元素，思想是一位一位往里面填非零的数。右指针遍历数组查看非零的数，并将非零的数与左指针数值交换。
+// var moveZeroes = function(nums) {
+//     let res = [];
+//     let zeros = [];
+//     let left = 0;
+//     for (let i = 0; i < nums.length; i ++) {
+//         if (nums[i] !== 0) {
+//             let temp = nums[i];
+//             nums[i] = nums[left];
+//             nums[left] = temp;
+//             left++;
+//         }
+//     }
+// };
+
+// 方法2：使用slice删除0元素，同时在数组后面补0
+var moveZeroes = function(nums) {
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] === 0) {
+            nums.slice(0, i).concat(nums.slice(i+1, nums.length));
+            nums.push(0);
+        }
+    }
+};
 ```
 
 - question: LC26 删除有序数组中的重复元素 link: https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
@@ -515,6 +546,24 @@ class Solution:
 ```
 
 ```java
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+ var removeDuplicates = function(nums) {
+    let left = 1;
+    while (left < nums.length) {
+        if (nums[left] != nums[left - 1]) {
+            left++;
+        } else {
+            let len = 1;
+            while (nums[left-1] == nums[left+len]) {
+                len++;
+            }
+            nums.splice(left, len);
+        }
+    }
+};
 ```
 
 - question: LC80 删除排序数组中的重复元素二 link: https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/
