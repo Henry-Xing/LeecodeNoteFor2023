@@ -746,6 +746,88 @@ class Solution:
 
         return ans
 ```
+```java
+```
 
+### 一维数组
+
+- question: LC941 有效的山脉数组 link: https://leetcode.cn/problems/valid-mountain-array/
+    - answer:
+```python
+# python code
+
+```
+```java
+```
+
+- question: LC189 旋转数组 link: https://leetcode.cn/problems/rotate-array/
+    - answer:
+```python
+# python code
+
+```
+```java
+```
+
+- question: LC665 非递减数列 link: https://leetcode.cn/problems/non-decreasing-array/
+    - answer:
+```python
+# python code
+
+```
+```java
+```
+
+- question: LC228 汇总区间 link: https://leetcode.cn/problems/summary-ranges/
+    - answer:
+```python
+# python code
+
+```
+```java
+```
+
+- question: LC163 缺失的区间 link: https://blog.csdn.net/ft_sunshine/article/details/103445054
+    - answer:
+```python
+# python code
+
+```
+```java
+```
+
+- question: LC31 下一个排列 link: https://leetcode.cn/problems/next-permutation/
+    - answer:
+```python
+# python code
+
+```
+```java
+```
+
+- question: LC135 分发糖果（困难） link: https://leetcode.cn/problems/candy/
+    - answer:
+```python
+# python code
+
+```
+```java
+```
+
+- question: LC605 种花问题 link: https://leetcode.cn/problems/can-place-flowers/
+    - answer:
+```python
+# python code
+
+```
+```java
+```
+
+- question: LC860 柠檬水找零 link: https://leetcode.cn/problems/lemonade-change/
+    - answer:
+```python
+# python code
+
+```
 ```java
 ```
