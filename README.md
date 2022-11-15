@@ -833,6 +833,9 @@ var maxArea = function(height) {
 };
 ```
 
+
+### 一维数组
+
 - question: LC1480 一维数组的动态和（前缀和） link: https://leetcode.cn/problems/running-sum-of-1d-array/
     - answer:
 ```python
@@ -880,14 +883,28 @@ class Solution:
 ```java
 ```
 
-### 一维数组
-
 - question: LC941 有效的山脉数组 link: https://leetcode.cn/problems/valid-mountain-array/
     - answer:
 ```python
 # python code
+# 双循环检索，第一个循环检索上坡，第二个循环检测下坡，中间任何间断则报错。
+class Solution:
+    def validMountainArray(self, arr: List[int]) -> bool:
+        N = len(arr)
+        i = 0
 
+        while i + 1 < N and arr[i] < arr[i + 1]:
+            i += 1
+
+        if i == 0 or i == N - 1:
+            return False
+
+        while i + 1 < N and arr[i] > arr[i + 1]:
+            i += 1
+
+        return i == N - 1
 ```
+
 ```java
 ```
 
@@ -895,7 +912,24 @@ class Solution:
     - answer:
 ```python
 # python code
+# 关键点一：原地改动nums，任何的赋值操作都会导致nums的id变化，只对nums内的元素做操作才不会导致id变化。
+# nums = nums[::-1] 会导致nums的id变化
+# nums[:] = nums[::-1] 不会导致nums的id变化，因为nums[:]表示对nums内每个元素对应赋值。
+# 关键点二：k值大于len(nums)时，需要对k做处理，当k等length时，相当于对数组没操作，所以对length取余则可以得到最终的k。
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        k = k % len(nums)
+        
+        nums[:] = nums[::-1]
 
+        nums[k:len(nums)] = nums[k:len(nums)][::-1]
+
+        nums[0:k] = nums[0:k][::-1]
+
+        return nums
 ```
 ```java
 ```
