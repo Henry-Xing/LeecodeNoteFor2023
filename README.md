@@ -553,6 +553,21 @@ class Solution:
  * @param {number[]} nums
  * @return {number}
  */
+// 方法一： 快慢指针（慢指针变换条件为快指针与快指针前一位比较），slow的作用是一位一位的将符合条件的数字填入数组。条件为通过fast和fast前一位比较，确定nums[slow]的值。fast与fast前一位一致，那么就不改变slow，如果不一致没那么就可以使nums[slow]=nums[fast]。此外条件还可以比较slow和fast位置是否相等，如果不相等的话，那么就用fast位置的数值填入slow位置
+ var removeDuplicates = function(nums) {
+    let slow = 0;
+    let fast = 1;
+    while (fast < nums.length) {
+        if (nums[fast] !== nums[slow]) {
+            nums[slow + 1] = nums[fast];
+            slow++;
+        }
+        fast++;
+    }
+    return slow+1;
+};
+
+// 方法二：使用splice，对nums从第一位left进行遍历，判断left位置和left上一位的数值是否相等，相等的话就继续检测下一位是否依然相等，然后统计出相等树枝的数量len，然后对nums数组使用nums.splice(left, len)进行裁剪。
  var removeDuplicates = function(nums) {
     let left = 1;
     while (left < nums.length) {
@@ -593,6 +608,39 @@ class Solution:
 ```
 
 ```java
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+// 同样的快慢指针，快慢指针一同从第3个元素出发，检验慢指针的前第二位是否与fast值相等，如果不相等，那么就对慢指针位置用快指针赋值，若果相等，那么慢指针不动，继续用下一个fast比较，如果不同再换。
+
+var removeDuplicates = function(nums) {
+    let slow = fast = 2;
+    if (nums.length <= 2) return 2;
+    while (fast < nums.length) {
+        if (nums[slow-2] != nums[fast]) {
+            nums[slow] = nums[fast];
+            slow++;
+        }
+        fast++;
+    }
+    return slow;
+};
+
+//方法二：splice
+var removeDuplicates = function(nums) {
+    let start = 2;
+    while (start < nums.length) {
+        if (nums[start] == nums[start-2]) {
+            let len = 1;
+            while (nums[start + len] == nums[start]) {
+                len++;
+            }
+            nums.splice(start, len)
+        }
+        start++;
+    }
+};
 ```
 
 - question: LC27 移除元素 link: https://leetcode.cn/problems/remove-element/
@@ -619,6 +667,40 @@ class Solution:
 ```
 
 ```java
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+// 方法一：快慢指针
+var removeElement = function(nums, val) {
+    let slow = fast = 0;
+    while (fast < nums.length) {
+        if (nums[fast] != val) {
+            nums[slow] = nums[fast]
+            slow++;
+        }
+        fast++;
+    }
+    return slow;
+};
+
+
+
+// 方法二:暴力splice
+// var removeElement = function(nums, val) {
+//     let start = 0;
+//     while (start < nums.length) {
+//         if (nums[start] == val) {
+//             let len = 1;
+//             while (nums[start] == nums[start+len]) {
+//                 len++;
+//             }
+//             nums.splice(start,len);
+//         }
+//         start++;
+//     }
+// };
 ```
 
 - question: LC344 反转字符串 link: https://leetcode.cn/problems/reverse-string/
@@ -645,6 +727,22 @@ class Solution:
 ```
 
 ```java
+/**
+ * @param {character[]} s
+ * @return {void} Do not return anything, modify s in-place instead.
+ */
+var reverseString = function(s) {
+    let left = 0;
+    let right = s.length - 1;
+    while (left < right) {
+        let temp = s[left];
+        s[left] = s[right];
+        s[right] = temp;
+        left ++;
+        right --;
+    }
+    return s;
+};
 ```
 
 - question: LC125 验证回文串 link: https://leetcode.cn/problems/valid-palindrome/
@@ -671,6 +769,20 @@ class Solution:
 ```
 
 ```java
+var isPalindrome = function(s) {
+    s=s.replace(/[^a-zA-Z0-9]/g,"").replace(/\s/g,"").toLowerCase(); // replace 函数替换字符串中的非字母字符
+    //toLowerCase()用于对字符串进行全小写处理
+    let left = 0;
+    let right = s.length - 1;
+    while (left <= right) {
+        if (s[left] !== s[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+};
 ```
 
 - question: LC11 盛最多水的容器 link: https://leetcode.cn/problems/container-with-most-water/
@@ -700,6 +812,25 @@ class Solution:
 ```
 
 ```java
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+// 收尾双指针向内收缩，短的一边收缩。
+var maxArea = function(height) {
+    let max = 0;
+    let left = 0;
+    let right = height.length - 1;
+    while (left < right){
+        let width = right - left;
+        let shortest = height[left] < height[right] ? height[left++] : height[right--];
+        let currentVolume =  width * shortest;
+        if (currentVolume > max) {
+            max = currentVolume;
+        }
+    }
+    return max;
+};
 ```
 
 - question: LC1480 一维数组的动态和（前缀和） link: https://leetcode.cn/problems/running-sum-of-1d-array/
