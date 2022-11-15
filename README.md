@@ -851,6 +851,19 @@ class Solution:
 ```
 
 ```java
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var runningSum = function(nums) {
+    let runningSum = [];
+    let sum = 0;
+    for (let i = 0; i < nums.length; i++) {
+        sum += nums[i]
+        runningSum[i] = sum;
+    }
+    return runningSum;
+};
 ```
 
 - question: LC238 除自身以外数组的乘积 link: https://leetcode.cn/problems/product-of-array-except-self/
@@ -881,6 +894,28 @@ class Solution:
         return ans
 ```
 ```java
+// 左右积合一起
+var productExceptSelf = function(nums) {
+  let ans = [];
+  let left = [];
+  left.push(1);
+  let right = [];
+  right.push(1);
+  let len = nums.length;
+  for (let i = 1; i < len; i++) {
+      left.push(left[i-1] * nums[i-1])
+      right.push(right[i - 1] * nums[len - i])
+      console.log("nums[len - i - 1]", nums[len - i - 1]);
+  }
+  right = right.reverse();
+  for (let i = 0; i < len; i++) {
+      console.log("i: ", i, "left: ", left[i], "right: ", right[i]);
+      ans[i] = left[i] * right[i];
+  }
+  return ans;
+};
+
+console.log(productExceptSelf([1,2,3,4]));
 ```
 
 - question: LC941 有效的山脉数组 link: https://leetcode.cn/problems/valid-mountain-array/
@@ -906,6 +941,29 @@ class Solution:
 ```
 
 ```java
+
+//顺序扫描数组，查看扫描一升一降(或)后的i的位置是否是原数组的长度。如果短了那么说明不是山脉数组。但是要注意山脉数组的最高点不能是第一位和最后一位
+var validMountainArray = function(arr) {
+    const N = arr.length;
+    let i = 0;
+
+    // 递增扫描
+    while (i + 1 < N && arr[i] < arr[i + 1]) {
+        i++;
+    }
+
+    // 最高点不能是数组的第一个位置或最后一个位置
+    if (i === 0 || i === N - 1) {
+        return false;
+    }
+
+    // 递减扫描
+    while (i + 1 < N && arr[i] > arr[i + 1]) {
+        i++;
+    }
+
+    return i === N - 1;
+};
 ```
 
 - question: LC189 旋转数组 link: https://leetcode.cn/problems/rotate-array/
@@ -932,6 +990,23 @@ class Solution:
         return nums
 ```
 ```java
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+// 旋转数组，将数组切为两份，然后将后一份放置于前一份前。注意本题需要最后在原数组的地址上进行数组变更，另外要注意旋转次数大于数组长度的情况，使用取余将问题简化。
+var rotate = function(nums, k) {
+    let len = nums.length;
+    k = k % len;
+    let num1 = nums.slice(len - k, len);
+    let num2 = nums.slice(0, len - k);
+    let newNums = num1.concat(num2);
+    for (let i = 0; i < len; i ++) {
+        nums[i] = newNums[i]
+    }
+    return nums;
+};
 ```
 
 - question: LC665 非递减数列 link: https://leetcode.cn/problems/non-decreasing-array/
