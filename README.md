@@ -1016,6 +1016,30 @@ var rotate = function(nums, k) {
 
 ```
 ```java
+[3,4,2,3]
+为了方便处理我前面和后面加入两个哨兵元素后数组变为
+[-Infinity,3,4,2,3,Infinity]
+当i等于3时，4>2，出现了一个减小的情况。
+关键来了，这时我们有两种改变方法，满足一个即可。
+将4改为2 ，这时必须满足 4左边的元素小于等于2
+将2改为4，这时必须满足4小于等于2右边的元素。 如果上述两种都不能成立其中一个，那么就说不能修改，返回false即可。
+关键就是上面的两个情况。相信各位大佬能简单看懂。希望各位大佬提出修改意见
+
+function checkPossibility(nums: number[]): boolean {
+    let count: number = 0
+    nums.push(Infinity)
+    nums.unshift(-Infinity)
+    let pre: number = 0
+    for (let i = 2; i < nums.length - 1; i++) {
+        if (nums[i - 1] > nums[i]) {
+            count++
+            if (nums[pre] > nums[i] && nums[i - 1] > nums[i + 1]) return false
+        }
+        if (count > 1) return false
+        if (i > 1) pre++
+    }
+    return true
+};
 ```
 
 - question: LC228 汇总区间 link: https://leetcode.cn/problems/summary-ranges/
@@ -1025,6 +1049,45 @@ var rotate = function(nums, k) {
 
 ```
 ```java
+/**
+ * @param {number[]} nums
+ * @return {string[]}
+ */
+// var summaryRanges = function(nums) {
+//     let end = 1;
+//     let res = [];
+//     while (end < nums.length) {
+//         start = end - 1;
+//         while (nums[end - 1] + 1 == nums[end]) {
+//             end++;
+//         }
+//         if (start == end - 1) {
+//             res.push(nums[start].toString());
+//             end++
+//         } else {
+//             res.push(nums[start]+"->"+nums[end]);
+//         }
+//     }
+//     return res;
+// };
+
+var summaryRanges = function(nums) {
+    let piv = 0;
+    let res = [];
+    while (piv < nums.length) {
+        start = piv;
+        while (nums[piv] + 1 == nums[piv + 1]) {
+            piv++;
+        }
+        if (piv == start) {
+            res.push(nums[start].toString());
+        } else {
+            res.push(nums[start]+"->"+nums[piv]);
+        }
+        piv++;
+    }
+    return res;
+};
 ```
 
 - question: LC163 缺失的区间(vip) link: https://blog.csdn.net/ft_sunshine/article/details/103445054
@@ -1071,3 +1134,4 @@ var rotate = function(nums, k) {
 ```
 ```java
 ```
+
