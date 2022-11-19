@@ -1013,7 +1013,24 @@ var rotate = function(nums, k) {
     - answer:
 ```python
 # python code
+# 遇到突变时，检测突变时检测当前位置与前两位的大小，必须使得当前位置大于前两位的值，否则就需要更改不止一次，如果是小于前两位的值，则当前位置能选择的最小值则是前一位的值。
+class Solution:
+    def checkPossibility(self, nums: List[int]) -> bool:
+        n = len(nums)
 
+        flag = True
+
+        for i in range(1, n):
+            if nums[i] < nums[i-1]:
+                if flag:
+                    flag = False
+                else:
+                    return flag
+
+                if i > 1 and nums[i] < nums[i-2]:
+                    nums[i] = nums[i-1]
+
+        return True
 ```
 ```java
 [3,4,2,3]
@@ -1047,7 +1064,35 @@ var checkPossibility = function(nums) {
     - answer:
 ```python
 # python code
+# 移动end，满足条件则end移动，否则更新start和end，最后跳出循环后还得再append。
+class Solution:
+    def summaryRanges(self, nums: List[int]) -> List[str]:
 
+        n = len(nums)
+        if not nums:
+            return []
+
+        start, end = nums[0],nums[0]
+
+        ans = []
+
+        for i in range(1, n):
+            if nums[i] == end + 1:
+                end = nums[i]
+            else:
+                if start != end:
+                    ans.append("->".join((str(start), str(end))))
+                else:
+                    ans.append(str(start))
+
+                start, end = nums[i], nums[i]
+        
+        if start != end:
+            ans.append("->".join((str(start), str(end))))
+        else:
+            ans.append(str(start))
+
+        return ans
 ```
 ```java
 /**
@@ -1095,7 +1140,46 @@ var summaryRanges = function(nums) {
     - answer:
 ```python
 # python code
+def summaryRanges(nums, lower, upper):
 
+    n = len(nums)
+    if not nums:
+        return []
+
+    ans = []
+    start = lower
+    
+    for i in range(1, n):
+        if nums[i] == start + 1:
+            start = nums[i]
+        else:
+            start += 1
+            if nums[i] < upper:
+                end = nums[i] - 1
+                if start != end:
+                    ans.append("->".join((str(start), str(end))))
+                else:
+                    ans.append(str(start))
+                    
+            else:
+                end = upper
+                if start != end:
+                    ans.append("->".join((str(start), str(end))))
+                else:
+                    ans.append(str(start))
+                break
+                
+            start = nums[i]
+
+    if upper > nums[n-1]:
+        start += 1
+        end = upper
+        if start != end:
+            ans.append("->".join((str(start), str(end))))
+        else:
+            ans.append(str(start))
+            
+    return ans
 ```
 ```java
 //简化版
