@@ -1025,20 +1025,21 @@ var rotate = function(nums, k) {
 将2改为4，这时必须满足4小于等于2右边的元素。 如果上述两种都不能成立其中一个，那么就说不能修改，返回false即可。
 关键就是上面的两个情况。相信各位大佬能简单看懂。希望各位大佬提出修改意见
 
-function checkPossibility(nums: number[]): boolean {
-    let count: number = 0
+var checkPossibility = function(nums) {
+    let sum = 0;
     nums.push(Infinity)
     nums.unshift(-Infinity)
-    let pre: number = 0
     for (let i = 2; i < nums.length - 1; i++) {
-        if (nums[i - 1] > nums[i]) {
-            count++
-            if (nums[pre] > nums[i] && nums[i - 1] > nums[i + 1]) return false
+        if (nums[i-1]> nums[i]) {
+            sum++;
+            if (nums[i-1]>nums[i+1] && nums[i] < nums[i-2]) return false;
         }
-        if (count > 1) return false
-        if (i > 1) pre++
+        if (sum>1) {
+            return false;
+        }
+        
     }
-    return true
+    return true;
 };
 ```
 
@@ -1097,6 +1098,35 @@ var summaryRanges = function(nums) {
 
 ```
 ```java
+//简化版
+var antiSummaryRanges = function(nums) {
+  let res = [];
+  let piv = 0;
+  let start = 0;
+  let end = 0;
+  while (piv < nums.length - 1) {
+    console.log("piv ", piv)
+    if (nums[piv] + 1 != nums[piv+1]) {
+      start = nums[piv] + 1;
+      let len = 0;
+      console.log("start " + start);
+      end = nums[piv+1] - 1;
+      console.log("end " + end);
+
+
+      // print the array
+      if (end == start) {
+        res.push(start);
+      } else {
+        res.push(start+"->"+end);
+      }
+    }
+    piv++;
+  }
+  return res;
+}
+
+console.log(antiSummaryRanges([0, 1, 3, 50, 75]));
 ```
 
 - question: LC31 下一个排列 link: https://leetcode.cn/problems/next-permutation/
@@ -1106,6 +1136,7 @@ var summaryRanges = function(nums) {
 
 ```
 ```java
+
 ```
 
 - question: LC135 分发糖果（困难） link: https://leetcode.cn/problems/candy/
@@ -1115,6 +1146,30 @@ var summaryRanges = function(nums) {
 
 ```
 ```java
+//我们遍历该数组两次，处理出每一个学生分别满足左规则或右规则时，最少需要被分得的糖果数量。每个人最终分得的糖果数量即为这两个数量的最大值。
+var candy = function(ratings) {
+    const n = ratings.length;
+    const left = new Array(n).fill(0);
+    for (let i = 0; i < n; i++) {
+        if (i > 0 && ratings[i] > ratings[i - 1]) {
+            left[i] = left[i - 1] + 1;
+        } else {
+            left[i] = 1;
+        }
+    }
+
+    let right = 0, ret = 0;
+    for (let i = n - 1; i > -1; i--) {
+        if (i < n - 1 && ratings[i] > ratings[i + 1]) {
+            right++;
+        } else {
+            right = 1;
+        }
+        ret += Math.max(left[i], right);
+    }
+    return ret;
+};
+
 ```
 
 - question: LC605 种花问题 link: https://leetcode.cn/problems/can-place-flowers/
