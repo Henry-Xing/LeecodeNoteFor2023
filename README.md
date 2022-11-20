@@ -1293,7 +1293,27 @@ class Solution:
     - answer:
 ```python
 # python code
+# 两次遍历，先从右边开始，找比右边大的，再从左边开始，找比左边大的。两者取最大值
+class Solution:
+    def candy(self, ratings: List[int]) -> int:
+        n = len(ratings)
+        left = [1] * n
 
+        for i in range(1, n):
+            if ratings[i] > ratings[i - 1]:
+                left[i] = left[i - 1] + 1
+
+        right = 1
+
+        for i in reversed(range(n-1)):
+            if ratings[i] > ratings[i + 1]:
+                right += 1
+            else:
+                right = 1
+
+            left[i] = max(right, left[i])
+        
+        return sum(left)
 ```
 ```java
 //我们遍历该数组两次，处理出每一个学生分别满足左规则或右规则时，最少需要被分得的糖果数量。每个人最终分得的糖果数量即为这两个数量的最大值。
