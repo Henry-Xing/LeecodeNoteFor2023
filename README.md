@@ -1136,6 +1136,45 @@ console.log(antiSummaryRanges([0, 1, 3, 50, 75]));
 
 ```
 ```java
+不会啊，交给时间吧
+ var nextPermutation = function(nums, n = nums.length) {
+  if (!n) return []
+  let p = n - 1, p1 = n - 1, nearIndex = 0, minD = Infinity
+  while(p > 0) {
+    if (nums[p] > nums[p - 1]) break
+    p -- // p为末尾开始算起的第一个非递减序列的起始值
+  }
+  if (p === 0) {
+    nums.sort((a, b) => a - b)
+    return nums
+  }
+  while (p1 > p - 1) {
+    if (minD > nums[p1] - nums[p - 1] && nums[p1] > nums[p - 1]) {
+      minD = nums[p1] - nums[p - 1]
+      nearIndex = p1
+    }
+    p1 --
+  }
+  // 交换邻近大值
+  let tmp = nums[nearIndex]
+  nums[nearIndex] = nums[p - 1
+  nums[p - 1] = tmp
+
+  for (let i = p; i < n; i++) { // 在区间i ~ n - 1做插排
+    let min = Infinity, k = i
+    for (let j = i; j < n; j++) {
+      if (min > nums[j]) {
+        min = nums[j]
+        k = j
+      }
+    }
+    if (k !== i) {
+      nums[k] = nums[i]
+      nums[i] = min
+    }
+  }
+  return nums
+};
 
 ```
 
@@ -1179,6 +1218,77 @@ var candy = function(ratings) {
 
 ```
 ```java
+// /**
+//  * @param {number[]} flowerbed
+//  * @param {number} n
+//  * @return {boolean}
+//  */
+// var canPlaceFlowers = function(flowerbed, n) {
+//     let space = 0;
+//     let pivot = 0;
+
+//     if (n == 0) {
+//         return true
+//     }
+
+//     if (flowerbed.length == 1) {
+//         console.log("!", flowerbed[0])
+//         return flowerbed[0] == 0;
+//     }
+//     if (flowerbed.length == 2) {
+
+//         if (flowerbed[1] == 0 && flowerbed[0] == 0) {
+//             space++
+//         }
+//         return space>=n;
+//     }
+
+
+//     if (flowerbed[0] == 0 && flowerbed[1] == 0) {
+//         flowerbed[0] = 1;
+//         space++;
+//         console.log("pre", space);
+//     }
+//     while (pivot < flowerbed.length - 1) {
+//         if (flowerbed[pivot] == 0) {
+//             if (flowerbed[pivot - 1] != 1 && flowerbed[pivot + 1] != 1) {
+//             flowerbed[pivot] = 1;
+//             space++;
+//             console.log("in", space);
+//         }
+//         }
+//         pivot ++;
+//     }
+    
+//     if (flowerbed[flowerbed.length - 1] == 0 && flowerbed[flowerbed.length - 2] == 0) {
+//         flowerbed[0] = 1;
+//         space++;
+//         console.log("end", space);
+//     }
+//     console.log(space)
+//     return space>=n
+// };
+
+var canPlaceFlowers = function(flowerbed, n) {
+    let space = 0;
+    let pivot = 0;
+
+
+    // 当存在当前值需要前后比较时，将首元素和尾元素的特殊情况可以使用||与前后值的比较相结合，比如，如果前置比较||首值的特殊情况 。
+    while (pivot < flowerbed.length) {
+        if (flowerbed[pivot] == 0) {
+            if ((pivot == 0 || flowerbed[pivot - 1] == 0) && (pivot == flowerbed.length - 1 || flowerbed[pivot + 1] == 0)) {
+            flowerbed[pivot] = 1;
+            space++;
+            console.log("pivot is ", pivot)
+            }
+        }
+        pivot ++;
+    }
+    
+    console.log(space)
+    return space>=n
+};
 ```
 
 - question: LC860 柠檬水找零 link: https://leetcode.cn/problems/lemonade-change/
