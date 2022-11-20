@@ -1217,7 +1217,34 @@ console.log(antiSummaryRanges([0, 1, 3, 50, 75]));
     - answer:
 ```python
 # python code
+# 先从尾部开始，找到下降点，下降点右边的点比较，找到大于下降点的最小值，与之交换，交换后，将下降点右边的点倒序，得到下一个值。
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
 
+        i, k = n-2, n-1
+
+        while i >= 0 and nums[i] >= nums[i+1]:
+            i -= 1
+        
+        if i >= 0:
+            while nums[i] >= nums[k]:
+                k -= 1
+            
+            nums[i], nums[k] = nums[k], nums[i]
+        
+        i, k = i + 1, n - 1
+
+        while nums[i] > nums[k] and i < k:
+            nums[i], nums[k] = nums[k], nums[i]
+            i += 1
+            k -= 1
+
+        return nums
+        
 ```
 ```java
 不会啊，交给时间吧
