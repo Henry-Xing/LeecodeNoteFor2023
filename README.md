@@ -1536,7 +1536,6 @@ class Solution:
 
         return t_m
 ```
-
 ```java
 
 ```
@@ -1545,14 +1544,26 @@ class Solution:
     - answer:
 ```python
 # python code
+# 两种思路解决，第一是通过先转置，再reverse。第二种，找对应关系m[i][j] 对应 m[j][n-1-i]。
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        n = len(matrix)
 
+        for i in range(n):
+            for j in range(i, n):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+        
+        for i in range(n):
+            matrix[i][:] = matrix[i][::-1]
 ```
-
 ```java
 
 ```
 
-- question: lc 36 ：有效的数独 link:
+- question: lc36：有效的数独 link: https://leetcode.cn/problems/valid-sudoku/
     - answer:
 
 ```python
