@@ -1346,7 +1346,32 @@ var candy = function(ratings) {
     - answer:
 ```python
 # python code
+# 找到1的位置，记录下来，每次找到1与之前的1的位置相减之后再减2并整除2，得到可以种花的位置。循环结束后要寻找n+1的位置与当前pre的位置之间是否可以再种。
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
 
+        m = len(flowerbed)
+
+        pre, cnt = -1, 0
+
+        for i in range(m):
+            if flowerbed[i] == 1:
+                if pre == -1:
+                    cnt += i//2
+                else:
+                    cnt += (i - pre - 2) // 2
+                pre = i
+
+                if cnt >= n:
+                    return True
+        
+        if pre == -1:
+            cnt += (m + 1) // 2
+        else:
+            cnt += (m - pre - 1) // 2
+        
+        return True if cnt >= n else False
+        
 ```
 ```java
 // /**
