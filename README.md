@@ -1518,21 +1518,31 @@ var lemonadeChange = function(bills) {
 
 ### 二维数组
 
-- question: lc 867：矩阵转置 link:https://leetcode.cn/problems/transpose-matrix/
+- question: lc867：矩阵转置 link: https://leetcode.cn/problems/transpose-matrix/
     - answer:
-
 ```python
 # python code
+# 转换shape重新赋值
+class Solution:
+    def transpose(self, matrix: List[List[int]]) -> List[List[int]]:
 
+        r,c = len(matrix), len(matrix[0])
+
+        t_m = [[0] * r for _ in range(c)]
+
+        for i in range(r):
+            for j in range(c):
+                t_m[j][i] = matrix[i][j]
+
+        return t_m
 ```
 
 ```java
 
 ```
 
-- question:lc 48 ：旋转图像 link:
+- question: lc48：旋转图像 link: https://leetcode.cn/problems/rotate-image/
     - answer:
-
 ```python
 # python code
 
