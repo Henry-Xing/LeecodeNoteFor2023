@@ -1429,5 +1429,409 @@ var canPlaceFlowers = function(flowerbed, n) {
 
 ```
 ```java
+/**
+ * @param {number[]} bills
+ * @return {boolean}
+ */
+var lemonadeChange = function(bills) {
+    let len = bills.length;
+    let five = 0;
+    let ten = 0;
+    for (let i= 0; i < len; i++) {
+        let money = bills[i];
+        if(money == 5) {
+            five++;
+        } else if (money == 10) {
+            ten++
+        }
+         {
+            while (money > 10 && ten > 0){
+                money-=10;
+                ten--;
+            }
+            while (money > 5) {
+                console.log(money)
+                money -= 5;
+                five --;
+            }
+            if (five<0) {
+                return false;
+            }
+        }
+    }
+    return true;
+};
+```
+
+- question: lc 867：矩阵转置 link:https://leetcode.cn/problems/transpose-matrix/
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:lc 48 ：旋转图像 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 36 ：有效的数独 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 73 ：矩阵置零 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- lc 54 &amp; 剑指 29 ：螺旋矩阵 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- lc 59 ：螺旋矩阵二 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- lc 498 ：对角线遍历 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:lc 118 ：杨辉三角 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 119：杨辉三角二 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 28 ：实现 strStr() link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  lc 344 ：反转字符串 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 345 ：反转字符串中的元音字母 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 1119 ：删去字符串中的元音 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 541 ：lc 557 ：反转字符串中的单词a III 反转字符串 II  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 58 ：最后一个单词的长度 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  lc 165 ：比较版本号 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:lc 12：整数转罗马数字  link: 
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  lc 13 ：罗马数字转整数 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link: lc 38 ：外观数列
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link: lc 6 ：Z 字形变换
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
 ```
 
