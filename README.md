@@ -833,7 +833,6 @@ var maxArea = function(height) {
 };
 ```
 
-
 ### 一维数组
 
 - question: LC1480 一维数组的动态和（前缀和） link: https://leetcode.cn/problems/running-sum-of-1d-array/
@@ -1516,6 +1515,8 @@ var lemonadeChange = function(bills) {
     return true;
 };
 ```
+
+### 二维数组
 
 - question: lc 867：矩阵转置 link:https://leetcode.cn/problems/transpose-matrix/
     - answer:
