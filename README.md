@@ -1496,6 +1496,8 @@ var lemonadeChange = function(bills) {
 };
 ```
 
+### 二维数组
+
 - question: lc 867：矩阵转置 link:https://leetcode.cn/problems/transpose-matrix/
     - answer:
 ```python
@@ -1557,6 +1559,20 @@ var transpose = function(matrix) {
 
 ```python
 # python code
+# 两种思路解决，第一是通过先转置，再reverse。第二种，找对应关系m[i][j] 对应 m[j][n-1-i]。
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        n = len(matrix)
+
+        for i in range(n):
+            for j in range(i, n):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+        
+        for i in range(n):
+            matrix[i][:] = matrix[i][::-1]
 
 ```
 
@@ -1589,7 +1605,38 @@ var rotate = function(matrix) {
 
 ```python
 # python code
+# 进行三次扫描，第一次找每一行，第二次找每一列，第三次找每个3x3。其中，最后一步中，m从0~8，对应3x3的行数为m//3，列数为m%3。由此得到3x3内的位置。
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        n = len(board)
 
+        for i in range(n):
+            dic1 = {}
+            dic2 = {}
+            for j in range(n):
+                if board[i][j] != '.':
+                    if board[i][j] in dic1:
+                        return False
+                    else:
+                        dic1[board[i][j]] = 1
+
+                if board[j][i] != '.':
+                    if board[j][i] in dic2:
+                        return False
+                    else:
+                        dic2[board[j][i]] = 1
+
+        for i in range(0,n,3):
+            for j in range(0,n,3):
+                dic = {}
+                for m in range(n):
+                    if board[i+(m//3)][j+(m%3)] != '.':
+                        if board[i+(m//3)][j+(m%3)] in dic:
+                            return False
+                        else:
+                            dic[board[i+(m//3)][j+(m%3)]] = 1
+
+        return True    
 ```
 
 ```java
