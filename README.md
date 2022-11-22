@@ -1451,6 +1451,14 @@ var canPlaceFlowers = function(flowerbed, n) {
     - answer:
 ```python
 # python code
+# hard code, find all possible situations.
+from collections import Counter
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        five, ten = 0,0
+        for i in bills:
+            if i == 5:
+                five += 1
 
 ```
 ```java
@@ -1490,12 +1498,37 @@ var lemonadeChange = function(bills) {
 
 - question: lc 867：矩阵转置 link:https://leetcode.cn/problems/transpose-matrix/
     - answer:
-
 ```python
 # python code
 
-```
+        for i in range(n):
+            dic1 = {}
+            dic2 = {}
+            for j in range(n):
+                if board[i][j] != '.':
+                    if board[i][j] in dic1:
+                        return False
+                    else:
+                        dic1[board[i][j]] = 1
 
+                if board[j][i] != '.':
+                    if board[j][i] in dic2:
+                        return False
+                    else:
+                        dic2[board[j][i]] = 1
+
+        for i in range(0,n,3):
+            for j in range(0,n,3):
+                dic = {}
+                for m in range(n):
+                    if board[i+(m//3)][j+(m%3)] != '.':
+                        if board[i+(m//3)][j+(m%3)] in dic:
+                            return False
+                        else:
+                            dic[board[i+(m//3)][j+(m%3)]] = 1
+
+        return True    
+```
 ```java
 /**
  * @param {number[][]} matrix
@@ -1618,19 +1651,16 @@ var isValidSudoku = function(board) {
 
 - question: lc 73 ：矩阵置零 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - lc 54 &amp; 剑指 29 ：螺旋矩阵 link:
     - answer:
-
 ```python
 # python code
 
@@ -1642,175 +1672,146 @@ var isValidSudoku = function(board) {
 
 - lc 59 ：螺旋矩阵二 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - lc 498 ：对角线遍历 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:lc 118 ：杨辉三角 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 119：杨辉三角二 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 28 ：实现 strStr() link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:  lc 344 ：反转字符串 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 345 ：反转字符串中的元音字母 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 1119 ：删去字符串中的元音 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 541 ：lc 557 ：反转字符串中的单词a III 反转字符串 II  link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 58 ：最后一个单词的长度 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:  lc 165 ：比较版本号 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:lc 12：整数转罗马数字  link: 
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:  lc 13 ：罗马数字转整数 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:  link: lc 38 ：外观数列
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:  link: lc 6 ：Z 字形变换
     - answer:
-
 ```python
 # python code
 
