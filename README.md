@@ -1556,7 +1556,6 @@ var transpose = function(matrix) {
 
 - question: lc48 旋转图像 link: https://leetcode.cn/problems/rotate-image
     - answer:
-
 ```python
 # python code
 # 两种思路解决，第一是通过先转置，再reverse。第二种，找对应关系m[i][j] 对应 m[j][n-1-i]。
@@ -1575,7 +1574,6 @@ class Solution:
             matrix[i][:] = matrix[i][::-1]
 
 ```
-
 ```java
 /**
  * @param {number[][]} matrix
@@ -1602,7 +1600,6 @@ var rotate = function(matrix) {
 
 - question: lc36 有效的数独 link: https://leetcode.cn/problems/valid-sudoku
     - answer:
-
 ```python
 # python code
 # 进行三次扫描，第一次找每一行，第二次找每一列，第三次找每个3x3。其中，最后一步中，m从0~8，对应3x3的行数为m//3，列数为m%3。由此得到3x3内的位置。
@@ -1638,7 +1635,6 @@ class Solution:
 
         return True    
 ```
-
 ```java
 /**
  * @param {character[][]} board
@@ -1692,8 +1688,6 @@ var isValidSudoku = function(board) {
     }
     return true;
 };
-
-
 ```
 
 - question: lc73 矩阵置零 link: 
@@ -1712,7 +1706,6 @@ var isValidSudoku = function(board) {
 # python code
 
 ```
-
 ```java
 
 ```
@@ -1797,12 +1790,24 @@ var isValidSudoku = function(board) {
 
 ```
 
-- question: lc541 ：lc557 ：反转字符串中的单词a III 反转字符串 II  link:
+- question: lc541 反转字符串中的单词 link:
     - answer:
 ```python
 # python code
 
 ```
+```java
+
+```
+
+- question: lc557 反转字符串 link:
+    - answer:
+
+```python
+# python code
+
+```
+
 ```java
 
 ```
@@ -1857,13 +1862,12 @@ var isValidSudoku = function(board) {
 
 ```
 
-- question: Z字形变换 lc6 link:
+- question: lc6 Z字形变换 link:
     - answer:
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
