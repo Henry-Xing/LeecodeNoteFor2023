@@ -833,6 +833,7 @@ var maxArea = function(height) {
 };
 ```
 
+
 ### 一维数组
 
 - question: LC1480 一维数组的动态和（前缀和） link: https://leetcode.cn/problems/running-sum-of-1d-array/
@@ -1453,5 +1454,501 @@ var canPlaceFlowers = function(flowerbed, n) {
 
 ```
 ```java
+/**
+ * @param {number[]} bills
+ * @return {boolean}
+ */
+var lemonadeChange = function(bills) {
+    let len = bills.length;
+    let five = 0;
+    let ten = 0;
+    for (let i= 0; i < len; i++) {
+        let money = bills[i];
+        if(money == 5) {
+            five++;
+        } else if (money == 10) {
+            ten++
+        }
+         {
+            while (money > 10 && ten > 0){
+                money-=10;
+                ten--;
+            }
+            while (money > 5) {
+                console.log(money)
+                money -= 5;
+                five --;
+            }
+            if (five<0) {
+                return false;
+            }
+        }
+    }
+    return true;
+};
+```
+
+- question: lc 867：矩阵转置 link:https://leetcode.cn/problems/transpose-matrix/
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+/**
+ * @param {number[][]} matrix
+ * @return {number[][]}
+ */
+var transpose = function(matrix) {
+    let res = [];
+    let m = matrix.length;
+    let n = matrix[0].length;
+    for (let i = 0; i< n; i++) {
+        let row = matrix[i];
+        let resLine = []
+
+        for (let j = 0; j < m; j++) {
+            resLine.push(matrix[j][i]);
+        }
+        res.push(resLine);
+    }
+    return res;
+};
+
+```
+
+- question:lc 48 ：旋转图像 link:https://leetcode.cn/problems/rotate-image
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+
+// js初始定义数组的时候，不要使用fill 要使用 Array.from(Array(n), item => new Array(n).fill(0)将数组变换
+var rotate = function(matrix) {
+    let n = matrix.length
+    let arr = Array.from(Array(n), item => new Array(n).fill(0))
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++){
+            arr[j][n - 1 - i] = matrix[i][j]
+        }
+    }
+    console.log(arr);
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++){
+            matrix[i][j] = arr[i][j]
+        }
+    }
+};
+```
+
+- question: lc 36 ：有效的数独 link:https://leetcode.cn/problems/valid-sudoku
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function(board) {
+    // check the line
+    for (let i = 0; i<9; i++) {
+        let arr = new Array(9).fill(false);
+        for (let j = 0; j < 9; j++) {
+            if (arr[board[i][j]] == true) {
+                console.log(i, j, "return false by row")
+                return false;
+            } 
+            if (board[i][j] != ".") {
+                arr[board[i][j]] = true;
+            }
+        }
+    };
+
+    for (let i = 0; i<9; i++) {  
+        let arr = new Array(9).fill(false);
+        for (let j = 0; j < 9; j++) {
+            if (arr[board[j][i]] == true) {
+                console.log(i, j, arr[board[j][i]], board[j][i], "return false by column")
+                return false;
+            } 
+            if (board[j][i] != ".") {
+                arr[board[j][i]] = true;
+            }
+        }
+    };
+
+    
+    // 寻找起始点然后开启3*3小循环
+    for (let a = 0; a < 9; a += 3){
+        for (let b = 0; b < 9; b+= 3) {
+            let arr = new Array(9).fill(false);
+            for (let i = a; i < a+3; i++) {
+                for (let j = b; j < b+3; j++) {
+                    if (arr[board[i][j]] == true) {
+                        console.log(i, j, "return false by group")
+                        return false;
+                    } 
+                    if (board[i][j] != ".") {
+                        arr[board[i][j]] = true;
+                    }
+                }
+            }
+        }
+    }
+    return true;
+};
+
+
+```
+
+- question: lc 73 ：矩阵置零 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- lc 54 &amp; 剑指 29 ：螺旋矩阵 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- lc 59 ：螺旋矩阵二 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- lc 498 ：对角线遍历 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:lc 118 ：杨辉三角 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 119：杨辉三角二 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 28 ：实现 strStr() link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  lc 344 ：反转字符串 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 345 ：反转字符串中的元音字母 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 1119 ：删去字符串中的元音 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 541 ：lc 557 ：反转字符串中的单词a III 反转字符串 II  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question: lc 58 ：最后一个单词的长度 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  lc 165 ：比较版本号 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:lc 12：整数转罗马数字  link: 
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  lc 13 ：罗马数字转整数 link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link: lc 38 ：外观数列
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link: lc 6 ：Z 字形变换
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
+```
+
+- question:  link:
+    - answer:
+
+```python
+# python code
+
+```
+
+```java
+
 ```
 
