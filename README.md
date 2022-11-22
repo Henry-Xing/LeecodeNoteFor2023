@@ -1498,7 +1498,7 @@ var lemonadeChange = function(bills) {
 
 ### 二维数组
 
-- question: lc 867：矩阵转置 link:https://leetcode.cn/problems/transpose-matrix/
+- question: lc867 矩阵转置 link: https://leetcode.cn/problems/transpose-matrix/
     - answer:
 ```python
 # python code
@@ -1554,7 +1554,7 @@ var transpose = function(matrix) {
 
 ```
 
-- question:lc 48 ：旋转图像 link:https://leetcode.cn/problems/rotate-image
+- question: lc48 旋转图像 link: https://leetcode.cn/problems/rotate-image
     - answer:
 
 ```python
@@ -1600,7 +1600,7 @@ var rotate = function(matrix) {
 };
 ```
 
-- question: lc 36 ：有效的数独 link:https://leetcode.cn/problems/valid-sudoku
+- question: lc36 有效的数独 link: https://leetcode.cn/problems/valid-sudoku
     - answer:
 
 ```python
@@ -1696,7 +1696,7 @@ var isValidSudoku = function(board) {
 
 ```
 
-- question: lc 73 ：矩阵置零 link:
+- question: lc73 矩阵置零 link: 
     - answer:
 ```python
 # python code
@@ -1706,158 +1706,7 @@ var isValidSudoku = function(board) {
 
 ```
 
-- lc 54 &amp; 剑指 29 ：螺旋矩阵 link:
-    - answer:
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- lc 59 ：螺旋矩阵二 link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- lc 498 ：对角线遍历 link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question:lc 118 ：杨辉三角 link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question: lc 119：杨辉三角二 link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question: lc 28 ：实现 strStr() link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question:  lc 344 ：反转字符串 link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question: lc 345 ：反转字符串中的元音字母 link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question: lc 1119 ：删去字符串中的元音 link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question: lc 541 ：lc 557 ：反转字符串中的单词a III 反转字符串 II  link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question: lc 58 ：最后一个单词的长度 link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question:  lc 165 ：比较版本号 link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question:lc 12：整数转罗马数字  link: 
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question:  lc 13 ：罗马数字转整数 link:
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question:  link: lc 38 ：外观数列
-    - answer:
-```python
-# python code
-
-```
-```java
-
-```
-
-- question:  link: lc 6 ：Z 字形变换
+- question: lc54 剑指29 螺旋矩阵 link:
     - answer:
 ```python
 # python code
@@ -1868,9 +1717,148 @@ var isValidSudoku = function(board) {
 
 ```
 
-- question:  link:
+- question: lc59 螺旋矩阵二 link:
     - answer:
+```python
+# python code
 
+```
+```java
+
+```
+
+- question: lc498 对角线遍历 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question:lc118 杨辉三角 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc119 杨辉三角二 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc28 实现 strStr() link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc344 反转字符串 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc345 反转字符串中的元音字母 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc1119 删去字符串中的元音 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc541 ：lc557 ：反转字符串中的单词a III 反转字符串 II  link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc58 最后一个单词的长度 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc165 比较版本号 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc12 整数转罗马数字 link: 
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc13 罗马数字转整数 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc38 外观数列 link: 
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: Z字形变换 lc6 link:
+    - answer:
 ```python
 # python code
 
@@ -1892,111 +1880,4 @@ var isValidSudoku = function(board) {
 
 ```
 
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
 
