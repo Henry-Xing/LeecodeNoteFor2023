@@ -1526,10 +1526,29 @@ var lemonadeChange = function(bills) {
 ```
 
 ```java
+/**
+ * @param {number[][]} matrix
+ * @return {number[][]}
+ */
+var transpose = function(matrix) {
+    let res = [];
+    let m = matrix.length;
+    let n = matrix[0].length;
+    for (let i = 0; i< n; i++) {
+        let row = matrix[i];
+        let resLine = []
+
+        for (let j = 0; j < m; j++) {
+            resLine.push(matrix[j][i]);
+        }
+        res.push(resLine);
+    }
+    return res;
+};
 
 ```
 
-- question:lc 48 ：旋转图像 link:
+- question:lc 48 ：旋转图像 link:https://leetcode.cn/problems/rotate-image
     - answer:
 
 ```python
@@ -1538,10 +1557,30 @@ var lemonadeChange = function(bills) {
 ```
 
 ```java
+/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
 
+// js初始定义数组的时候，不要使用fill 要使用 Array.from(Array(n), item => new Array(n).fill(0)将数组变换
+var rotate = function(matrix) {
+    let n = matrix.length
+    let arr = Array.from(Array(n), item => new Array(n).fill(0))
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++){
+            arr[j][n - 1 - i] = matrix[i][j]
+        }
+    }
+    console.log(arr);
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++){
+            matrix[i][j] = arr[i][j]
+        }
+    }
+};
 ```
 
-- question: lc 36 ：有效的数独 link:
+- question: lc 36 ：有效的数独 link:https://leetcode.cn/problems/valid-sudoku
     - answer:
 
 ```python
@@ -1550,6 +1589,59 @@ var lemonadeChange = function(bills) {
 ```
 
 ```java
+/**
+ * @param {character[][]} board
+ * @return {boolean}
+ */
+var isValidSudoku = function(board) {
+    // check the line
+    for (let i = 0; i<9; i++) {
+        let arr = new Array(9).fill(false);
+        for (let j = 0; j < 9; j++) {
+            if (arr[board[i][j]] == true) {
+                console.log(i, j, "return false by row")
+                return false;
+            } 
+            if (board[i][j] != ".") {
+                arr[board[i][j]] = true;
+            }
+        }
+    };
+
+    for (let i = 0; i<9; i++) {  
+        let arr = new Array(9).fill(false);
+        for (let j = 0; j < 9; j++) {
+            if (arr[board[j][i]] == true) {
+                console.log(i, j, arr[board[j][i]], board[j][i], "return false by column")
+                return false;
+            } 
+            if (board[j][i] != ".") {
+                arr[board[j][i]] = true;
+            }
+        }
+    };
+
+    
+    // 寻找起始点然后开启3*3小循环
+    for (let a = 0; a < 9; a += 3){
+        for (let b = 0; b < 9; b+= 3) {
+            let arr = new Array(9).fill(false);
+            for (let i = a; i < a+3; i++) {
+                for (let j = b; j < b+3; j++) {
+                    if (arr[board[i][j]] == true) {
+                        console.log(i, j, "return false by group")
+                        return false;
+                    } 
+                    if (board[i][j] != ".") {
+                        arr[board[i][j]] = true;
+                    }
+                }
+            }
+        }
+    }
+    return true;
+};
+
 
 ```
 
