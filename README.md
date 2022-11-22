@@ -1241,8 +1241,6 @@ class Solution:
     - answer:
 ```python
 # python code
-<<<<<<< Updated upstream
-=======
 # hard code, find all possible situations.
 from collections import Counter
 class Solution:
@@ -1358,7 +1356,6 @@ class Solution:
 
 - question: lc36：有效的数独 link: https://leetcode.cn/problems/valid-sudoku/
     - answer:
-
 ```python
 # python code
 # 进行三次扫描，第一次找每一行，第二次找每一列，第三次找每个3x3。其中，最后一步中，m从0~8，对应3x3的行数为m//3，列数为m%3。由此得到3x3内的位置。
@@ -1392,32 +1389,24 @@ class Solution:
                         else:
                             dic[board[i+(m//3)][j+(m%3)]] = 1
 
-        return True
-        
-
-        
-        
+        return True    
 ```
-
 ```java
 
 ```
 
 - question: lc 73 ：矩阵置零 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - lc 54 &amp; 剑指 29 ：螺旋矩阵 link:
     - answer:
-
 ```python
 # python code
 
@@ -1429,178 +1418,148 @@ class Solution:
 
 - lc 59 ：螺旋矩阵二 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - lc 498 ：对角线遍历 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:lc 118 ：杨辉三角 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 119：杨辉三角二 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 28 ：实现 strStr() link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:  lc 344 ：反转字符串 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 345 ：反转字符串中的元音字母 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 1119 ：删去字符串中的元音 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 541 ：lc 557 ：反转字符串中的单词a III 反转字符串 II  link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question: lc 58 ：最后一个单词的长度 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:  lc 165 ：比较版本号 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:lc 12：整数转罗马数字  link: 
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:  lc 13 ：罗马数字转整数 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:  link: lc 38 ：外观数列
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
 - question:  link: lc 6 ：Z 字形变换
     - answer:
-
 ```python
 # python code
->>>>>>> Stashed changes
 
 ```
 ```java
