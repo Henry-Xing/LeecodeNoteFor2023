@@ -1690,7 +1690,7 @@ var isValidSudoku = function(board) {
 };
 ```
 
-- question: lc73 矩阵置零 link: 
+- question: lc73 矩阵置零 link: https://leetcode.cn/problems/set-matrix-zeroes/
     - answer:
 ```python
 # python code
