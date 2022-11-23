@@ -1697,7 +1697,33 @@ var isValidSudoku = function(board) {
 
 ```
 ```java
-
+/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+var setZeroes = function(matrix) {
+    let m = matrix.length;
+    let n = matrix[0].length;
+    let zerosIndexI = new Set();
+    let zerosIndexJ = new Set();
+    // let arr = Array.from(new Array(m), item => new Array(n).fill(false));
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            // arr[i][j] = true;
+            if (matrix[i][j] == 0) {
+               zerosIndexI.add(i)
+               zerosIndexJ.add(j)
+            }
+        }
+    }
+    for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+            if (zerosIndexI.has(i) || zerosIndexJ.has(j)) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+};
 ```
 
 - question: lc54 剑指29 螺旋矩阵 link:link:https://leetcode.cn/problems/set-matrix-zeroes
@@ -1911,5 +1937,4 @@ var setZeroes = function(matrix) {
 ```java
 
 ```
-
 
