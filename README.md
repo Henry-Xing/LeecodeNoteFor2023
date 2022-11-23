@@ -1694,7 +1694,45 @@ var isValidSudoku = function(board) {
     - answer:
 ```python
 # python code
+# 利用自身数组的第一行与第一列记录是否需要变为零，同时需要两个变量来记录第一行与第一列是否需要变为全零。进阶版本可以只使用一个变量来记录但过程不是很清晰。
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        row = len(matrix)
+        col = len(matrix[0])
 
+        col_flag, row_flag = True, True
+
+        for i in range(row):
+            if matrix[i][0] == 0:
+                col_flag = False
+                break
+
+        for i in range(col):
+            if matrix[0][i] == 0:
+                row_flag = False
+                break
+
+        for i in range(1, row):
+            for j in range(1, col):
+                if matrix[i][j] == 0:
+                    matrix[i][0] = 0
+                    matrix[0][j] = 0
+        
+        for i in range(1, row):
+            for j in range(1, col):
+                if matrix[i][0] == 0 or matrix[0][j] == 0:
+                    matrix[i][j] = 0
+
+        if not row_flag:
+            for i in range(col):
+                matrix[0][i] = 0
+        
+        if not col_flag:
+            for i in range(row):
+                matrix[i][0] = 0
 ```
 ```java
 /**
@@ -1726,7 +1764,7 @@ var setZeroes = function(matrix) {
 };
 ```
 
-- question: lc54 剑指29 螺旋矩阵 link:link:https://leetcode.cn/problems/set-matrix-zeroes
+- question: lc54 剑指29 螺旋矩阵 link: https://leetcode.cn/problems/spiral-matrix/
     - answer:
 ```python
 # python code
