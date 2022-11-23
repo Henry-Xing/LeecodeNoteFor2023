@@ -833,6 +833,7 @@ var maxArea = function(height) {
 };
 ```
 
+
 ### 一维数组
 
 - question: LC1480 一维数组的动态和（前缀和） link: https://leetcode.cn/problems/running-sum-of-1d-array/
@@ -1459,27 +1460,6 @@ class Solution:
             if i == 5:
                 five += 1
 
-            if i == 10:
-                if five > 0:
-                    five -= 1
-                    ten += 1
-                else:
-                    return False
-
-            if i == 20:
-                if five > 0:
-                    if ten > 0:
-                        five -= 1
-                        ten -= 1
-                    else:
-                        if five > 2:
-                            five -= 3
-                        else:
-                            return False
-                else:
-                    return False
-
-        return True
 ```
 ```java
 /**
@@ -1518,23 +1498,38 @@ var lemonadeChange = function(bills) {
 
 ### 二维数组
 
-- question: lc867：矩阵转置 link: https://leetcode.cn/problems/transpose-matrix/
+- question: lc867 矩阵转置 link: https://leetcode.cn/problems/transpose-matrix/
     - answer:
 ```python
 # python code
-# 转换shape重新赋值
-class Solution:
-    def transpose(self, matrix: List[List[int]]) -> List[List[int]]:
 
-        r,c = len(matrix), len(matrix[0])
+        for i in range(n):
+            dic1 = {}
+            dic2 = {}
+            for j in range(n):
+                if board[i][j] != '.':
+                    if board[i][j] in dic1:
+                        return False
+                    else:
+                        dic1[board[i][j]] = 1
 
-        t_m = [[0] * r for _ in range(c)]
+                if board[j][i] != '.':
+                    if board[j][i] in dic2:
+                        return False
+                    else:
+                        dic2[board[j][i]] = 1
 
-        for i in range(r):
-            for j in range(c):
-                t_m[j][i] = matrix[i][j]
+        for i in range(0,n,3):
+            for j in range(0,n,3):
+                dic = {}
+                for m in range(n):
+                    if board[i+(m//3)][j+(m%3)] != '.':
+                        if board[i+(m//3)][j+(m%3)] in dic:
+                            return False
+                        else:
+                            dic[board[i+(m//3)][j+(m%3)]] = 1
 
-        return t_m
+        return True    
 ```
 ```java
 /**
@@ -1559,7 +1554,7 @@ var transpose = function(matrix) {
 
 ```
 
-- question:lc 48 ：旋转图像 link:https://leetcode.cn/problems/rotate-image
+- question: lc48 旋转图像 link: https://leetcode.cn/problems/rotate-image
     - answer:
 ```python
 # python code
@@ -1577,6 +1572,7 @@ class Solution:
         
         for i in range(n):
             matrix[i][:] = matrix[i][::-1]
+
 ```
 ```java
 /**
@@ -1602,14 +1598,43 @@ var rotate = function(matrix) {
 };
 ```
 
-- question: lc 36 ：有效的数独 link:https://leetcode.cn/problems/valid-sudoku
+- question: lc36 有效的数独 link: https://leetcode.cn/problems/valid-sudoku
     - answer:
-
 ```python
 # python code
+# 进行三次扫描，第一次找每一行，第二次找每一列，第三次找每个3x3。其中，最后一步中，m从0~8，对应3x3的行数为m//3，列数为m%3。由此得到3x3内的位置。
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        n = len(board)
 
+        for i in range(n):
+            dic1 = {}
+            dic2 = {}
+            for j in range(n):
+                if board[i][j] != '.':
+                    if board[i][j] in dic1:
+                        return False
+                    else:
+                        dic1[board[i][j]] = 1
+
+                if board[j][i] != '.':
+                    if board[j][i] in dic2:
+                        return False
+                    else:
+                        dic2[board[j][i]] = 1
+
+        for i in range(0,n,3):
+            for j in range(0,n,3):
+                dic = {}
+                for m in range(n):
+                    if board[i+(m//3)][j+(m%3)] != '.':
+                        if board[i+(m//3)][j+(m%3)] in dic:
+                            return False
+                        else:
+                            dic[board[i+(m//3)][j+(m%3)]] = 1
+
+        return True    
 ```
-
 ```java
 /**
  * @param {character[][]} board
@@ -1663,11 +1688,119 @@ var isValidSudoku = function(board) {
     }
     return true;
 };
+```
 
+- question: lc73 矩阵置零 link: https://leetcode.cn/problems/set-matrix-zeroes/
+    - answer:
+```python
+# python code
+
+```
+```java
 
 ```
 
-- question: lc 73 ：矩阵置零 link:https://leetcode.cn/problems/set-matrix-zeroes
+- question: lc54 剑指29 螺旋矩阵 link:link:https://leetcode.cn/problems/set-matrix-zeroes
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc59 螺旋矩阵二 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc498 对角线遍历 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question:lc118 杨辉三角 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc119 杨辉三角二 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc28 实现 strStr() link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc344 反转字符串 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc345 反转字符串中的元音字母 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc1119 删去字符串中的元音 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc541 反转字符串中的单词 link:
+    - answer:
+```python
+# python code
+
+```
+```java
+
+```
+
+- question: lc557 反转字符串 link:
     - answer:
 
 ```python
@@ -1707,194 +1840,62 @@ var setZeroes = function(matrix) {
 };
 ```
 
-- lc 54 &amp; 剑指 29 ：螺旋矩阵 link:
+- question: lc58 最后一个单词的长度 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
-- lc 59 ：螺旋矩阵二 link:
+- question: lc165 比较版本号 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
-- lc 498 ：对角线遍历 link:
+- question: lc12 整数转罗马数字 link: 
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
-- question:lc 118 ：杨辉三角 link:
+- question: lc13 罗马数字转整数 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
-- question: lc 119：杨辉三角二 link:
+- question: lc38 外观数列 link: 
     - answer:
-
 ```python
 # python code
 
 ```
-
 ```java
 
 ```
 
-- question: lc 28 ：实现 strStr() link:
+- question: lc6 Z字形变换 link:
     - answer:
-
 ```python
 # python code
 
 ```
-
-```java
-
-```
-
-- question:  lc 344 ：反转字符串 link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question: lc 345 ：反转字符串中的元音字母 link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question: lc 1119 ：删去字符串中的元音 link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question: lc 541 ：lc 557 ：反转字符串中的单词a III 反转字符串 II  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question: lc 58 ：最后一个单词的长度 link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  lc 165 ：比较版本号 link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:lc 12：整数转罗马数字  link: 
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  lc 13 ：罗马数字转整数 link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link: lc 38 ：外观数列
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link: lc 6 ：Z 字形变换
-    - answer:
-
-```python
-# python code
-
-```
-
 ```java
 
 ```
@@ -1911,123 +1912,4 @@ var setZeroes = function(matrix) {
 
 ```
 
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
-
-- question:  link:
-    - answer:
-
-```python
-# python code
-
-```
-
-```java
-
-```
 
