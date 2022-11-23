@@ -1768,7 +1768,38 @@ var setZeroes = function(matrix) {
     - answer:
 ```python
 # python code
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
 
+        n = len(matrix)
+        m = len(matrix[0])
+
+        ans = []
+        start = 0
+
+        while len(ans) < n*m:
+
+            for i in range(start, m-start):
+                ans.append(matrix[start][i])
+            if len(ans) == n*m:
+                break
+
+            for i in range(1+start, n-start):
+                ans.append(matrix[i][m-start-1])
+            if len(ans) == n*m:
+                break
+
+            for i in reversed(range(start, m-start-1)):
+                ans.append(matrix[n-start-1][i])
+            if len(ans) == n*m:
+                break
+
+            for i in reversed(range(start+1, n-start-1)):
+                ans.append(matrix[i][start])
+            
+            start += 1
+
+        return ans
 ```
 ```java
 
