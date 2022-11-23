@@ -1805,7 +1805,7 @@ class Solution:
 
 ```
 
-- question: lc59 螺旋矩阵二 link:
+- question: lc59 螺旋矩阵二 link: https://leetcode.cn/problems/spiral-matrix-ii/
     - answer:
 ```python
 # python code
