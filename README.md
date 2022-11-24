@@ -1884,7 +1884,7 @@ class Solution:
 
 ```
 
-- question:lc118 杨辉三角 link:
+- question:lc118 杨辉三角 link: https://leetcode.cn/problems/pascals-triangle/
     - answer:
 ```python
 # python code
@@ -1894,7 +1894,7 @@ class Solution:
 
 ```
 
-- question: lc119 杨辉三角二 link:
+- question: lc119 杨辉三角II link: https://leetcode.cn/problems/pascals-triangle-ii/
     - answer:
 ```python
 # python code
@@ -1904,7 +1904,7 @@ class Solution:
 
 ```
 
-- question: lc28 实现 strStr() link:
+- question: lc28 实现 strStr() link: https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/
     - answer:
 ```python
 # python code
@@ -1914,7 +1914,7 @@ class Solution:
 
 ```
 
-- question: lc344 反转字符串 link:
+- question: lc344 反转字符串 link: https://leetcode.cn/problems/reverse-string/
     - answer:
 ```python
 # python code
@@ -1924,7 +1924,7 @@ class Solution:
 
 ```
 
-- question: lc345 反转字符串中的元音字母 link:
+- question: lc345 反转字符串中的元音字母 link: https://leetcode.cn/problems/reverse-vowels-of-a-string/
     - answer:
 ```python
 # python code
@@ -1934,7 +1934,7 @@ class Solution:
 
 ```
 
-- question: lc1119 删去字符串中的元音 link:
+- question: lc1119 删去字符串中的元音（vip） link:
     - answer:
 ```python
 # python code
@@ -1944,7 +1944,7 @@ class Solution:
 
 ```
 
-- question: lc541 反转字符串中的单词 link:
+- question: lc541 反转字符串中的单词 link: https://leetcode.cn/problems/reverse-string-ii/
     - answer:
 ```python
 # python code
@@ -1954,7 +1954,7 @@ class Solution:
 
 ```
 
-- question: lc557 反转字符串 link:
+- question: lc557 反转字符串 link: https://leetcode.cn/problems/reverse-words-in-a-string-iii/
     - answer:
 
 ```python
@@ -1994,7 +1994,7 @@ var setZeroes = function(matrix) {
 };
 ```
 
-- question: lc58 最后一个单词的长度 link:
+- question: lc58 最后一个单词的长度 link: https://leetcode.cn/problems/length-of-last-word/
     - answer:
 ```python
 # python code
@@ -2004,7 +2004,7 @@ var setZeroes = function(matrix) {
 
 ```
 
-- question: lc165 比较版本号 link:
+- question: lc165 比较版本号 link: https://leetcode.cn/problems/compare-version-numbers/
     - answer:
 ```python
 # python code
@@ -2014,7 +2014,7 @@ var setZeroes = function(matrix) {
 
 ```
 
-- question: lc12 整数转罗马数字 link: 
+- question: lc12 整数转罗马数字 link: https://leetcode.cn/problems/integer-to-roman/
     - answer:
 ```python
 # python code
@@ -2024,7 +2024,7 @@ var setZeroes = function(matrix) {
 
 ```
 
-- question: lc13 罗马数字转整数 link:
+- question: lc13 罗马数字转整数 link: https://leetcode.cn/problems/roman-to-integer/
     - answer:
 ```python
 # python code
@@ -2034,7 +2034,7 @@ var setZeroes = function(matrix) {
 
 ```
 
-- question: lc38 外观数列 link: 
+- question: lc38 外观数列 link: https://leetcode.cn/problems/count-and-say/
     - answer:
 ```python
 # python code
@@ -2044,7 +2044,7 @@ var setZeroes = function(matrix) {
 
 ```
 
-- question: lc6 Z字形变换 link:
+- question: lc6 Z字形变换 link: https://leetcode.cn/problems/zigzag-conversion/
     - answer:
 ```python
 # python code
