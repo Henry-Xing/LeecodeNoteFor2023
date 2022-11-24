@@ -1843,17 +1843,100 @@ var spiralOrder = function(matrix) {
 
 ```
 ```java
+/**
+ * @param {number} n
+ * @return {number[][]}
+ */
+var generateMatrix = function(n) {
+    let res = [];
+    let matrix = [];
+    let row = 0;
+    let column = 0;
+    let total =n*n;
+    directionIndex = 0;
+    for (let i = 0; i < n; i++) {
+        matrix.push(new Array());
+        for (let j = 0; j < n; j++) {
+            matrix[i].push(0);
+        }
+    }
+    let visited = new Array(n).fill(0).map(() => new Array(n).fill(false));
+    // 右下左上
+    let directions = [[0,1], [1,0], [0,-1], [-1, 0]];    
+    for (let i = 0; i < total; i++) {
+        visited[row][column] = true;
+        matrix[row][column] = i+1;
+            console.log(matrix)
+        let Nrow = row + (directions[directionIndex][0]);
+        let Ncolumn = column +  (directions[directionIndex][1]);
+        if (Nrow >= n || Ncolumn >= n || Ncolumn <0  || Nrow < 0 || visited[Nrow][Ncolumn]) {
+            directionIndex = (directionIndex + 1) % 4; 
+            
+        }
+        row = row + (directions[directionIndex][0]);
+        column = column +  (directions[directionIndex][1]);
+    }
 
+    for (let i = 0; i<n; i++) {
+        res.push(new Array())
+        for (let j = 0; j < n; j++) {
+            res[i].push(matrix[i][j]);
+        }
+    }
+    
+    return res;
+};
 ```
 
-- question: lc498 对角线遍历 link:
+- question: lc498 对角线遍历 link: https://leetcode.cn/problems/diagonal-traverse/
     - answer:
 ```python
 # python code
 
 ```
 ```java
+/**
+ * @param {number[][]} mat
+ * @return {number[]}
+ */
+//利用x, y 遍历数组。因为对角线只有两个方向，我们就用两个方向的情况讨论。方向1为右上方向，他的终止条件是碰到上墙壁和有墙壁。方向2为左下方向，他的终止条件为碰到下墙壁和做墙壁。
 
+var findDiagonalOrder = function(mat) {
+    let direction = 1;
+    let m = mat.length;
+    let n = mat[0].length;
+    let total = m * n
+    let x = 0;
+    let y = 0;
+    let res = [];
+    for (let i = 0; i<total; i++) {
+        res.push(mat[y][x]);
+        if (direction == 1) {
+            if (x + 1 == n) {
+                y++;
+                direction = 2;
+            } else if (y - 1 < 0){
+                x++;
+                direction = 2;
+            } else {
+                x++;
+                y--;
+            }
+        } else {
+            if (y + 1 == m) {
+                x++;
+                direction = 1;
+            } else if (x - 1 < 0){
+                y++;
+                direction = 1;
+            } else {
+                y++;
+                x--;
+            }
+        }
+    }
+    return res;
+};
 ```
 
 - question:lc118 杨辉三角 link:
@@ -1863,27 +1946,86 @@ var spiralOrder = function(matrix) {
 
 ```
 ```java
-
+/**
+ * @param {number} numRows
+ * @return {number[][]}
+ */
+var generate = function(numRows) {
+    let res = new Array(numRows);
+    for (let i = 0; i < numRows; i++) {
+        
+        res[i] = new Array(i+1);
+        res[i][0] = 1;
+        res[i][i] = 1;
+        console.log(res);
+        for (let j = 1; j < i; j++) {
+            res[i][j] = res[i - 1][j] + res[i - 1][j - 1];
+        }
+    }
+    return res;
+};
 ```
 
-- question: lc119 杨辉三角二 link:
+- question: lc119 杨辉三角二 link: https://leetcode.cn/problems/pascals-triangle-ii/
     - answer:
 ```python
 # python code
 
 ```
 ```java
+/**
+ * @param {number} rowIndex
+ * @return {number[]}
+ */
+var getRow = function(rowIndex) {
+    let res = [];
+    for (let i = 0; i <= rowIndex; i++) {
+        let row = new Array(i+1);
+        row[0] = 1;
+        row[row.length - 1] = 1; 
 
+        for (let j = 1; j < i; j++) {
+            row[j] = res[i - 1][j] + res[i - 1][j - 1]
+        }
+        if (i == rowIndex) {
+            return row
+        }
+        res.push(row);
+    }
+};
 ```
 
-- question: lc28 实现 strStr() link:
+- question: lc28 实现 strStr() link: https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/
     - answer:
 ```python
 # python code
 
 ```
 ```java
-
+/**
+ * @param {string} haystack
+ * @param {string} needle
+ * @return {number}
+ */
+var strStr = function(haystack, needle) {
+    let hl = haystack.length;
+    let nl = needle.length;
+    let a = 0;
+    let b = 0;
+    while (a <= hl) {
+        if (haystack[a] == needle[b]) {
+            if (b == nl - 1) {
+                return a - b;
+            }
+            b++;
+        } else {
+            a = a - b;
+            b = 0
+        }
+        a++;
+    }
+    return -1;
+};
 ```
 
 - question: lc344 反转字符串 link:
