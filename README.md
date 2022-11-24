@@ -1768,6 +1768,7 @@ var setZeroes = function(matrix) {
     - answer:
 ```python
 # python code
+# 外层循环，大循环内有四次小循环，代表最外层。
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
 
@@ -1840,7 +1841,34 @@ var spiralOrder = function(matrix) {
     - answer:
 ```python
 # python code
+# 类似 lc54 但这个是方阵，所以不用做if检测。
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0]*n for _ in range(n)]
+        init = 1
+        start = 0
 
+        while init <= n*n:
+
+            for i in range(start, n-start):
+                matrix[start][i] = init
+                init += 1
+
+            for i in range(1+start, n-start):
+                matrix[i][n-start-1] = init
+                init += 1
+
+            for i in reversed(range(start, n-start-1)):
+                matrix[n-start-1][i] = init
+                init += 1
+
+            for i in reversed(range(start+1, n-start-1)):
+                matrix[i][start] = init
+                init += 1
+            
+            start += 1
+
+        return matrix
 ```
 ```java
 
