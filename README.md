@@ -1874,7 +1874,7 @@ class Solution:
 
 ```
 
-- question: lc498 对角线遍历 link:
+- question: lc498 对角线遍历 link: https://leetcode.cn/problems/diagonal-traverse/
     - answer:
 ```python
 # python code
