@@ -1768,6 +1768,7 @@ var setZeroes = function(matrix) {
     - answer:
 ```python
 # python code
+# 外层循环，大循环内有四次小循环，代表最外层。
 class Solution:
     def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
 
@@ -1840,7 +1841,34 @@ var spiralOrder = function(matrix) {
     - answer:
 ```python
 # python code
+# 类似 lc54 但这个是方阵，所以不用做if检测。
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        matrix = [[0]*n for _ in range(n)]
+        init = 1
+        start = 0
 
+        while init <= n*n:
+
+            for i in range(start, n-start):
+                matrix[start][i] = init
+                init += 1
+
+            for i in range(1+start, n-start):
+                matrix[i][n-start-1] = init
+                init += 1
+
+            for i in reversed(range(start, n-start-1)):
+                matrix[n-start-1][i] = init
+                init += 1
+
+            for i in reversed(range(start+1, n-start-1)):
+                matrix[i][start] = init
+                init += 1
+            
+            start += 1
+
+        return matrix
 ```
 ```java
 /**
@@ -1939,7 +1967,7 @@ var findDiagonalOrder = function(mat) {
 };
 ```
 
-- question:lc118 杨辉三角 link:
+- question:lc118 杨辉三角 link: https://leetcode.cn/problems/pascals-triangle/
     - answer:
 ```python
 # python code
@@ -2028,7 +2056,7 @@ var strStr = function(haystack, needle) {
 };
 ```
 
-- question: lc344 反转字符串 link:
+- question: lc344 反转字符串 link: https://leetcode.cn/problems/reverse-string/
     - answer:
 ```python
 # python code
@@ -2038,7 +2066,7 @@ var strStr = function(haystack, needle) {
 
 ```
 
-- question: lc345 反转字符串中的元音字母 link:
+- question: lc345 反转字符串中的元音字母 link: https://leetcode.cn/problems/reverse-vowels-of-a-string/
     - answer:
 ```python
 # python code
@@ -2048,7 +2076,7 @@ var strStr = function(haystack, needle) {
 
 ```
 
-- question: lc1119 删去字符串中的元音 link:
+- question: lc1119 删去字符串中的元音（vip） link:
     - answer:
 ```python
 # python code
@@ -2058,7 +2086,7 @@ var strStr = function(haystack, needle) {
 
 ```
 
-- question: lc541 反转字符串中的单词 link:
+- question: lc541 反转字符串中的单词 link: https://leetcode.cn/problems/reverse-string-ii/
     - answer:
 ```python
 # python code
@@ -2068,7 +2096,7 @@ var strStr = function(haystack, needle) {
 
 ```
 
-- question: lc557 反转字符串 link:
+- question: lc557 反转字符串 link: https://leetcode.cn/problems/reverse-words-in-a-string-iii/
     - answer:
 
 ```python
@@ -2108,7 +2136,7 @@ var setZeroes = function(matrix) {
 };
 ```
 
-- question: lc58 最后一个单词的长度 link:
+- question: lc58 最后一个单词的长度 link: https://leetcode.cn/problems/length-of-last-word/
     - answer:
 ```python
 # python code
@@ -2118,7 +2146,7 @@ var setZeroes = function(matrix) {
 
 ```
 
-- question: lc165 比较版本号 link:
+- question: lc165 比较版本号 link: https://leetcode.cn/problems/compare-version-numbers/
     - answer:
 ```python
 # python code
@@ -2128,7 +2156,7 @@ var setZeroes = function(matrix) {
 
 ```
 
-- question: lc12 整数转罗马数字 link: 
+- question: lc12 整数转罗马数字 link: https://leetcode.cn/problems/integer-to-roman/
     - answer:
 ```python
 # python code
@@ -2138,7 +2166,7 @@ var setZeroes = function(matrix) {
 
 ```
 
-- question: lc13 罗马数字转整数 link:
+- question: lc13 罗马数字转整数 link: https://leetcode.cn/problems/roman-to-integer/
     - answer:
 ```python
 # python code
@@ -2148,7 +2176,7 @@ var setZeroes = function(matrix) {
 
 ```
 
-- question: lc38 外观数列 link: 
+- question: lc38 外观数列 link: https://leetcode.cn/problems/count-and-say/
     - answer:
 ```python
 # python code
@@ -2158,7 +2186,7 @@ var setZeroes = function(matrix) {
 
 ```
 
-- question: lc6 Z字形变换 link:
+- question: lc6 Z字形变换 link: https://leetcode.cn/problems/zigzag-conversion/
     - answer:
 ```python
 # python code
