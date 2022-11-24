@@ -1726,14 +1726,45 @@ var setZeroes = function(matrix) {
 };
 ```
 
-- question: lc54 剑指29 螺旋矩阵 link:link:https://leetcode.cn/problems/set-matrix-zeroes
+- question: lc54 剑指29 螺旋矩阵 link https://leetcode.cn/problems/spiral-matrix
     - answer:
 ```python
 # python code
 
 ```
 ```java
-
+/**
+ * @param {number[][]} matrix
+ * @return {number[]}
+ */
+var spiralOrder = function(matrix) {
+    let res =[];
+    let m = matrix.length;
+    let n = matrix[0].length;
+    let row = 0;
+    let column = 0;
+    let total = m*n;
+    console.log(total)
+    directionIndex = 0;
+    let visited = new Array(m).fill(0).map(() => new Array(n).fill(false));
+    // 右下左上
+    let directions = [[0,1], [1,0], [0,-1], [-1, 0]];
+    for (let i = 0; i < total; i++) {
+        visited[row][column] = true;
+        console.log(row, column, matrix[row][column])
+        res.push(matrix[row][column])
+        let Nrow = row + (directions[directionIndex][0]);
+        let Ncolumn = column +  (directions[directionIndex][1]);
+        if (Ncolumn >= n || Ncolumn <0 || Nrow >= m || Nrow < 0 || visited[Nrow][Ncolumn]) {
+            directionIndex = (directionIndex + 1) % 4; 
+            
+        }
+        row = row + (directions[directionIndex][0]);
+        column = column +  (directions[directionIndex][1]);
+    }
+    
+    return res;
+};
 ```
 
 - question: lc59 螺旋矩阵二 link:
