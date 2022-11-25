@@ -2004,7 +2004,21 @@ var findDiagonalOrder = function(mat) {
     - answer:
 ```python
 # python code
+# 每一行第0和最后一个元素都为1，其他元素都为上一行的第j-1与j项相加之和。第n行m个数用公式为Cmn = n! / m!(n-m)! = cm-1n * ((n-m+1) / m)
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        ans = []
 
+        for i in range(numRows):
+            temp = []
+            for j in range(i + 1):
+                if j == 0 or j == i:
+                    temp.append(1)
+                else:
+                    temp.append(ans[i-1][j-1]+ans[i-1][j])
+            ans.append(temp)
+
+        return ans
 ```
 ```java
 /**
@@ -2031,7 +2045,16 @@ var generate = function(numRows) {
     - answer:
 ```python
 # python code
+# 代入公式: ans[i] = ans[i-1] * (n-i+1) / i
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        ans = [1] * (rowIndex + 1)
+    
+        for i in range(1, rowIndex + 1):
 
+            ans[i] = int(ans[i-1] * (rowIndex - i + 1) / i)
+        
+        return ans
 ```
 ```java
 /**
