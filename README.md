@@ -1920,6 +1920,39 @@ var generateMatrix = function(n) {
     - answer:
 ```python
 # python code
+# 对角线的数量为n + m - 1，当对角线为偶数时，从下往上遍历，当对角线为奇数时，从上往下遍历。当i为偶数且小于行数时，起始点为（i，0），当i大于行数时，起始点为（行数-1，i-(m-1))。
+class Solution:
+    def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
+        m = len(mat)
+        n = len(mat[0])
+
+        ans = []
+
+        for i in range(n + m - 1):
+            if i % 2:
+                if i < n:
+                    x = 0
+                    y = i
+                else:
+                    x = i - n + 1
+                    y = n - 1
+                while x < m and y >= 0:
+                    ans.append(mat[x][y])
+                    x += 1
+                    y -= 1
+            else:
+                if i < m:
+                    x = i
+                    y = 0
+                else:
+                    y = i - m + 1
+                    x = m - 1
+                while x >= 0 and y < n:
+                    ans.append(mat[x][y])
+                    x -= 1
+                    y += 1
+        
+        return ans
 
 ```
 ```java
