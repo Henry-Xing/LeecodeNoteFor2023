@@ -1920,6 +1920,39 @@ var generateMatrix = function(n) {
     - answer:
 ```python
 # python code
+# 对角线的数量为n + m - 1，当对角线为偶数时，从下往上遍历，当对角线为奇数时，从上往下遍历。当i为偶数且小于行数时，起始点为（i，0），当i大于行数时，起始点为（行数-1，i-(m-1))。
+class Solution:
+    def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
+        m = len(mat)
+        n = len(mat[0])
+
+        ans = []
+
+        for i in range(n + m - 1):
+            if i % 2:
+                if i < n:
+                    x = 0
+                    y = i
+                else:
+                    x = i - n + 1
+                    y = n - 1
+                while x < m and y >= 0:
+                    ans.append(mat[x][y])
+                    x += 1
+                    y -= 1
+            else:
+                if i < m:
+                    x = i
+                    y = 0
+                else:
+                    y = i - m + 1
+                    x = m - 1
+                while x >= 0 and y < n:
+                    ans.append(mat[x][y])
+                    x -= 1
+                    y += 1
+        
+        return ans
 
 ```
 ```java
@@ -1971,7 +2004,21 @@ var findDiagonalOrder = function(mat) {
     - answer:
 ```python
 # python code
+# 每一行第0和最后一个元素都为1，其他元素都为上一行的第j-1与j项相加之和。第n行m个数用公式为Cmn = n! / m!(n-m)! = cm-1n * ((n-m+1) / m)
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        ans = []
 
+        for i in range(numRows):
+            temp = []
+            for j in range(i + 1):
+                if j == 0 or j == i:
+                    temp.append(1)
+                else:
+                    temp.append(ans[i-1][j-1]+ans[i-1][j])
+            ans.append(temp)
+
+        return ans
 ```
 ```java
 /**
@@ -1998,7 +2045,16 @@ var generate = function(numRows) {
     - answer:
 ```python
 # python code
+# 代入公式: ans[i] = ans[i-1] * (n-i+1) / i
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        ans = [1] * (rowIndex + 1)
+    
+        for i in range(1, rowIndex + 1):
 
+            ans[i] = int(ans[i-1] * (rowIndex - i + 1) / i)
+        
+        return ans
 ```
 ```java
 /**
