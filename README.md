@@ -2063,7 +2063,40 @@ var strStr = function(haystack, needle) {
 
 ```
 ```java
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLastWord = function(s) {
+    let space = " ".charCodeAt();
+    let res = 0
+    let spaceNum = 0;
+    let shouldReturn = s[s.length - 1] == " "? false : true;
+    for (let i = s.length - 1; i >= 0; i--) {
+        console.log(s[i 
+        if (s[i] == " ") {
+            if ( shouldReturn) {
+                 return  res;
+            }
+            spaceNum ++;
+            continue;
+        }
+        shouldReturn = true;
+        res++;
+    }
+    return s.length - spaceNum;
+};
 
+
+// 使用前后指针 后指针end记录空位，前指针start记录满足要求的单词，详见得到res
+// var lengthOfLastWord = function(s) {
+//     let end = s.length - 1;
+//     while(end >= 0 && s[end] == ' ') end--;
+//     if(end < 0) return 0;
+//     let start = end;
+//     while(start >= 0 && s[start] != ' ') start--;
+//     return end - start;
+// };
 ```
 
 - question: lc345 反转字符串中的元音字母 link: https://leetcode.cn/problems/reverse-vowels-of-a-string/
@@ -2073,7 +2106,67 @@ var strStr = function(haystack, needle) {
 
 ```
 ```java
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var reverseVowels = function(s) {
+    let set = new Set(['a','e','i','o','u','A','E','I','O','U']);
+    let left = 0;
+    let right = s.length - 1;
+    let res = s.split("");
+    while (left < right) {
+        console.log(left, right)
+        while ((!set.has(s[left]))){
+            left++;
+            if (left >= right) {
+                return res.join("");
+            }
+        } 
+        while ((!set.has(s[right]))){
+            right--;
+            if (left >= right) {
+                return res.join("");
+            }
+        }
+        console.log("fin currect: ", left, right)
+        console.log(res[left])
+        res[left] = s.charAt(right);
+        console.log(res[left])
+        res[right] = s.charAt(left);
+        console.log(res)
+        left++;
+        right--;
+    }
+    return res.join("");
+};
 
+// 使用 arr.indexOf()
+var reverseVowels = function(s) {
+    var result;
+    var temp
+    var arr = ['a','e','i','o','u','A','E','I','O','U']
+    var t = s.split('')
+    var i = 0; j = t.length
+
+    
+    while(i<j){
+        while(i<j && arr.indexOf(t[i]) == -1){
+            i++;
+        }
+        while(i<j && arr.indexOf(t[j]) == -1){
+            j--
+        }
+        temp = t[i];
+        t[i] = t[j];
+        t[j] = temp
+
+        i++;
+        j--
+    }
+    result = t.join('');
+    return result
+};
 ```
 
 - question: lc1119 删去字符串中的元音（vip） link:
@@ -2093,7 +2186,17 @@ var strStr = function(haystack, needle) {
 
 ```
 ```java
-
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var reverseWords = function(s) {
+    let arr = s.split(" ");
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = arr[i].split("").reverse().join("")
+    }
+    return arr.join(" ");
+};
 ```
 
 - question: lc557 反转字符串 link: https://leetcode.cn/problems/reverse-words-in-a-string-iii/
@@ -2143,7 +2246,67 @@ var setZeroes = function(matrix) {
 
 ```
 ```java
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var reverseVowels = function(s) {
+    let set = new Set(['a','e','i','o','u','A','E','I','O','U']);
+    let left = 0;
+    let right = s.length - 1;
+    let res = s.split("");
+    while (left < right) {
+        console.log(left, right)
+        while ((!set.has(s[left]))){
+            left++;
+            if (left >= right) {
+                return res.join("");
+            }
+        } 
+        while ((!set.has(s[right]))){
+            right--;
+            if (left >= right) {
+                return res.join("");
+            }
+        }
+        console.log("fin currect: ", left, right)
+        console.log(res[left])
+        res[left] = s.charAt(right);
+        console.log(res[left])
+        res[right] = s.charAt(left);
+        console.log(res)
+        left++;
+        right--;
+    }
+    return res.join("");
+};
 
+// 使用 arr.indexOf()
+var reverseVowels = function(s) {
+    var result;
+    var temp
+    var arr = ['a','e','i','o','u','A','E','I','O','U']
+    var t = s.split('')
+    var i = 0; j = t.length
+
+    
+    while(i<j){
+        while(i<j && arr.indexOf(t[i]) == -1){
+            i++;
+        }
+        while(i<j && arr.indexOf(t[j]) == -1){
+            j--
+        }
+        temp = t[i];
+        t[i] = t[j];
+        t[j] = temp
+
+        i++;
+        j--
+    }
+    result = t.join('');
+    return result
+};
 ```
 
 - question: lc165 比较版本号 link: https://leetcode.cn/problems/compare-version-numbers/
@@ -2153,7 +2316,32 @@ var setZeroes = function(matrix) {
 
 ```
 ```java
-
+/**
+ * @param {string} version1
+ * @param {string} version2
+ * @return {number}
+ */
+var compareVersion = function(version1, version2) {
+    let v1Arr = version1.split(".");
+    let v2Arr = version2.split(".");
+    let i = 0;
+    while (parseInt(v1Arr[i]) == parseInt(v2Arr[i])) {
+        i++;
+    }
+    let minLen = v1Arr.length > v2Arr.length ? v2Arr.length:v1Arr.length;
+    let maxArr = v1Arr.length > v2Arr.length ? v1Arr:v2Arr;
+    if (i == minLen) {
+        if (v1Arr.length == v2Arr.length) return 0;
+        while (i < maxArr.length) {
+            if(parseInt(maxArr[i]) != 0) {
+                return v1Arr.length > v2Arr.length ? 1:-1
+            }
+            i++
+        }
+        return 0
+    } 
+    return parseInt(v1Arr[i]) > parseInt(v2Arr[i]) ? 1 : -1;
+};
 ```
 
 - question: lc12 整数转罗马数字 link: https://leetcode.cn/problems/integer-to-roman/
