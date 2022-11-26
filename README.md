@@ -2566,6 +2566,30 @@ class Solution:
     - answer:
 ```python
 # python code
+# 当前罗马字符如果大于等于下一个罗马字符，则结果加上对应数值，否则减去对应数值。
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        dic = {
+            "M" : 1000,
+            "D" : 500,
+            "C" : 100,
+            "L" : 50,
+            "X" : 10,
+            "V" : 5,
+            "I" : 1
+        }
+
+        ans = 0
+
+        for i in range(len(s) - 1):
+            if dic[s[i]] >= dic[s[i+1]]:
+                ans += dic[s[i]]
+            else:
+                ans -= dic[s[i]]
+
+        ans += dic[s[-1]]
+
+        return ans
 
 ```
 ```java
