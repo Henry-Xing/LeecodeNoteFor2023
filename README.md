@@ -2535,7 +2535,28 @@ var compareVersion = function(version1, version2) {
     - answer:
 ```python
 # python code
+# 拆除特殊字符进行特殊处理。
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        mapR = ['I', 'X', 'C', 'M']
+        mapS = ['V', 'L', 'D']
+        map4 = ['IV', 'XL', 'CD']
+        map9 = ['IX', 'XC', 'CM']
+        ans = []
 
+        for i in reversed(range(4)):
+            n = num//(10**i)
+            num = num - n*(10**i)
+            if n < 4:
+                ans.append("".join([mapR[i]]*n))
+            elif n == 4:
+                ans.append(map4[i])
+            elif n > 4 and n < 9:
+                ans.append(mapS[i] + "".join([mapR[i]]*(n-5)))
+            elif n == 9:
+                ans.append(map9[i])
+
+        return "".join(ans)
 ```
 ```java
 
