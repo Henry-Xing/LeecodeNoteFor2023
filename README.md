@@ -8,7 +8,7 @@ task link: https://ke.qq.com/course/package/31104?flowToken=1039500
 Learning Time: 2:00-6:00 7:30-10:30 7h
 
 
-## 数组字符串
+### 数组字符串
 
 - question: input/output基础 link: https://www.nowcoder.com/test/27976983/summary#question
 
@@ -2079,11 +2079,53 @@ var getRow = function(rowIndex) {
 };
 ```
 
+### 字符串操作
+
 - question: lc28 实现 strStr() link: https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/
     - answer:
 ```python
 # python code
+# 匹配过程中，检测是否有头部，匹配失败后直接移动到头部位置而不是一步一步移动。
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        nh = len(haystack)
+        nn = len(needle)
 
+        if nn >= nh:
+            return 0 if needle == haystack else -1
+        
+        start = 0
+        nextstart = 0
+
+        flag = False
+        first = True
+
+        while start < nh:
+            if haystack[start] == needle[0]:
+                j = 0
+                while j < nn:
+                    if j+start < nh and haystack[j+start] == needle[j]:
+                        if haystack[j+start] == needle[0] and first:
+                            first = False
+                            nextstart = j+start
+                        flag = True
+                        j += 1
+                    else:
+                        if not first:
+                            start = nextstart
+                        else:
+                            start = j+start-1
+                            nextstart = start
+                        
+                        first = True
+                        flag = False
+                        break
+                if flag:
+                    return start
+            
+            start += 1
+
+        return -1
 ```
 ```java
 /**
@@ -2116,7 +2158,25 @@ var strStr = function(haystack, needle) {
     - answer:
 ```python
 # python code
+# 赋值的方式可以通过双指针的形式首尾进行交换，或者反向切片并逐个赋值。
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        
+        n = len(s)
 
+        right, left = 0, n-1
+        
+        while right < left:
+            s[right], s[left] = s[left], s[right]
+            right += 1
+            left -= 1
+
+        return s 
+        # s[:] = s[::-1]
+        # return s
 ```
 ```java
 /**
@@ -2159,7 +2219,31 @@ var lengthOfLastWord = function(s) {
     - answer:
 ```python
 # python code
+# str无法直接更改，需要将str先变为list再去更改，str.lower()变小写，str.upper()变大写。in检查某个元素是否在list中。
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        n = len(s)
+        right, left = 0, n-1
 
+        s = list(s)
+
+        yuan = ['a', 'e', 'i', 'o', 'u']
+
+        while right < left:
+            if s[right].lower() in yuan and s[left].lower() in yuan:
+                s[right], s[left] = s[left], s[right]
+                right += 1
+                left -= 1
+            elif s[right].lower() in yuan:
+                left -= 1
+            elif s[left].lower() in yuan:
+                right += 1
+            else:
+                right += 1
+                left -= 1
+        
+        return "".join(s)
+            
 ```
 ```java
 /**
@@ -2235,11 +2319,25 @@ var reverseVowels = function(s) {
 
 ```
 
-- question: lc541 反转字符串中的单词 link: https://leetcode.cn/problems/reverse-string-ii/
+- question: lc557 反转字符串中的单词 link: https://leetcode.cn/problems/reverse-words-in-a-string-iii/
     - answer:
+    - For python, the split() method splits a string into a list. You can specify the separator, default separator is any whitespace.
+    - For python, The strip() method removes any leading (spaces at the beginning) and trailing (spaces at the end) characters (space is the default leading character to remove)
+    - For python, string can not be changed directly.
 ```python
 # python code
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        # allstr = s.split()
 
+        # ans = allstr[0][::-1]
+
+        # for i in range(1, len(allstr)):
+        #     ans += " " + allstr[i][::-1]
+
+        # return ans
+
+        return " ".join([word[::-1] for word in s.split(" ")])
 ```
 ```java
 /**
@@ -2255,14 +2353,19 @@ var reverseWords = function(s) {
 };
 ```
 
-- question: lc557 反转字符串 link: https://leetcode.cn/problems/reverse-words-in-a-string-iii/
+- question: lc541 反转字符串 link: https://leetcode.cn/problems/reverse-string-ii/
     - answer:
 
 ```python
 # python code
-
+# 2k为步长，每次反转i：i+2k，python切片时，即使末尾超出数组，也不会报错，只会遍历到尾部。
+class Solution:
+    def reverseStr(self, s: str, k: int) -> str:
+        t = list(s)
+        for i in range(0, len(t), 2 * k):
+            t[i: i + k] = reversed(t[i: i + k])
+        return "".join(t)
 ```
-
 ```java
 /**
  * @param {string} s
@@ -2279,9 +2382,13 @@ var reverseWords = function(s) {
 
 - question: lc58 最后一个单词的长度 link: https://leetcode.cn/problems/length-of-last-word/
     - answer:
+    
 ```python
 # python code
-
+# 按空格划分，然后返回最后一个元素，index为-1.
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        return len(s.split()[-1])
 ```
 ```java
 /**
@@ -2324,7 +2431,31 @@ var lengthOfLastWord = function(s) {
     - answer:
 ```python
 # python code
+# 按"."划分后先比较相同长度的信息，再比较多出来的信息。
+class Solution:
+    def compareVersion(self, version1: str, version2: str) -> int:
+        v1 = version1.split(".")
+        v2 = version2.split(".")
 
+        n1 = len(v1)
+        n2 = len(v2)
+
+        for i in range(min(n1,n2)):
+            if int(v1[i]) > int(v2[i]):
+                return 1
+            elif int(v1[i]) < int(v2[i]):
+                return -1
+        
+        if n1 > n2:
+            for i in range(n2, n1):
+                if int(v1[i]) != 0:
+                    return 1
+        elif n1 < n2:
+            for i in range(n1, n2):
+                if int(v2[i]) != 0:
+                    return -1
+
+        return 0
 ```
 ```java
 /**
@@ -2359,7 +2490,28 @@ var compareVersion = function(version1, version2) {
     - answer:
 ```python
 # python code
+# 拆除特殊字符进行特殊处理。
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        mapR = ['I', 'X', 'C', 'M']
+        mapS = ['V', 'L', 'D']
+        map4 = ['IV', 'XL', 'CD']
+        map9 = ['IX', 'XC', 'CM']
+        ans = []
 
+        for i in reversed(range(4)):
+            n = num//(10**i)
+            num = num - n*(10**i)
+            if n < 4:
+                ans.append("".join([mapR[i]]*n))
+            elif n == 4:
+                ans.append(map4[i])
+            elif n > 4 and n < 9:
+                ans.append(mapS[i] + "".join([mapR[i]]*(n-5)))
+            elif n == 9:
+                ans.append(map9[i])
+
+        return "".join(ans)
 ```
 ```java
 //方法一: 列举全部大单位，由大到小逐位相减
@@ -2403,6 +2555,30 @@ var intToRoman = function(num) {
     - answer:
 ```python
 # python code
+# 当前罗马字符如果大于等于下一个罗马字符，则结果加上对应数值，否则减去对应数值。
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        dic = {
+            "M" : 1000,
+            "D" : 500,
+            "C" : 100,
+            "L" : 50,
+            "X" : 10,
+            "V" : 5,
+            "I" : 1
+        }
+
+        ans = 0
+
+        for i in range(len(s) - 1):
+            if dic[s[i]] >= dic[s[i+1]]:
+                ans += dic[s[i]]
+            else:
+                ans -= dic[s[i]]
+
+        ans += dic[s[-1]]
+
+        return ans
 
 ```
 ```java
@@ -2444,7 +2620,30 @@ function getchar() {
     - answer:
 ```python
 # python code
+# 计数统计，循环结束后需要再插值一次。
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        num = "1"
+        if n == 1:
+            return num
 
+        for j in range(n-1):
+            count = 1
+            cur = num[0]
+            ans = ""
+
+            for i in range(1, len(num)):
+                if num[i] == cur:
+                    count += 1
+                else:
+                    ans += str(count) + str(cur)
+                    cur = num[i]
+                    count = 1
+
+            ans += str(count) + str(cur)
+            num = ans
+
+        return num
 ```
 ```java
 
@@ -2454,7 +2653,26 @@ function getchar() {
     - answer:
 ```python
 # python code
+# 初始化n行string，每次i到达numRows-1与0时，改变方向.
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows <= 1:
+            return s
+            
+        ans = ["" for i in range(numRows)]
+        # 初始化n个字符串
 
+        i = 0
+        flag = -1
+        # 移动方向
+        for c in s:
+            ans[i] += c
+            if i == numRows-1 or i == 0:  
+                flag = -flag  
+                # 改变方向
+            i += flag
+
+        return "".join(ans)
 ```
 ```java
 
