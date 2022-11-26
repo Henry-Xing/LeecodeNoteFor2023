@@ -2678,15 +2678,662 @@ class Solution:
 
 ```
 
-- question:  link:
-    - answer:
+### 数学相关
 
+- question: lc7 整数反转 link: https://leetcode.cn/problems/reverse-integer/
+    - answer:
 ```python
-# python code
 
 ```
-
 ```java
 
 ```
 
+- question: lc9 回文数 link: https://leetcode.cn/problems/palindrome-number/
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc989 数组形式的整数加法 link: https://leetcode.cn/problems/add-to-array-form-of-integer/
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc66 加1 link: https://leetcode.cn/problems/plus-one/
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc415 字符串相加 link: https://leetcode.cn/problems/add-strings/
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc67 剑指002 二进制求和 link: https://leetcode.cn/problems/add-binary/
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc2 两数相加 link: https://leetcode.cn/problems/add-two-numbers/
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc43 字符串相乘 link: https://leetcode.cn/problems/multiply-strings/
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc204 计数质数 link: https://leetcode.cn/problems/count-primes/
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc233 剑指43 数字1的个数 link: https://leetcode.cn/problems/number-of-digit-one/
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc1232 缀点成线 link: https://leetcode.cn/problems/check-if-it-is-a-straight-line/
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 位运算
+ 
+- question: lc191 剑指 15 位1的个数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc461 汉明距离 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc477 汉明距离总和 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc231 2的幂 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc371 两整数之和 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc29 两数相除 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc136 只出现一次的数字 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc137 只出现一次的数字II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc1318 或运算的最小翻转次数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc201 数字范围按位与 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc476 数字的补数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc405 数字转换为十六进制数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc190 颠倒二进制位 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 排序
+
+lc 912 ：排序数组
+阿里面试题 - 快速查找第二大数
+lc 628 ：三个数的最大乘积
+lc 88 号算法：合并两个有序数组
+剑指  51： 数组中的逆序对
+lc 315 号算法题：计算右侧小于当前元素的个数
+lc 327 ：区间和的个数
+lc 493 ：翻转对
+lc 50 &amp; 剑指 16 ：Pow(x, n)
+lc 75 ：颜色分类【top100】
+lc 179 &amp; 剑指 45 ：最大数
+lc 56 &amp; 剑指 74 ：合并区间【top100】
+lc 57 ：插入区间
+lc 905 ：按奇偶排序数组
+lc 922 ：按奇偶排序数组 II
+lc 1365 ：有多少小于当前数字的数字
+lc 164 ：最大间距
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 查找
+
+lc 704 号算法题：二分查找
+lc 34 ：排序数组中找元素的第一个和最后一个位置【top100】
+lc 35 &amp; 剑指 53-1：搜索插入位置【top100】
+lc 278 号算法题：第一个错误的版本
+lc 33 ：搜索旋转排序数组【top100】
+lc 153 号算法题：寻找旋转排序数组中的最小值
+lc 154 &amp; 剑指 11 ：寻找旋转排序数组中的最小值 II
+lc 852 &amp; 剑指 069：山脉数组的峰顶索引
+lc 1095 号算法题：山脉数组中查找目标值
+lc 162 号算法题：寻找峰值
+lc 74 号算法题：搜索二维矩阵
+lc 240 &amp; 剑指 4 ：搜索二维矩阵 II【top100】
+lc 69 &amp; 剑指 072 ：x 的平方根
+lc 1539 号算法题：第 k 个缺失的正整数
+字节 - 教育部门 - 三面：截木头
+lc 771 号算法题：宝石与石头
+lc 888 号算法题：公平的糖果棒交换
+lc 128 &amp; 剑指 119 ：最长连续序列【top100】
+lc 136 ：只出现一次的数字【top100】
+lc 389 号算法题：找不同
+lc 554 号算法题：砖墙
+lc 205 号算法题：同构字符串
+lc 290 号算法题：单词规律
+lc 242 &amp; 剑指 032 ：有效的字母异位词
+lc 49 &amp; 剑指 033 ：字母异位词分组【top100】
+lc 560 &amp; 剑指 010 ：和为K的子数组【top100】
+lc 41 号算法题：缺失的第一个正数
+lc 1122 &amp; 剑指 075 ：数组的相对排序
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 栈与队列
+
+lc 20 ：有效的括号【top100】
+lc 71 &amp; 剑指 017 ：简化路径
+lc 394 ：字符串解码【top100】
+lc 224 号算法题：基本计算器
+lc 227 号算法题：基本计算器二
+lc 946 &amp; 剑指 31 ：验证栈序列
+lc 739 &amp; 剑指 038 ：每日温度【top100】
+lc 42 ：接雨水【top100】
+lc 84 &amp; 剑指 039 ：柱状图中最大的矩形【top100】
+lc 85 &amp; 剑指 040 ：最大矩形【top100】
+lc 321 号算法题：拼接最大数
+lc 456 号算法题：132 模式
+lc 151 &amp; 剑指 58-1：翻转字符串里的单词"
+堆和优先队列回顾
+lc 1046 号算法题：最后一块石头的重量
+lc 215 &amp; 剑指 076 ：数组中的第 K 个最大元素【top100】
+lc 347 &amp; 剑指 060：前 K 个高频元素【top100】
+lc 973 号算法题：最接近原点的 K 个点
+lc 703 &amp; 剑指 059：数据流中的第 K 大元素
+lc 295 &amp; 剑指 41：数据流的中位数
+lc 4 ：寻找两个正序数组的中位数【top100】
+lc 239 &amp; 剑指 59-1 ：滑动窗口最大值【top100】
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 滑动窗口
+
+lc 643 ：子数组最大平均数 I
+lc 209 &amp; 剑指 008 ：长度最小的子数组
+lc 3 &amp; 剑指 016 ：无重复字符的最长子串【top100】
+lc 76 ：最小覆盖子串【top100】
+lc 485 ：最大连续 1 的个数
+lc 487 ：最大连续1的个数 II
+lc 1004 ：最大连续 1 的个数 III
+lc 1151 ：最少交换次数来组合所有的 1
+lc 30 ：串联所有单词的子串
+lc 567 &amp; 剑指 014 ：字符串的排列
+lc 763 ：划分字母区间
+lc 845 ：数组中的最长山脉
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 综合应用I
+
+lc 1 ：两数之和【top100】
+lc 167 &amp; 剑指 006 ：两数之和：输入有序数组
+lc 170 ：两数之和：数据结构设计
+lc 653 ：两数之和：输入 BST
+lc 15 &amp; 剑指 007 ：三数之和【top100】
+lc 18 ：四数之和
+lc 349 : 两个数组的交集
+lc 350 ：两个数组的交集 II
+lc 169  &amp; 剑指 39 ：多数元素【top100】
+lc 229 ：多数元素变形题
+lc 844 ：比较含退格的字符串
+lc 318 &amp; 剑指 005 ：最大单词长度乘积
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 链表
+
+lc 203 ：移除链表元素
+lc 237 删除链表中的节点
+lc 83 ：删除排序链表中的重复元素
+lc 82 ：删除排序链表中的重复元素 II
+lc 876 ：链表的中间结点
+lc 19 &amp; 剑指 021 ：删除链表的倒数第 N 个结点【top100】
+lc 141 ：环形链表【top100】
+lc 142 &amp; 剑指 022 ：环形链表 II【top100】
+lc 206 &amp; 剑指 024 ：反转链表【top100】
+lc 92 ：反转链表 II
+lc 61 ：旋转链表
+lc 328 ：奇偶链表
+lc 725 ：分隔链表
+lc 24 ：两两交换链表中的节点
+lc 25 ：K 个一组翻转链表
+lc 234 &amp; 剑指 027 ：回文链表【top100】
+lc 138 &amp; 剑指 35 ：复制带随机指针的链表
+lc 138 ：复制带随机指针的链表
+lc 86 ：分隔链表
+lc 160 &amp; 剑指 023 ：相交链表【top100】
+lc 2 ：两数相加【top100】
+lc 445 &amp; 剑指 025 ：两数相加 II
+lc 21 &amp; 剑指 25 ：合并两个有序链表【top100】
+lc 23 &amp; 剑指 078 ：合并K个升序链表【top100】
+lc 147 ：对链表进行插入排序"
+lc 148 &amp; 剑指 077 ：排序链表【top100】
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 二叉树
+
+lc 144 ：二叉树的前序遍历
+lc 94 ：二叉树的中序遍历【top100】"
+lc 145 ：二叉树的后序遍历
+
+#### BFS与DFS
+lc 102 &amp; 剑指 32-2 ： 二叉树的层序遍历【top100】
+lc 107 ：二叉树的层序遍历 II
+lc 104 &amp; 剑指 55-1 ：二叉树的最大深度【top100】
+lc 543 ：二叉树的直径【top100】
+lc 110 &amp; 剑指 55-2 ：平衡二叉树
+lc 111 ：二叉树的最小深度
+lc 404 ：左叶子之和
+lc 103 &amp; 剑指 32-3 ：二叉树的锯齿形层序遍历
+lc 515 &amp; 剑指 044 ：在每个树行中找最大值
+lc 199 &amp; 剑指 046 ：二叉树的右视图
+lc 100 ：相同的树
+lc 101 &amp; 剑指 28 ：对称二叉树 【top100】
+lc 662 ：二叉树最大宽度
+lc 222 ：完全二叉树的节点个数
+lc 114 ：二叉树展开为链表【top100】
+lc 236 &amp; 剑指 68-2 ：二叉树的最近公共祖先【top100】
+
+#### 回溯思想
+lc 112 ：路径总和
+lc 113 &amp; 剑指 34 ：路径总和 II
+lc 257 ：二叉树的所有路径
+lc 437 ：路径总和 III【top100】
+lc 124 ：二叉树中的最大路径和【top100】
+lc 226 &amp; 剑指 226 ：翻转二叉树【top100】
+lc 617 ：合并二叉树【top100】
+lc 105 &amp; 剑指 7 ：从前序与中序遍历序列构造二叉树【top100】
+lc 106 ：从中序与后序遍历序列构造二叉树
+lc 116 ：填充每个节点的下一个右侧节点指针
+
+#### 二叉搜索树
+lc 701 ：二叉搜索树中的插入操作
+lc 108 ：将有序数组转换为二叉搜索树
+lc 235 &amp; 剑指 68-1 ：二叉搜索树的最近公共祖先
+lc 98 ：验证二叉搜索树【top100】
+lc 501 ：二叉搜索树中的众数
+lc 99 ：恢复二叉搜索树
+lc 538 &amp; 剑指 054 ：把二叉搜索树转换为累加树【top100】
+lc 589 ：N 叉树的前序遍历
+lc 590 ：N 叉树的后序遍历
+lc 429 ：N 叉树的层序遍历
+lc 690 ：员工的重要性
+
+#### 图的 DFS 和 BFS
+lc 733 ：图像渲染
+lc 463 ：岛屿的周长
+lc 200 ：岛屿数量【top100】
+lc 695 ：岛屿的最大面积
+lc 130 ：被围绕的区域
+lc 1034 ：边框着色
+lc 529 ：扫雷游戏
+lc 994 ：腐烂的橘子
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 数据结构设计
+
+lc 155 &amp; 剑指 30 ：最小栈 【top100】
+lc 225 ：用队列实现栈
+lc 622 ：设计循环队列
+lc 380 &amp; 剑指 030 ：O(1) 时间插入、删除和获取随机元素
+lc 381 ：O(1) 时间插入、删除和获取随机元素 - 允许重复
+缓存机制
+FIFO 缓存机制
+lc 146 &amp; 剑指 031 ：LRU 缓存机制
+lc 460 ：LFU 缓存
+并查集 20-11
+并查集优化 20-12
+lc 547 &amp; 剑指 116 ：省份数量
+lc 200 ：岛屿数量【top100】
+lc 721 ：账户合并
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 综合应用II
+
+lc 217 ：存在重复元素
+lc 219 ：存在重复元素 II
+lc 220 &amp; 剑指 057 ：存在重复元素 III
+lc 258 ：各位相加
+lc 202 ：快乐数
+lc 263 ：丑数
+
+#### 字典树 - 前缀树 - Tire
+lc 208 &amp; 剑指 062 ：实现 Trie (前缀树)【top100】
+lc 642 ：搜索自动补全系统
+lc 421 &amp; 剑指 067 ：数组中两个数的最大异或值
+lc 440 ：字典序的第K小数字
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 回溯算法
+
+lc 112 和 113 &amp; 剑指 34 ：路径总和
+lc 46 和 47 &amp; 剑指 083 和 084 ：全排列【top100】
+lc 77 &amp; 剑指 080 ：组合
+lc 39 和 40 &amp; 剑指 081 和 082  ：组合总和【top100】
+lc 78 和 90 &amp; 剑指 079：子集【top100】
+lc 17 ：电话号码的字母组合【top100】
+lc 93 &amp; 剑指 087 ：复原 IP 地址
+lc 22 &amp; 剑指 085 ：括号生成【top100】
+lc 51 ：N 皇后
+lc 37 ：数独问题
+lc 401 ：二进制手表
+lc 131 &amp; 剑指 086 ：分割回文串
+lc 842 ：将数组拆分成斐波那契序列
+lc 79 &amp; 剑指 12 ： 单词搜索 【top100】
+lc 679 ：24 点游戏
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 贪心算法
+
+lc 455 ：分发饼干 - 贪心思想
+lc 322 &amp; 剑指 103 ：零钱兑换 - 贪心 + 回溯【top100】
+贪心算法特点总结 25-4
+lc 45 ：跳跃游戏 Ⅱ
+lc 55 ：跳跃游戏【top100】
+lc 1578 ：避免重复字母的最小删除成本
+lc 402 ：移掉K位数字
+lc 409 ：最长回文串
+lc 680 &amp; 剑指 019 ：验证回文字符串 Ⅱ
+lc 316 ：去除重复字母
+lc 1047 ：删除字符串中的所有相邻重复项
+lc 1209 ：删除字符串中的所有相邻重复项 II
+lc 976 ：三角形的最大周长
+lc 674 ：最长连续递增序列
+lc 738 ：单调递增的数字
+lc 134 ： 加油站
+lc 767 ：重构字符串
+lc 621 ： 任务调度器【top100】
+lc 670 ：最大交换
+lc 861 ：翻转矩阵后的得分
+lc 1029 ：两地调度
+lc 330 ：按要求补齐数组
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+### 动态规划
+
+lc 509 &amp; 剑指 10-1 ：斐波那契数列问题 - 动态规划入门
+lc 322 &amp; 剑指 103 ：零钱兑换
+动态规划总结 27-4
+lc 64 &amp; 剑指 099 ：最小路径和【top100】
+lc 53 &amp; 剑指 42 ：最大子数组之和【top100】
+lc 53 &amp; 剑指 42 ：最大子数组之和【top100】
+lc 647、5、131 &amp; 剑指 086 、020  ：回文子串【top100】
+lc 516 ：最长回文子序列
+lc 300 ：最长上升子序列【top100】
+lc 1143 &amp; 剑指 095 ：最长公共子序列
+lc 72 ：编辑距离【top100】
+lc 44 ：通配符匹配
+lc 486 ：预测赢家
+lc 70 &amp; 剑指 10 - 2： 爬楼梯【top100】
+lc 746 &amp; 剑指 088 ：使用最小花费爬楼梯
+lc 198 &amp; 剑指 089 ：打家劫舍【top100】
+lc 213 &amp; 剑指 090 ：打家劫舍 II
+lc 337 ：打家劫舍 III【top100】
+0 - 1 背包问题 28-7
+完全背包问题 28-8
+lc 322 &amp; 剑指 103 ：零钱兑换
+lc 518 ：零钱兑换 II
+lc 377 &amp; 剑指 104 ：组合总和 Ⅳ
+lc 494 &amp; 剑指 102 ：目标和【top100】
+lc 416 &amp; 剑指 101 ：分割等和子集【top100】
+lc 279 ：完全平方数【top100】
+lc 474 ：一和零
+lc 139 ：单词拆分【top100】
+lc 62 &amp; 剑指 098 ：不同路径【top100】
+lc 63 ：不同路径 II
+lc 120 &amp; 剑指 100 ：三角形最小路径和
+lc 97 &amp; 剑指 096 ：交错字符串
+lc 221 ： 最大正方形【top100】
+系列算法题：买卖股票的最佳时机
+lc 121 &amp; 剑指 63 ：买卖股票的最佳时机【top100】
+lc 122 ：买卖股票的最佳时机 II
+lc 123 ：买卖股票的最佳时机 III
+lc 188 ：买卖股票的最佳时机 IV
+lc 309 ：最佳买卖股票时机含冷冻期【top100】
+lc 714 ：买卖股票的最佳时机含手续费
+lc 139. 单词拆分【top100】"
+lc 140. 单词拆分 II
+lc 91. 解码方法
+lc 32. 最长有效括号【top100】
+lc 10 &amp; 剑指 19. 正则表达式匹配【top100】
+lc 718. 最长重复子数组
+lc 354. 俄罗斯套娃信封问题
+lc 152. 乘积最大子数组【top100】
+lc 376. 摆动序列
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+###
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
