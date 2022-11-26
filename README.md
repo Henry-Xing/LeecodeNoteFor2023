@@ -2264,34 +2264,16 @@ var reverseWords = function(s) {
 ```
 
 ```java
-//巧用set
-
 /**
- * @param {number[][]} matrix
- * @return {void} Do not return anything, modify matrix in-place instead.
+ * @param {string} s
+ * @return {string}
  */
-var setZeroes = function(matrix) {
-    let m = matrix.length;
-    let n = matrix[0].length;
-    let zerosIndexI = new Set();
-    let zerosIndexJ = new Set();
-    // let arr = Array.from(new Array(m), item => new Array(n).fill(false));
-    for (let i = 0; i < m; i++) {
-        for (let j = 0; j < n; j++) {
-            // arr[i][j] = true;
-            if (matrix[i][j] == 0) {
-               zerosIndexI.add(i)
-               zerosIndexJ.add(j)
-            }
-        }
+var reverseWords = function(s) {
+    let arr = s.split(" ");
+    for (let i = 0; i < arr.length; i++) {
+        arr[i] = arr[i].split("").reverse().join("")
     }
-    for (let i = 0; i < m; i++) {
-        for (let j = 0; j < n; j++) {
-            if (zerosIndexI.has(i) || zerosIndexJ.has(j)) {
-                matrix[i][j] = 0;
-            }
-        }
-    }
+    return arr.join(" ");
 };
 ```
 
@@ -2304,65 +2286,38 @@ var setZeroes = function(matrix) {
 ```java
 /**
  * @param {string} s
- * @return {string}
+ * @return {number}
  */
-var reverseVowels = function(s) {
-    let set = new Set(['a','e','i','o','u','A','E','I','O','U']);
-    let left = 0;
-    let right = s.length - 1;
-    let res = s.split("");
-    while (left < right) {
-        console.log(left, right)
-        while ((!set.has(s[left]))){
-            left++;
-            if (left >= right) {
-                return res.join("");
+var lengthOfLastWord = function(s) {
+    let space = " ".charCodeAt();
+    let res = 0
+    let spaceNum = 0;
+    let shouldReturn = s[s.length - 1] == " "? false : true;
+    for (let i = s.length - 1; i >= 0; i--) {
+        console.log(s[i])
+        if (s[i] == " ") {
+            if ( shouldReturn) {
+                 return  res;
             }
-        } 
-        while ((!set.has(s[right]))){
-            right--;
-            if (left >= right) {
-                return res.join("");
-            }
+            spaceNum ++;
+            continue;
         }
-        console.log("fin currect: ", left, right)
-        console.log(res[left])
-        res[left] = s.charAt(right);
-        console.log(res[left])
-        res[right] = s.charAt(left);
-        console.log(res)
-        left++;
-        right--;
+        shouldReturn = true;
+        res++;
     }
-    return res.join("");
+    return s.length - spaceNum;
 };
 
-// 使用 arr.indexOf()
-var reverseVowels = function(s) {
-    var result;
-    var temp
-    var arr = ['a','e','i','o','u','A','E','I','O','U']
-    var t = s.split('')
-    var i = 0; j = t.length
 
-    
-    while(i<j){
-        while(i<j && arr.indexOf(t[i]) == -1){
-            i++;
-        }
-        while(i<j && arr.indexOf(t[j]) == -1){
-            j--
-        }
-        temp = t[i];
-        t[i] = t[j];
-        t[j] = temp
-
-        i++;
-        j--
-    }
-    result = t.join('');
-    return result
-};
+// 使用前后指针 后指针end记录空位，前指针start记录满足要求的单词，详见得到res
+// var lengthOfLastWord = function(s) {
+//     let end = s.length - 1;
+//     while(end >= 0 && s[end] == ' ') end--;
+//     if(end < 0) return 0;
+//     let start = end;
+//     while(start >= 0 && s[start] != ' ') start--;
+//     return end - start;
+// };
 ```
 
 - question: lc165 比较版本号 link: https://leetcode.cn/problems/compare-version-numbers/
@@ -2407,7 +2362,41 @@ var compareVersion = function(version1, version2) {
 
 ```
 ```java
+//方法一: 列举全部大单位，由大到小逐位相减
+/**
+ * @param {number} num
+ * @return {string}
+ */
+var intToRoman = function(num) {
+    const valueSymbols = [[1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+    const roman = [];
+    for (const [value, symbol] of valueSymbols) {
+        while (num >= value) {
+            num -= value;
+            roman.push(symbol);
+        }
+        if (num == 0) {
+            break;
+        }
+    }
+    return roman.join('');
+};
 
+
+//方法一: 列举个十百千全部元素，由大到小逐位放置
+var intToRoman = function(num) {
+    const thousands = ["", "M", "MM", "MMM"];
+    const hundreds = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"];
+    const tens     = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"];
+    const ones     = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
+
+    const roman = [];
+    roman.push(thousands[Math.floor(num / 1000)]);
+    roman.push(hundreds[Math.floor(num % 1000 / 100)]);
+    roman.push(tens[Math.floor(num % 100 / 10)]);
+    roman.push(ones[num % 10]);
+    return roman.join('');
+};
 ```
 
 - question: lc13 罗马数字转整数 link: https://leetcode.cn/problems/roman-to-integer/
@@ -2417,7 +2406,38 @@ var compareVersion = function(version1, version2) {
 
 ```
 ```java
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    let keys = ["I", "V", "X", "L", "C", "D", "M"];
+    let values = [1, 5, 10, 50, 100, 500, 1000];
+    let res =0;
+    for (let i = 0; i < s.length; i++) {
+        if (keys.indexOf(s.charAt(i)) >= keys.indexOf(s.charAt(i+1))) {
+            res+=values[keys.indexOf(s.charAt(i))];
+        } else {
+            res-=values[keys.indexOf(s.charAt(i))];
+        }
+    }
+    return res;
+};
 
+
+//除此之外，还可以使用function进行对数组的存储
+function getchar() {
+        switch(ch) {
+            case 'I': return 1;
+            case 'V': return 5;
+            case 'X': return 10;
+            case 'L': return 50;
+            case 'C': return 100;
+            case 'D': return 500;
+            case 'M': return 1000;
+            default: return 0;
+        }
+    }
 ```
 
 - question: lc38 外观数列 link: https://leetcode.cn/problems/count-and-say/
