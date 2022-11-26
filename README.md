@@ -2899,7 +2899,7 @@ class Solution:
             l1 = l1.next if l1 else l1
             l2 = l2.next if l2 else l2
         
-        return ans.next
+        return ans.next 
 ```
 ```java
 
@@ -2908,7 +2908,34 @@ class Solution:
 - question: lc43 字符串相乘 link: https://leetcode.cn/problems/multiply-strings/
     - answer:
 ```python
+# 利用竖式乘法规则, 小数每一位与大数相乘再求和.
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1 == "0" or num2 == "0":
+            return "0"
+        
+        if len(num1) < len(num2):
+            num1, num2 = num2, num1
+        
+        n1 = len(num1)
+        n2 = len(num2)
 
+        result = 0
+
+        for i in range(n2):
+            temp = 0
+            for j in range(n1):
+                temp = temp + (ord(num2[n2-1-i]) - ord("0")) * (ord(num1[n1-1-j]) - ord("0"))*(10**j)
+
+            result += temp*(10**i)
+
+        ans = ""
+
+        while result > 0:
+            ans += chr(result%10 + ord("0"))
+            result //= 10
+
+        return ans[::-1]
 ```
 ```java
 
@@ -2917,7 +2944,21 @@ class Solution:
 - question: lc204 计数质数 link: https://leetcode.cn/problems/count-primes/
     - answer:
 ```python
+# 筛选法,先初始化一个长度为n,且都为1的数组,当当前数组值为1时,将所有i的倍数的值都赋值为0,最后剩下的1就都是质数.
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n < 2:
+            return 0
 
+        isPrime = [1] * n
+        isPrime[0] = isPrime[1] = 0 
+        
+        for i in range(2, int(n ** 0.5) + 1):
+            if isPrime[i]:
+                for j in range(i+i, n, i):
+                    isPrime[j] = 0
+
+        return sum(isPrime)
 ```
 ```java
 
