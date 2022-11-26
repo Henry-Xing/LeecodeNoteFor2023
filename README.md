@@ -2633,7 +2633,26 @@ class Solution:
     - answer:
 ```python
 # python code
+# 初始化n行string，每次i到达numRows-1与0时，改变方向.
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        if numRows <= 1:
+            return s
+            
+        ans = ["" for i in range(numRows)]
+        # 初始化n个字符串
 
+        i = 0
+        flag = -1
+        # 移动方向
+        for c in s:
+            ans[i] += c
+            if i == numRows-1 or i == 0:  
+                flag = -flag  
+                # 改变方向
+            i += flag
+
+        return "".join(ans)
 ```
 ```java
 
