@@ -2683,7 +2683,27 @@ class Solution:
 - question: lc7 整数反转 link: https://leetcode.cn/problems/reverse-integer/
     - answer:
 ```python
+# mod 10 and reverse the numbers
+# or convert to string and reversed
+class Solution:
+    def reverse(self, x: int) -> int:
+        if x < -2**31 or x > 2**31 - 1:
+            return 0
 
+        flag = True if x > 0 else False
+
+        x = abs(x)
+
+        ans = 0
+
+        while x > 0:
+            ans = ans*10 + x%10
+            x //= 10
+
+        if ans < -2**31 or ans > 2**31 - 1:
+            return 0
+
+        return ans if flag else -ans
 ```
 ```java
 
@@ -2692,7 +2712,34 @@ class Solution:
 - question: lc9 回文数 link: https://leetcode.cn/problems/palindrome-number/
     - answer:
 ```python
+# 双指针头尾同时检测并向内侧移动（允许使用string的时候）
+# 不允许使用string时，需要用数学方法得到反转后的数字，检查是否相等。
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        # s = str(x)
+        # right, left = len(s)-1, 0
 
+        # while left < right:
+        #     if s[left] != s[right]:
+        #         return False
+            
+        #     left += 1
+        #     right -= 1
+        
+        # return True
+
+        if x < 0:
+            return False
+
+        n = x
+
+        ans = 0
+
+        while n > 0:
+            ans = ans*10 + n%10
+            n = n//10
+        
+        return True if ans == x else False
 ```
 ```java
 
@@ -2701,7 +2748,47 @@ class Solution:
 - question: lc989 数组形式的整数加法 link: https://leetcode.cn/problems/add-to-array-form-of-integer/
     - answer:
 ```python
+# 不转换为字符串，则需要将k转为list形式，相加有进位就进位。
+class Solution:
+    def addToArrayForm(self, num: List[int], k: int) -> List[int]:
+        n = len(num)
 
+        lk = []
+        num[:] = num[::-1]
+
+        while k > 0:
+            lk.append(k%10)
+            k //= 10
+
+        if len(lk) > n:
+            num.extend([0]*(len(lk)-n))
+            n = len(lk)
+        else:
+            lk.extend([0]*(n-len(lk)))
+
+        ans = [0] * (n+1)
+        
+        for i in range(n):
+            ans[i] += lk[i] + num[i]
+            if ans[i] >= 10:
+                ans[i] %= 10
+                ans[i+1] += 1
+
+        if ans[-1] == 0:
+            ans.pop()
+
+        return ans[::-1]
+
+# 转换为字符串后，连接再转为int然后相加最后拆成list返回。
+        # n = int("".join([str(c) for c in num])) + k
+
+        # ans = []
+
+        # while n > 0:
+        #     ans.append(n%10)
+        #     n //= 10
+        
+        # return ans[::-1]
 ```
 ```java
 
