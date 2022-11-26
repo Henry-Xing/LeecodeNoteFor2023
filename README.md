@@ -2924,7 +2924,7 @@ class Solution:
 
 ### 位运算
  
-- question: lc191 剑指 15 位1的个数 link:
+- question: lc191 位1的个数 link: https://leetcode.cn/problems/number-of-1-bits/
     - answer:
 ```python
 
@@ -2933,7 +2933,7 @@ class Solution:
 
 ```
 
-- question: lc461 汉明距离 link:
+- question: lc461 汉明距离 link: https://leetcode.cn/problems/hamming-distance/
     - answer:
 ```python
 
@@ -2942,7 +2942,7 @@ class Solution:
 
 ```
 
-- question: lc477 汉明距离总和 link:
+- question: lc477 汉明距离总和 link: https://leetcode.cn/problems/total-hamming-distance/
     - answer:
 ```python
 
@@ -2951,7 +2951,7 @@ class Solution:
 
 ```
 
-- question: lc231 2的幂 link:
+- question: lc231 2的幂 link: https://leetcode.cn/problems/power-of-two/
     - answer:
 ```python
 
@@ -2960,7 +2960,7 @@ class Solution:
 
 ```
 
-- question: lc371 两整数之和 link:
+- question: lc371 两整数之和 link: https://leetcode.cn/problems/sum-of-two-integers/
     - answer:
 ```python
 
@@ -2969,7 +2969,7 @@ class Solution:
 
 ```
 
-- question: lc29 两数相除 link:
+- question: lc29 两数相除 link: https://leetcode.cn/problems/divide-two-integers/
     - answer:
 ```python
 
@@ -2978,7 +2978,7 @@ class Solution:
 
 ```
 
-- question: lc136 只出现一次的数字 link:
+- question: lc136 只出现一次的数字 link: https://leetcode.cn/problems/single-number/
     - answer:
 ```python
 
@@ -2987,7 +2987,7 @@ class Solution:
 
 ```
 
-- question: lc137 只出现一次的数字II link:
+- question: lc137 只出现一次的数字II link: https://leetcode.cn/problems/single-number-ii/
     - answer:
 ```python
 
@@ -2996,7 +2996,7 @@ class Solution:
 
 ```
 
-- question: lc1318 或运算的最小翻转次数 link:
+- question: lc1318 或运算的最小翻转次数 link: https://leetcode.cn/problems/minimum-flips-to-make-a-or-b-equal-to-c/
     - answer:
 ```python
 
@@ -3005,7 +3005,7 @@ class Solution:
 
 ```
 
-- question: lc201 数字范围按位与 link:
+- question: lc201 数字范围按位与 link: https://leetcode.cn/problems/bitwise-and-of-numbers-range/
     - answer:
 ```python
 
@@ -3014,7 +3014,7 @@ class Solution:
 
 ```
 
-- question: lc476 数字的补数 link:
+- question: lc476 数字的补数 link: https://leetcode.cn/problems/number-complement/
     - answer:
 ```python
 
@@ -3023,7 +3023,7 @@ class Solution:
 
 ```
 
-- question: lc405 数字转换为十六进制数 link:
+- question: lc405 数字转换为十六进制数 link: https://leetcode.cn/problems/convert-a-number-to-hexadecimal/
     - answer:
 ```python
 
@@ -3032,7 +3032,7 @@ class Solution:
 
 ```
 
-- question: lc190 颠倒二进制位 link:
+- question: lc190 颠倒二进制位 link: https://leetcode.cn/problems/reverse-bits/
     - answer:
 ```python
 
@@ -3042,26 +3042,144 @@ class Solution:
 ```
 
 ### 排序
-
-lc 912 ：排序数组
 阿里面试题 - 快速查找第二大数
-lc 628 ：三个数的最大乘积
-lc 88 号算法：合并两个有序数组
-剑指  51： 数组中的逆序对
-lc 315 号算法题：计算右侧小于当前元素的个数
-lc 327 ：区间和的个数
-lc 493 ：翻转对
-lc 50 &amp; 剑指 16 ：Pow(x, n)
-lc 75 ：颜色分类【top100】
-lc 179 &amp; 剑指 45 ：最大数
-lc 56 &amp; 剑指 74 ：合并区间【top100】
-lc 57 ：插入区间
-lc 905 ：按奇偶排序数组
-lc 922 ：按奇偶排序数组 II
-lc 1365 ：有多少小于当前数字的数字
-lc 164 ：最大间距
 
-- question:  link:
+- question: lc912 ：排序数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc628 ：三个数的最大乘积 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc88 ：合并两个有序数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: 剑指51 ：数组中的逆序对 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc315 ：计算右侧小于当前元素的个数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc327 ：区间和的个数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc493 ：翻转对 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc50剑指16 ：Pow(x, n) link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc75 ：颜色分类 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc179剑指45 ：最大数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc56剑指74 ：合并区间 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc57 ：插入区间 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc905 ：按奇偶排序数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc922 ：按奇偶排序数组 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc1365 ：有多少小于当前数字的数字 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc164 ：最大间距 link:
     - answer:
 ```python
 
@@ -3072,36 +3190,7 @@ lc 164 ：最大间距
 
 ### 查找
 
-lc 704 号算法题：二分查找
-lc 34 ：排序数组中找元素的第一个和最后一个位置【top100】
-lc 35 &amp; 剑指 53-1：搜索插入位置【top100】
-lc 278 号算法题：第一个错误的版本
-lc 33 ：搜索旋转排序数组【top100】
-lc 153 号算法题：寻找旋转排序数组中的最小值
-lc 154 &amp; 剑指 11 ：寻找旋转排序数组中的最小值 II
-lc 852 &amp; 剑指 069：山脉数组的峰顶索引
-lc 1095 号算法题：山脉数组中查找目标值
-lc 162 号算法题：寻找峰值
-lc 74 号算法题：搜索二维矩阵
-lc 240 &amp; 剑指 4 ：搜索二维矩阵 II【top100】
-lc 69 &amp; 剑指 072 ：x 的平方根
-lc 1539 号算法题：第 k 个缺失的正整数
-字节 - 教育部门 - 三面：截木头
-lc 771 号算法题：宝石与石头
-lc 888 号算法题：公平的糖果棒交换
-lc 128 &amp; 剑指 119 ：最长连续序列【top100】
-lc 136 ：只出现一次的数字【top100】
-lc 389 号算法题：找不同
-lc 554 号算法题：砖墙
-lc 205 号算法题：同构字符串
-lc 290 号算法题：单词规律
-lc 242 &amp; 剑指 032 ：有效的字母异位词
-lc 49 &amp; 剑指 033 ：字母异位词分组【top100】
-lc 560 &amp; 剑指 010 ：和为K的子数组【top100】
-lc 41 号算法题：缺失的第一个正数
-lc 1122 &amp; 剑指 075 ：数组的相对排序
-
-- question:  link:
+- question: lc704 ：二分查找 link:
     - answer:
 ```python
 
@@ -3109,6 +3198,241 @@ lc 1122 &amp; 剑指 075 ：数组的相对排序
 ```java
 
 ```
+
+- question: lc34 ：排序数组中找元素的第一个和最后一个位置 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc35 ：搜索插入位置 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc278 ：第一个错误的版本 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc33 ：搜索旋转排序数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc153 ：寻找旋转排序数组中的最小值 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc154 ：寻找旋转排序数组中的最小值 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc852 ：山脉数组的峰顶索引 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc1095 ：山脉数组中查找目标值 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc162 ：寻找峰值 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc74 ：搜索二维矩阵 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc240 ：搜索二维矩阵 II【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc69 ：x 的平方根 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc1539 ：第 k 个缺失的正整数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc771 ：宝石与石头 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc888 ：公平的糖果棒交换 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc128 ：最长连续序列 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc136 ：只出现一次的数字 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc389 ：找不同 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc554 ：砖墙 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc205 ：同构字符串 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc290 ：单词规律 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc242 ：有效的字母异位词 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc49 ：字母异位词分组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc560 ：和为K的子数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc41 ：缺失的第一个正数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc1122 ：数组的相对排序 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
 
 ### 栈与队列
 
