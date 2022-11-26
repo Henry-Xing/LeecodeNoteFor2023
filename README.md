@@ -2797,7 +2797,24 @@ class Solution:
 - question: lc66 加1 link: https://leetcode.cn/problems/plus-one/
     - answer:
 ```python
+# 翻转后先hardcode给第一项加1，之后遍历0~n-2项，大于等于10则进位。跳出循环后，如果最后一位大于等于10则在末尾append（1）。
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
 
+        digits[:] = digits[::-1]
+
+        digits[0] += 1
+
+        for i in range(len(digits) - 1):
+            if digits[i] >= 10:
+                digits[i] %= 10
+                digits[i+1] += 1
+        
+        if digits[-1] >= 10:
+            digits[-1] %= 10
+            digits.append(1)
+        
+        return digits[::-1]
 ```
 ```java
 
@@ -2806,7 +2823,26 @@ class Solution:
 - question: lc415 字符串相加 link: https://leetcode.cn/problems/add-strings/
     - answer:
 ```python
+# 无法转为int时，用ord（str） - ord（‘0’）
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        i = len(num1) - 1
+        j = len(num2) - 1
+        carry = 0
 
+        ans = ""
+
+        while i >= 0 or j >= 0 or carry != 0:
+            x = ord(num1[i]) - ord('0') if i >= 0 else 0
+            y = ord(num2[j]) - ord('0') if j >= 0 else 0
+
+            ans += chr((x + y + carry)%10 + ord('0'))
+            carry = (x + y + carry)//10
+
+            i -= 1
+            j -= 1
+
+        return ans[::-1] 
 ```
 ```java
 
