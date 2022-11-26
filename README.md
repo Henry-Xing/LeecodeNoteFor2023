@@ -2600,7 +2600,30 @@ class Solution:
     - answer:
 ```python
 # python code
+# 计数统计，循环结束后需要再插值一次。
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        num = "1"
+        if n == 1:
+            return num
 
+        for j in range(n-1):
+            count = 1
+            cur = num[0]
+            ans = ""
+
+            for i in range(1, len(num)):
+                if num[i] == cur:
+                    count += 1
+                else:
+                    ans += str(count) + str(cur)
+                    cur = num[i]
+                    count = 1
+
+            ans += str(count) + str(cur)
+            num = ans
+
+        return num
 ```
 ```java
 
