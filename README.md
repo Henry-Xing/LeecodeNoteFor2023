@@ -2851,7 +2851,27 @@ class Solution:
 - question: lc67 剑指002 二进制求和 link: https://leetcode.cn/problems/add-binary/
     - answer:
 ```python
+# 类似上一题,把进位改成2就行,当前位置为result%2, 进位为result//2.
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        i = len(a) - 1
+        j = len(b) - 1
 
+        carry = 0
+
+        ans = ""
+
+        while i >= 0 or j >= 0 or carry != 0:
+            x = ord(a[i]) - ord('0') if i >= 0 else 0
+            y = ord(b[j]) - ord('0') if j >= 0 else 0
+
+            ans += chr((x + y + carry)%2 + ord('0'))
+            carry = (x + y + carry)//2
+
+            i -= 1
+            j -= 1
+
+        return ans[::-1] 
 ```
 ```java
 
