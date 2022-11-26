@@ -2476,7 +2476,31 @@ var reverseVowels = function(s) {
     - answer:
 ```python
 # python code
+# 按"."划分后先比较相同长度的信息，再比较多出来的信息。
+class Solution:
+    def compareVersion(self, version1: str, version2: str) -> int:
+        v1 = version1.split(".")
+        v2 = version2.split(".")
 
+        n1 = len(v1)
+        n2 = len(v2)
+
+        for i in range(min(n1,n2)):
+            if int(v1[i]) > int(v2[i]):
+                return 1
+            elif int(v1[i]) < int(v2[i]):
+                return -1
+        
+        if n1 > n2:
+            for i in range(n2, n1):
+                if int(v1[i]) != 0:
+                    return 1
+        elif n1 < n2:
+            for i in range(n1, n2):
+                if int(v2[i]) != 0:
+                    return -1
+
+        return 0
 ```
 ```java
 /**
