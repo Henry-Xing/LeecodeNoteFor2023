@@ -3162,7 +3162,18 @@ class Solution:
 - question: lc461 汉明距离 link: https://leetcode.cn/problems/hamming-distance/
     - answer:
 ```python
-
+# 首先将x与y异或，得到的数每一位为两者不相同的非0位，最后统计1的个数，则是汉明距离。
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        # x y异或
+        a = x ^ y
+        
+        ans = 0
+        while a:
+            a &= a-1
+            ans += 1
+        
+        return ans
 ```
 ```java
 
