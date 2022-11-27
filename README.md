@@ -2726,7 +2726,27 @@ var convert = function(s, numRows) {
 - question: lc7 整数反转 link: https://leetcode.cn/problems/reverse-integer/
     - answer:
 ```python
+# mod 10 and reverse the numbers
+# or convert to string and reversed
+class Solution:
+    def reverse(self, x: int) -> int:
+        if x < -2**31 or x > 2**31 - 1:
+            return 0
 
+        flag = True if x > 0 else False
+
+        x = abs(x)
+
+        ans = 0
+
+        while x > 0:
+            ans = ans*10 + x%10
+            x //= 10
+
+        if ans < -2**31 or ans > 2**31 - 1:
+            return 0
+
+        return ans if flag else -ans
 ```
 ```java
 /**
@@ -2749,7 +2769,34 @@ var reverse = function(x) {
 - question: lc9 回文数 link: https://leetcode.cn/problems/palindrome-number/
     - answer:
 ```python
+# 双指针头尾同时检测并向内侧移动（允许使用string的时候）
+# 不允许使用string时，需要用数学方法得到反转后的数字，检查是否相等。
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        # s = str(x)
+        # right, left = len(s)-1, 0
 
+        # while left < right:
+        #     if s[left] != s[right]:
+        #         return False
+            
+        #     left += 1
+        #     right -= 1
+        
+        # return True
+
+        if x < 0:
+            return False
+
+        n = x
+
+        ans = 0
+
+        while n > 0:
+            ans = ans*10 + n%10
+            n = n//10
+        
+        return True if ans == x else False
 ```
 ```java
 /**
@@ -2783,7 +2830,47 @@ while ( A 没完 || B 没完)
 ```
 
 ```python
+# 不转换为字符串，则需要将k转为list形式，相加有进位就进位。
+class Solution:
+    def addToArrayForm(self, num: List[int], k: int) -> List[int]:
+        n = len(num)
 
+        lk = []
+        num[:] = num[::-1]
+
+        while k > 0:
+            lk.append(k%10)
+            k //= 10
+
+        if len(lk) > n:
+            num.extend([0]*(len(lk)-n))
+            n = len(lk)
+        else:
+            lk.extend([0]*(n-len(lk)))
+
+        ans = [0] * (n+1)
+        
+        for i in range(n):
+            ans[i] += lk[i] + num[i]
+            if ans[i] >= 10:
+                ans[i] %= 10
+                ans[i+1] += 1
+
+        if ans[-1] == 0:
+            ans.pop()
+
+        return ans[::-1]
+
+# 转换为字符串后，连接再转为int然后相加最后拆成list返回。
+        # n = int("".join([str(c) for c in num])) + k
+
+        # ans = []
+
+        # while n > 0:
+        #     ans.append(n%10)
+        #     n //= 10
+        
+        # return ans[::-1]
 ```
 ```java
 /**
@@ -2821,7 +2908,24 @@ var addToArrayForm = function(num, k) {
 - question: lc66 加1 link: https://leetcode.cn/problems/plus-one/
     - answer:
 ```python
+# 翻转后先hardcode给第一项加1，之后遍历0~n-2项，大于等于10则进位。跳出循环后，如果最后一位大于等于10则在末尾append（1）。
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
 
+        digits[:] = digits[::-1]
+
+        digits[0] += 1
+
+        for i in range(len(digits) - 1):
+            if digits[i] >= 10:
+                digits[i] %= 10
+                digits[i+1] += 1
+        
+        if digits[-1] >= 10:
+            digits[-1] %= 10
+            digits.append(1)
+        
+        return digits[::-1]
 ```
 ```java
 /**
@@ -2847,7 +2951,26 @@ var plusOne = function(digits) {
 - question: lc415 字符串相加 link: https://leetcode.cn/problems/add-strings/
     - answer:
 ```python
+# 无法转为int时，用ord（str） - ord（‘0’）
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        i = len(num1) - 1
+        j = len(num2) - 1
+        carry = 0
 
+        ans = ""
+
+        while i >= 0 or j >= 0 or carry != 0:
+            x = ord(num1[i]) - ord('0') if i >= 0 else 0
+            y = ord(num2[j]) - ord('0') if j >= 0 else 0
+
+            ans += chr((x + y + carry)%10 + ord('0'))
+            carry = (x + y + carry)//10
+
+            i -= 1
+            j -= 1
+
+        return ans[::-1] 
 ```
 ```java
 
@@ -2856,7 +2979,27 @@ var plusOne = function(digits) {
 - question: lc67 剑指002 二进制求和 link: https://leetcode.cn/problems/add-binary/
     - answer:
 ```python
+# 类似上一题,把进位改成2就行,当前位置为result%2, 进位为result//2.
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        i = len(a) - 1
+        j = len(b) - 1
 
+        carry = 0
+
+        ans = ""
+
+        while i >= 0 or j >= 0 or carry != 0:
+            x = ord(a[i]) - ord('0') if i >= 0 else 0
+            y = ord(b[j]) - ord('0') if j >= 0 else 0
+
+            ans += chr((x + y + carry)%2 + ord('0'))
+            carry = (x + y + carry)//2
+
+            i -= 1
+            j -= 1
+
+        return ans[::-1] 
 ```
 ```java
 
@@ -2865,7 +3008,26 @@ var plusOne = function(digits) {
 - question: lc2 两数相加 link: https://leetcode.cn/problems/add-two-numbers/
     - answer:
 ```python
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        ans = head = ListNode(0)
+        carry = 0
+        while l1 or l2 or carry:
+            x = l1.val if l1 else 0
+            y = l2.val if l2 else 0
+            result = x + y + carry
+            head.next = ListNode(result%10)
+            head = head.next
+            carry = result//10
+            l1 = l1.next if l1 else l1
+            l2 = l2.next if l2 else l2
+        
+        return ans.next 
 ```
 ```java
 
@@ -2874,7 +3036,34 @@ var plusOne = function(digits) {
 - question: lc43 字符串相乘 link: https://leetcode.cn/problems/multiply-strings/
     - answer:
 ```python
+# 利用竖式乘法规则, 小数每一位与大数相乘再求和.
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1 == "0" or num2 == "0":
+            return "0"
+        
+        if len(num1) < len(num2):
+            num1, num2 = num2, num1
+        
+        n1 = len(num1)
+        n2 = len(num2)
 
+        result = 0
+
+        for i in range(n2):
+            temp = 0
+            for j in range(n1):
+                temp = temp + (ord(num2[n2-1-i]) - ord("0")) * (ord(num1[n1-1-j]) - ord("0"))*(10**j)
+
+            result += temp*(10**i)
+
+        ans = ""
+
+        while result > 0:
+            ans += chr(result%10 + ord("0"))
+            result //= 10
+
+        return ans[::-1]
 ```
 ```java
 
@@ -2883,7 +3072,21 @@ var plusOne = function(digits) {
 - question: lc204 计数质数 link: https://leetcode.cn/problems/count-primes/
     - answer:
 ```python
+# 筛选法,先初始化一个长度为n,且都为1的数组,当当前数组值为1时,将所有i的倍数的值都赋值为0,最后剩下的1就都是质数.
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n < 2:
+            return 0
 
+        isPrime = [1] * n
+        isPrime[0] = isPrime[1] = 0 
+        
+        for i in range(2, int(n ** 0.5) + 1):
+            if isPrime[i]:
+                for j in range(i+i, n, i):
+                    isPrime[j] = 0
+
+        return sum(isPrime)
 ```
 ```java
 
@@ -2908,8 +3111,8 @@ var plusOne = function(digits) {
 ```
 
 ### 位运算
-
-- question: lc191 剑指 15 位1的个数 link:
+ 
+- question: lc191 位1的个数 link: https://leetcode.cn/problems/number-of-1-bits/
     - answer:
 ```python
 
@@ -2918,7 +3121,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc461 汉明距离 link:
+- question: lc461 汉明距离 link: https://leetcode.cn/problems/hamming-distance/
     - answer:
 ```python
 
@@ -2927,7 +3130,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc477 汉明距离总和 link:
+- question: lc477 汉明距离总和 link: https://leetcode.cn/problems/total-hamming-distance/
     - answer:
 ```python
 
@@ -2936,7 +3139,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc231 2的幂 link:
+- question: lc231 2的幂 link: https://leetcode.cn/problems/power-of-two/
     - answer:
 ```python
 
@@ -2945,7 +3148,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc371 两整数之和 link:
+- question: lc371 两整数之和 link: https://leetcode.cn/problems/sum-of-two-integers/
     - answer:
 ```python
 
@@ -2954,7 +3157,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc29 两数相除 link:
+- question: lc29 两数相除 link: https://leetcode.cn/problems/divide-two-integers/
     - answer:
 ```python
 
@@ -2963,7 +3166,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc136 只出现一次的数字 link:
+- question: lc136 只出现一次的数字 link: https://leetcode.cn/problems/single-number/
     - answer:
 ```python
 
@@ -2972,7 +3175,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc137 只出现一次的数字II link:
+- question: lc137 只出现一次的数字II link: https://leetcode.cn/problems/single-number-ii/
     - answer:
 ```python
 
@@ -2981,7 +3184,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc1318 或运算的最小翻转次数 link:
+- question: lc1318 或运算的最小翻转次数 link: https://leetcode.cn/problems/minimum-flips-to-make-a-or-b-equal-to-c/
     - answer:
 ```python
 
@@ -2990,7 +3193,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc201 数字范围按位与 link:
+- question: lc201 数字范围按位与 link: https://leetcode.cn/problems/bitwise-and-of-numbers-range/
     - answer:
 ```python
 
@@ -2999,7 +3202,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc476 数字的补数 link:
+- question: lc476 数字的补数 link: https://leetcode.cn/problems/number-complement/
     - answer:
 ```python
 
@@ -3008,7 +3211,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc405 数字转换为十六进制数 link:
+- question: lc405 数字转换为十六进制数 link: https://leetcode.cn/problems/convert-a-number-to-hexadecimal/
     - answer:
 ```python
 
@@ -3017,7 +3220,7 @@ var plusOne = function(digits) {
 
 ```
 
-- question: lc190 颠倒二进制位 link:
+- question: lc190 颠倒二进制位 link: https://leetcode.cn/problems/reverse-bits/
     - answer:
 ```python
 
@@ -3027,26 +3230,144 @@ var plusOne = function(digits) {
 ```
 
 ### 排序
-
-lc 912 ：排序数组
 阿里面试题 - 快速查找第二大数
-lc 628 ：三个数的最大乘积
-lc 88 号算法：合并两个有序数组
-剑指  51： 数组中的逆序对
-lc 315 号算法题：计算右侧小于当前元素的个数
-lc 327 ：区间和的个数
-lc 493 ：翻转对
-lc 50 &amp; 剑指 16 ：Pow(x, n)
-lc 75 ：颜色分类【top100】
-lc 179 &amp; 剑指 45 ：最大数
-lc 56 &amp; 剑指 74 ：合并区间【top100】
-lc 57 ：插入区间
-lc 905 ：按奇偶排序数组
-lc 922 ：按奇偶排序数组 II
-lc 1365 ：有多少小于当前数字的数字
-lc 164 ：最大间距
 
-- question:  link:
+- question: lc912 ：排序数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc628 ：三个数的最大乘积 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc88 ：合并两个有序数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: 剑指51 ：数组中的逆序对 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc315 ：计算右侧小于当前元素的个数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc327 ：区间和的个数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc493 ：翻转对 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc50剑指16 ：Pow(x, n) link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc75 ：颜色分类 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc179剑指45 ：最大数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc56剑指74 ：合并区间 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc57 ：插入区间 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc905 ：按奇偶排序数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc922 ：按奇偶排序数组 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc1365 ：有多少小于当前数字的数字 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc164 ：最大间距 link:
     - answer:
 ```python
 
@@ -3057,36 +3378,7 @@ lc 164 ：最大间距
 
 ### 查找
 
-lc 704 号算法题：二分查找
-lc 34 ：排序数组中找元素的第一个和最后一个位置【top100】
-lc 35 &amp; 剑指 53-1：搜索插入位置【top100】
-lc 278 号算法题：第一个错误的版本
-lc 33 ：搜索旋转排序数组【top100】
-lc 153 号算法题：寻找旋转排序数组中的最小值
-lc 154 &amp; 剑指 11 ：寻找旋转排序数组中的最小值 II
-lc 852 &amp; 剑指 069：山脉数组的峰顶索引
-lc 1095 号算法题：山脉数组中查找目标值
-lc 162 号算法题：寻找峰值
-lc 74 号算法题：搜索二维矩阵
-lc 240 &amp; 剑指 4 ：搜索二维矩阵 II【top100】
-lc 69 &amp; 剑指 072 ：x 的平方根
-lc 1539 号算法题：第 k 个缺失的正整数
-字节 - 教育部门 - 三面：截木头
-lc 771 号算法题：宝石与石头
-lc 888 号算法题：公平的糖果棒交换
-lc 128 &amp; 剑指 119 ：最长连续序列【top100】
-lc 136 ：只出现一次的数字【top100】
-lc 389 号算法题：找不同
-lc 554 号算法题：砖墙
-lc 205 号算法题：同构字符串
-lc 290 号算法题：单词规律
-lc 242 &amp; 剑指 032 ：有效的字母异位词
-lc 49 &amp; 剑指 033 ：字母异位词分组【top100】
-lc 560 &amp; 剑指 010 ：和为K的子数组【top100】
-lc 41 号算法题：缺失的第一个正数
-lc 1122 &amp; 剑指 075 ：数组的相对排序
-
-- question:  link:
+- question: lc704 ：二分查找 link:
     - answer:
 ```python
 
@@ -3094,6 +3386,241 @@ lc 1122 &amp; 剑指 075 ：数组的相对排序
 ```java
 
 ```
+
+- question: lc34 ：排序数组中找元素的第一个和最后一个位置 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc35 ：搜索插入位置 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc278 ：第一个错误的版本 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc33 ：搜索旋转排序数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc153 ：寻找旋转排序数组中的最小值 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc154 ：寻找旋转排序数组中的最小值 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc852 ：山脉数组的峰顶索引 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc1095 ：山脉数组中查找目标值 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc162 ：寻找峰值 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc74 ：搜索二维矩阵 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc240 ：搜索二维矩阵 II【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc69 ：x 的平方根 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc1539 ：第 k 个缺失的正整数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc771 ：宝石与石头 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc888 ：公平的糖果棒交换 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc128 ：最长连续序列 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc136 ：只出现一次的数字 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc389 ：找不同 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc554 ：砖墙 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc205 ：同构字符串 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc290 ：单词规律 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc242 ：有效的字母异位词 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc49 ：字母异位词分组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc560 ：和为K的子数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc41 ：缺失的第一个正数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc1122 ：数组的相对排序 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
 
 ### 栈与队列
 
