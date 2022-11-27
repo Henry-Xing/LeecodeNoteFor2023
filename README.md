@@ -3167,7 +3167,7 @@ class Solution:
     def hammingDistance(self, x: int, y: int) -> int:
         # x y异或
         a = x ^ y
-        
+
         ans = 0
         while a:
             a &= a-1
@@ -3182,7 +3182,23 @@ class Solution:
 - question: lc477 汉明距离总和 link: https://leetcode.cn/problems/total-hamming-distance/
     - answer:
 ```python
+# 如果两两之间求距离再求和会超时。
+# 因为n < 2^32，所以可以用32位内每位的1与上每个数，记录有多少个在当前位置上是1，总数减掉是1的个数则得到是0的个数，用是1的个数乘上是0的个数则得到当前位能得到多少的距离，把每一位能得到的距离和求和则得到总的距离和。
+class Solution:
+    def totalHammingDistance(self, nums: List[int]) -> int:
+        ans = 0
 
+        n = len(nums)
+
+        for i in range(32):
+            count1 = 0
+            for j in range(n):
+                if nums[j] & (1 << i):
+                    count1 += 1
+            
+            ans += count1 * (n - count1)
+        
+        return ans
 ```
 ```java
 
@@ -3191,7 +3207,14 @@ class Solution:
 - question: lc231 2的幂 link: https://leetcode.cn/problems/power-of-two/
     - answer:
 ```python
-
+# 一个数是2的幂说明其二进制表示中只有一个1。
+# 有两种方式检测是否只有一个1。
+# 第一种是消去最低位1的方法，检测结果是否为0。消去最低位的1使用: n & (n-1)
+# 第二种，因为负数在二进制表示中是用补码表示。补码：每一位取反加1。如果是2的幂，则负数的高位符号位与正数相反，低位1的位置与正数一样，相与后得到正数本身。n & -n == n。
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        # return n > 0 and n & -n == n
+        return n > 0 and n & (n - 1) == 0
 ```
 ```java
 
@@ -3200,6 +3223,21 @@ class Solution:
 - question: lc371 两整数之和 link: https://leetcode.cn/problems/sum-of-two-integers/
     - answer:
 ```python
+# 未进位相加结果可以用异或得到，进位信息用与及左移一位得到，两者不停相异或及更新进位，直到进位为0。python中整数无大小限制，因此需要人为限制，并且如果结果为负则需要转为补码。
+class Solution:
+    def getSum(self, a: int, b: int) -> int:
+        MASK = 4294967296
+        MAX = 2147483647
+        MIN = 2147483648
+        a %= MASK
+        b %= MASK
+
+        while b:
+            carry = ((a & b) << 1) % MASK
+            a = (a ^ b) % MASK
+            b = carry
+
+        return a if a <= MAX else ~((a ^ MIN) ^ MAX)
 
 ```
 ```java
@@ -3218,7 +3256,18 @@ class Solution:
 - question: lc136 只出现一次的数字 link: https://leetcode.cn/problems/single-number/
     - answer:
 ```python
+# 找到不同的数字，因为每个数要不出现两次，要么出现一次，异或操作中，自己异或自己则会得到0，于是用一个数不停异或数组内的所有数，最后留下的那个数就是只出现一次的。
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        if len(nums) < 2:
+            return nums[0]
+            
+        ans = nums[0]
 
+        for i in range(1, len(nums)):
+            ans ^= nums[i]
+
+        return ans
 ```
 ```java
 
@@ -3227,6 +3276,27 @@ class Solution:
 - question: lc137 只出现一次的数字II link: https://leetcode.cn/problems/single-number-ii/
     - answer:
 ```python
+# 出现三次，不能用异或处理。此时需要统计每一位1出现的次数mod3得到特殊的那个在这个位是不是1，最终在第32位时，如果是1，说明此数字是负数，需要减去最大的负数得到对应的负数。
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        ans = 0
+
+        for i in range(32):
+            count3 = 0
+            for j in range(n):
+                if (1 << i) & nums[j]:
+                    count3 += 1
+            
+            if count3%3:
+                if i == 31:
+                    # 如果32位是1，说明此数是负数，需要转为负数
+                    ans -= (1 << i)
+                else:
+                    ans |= (1 << i)
+        
+        return ans
 
 ```
 ```java
@@ -3236,7 +3306,29 @@ class Solution:
 - question: lc1318 或运算的最小翻转次数 link: https://leetcode.cn/problems/minimum-flips-to-make-a-or-b-equal-to-c/
     - answer:
 ```python
+# 枚举出三种情况，分别计数。当c的i位为1时，如果a，b的i位有1则加0，否则加1，如果c的i位为0时，如果a，b的i位都为1时，加2，只有一个为1则加1，否则加0。
+# 第二种方法，也是枚举，但可以简化操作。
+class Solution:
+    def minFlips(self, a: int, b: int, c: int) -> int:
+        # ans = 0
+        # for i in range(32):
+        #     if c & (1 << i) and (a & (1 << i) == 0 and b & (1 << i) == 0):
+        #         ans += 1
+        #     elif c & (1 << i) == 0 and (a & (1 << i) and b & (1 << i)):
+        #         ans += 2
+        #     elif c & (1 << i) == 0 and (a & (1 << i) or b & (1 << i)):
+        #         ans += 1
+        
+        # return ans
 
+        ans = 0
+        for i in range(32):
+            bit_a, bit_b, bit_c = (a >> i) & 1, (b >> i) & 1, (c >> i) & 1
+            if bit_c == 0:
+                ans += bit_a + bit_b
+            else:
+                ans += int(bit_a + bit_b == 0)
+        return ans
 ```
 ```java
 
@@ -3245,6 +3337,25 @@ class Solution:
 - question: lc201 数字范围按位与 link: https://leetcode.cn/problems/bitwise-and-of-numbers-range/
     - answer:
 ```python
+# 两种方法，都基于一个共识，区间求与的结果就是两个端点的共同前缀加后续补0。前缀不同则得到0。
+# 第一种方法，将左右同时右移一格并记录移动次数，当左右相等时，则将其中一个左移 移动次数。
+# 第二种方法，大数不停消去最后一个1，直到小于小数，则得到求与结果。
+class Solution:
+    def rangeBitwiseAnd(self, left: int, right: int) -> int:
+        # method 1
+        # count = 0
+        # while left < right:
+        #     left = left >> 1
+        #     right = right >> 1
+        #     count += 1
+        
+        # return right << count
+
+        # method 2
+        while left < right:
+            right &= right - 1
+        
+        return right
 
 ```
 ```java
@@ -3254,7 +3365,16 @@ class Solution:
 - question: lc476 数字的补数 link: https://leetcode.cn/problems/number-complement/
     - answer:
 ```python
+# 先找到num是几位的数，然后1左移num的位数再减1得到一个与num位数相同且全1的数，与num相异或得到结果。
+class Solution:
+    def findComplement(self, num: int) -> int:
+        k = 0
+        temp = num
+        while temp:
+            temp = temp >> 1
+            k += 1
 
+        return num ^ ((1<<k)-1)
 ```
 ```java
 
@@ -3263,7 +3383,22 @@ class Solution:
 - question: lc405 数字转换为十六进制数 link: https://leetcode.cn/problems/convert-a-number-to-hexadecimal/
     - answer:
 ```python
+# 每次让num与上1111，将结果转为16进制后，num右移4位直到num等于0，将结果反转则是转换结果。
+class Solution:
+    def toHex(self, num: int) -> str:
+        if num == 0:
+            return "0"
 
+        f = lambda x: chr(x + ord('0')) if x < 10 else chr(x - 10 + ord('a'))
+
+        result = []
+        num = num & 0xFFFFFFFF
+
+        while num > 0:
+            result.append(f(num & 0XF))
+            num = num >> 4
+
+        return "".join(result[::-1])
 ```
 ```java
 
@@ -3272,7 +3407,19 @@ class Solution:
 - question: lc190 颠倒二进制位 link: https://leetcode.cn/problems/reverse-bits/
     - answer:
 ```python
+# 总的有32位，反转后的数每次右移一位且或上（原数与1），原数右移一位。
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        ans = 0
 
+        for i in range(31):
+            ans |= n & 1
+            ans = ans << 1
+            n = n >> 1
+
+        ans |= n & 1
+        
+        return ans
 ```
 ```java
 
