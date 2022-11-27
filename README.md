@@ -2820,7 +2820,6 @@ var isPalindrome = function(x) {
 
 ```
 逐位相加解题思路
-
 while ( A 没完 || B 没完)
     A 的当前位
     B 的当前位
@@ -3127,7 +3126,34 @@ class Solution:
 - question: lc191 位1的个数 link: https://leetcode.cn/problems/number-of-1-bits/
     - answer:
 ```python
+# 三种方法实现。
+# 第一，利用bin转为二进制字符串，计数其中的1
+# 第二，因为n<2^32，只需要与上32次，每个位上都检测一次是否是1
+# 第三，n & n-1 得到 n最后一位变为0后的数，例如6（110），5（101），6&5 = 4（100）
+# 每次n & n-1 可以减少一个1，当n为0时，结束循环，记录循环次数则是1的个数。
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        # bi = bin(n).strip("0b")
 
+        # ans = 0
+
+        # for c in bi:
+        #     if c == "1":
+        #         ans += 1
+        
+        # return ans
+
+        # ans = 0
+        # for i in range(32):
+        #     if n & (1 << i):
+        #         ans += 1
+        # return ans
+
+        ans = 0
+        while n:
+            n &= n-1
+            ans += 1
+        return ans
 ```
 ```java
 
