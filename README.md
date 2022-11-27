@@ -2976,7 +2976,19 @@ class Solution:
 - question: lc1232 缀点成线 link: https://leetcode.cn/problems/check-if-it-is-a-straight-line/
     - answer:
 ```python
+# 通过计算斜率是否相同来得到，但需要注意不要用除法，可以换成乘法:
+# (yi-1 - yi)*(xi - xi+1) ?= (yi - yi+1) * (xi-1 - xi)
+class Solution:
+    def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+        if len(coordinates) < 2:
+            return False
 
+        for i in range(1,len(coordinates)-1):
+            if (coordinates[i-1][1] - coordinates[i][1]) * (coordinates[i][0] - coordinates[i+1][0]) != \
+            (coordinates[i][1] - coordinates[i+1][1]) * (coordinates[i-1][0] - coordinates[i][0]):
+                return False
+        
+        return True
 ```
 ```java
 
