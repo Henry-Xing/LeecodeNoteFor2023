@@ -3428,7 +3428,7 @@ class Solution:
 ### 排序
 阿里面试题 - 快速查找第二大数
 
-- question: lc912 ：排序数组 link:
+- question: lc912 ：排序数组 link: https://leetcode.cn/problems/sort-an-array/
     - answer:
 ```python
 
@@ -3437,7 +3437,7 @@ class Solution:
 
 ```
 
-- question: lc628 ：三个数的最大乘积 link:
+- question: lc628 ：三个数的最大乘积 link: https://leetcode.cn/problems/maximum-product-of-three-numbers/
     - answer:
 ```python
 
@@ -3446,7 +3446,7 @@ class Solution:
 
 ```
 
-- question: lc88 ：合并两个有序数组 link:
+- question: lc88 ：合并两个有序数组 link: https://leetcode.cn/problems/merge-sorted-array/
     - answer:
 ```python
 
@@ -3455,7 +3455,7 @@ class Solution:
 
 ```
 
-- question: 剑指51 ：数组中的逆序对 link:
+- question: 剑指51 ：数组中的逆序对 link: https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/
     - answer:
 ```python
 
@@ -3464,7 +3464,7 @@ class Solution:
 
 ```
 
-- question: lc315 ：计算右侧小于当前元素的个数 link:
+- question: lc315 ：计算右侧小于当前元素的个数 link: https://leetcode.cn/problems/count-of-smaller-numbers-after-self/
     - answer:
 ```python
 
@@ -3473,7 +3473,7 @@ class Solution:
 
 ```
 
-- question: lc327 ：区间和的个数 link:
+- question: lc327 ：区间和的个数 link: https://leetcode.cn/problems/count-of-range-sum/
     - answer:
 ```python
 
@@ -3482,7 +3482,7 @@ class Solution:
 
 ```
 
-- question: lc493 ：翻转对 link:
+- question: lc493 ：翻转对 link: https://leetcode.cn/problems/reverse-pairs/
     - answer:
 ```python
 
@@ -3491,7 +3491,7 @@ class Solution:
 
 ```
 
-- question: lc50剑指16 ：Pow(x, n) link:
+- question: lc50剑指16 ：Pow(x, n) link: https://leetcode.cn/problems/powx-n/
     - answer:
 ```python
 
@@ -3500,7 +3500,7 @@ class Solution:
 
 ```
 
-- question: lc75 ：颜色分类 link:
+- question: lc75 ：颜色分类 link: https://leetcode.cn/problems/sort-colors/
     - answer:
 ```python
 
@@ -3509,7 +3509,7 @@ class Solution:
 
 ```
 
-- question: lc179剑指45 ：最大数 link:
+- question: lc179剑指45 ：最大数 link: https://leetcode.cn/problems/largest-number/
     - answer:
 ```python
 
@@ -3518,7 +3518,7 @@ class Solution:
 
 ```
 
-- question: lc56剑指74 ：合并区间 link:
+- question: lc56剑指74 ：合并区间 link: https://leetcode.cn/problems/merge-intervals/
     - answer:
 ```python
 
@@ -3527,7 +3527,7 @@ class Solution:
 
 ```
 
-- question: lc57 ：插入区间 link:
+- question: lc57 ：插入区间 link: https://leetcode.cn/problems/insert-interval/
     - answer:
 ```python
 
@@ -3536,7 +3536,7 @@ class Solution:
 
 ```
 
-- question: lc905 ：按奇偶排序数组 link:
+- question: lc905 ：按奇偶排序数组 link: https://leetcode.cn/problems/sort-array-by-parity/
     - answer:
 ```python
 
@@ -3545,7 +3545,7 @@ class Solution:
 
 ```
 
-- question: lc922 ：按奇偶排序数组 II link:
+- question: lc922 ：按奇偶排序数组 II link: https://leetcode.cn/problems/sort-array-by-parity-ii/
     - answer:
 ```python
 
@@ -3554,7 +3554,7 @@ class Solution:
 
 ```
 
-- question: lc1365 ：有多少小于当前数字的数字 link:
+- question: lc1365 ：有多少小于当前数字的数字 link: https://leetcode.cn/problems/how-many-numbers-are-smaller-than-the-current-number/
     - answer:
 ```python
 
@@ -3563,7 +3563,7 @@ class Solution:
 
 ```
 
-- question: lc164 ：最大间距 link:
+- question: lc164 ：最大间距 link: https://leetcode.cn/problems/maximum-gap/
     - answer:
 ```python
 
@@ -3574,7 +3574,7 @@ class Solution:
 
 ### 查找
 
-- question: lc704 ：二分查找 link:
+- question: lc704 ：二分查找 link: https://leetcode.cn/problems/binary-search/
     - answer:
 ```python
 
@@ -3583,7 +3583,7 @@ class Solution:
 
 ```
 
-- question: lc34 ：排序数组中找元素的第一个和最后一个位置 link:
+- question: lc34 ：排序数组中找元素的第一个和最后一个位置 link: https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/
     - answer:
 ```python
 
@@ -3592,7 +3592,7 @@ class Solution:
 
 ```
 
-- question: lc35 ：搜索插入位置 link:
+- question: lc35 ：搜索插入位置 link: https://leetcode.cn/problems/search-insert-position/
     - answer:
 ```python
 
@@ -3601,7 +3601,7 @@ class Solution:
 
 ```
 
-- question: lc278 ：第一个错误的版本 link:
+- question: lc278 ：第一个错误的版本 link: https://leetcode.cn/problems/first-bad-version/
     - answer:
 ```python
 
@@ -3610,7 +3610,7 @@ class Solution:
 
 ```
 
-- question: lc33 ：搜索旋转排序数组 link:
+- question: lc33 ：搜索旋转排序数组 link: https://leetcode.cn/problems/search-in-rotated-sorted-array/
     - answer:
 ```python
 
@@ -3619,7 +3619,7 @@ class Solution:
 
 ```
 
-- question: lc153 ：寻找旋转排序数组中的最小值 link:
+- question: lc153 ：寻找旋转排序数组中的最小值 link: https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/
     - answer:
 ```python
 
@@ -3628,7 +3628,7 @@ class Solution:
 
 ```
 
-- question: lc154 ：寻找旋转排序数组中的最小值 II link:
+- question: lc154 ：寻找旋转排序数组中的最小值 II link: https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/
     - answer:
 ```python
 
@@ -3637,7 +3637,7 @@ class Solution:
 
 ```
 
-- question: lc852 ：山脉数组的峰顶索引 link:
+- question: lc852 ：山脉数组的峰顶索引 link: https://leetcode.cn/problems/peak-index-in-a-mountain-array/
     - answer:
 ```python
 
@@ -3646,7 +3646,7 @@ class Solution:
 
 ```
 
-- question: lc1095 ：山脉数组中查找目标值 link:
+- question: lc1095 ：山脉数组中查找目标值 link: https://leetcode.cn/problems/find-in-mountain-array/
     - answer:
 ```python
 
@@ -3655,7 +3655,7 @@ class Solution:
 
 ```
 
-- question: lc162 ：寻找峰值 link:
+- question: lc162 ：寻找峰值 link: https://leetcode.cn/problems/find-peak-element/
     - answer:
 ```python
 
@@ -3664,7 +3664,7 @@ class Solution:
 
 ```
 
-- question: lc74 ：搜索二维矩阵 link:
+- question: lc74 ：搜索二维矩阵 link: https://leetcode.cn/problems/search-a-2d-matrix/
     - answer:
 ```python
 
@@ -3673,7 +3673,7 @@ class Solution:
 
 ```
 
-- question: lc240 ：搜索二维矩阵 II【top100】 link:
+- question: lc240 ：搜索二维矩阵II【top100】 link: https://leetcode.cn/problems/search-a-2d-matrix-ii/
     - answer:
 ```python
 
@@ -3682,7 +3682,7 @@ class Solution:
 
 ```
 
-- question: lc69 ：x 的平方根 link:
+- question: lc69 ：x 的平方根 link: https://leetcode.cn/problems/sqrtx/
     - answer:
 ```python
 
@@ -3691,7 +3691,7 @@ class Solution:
 
 ```
 
-- question: lc1539 ：第 k 个缺失的正整数 link:
+- question: lc1539 ：第 k 个缺失的正整数 link: https://leetcode.cn/problems/kth-missing-positive-number/
     - answer:
 ```python
 
@@ -3700,7 +3700,7 @@ class Solution:
 
 ```
 
-- question: lc771 ：宝石与石头 link:
+- question: lc771 ：宝石与石头 link: https://leetcode.cn/problems/jewels-and-stones/
     - answer:
 ```python
 
@@ -3709,7 +3709,7 @@ class Solution:
 
 ```
 
-- question: lc888 ：公平的糖果棒交换 link:
+- question: lc888 ：公平的糖果棒交换 link: https://leetcode.cn/problems/fair-candy-swap/
     - answer:
 ```python
 
@@ -3718,7 +3718,7 @@ class Solution:
 
 ```
 
-- question: lc128 ：最长连续序列 link:
+- question: lc128 ：最长连续序列 link: https://leetcode.cn/problems/longest-consecutive-sequence/
     - answer:
 ```python
 
@@ -3727,7 +3727,7 @@ class Solution:
 
 ```
 
-- question: lc136 ：只出现一次的数字 link:
+- question: lc136 ：只出现一次的数字 link: https://leetcode.cn/problems/single-number/
     - answer:
 ```python
 
@@ -3736,7 +3736,7 @@ class Solution:
 
 ```
 
-- question: lc389 ：找不同 link:
+- question: lc389 ：找不同 link: https://leetcode.cn/problems/find-the-difference/
     - answer:
 ```python
 
@@ -3745,7 +3745,7 @@ class Solution:
 
 ```
 
-- question: lc554 ：砖墙 link:
+- question: lc554 ：砖墙 link: https://leetcode.cn/problems/brick-wall/
     - answer:
 ```python
 
@@ -3754,7 +3754,7 @@ class Solution:
 
 ```
 
-- question: lc205 ：同构字符串 link:
+- question: lc205 ：同构字符串 link: https://leetcode.cn/problems/isomorphic-strings/
     - answer:
 ```python
 
@@ -3763,7 +3763,7 @@ class Solution:
 
 ```
 
-- question: lc290 ：单词规律 link:
+- question: lc290 ：单词规律 link: https://leetcode.cn/problems/word-pattern/
     - answer:
 ```python
 
@@ -3772,7 +3772,7 @@ class Solution:
 
 ```
 
-- question: lc242 ：有效的字母异位词 link:
+- question: lc242 ：有效的字母异位词 link: https://leetcode.cn/problems/valid-anagram/
     - answer:
 ```python
 
@@ -3781,7 +3781,7 @@ class Solution:
 
 ```
 
-- question: lc49 ：字母异位词分组 link:
+- question: lc49 ：字母异位词分组 link: https://leetcode.cn/problems/group-anagrams/
     - answer:
 ```python
 
@@ -3790,7 +3790,7 @@ class Solution:
 
 ```
 
-- question: lc560 ：和为K的子数组 link:
+- question: lc560 ：和为K的子数组 link: https://leetcode.cn/problems/subarray-sum-equals-k/
     - answer:
 ```python
 
@@ -3799,7 +3799,7 @@ class Solution:
 
 ```
 
-- question: lc41 ：缺失的第一个正数 link:
+- question: lc41 ：缺失的第一个正数 link: https://leetcode.cn/problems/first-missing-positive/
     - answer:
 ```python
 
@@ -3808,7 +3808,7 @@ class Solution:
 
 ```
 
-- question: lc1122 ：数组的相对排序 link:
+- question: lc1122 ：数组的相对排序 link: https://leetcode.cn/problems/relative-sort-array/
     - answer:
 ```python
 
@@ -3816,34 +3816,189 @@ class Solution:
 ```java
 
 ```
-
 
 ### 栈与队列
 
-lc 20 ：有效的括号【top100】
-lc 71 &amp; 剑指 017 ：简化路径
-lc 394 ：字符串解码【top100】
-lc 224 号算法题：基本计算器
-lc 227 号算法题：基本计算器二
-lc 946 &amp; 剑指 31 ：验证栈序列
-lc 739 &amp; 剑指 038 ：每日温度【top100】
-lc 42 ：接雨水【top100】
-lc 84 &amp; 剑指 039 ：柱状图中最大的矩形【top100】
-lc 85 &amp; 剑指 040 ：最大矩形【top100】
-lc 321 号算法题：拼接最大数
-lc 456 号算法题：132 模式
-lc 151 &amp; 剑指 58-1：翻转字符串里的单词"
-堆和优先队列回顾
-lc 1046 号算法题：最后一块石头的重量
-lc 215 &amp; 剑指 076 ：数组中的第 K 个最大元素【top100】
-lc 347 &amp; 剑指 060：前 K 个高频元素【top100】
-lc 973 号算法题：最接近原点的 K 个点
-lc 703 &amp; 剑指 059：数据流中的第 K 大元素
-lc 295 &amp; 剑指 41：数据流的中位数
-lc 4 ：寻找两个正序数组的中位数【top100】
-lc 239 &amp; 剑指 59-1 ：滑动窗口最大值【top100】
+- question: lc20 ：有效的括号 link:
+    - answer:
+```python
 
-- question:  link:
+```
+```java
+
+```
+
+- question: lc71 剑指 017 ：简化路径 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc394 ：字符串解码 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc224 ：基本计算器 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc227 : 基本计算器二 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc946 剑指31 ：验证栈序列 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc739 剑指038 ：每日温度 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc42 ：接雨水 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc84 剑指039 ：柱状图中最大的矩形 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc85 剑指040 ：最大矩形 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc321 ：拼接最大数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc456 : 132模式 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc151 ：翻转字符串里的单词 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc1046 : 最后一块石头的重量 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc215 ：数组中的第 K 个最大元素 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc347 ：前 K 个高频元素 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+- question: lc973 : 最接近原点的 K 个点 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc703 ：数据流中的第 K 大元素 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc295 ：数据流的中位数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc4 ：寻找两个正序数组的中位数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc239 ：滑动窗口最大值 link:
     - answer:
 ```python
 
@@ -3854,20 +4009,106 @@ lc 239 &amp; 剑指 59-1 ：滑动窗口最大值【top100】
 
 ### 滑动窗口
 
-lc 643 ：子数组最大平均数 I
-lc 209 &amp; 剑指 008 ：长度最小的子数组
-lc 3 &amp; 剑指 016 ：无重复字符的最长子串【top100】
-lc 76 ：最小覆盖子串【top100】
-lc 485 ：最大连续 1 的个数
-lc 487 ：最大连续1的个数 II
-lc 1004 ：最大连续 1 的个数 III
-lc 1151 ：最少交换次数来组合所有的 1
-lc 30 ：串联所有单词的子串
-lc 567 &amp; 剑指 014 ：字符串的排列
-lc 763 ：划分字母区间
-lc 845 ：数组中的最长山脉
+- question: lc 643 ：子数组最大平均数 I link:
+    - answer:
+```python
 
-- question:  link:
+```
+```java
+
+```
+
+- question: lc 209 &amp; 剑指 008 ：长度最小的子数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 3 &amp; 剑指 016 ：无重复字符的最长子串【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 76 ：最小覆盖子串【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 485 ：最大连续 1 的个数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 487 ：最大连续1的个数 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 1004 ：最大连续 1 的个数 III link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 1151 ：最少交换次数来组合所有的 1 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 30 ：串联所有单词的子串 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 567 &amp; 剑指 014 ：字符串的排列 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 763 ：划分字母区间 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 845 ：数组中的最长山脉 link:
     - answer:
 ```python
 
@@ -3878,20 +4119,106 @@ lc 845 ：数组中的最长山脉
 
 ### 综合应用I
 
-lc 1 ：两数之和【top100】
-lc 167 &amp; 剑指 006 ：两数之和：输入有序数组
-lc 170 ：两数之和：数据结构设计
-lc 653 ：两数之和：输入 BST
-lc 15 &amp; 剑指 007 ：三数之和【top100】
-lc 18 ：四数之和
-lc 349 : 两个数组的交集
-lc 350 ：两个数组的交集 II
-lc 169  &amp; 剑指 39 ：多数元素【top100】
-lc 229 ：多数元素变形题
-lc 844 ：比较含退格的字符串
-lc 318 &amp; 剑指 005 ：最大单词长度乘积
+- question: lc 1 ：两数之和【top100】 link:
+    - answer:
+```python
 
-- question:  link:
+```
+```java
+
+```
+
+- question: lc 167 &amp; 剑指 006 ：两数之和：输入有序数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 170 ：两数之和：数据结构设计 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 653 ：两数之和：输入 BST link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 15 &amp; 剑指 007 ：三数之和【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 18 ：四数之和 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 349 : 两个数组的交集 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 350 ：两个数组的交集 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 169  &amp; 剑指 39 ：多数元素【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 229 ：多数元素变形题 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 844 ：比较含退格的字符串 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 318 &amp; 剑指 005 ：最大单词长度乘积 link:
     - answer:
 ```python
 
@@ -3902,34 +4229,232 @@ lc 318 &amp; 剑指 005 ：最大单词长度乘积
 
 ### 链表
 
-lc 203 ：移除链表元素
-lc 237 删除链表中的节点
-lc 83 ：删除排序链表中的重复元素
-lc 82 ：删除排序链表中的重复元素 II
-lc 876 ：链表的中间结点
-lc 19 &amp; 剑指 021 ：删除链表的倒数第 N 个结点【top100】
-lc 141 ：环形链表【top100】
-lc 142 &amp; 剑指 022 ：环形链表 II【top100】
-lc 206 &amp; 剑指 024 ：反转链表【top100】
-lc 92 ：反转链表 II
-lc 61 ：旋转链表
-lc 328 ：奇偶链表
-lc 725 ：分隔链表
-lc 24 ：两两交换链表中的节点
-lc 25 ：K 个一组翻转链表
-lc 234 &amp; 剑指 027 ：回文链表【top100】
-lc 138 &amp; 剑指 35 ：复制带随机指针的链表
-lc 138 ：复制带随机指针的链表
-lc 86 ：分隔链表
-lc 160 &amp; 剑指 023 ：相交链表【top100】
-lc 2 ：两数相加【top100】
-lc 445 &amp; 剑指 025 ：两数相加 II
-lc 21 &amp; 剑指 25 ：合并两个有序链表【top100】
-lc 23 &amp; 剑指 078 ：合并K个升序链表【top100】
-lc 147 ：对链表进行插入排序"
-lc 148 &amp; 剑指 077 ：排序链表【top100】
+- question: lc 203 ：移除链表元素 link:
+    - answer:
+```python
 
-- question:  link:
+```
+```java
+
+```
+
+- question: lc 237 删除链表中的节点 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 83 ：删除排序链表中的重复元素 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 82 ：删除排序链表中的重复元素 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 876 ：链表的中间结点 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 19 &amp; 剑指 021 ：删除链表的倒数第 N 个结点【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 141 ：环形链表【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 142 &amp; 剑指 022 ：环形链表 II【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 206 &amp; 剑指 024 ：反转链表【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 92 ：反转链表 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 61 ：旋转链表 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 328 ：奇偶链表 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 725 ：分隔链表 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 24 ：两两交换链表中的节点 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 25 ：K 个一组翻转链表 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 234 &amp; 剑指 027 ：回文链表【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 138 &amp; 剑指 35 ：复制带随机指针的链表 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 138 ：复制带随机指针的链表 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 86 ：分隔链表 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 160 &amp; 剑指 023 ：相交链表【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 2 ：两数相加【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 445 &amp; 剑指 025 ：两数相加 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 21 &amp; 剑指 25 ：合并两个有序链表【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 23 &amp; 剑指 078 ：合并K个升序链表【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 147 ：对链表进行插入排序" link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 148 &amp; 剑指 077 ：排序链表【top100】 link:
     - answer:
 ```python
 
@@ -3940,64 +4465,429 @@ lc 148 &amp; 剑指 077 ：排序链表【top100】
 
 ### 二叉树
 
-lc 144 ：二叉树的前序遍历
-lc 94 ：二叉树的中序遍历【top100】"
-lc 145 ：二叉树的后序遍历
+- question: lc 144 ：二叉树的前序遍历 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 94 ：二叉树的中序遍历【top100】" link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 145 ：二叉树的后序遍历 link:
+    - answer:
+```python
+
+```
+```java
+
+```
 
 #### BFS与DFS
-lc 102 &amp; 剑指 32-2 ： 二叉树的层序遍历【top100】
-lc 107 ：二叉树的层序遍历 II
-lc 104 &amp; 剑指 55-1 ：二叉树的最大深度【top100】
-lc 543 ：二叉树的直径【top100】
-lc 110 &amp; 剑指 55-2 ：平衡二叉树
-lc 111 ：二叉树的最小深度
-lc 404 ：左叶子之和
-lc 103 &amp; 剑指 32-3 ：二叉树的锯齿形层序遍历
-lc 515 &amp; 剑指 044 ：在每个树行中找最大值
-lc 199 &amp; 剑指 046 ：二叉树的右视图
-lc 100 ：相同的树
-lc 101 &amp; 剑指 28 ：对称二叉树 【top100】
-lc 662 ：二叉树最大宽度
-lc 222 ：完全二叉树的节点个数
-lc 114 ：二叉树展开为链表【top100】
-lc 236 &amp; 剑指 68-2 ：二叉树的最近公共祖先【top100】
+
+- question: lc 102 &amp; 剑指 32-2 ： 二叉树的层序遍历【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 107 ：二叉树的层序遍历 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 104 &amp; 剑指 55-1 ：二叉树的最大深度【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 543 ：二叉树的直径【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 110 &amp; 剑指 55-2 ：平衡二叉树 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 111 ：二叉树的最小深度 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 404 ：左叶子之和 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 103 &amp; 剑指 32-3 ：二叉树的锯齿形层序遍历 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 515 &amp; 剑指 044 ：在每个树行中找最大值 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 199 &amp; 剑指 046 ：二叉树的右视图 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 100 ：相同的树 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 101 &amp; 剑指 28 ：对称二叉树 【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 662 ：二叉树最大宽度 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 222 ：完全二叉树的节点个数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 114 ：二叉树展开为链表【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 236 &amp; 剑指 68-2 ：二叉树的最近公共祖先【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
 
 #### 回溯思想
-lc 112 ：路径总和
-lc 113 &amp; 剑指 34 ：路径总和 II
-lc 257 ：二叉树的所有路径
-lc 437 ：路径总和 III【top100】
-lc 124 ：二叉树中的最大路径和【top100】
-lc 226 &amp; 剑指 226 ：翻转二叉树【top100】
-lc 617 ：合并二叉树【top100】
-lc 105 &amp; 剑指 7 ：从前序与中序遍历序列构造二叉树【top100】
-lc 106 ：从中序与后序遍历序列构造二叉树
-lc 116 ：填充每个节点的下一个右侧节点指针
+
+- question: lc 112 ：路径总和 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 113 &amp; 剑指 34 ：路径总和 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 257 ：二叉树的所有路径 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 437 ：路径总和 III【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 124 ：二叉树中的最大路径和【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 226 &amp; 剑指 226 ：翻转二叉树【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 105 &amp; 剑指 7 ：从前序与中序遍历序列构造二叉树【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 106 ：从中序与后序遍历序列构造二叉树 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 116 ：填充每个节点的下一个右侧节点指针 link:
+    - answer:
+```python
+
+```
+```java
+
+```
 
 #### 二叉搜索树
-lc 701 ：二叉搜索树中的插入操作
-lc 108 ：将有序数组转换为二叉搜索树
-lc 235 &amp; 剑指 68-1 ：二叉搜索树的最近公共祖先
-lc 98 ：验证二叉搜索树【top100】
-lc 501 ：二叉搜索树中的众数
-lc 99 ：恢复二叉搜索树
-lc 538 &amp; 剑指 054 ：把二叉搜索树转换为累加树【top100】
-lc 589 ：N 叉树的前序遍历
-lc 590 ：N 叉树的后序遍历
-lc 429 ：N 叉树的层序遍历
-lc 690 ：员工的重要性
+
+- question: lc 701 ：二叉搜索树中的插入操作 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 108 ：将有序数组转换为二叉搜索树 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 235 &amp; 剑指 68-1 ：二叉搜索树的最近公共祖先 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 98 ：验证二叉搜索树【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 501 ：二叉搜索树中的众数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 99 ：恢复二叉搜索树 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 538 &amp; 剑指 054 ：把二叉搜索树转换为累加树【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 589 ：N 叉树的前序遍历 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 590 ：N 叉树的后序遍历 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 429 ：N 叉树的层序遍历 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 690 ：员工的重要性 link:
+    - answer:
+```python
+
+```
+```java
+
+```
 
 #### 图的 DFS 和 BFS
-lc 733 ：图像渲染
-lc 463 ：岛屿的周长
-lc 200 ：岛屿数量【top100】
-lc 695 ：岛屿的最大面积
-lc 130 ：被围绕的区域
-lc 1034 ：边框着色
-lc 529 ：扫雷游戏
-lc 994 ：腐烂的橘子
 
-- question:  link:
+- question: lc 733 ：图像渲染 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 463 ：岛屿的周长 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 200 ：岛屿数量【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 695 ：岛屿的最大面积 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 130 ：被围绕的区域 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 1034 ：边框着色 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 529 ：扫雷游戏 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 994 ：腐烂的橘子 link:
     - answer:
 ```python
 
