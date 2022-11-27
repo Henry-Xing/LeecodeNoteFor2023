@@ -2646,7 +2646,29 @@ class Solution:
         return num
 ```
 ```java
+// 好题
+/**
+ * @param {number} n
+ * @return {string}
+ */
+var countAndSay = function(n) {
 
+    let pre = "1";
+    for (let i = 1; i < n; i++) {
+        let start = 0;
+        let pos = 0;
+        let line = ""
+        while (pos < pre.length) {
+            while (pos < pre.length && pre[pos] == pre[start]) {
+                pos++;
+            }
+            line = line + (pos - start) + pre[start]
+            start = pos;
+        }
+        pre = line;
+    }
+    return pre;
+};
 ```
 
 - question: lc6 Z字形变换 link: https://leetcode.cn/problems/zigzag-conversion/
@@ -2675,7 +2697,28 @@ class Solution:
         return "".join(ans)
 ```
 ```java
-
+/**
+ * @param {string} s
+ * @param {number} numRows
+ * @return {string}
+ */
+var convert = function(s, numRows) {
+    let arr = new Array(numRows).fill("");
+    let flag = 1;
+    let index = 0;
+    if (numRows == 1) {
+        return s;
+    }
+    for (let i = 0; i < s.length; i++) {
+        arr[index]+=s.charAt(i);
+        index += flag;
+        if (index == numRows - 1 || index == 0) {
+            flag = -flag;
+        }
+    }
+    return arr.join('')
+    
+};
 ```
 
 ### 数学相关
@@ -2686,7 +2729,21 @@ class Solution:
 
 ```
 ```java
-
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function(x) {
+    let res = 0;
+    let absx = x >= 0 ? x : -x;
+    while (absx != 0) {
+        let temp = absx%10;
+        absx = Math.floor(absx / 10)
+        res = res * 10 + temp; 
+        if(res > Math.pow(2, 31) - 1 || res < Math.pow(-2, 31)) return 0;
+    }
+    return x >= 0 ? res : -res;
+};
 ```
 
 - question: lc9 回文数 link: https://leetcode.cn/problems/palindrome-number/
@@ -2695,16 +2752,70 @@ class Solution:
 
 ```
 ```java
-
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+    if (x < 0) return false
+    let x2 = x.toString();
+    let left = 0;
+    let right = x2.length - 1
+    while (left < right) {
+        if (x2.charAt(right--) != x2.charAt(left++)) return false;
+    }
+    return true
+};
 ```
 
 - question: lc989 数组形式的整数加法 link: https://leetcode.cn/problems/add-to-array-form-of-integer/
     - answer:
+
+```
+逐位相加解题思路
+
+while ( A 没完 || B 没完)
+    A 的当前位
+    B 的当前位
+    和 = A 的当前位 + B 的当前位 + 进位carry
+    当前位 = 和 % 10;
+    进位 = 和 / 10;
+```
+
 ```python
 
 ```
 ```java
+/**
+ * @param {number[]} num
+ * @param {number} k
+ * @return {number[]}
+ */
+var addToArrayForm = function(num, k) {
+    let karr = [];
+    let res = []
+    while (k != 0) {
+        let temp = k % 10;
+        karr.push(temp);
+        k = Math.floor(k / 10);
+    }
+    karr.reverse();
+    let i = num.length - 1;
+    let j = karr.length - 1;
+    let carry = 0;
+    while (i >= 0 || j >= 0) {
+        let x = i >= 0 ? num[i--] : 0; 
+        let y = j >= 0 ? karr[j--] : 0; 
+        let sum = carry + x + y
+        res.push(sum%10);
+        carry = Math.floor(sum/10);
+    }
+    if (carry == 1) {
+        res.push(1);
+    }
+    return res.reverse();
 
+};
 ```
 
 - question: lc66 加1 link: https://leetcode.cn/problems/plus-one/
@@ -2713,7 +2824,24 @@ class Solution:
 
 ```
 ```java
-
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+    let i = digits.length - 1;
+    let carry = 1;
+    while (i >= 0) {
+        let sum = carry + digits[i];
+        digits[i] = sum % 10;
+        carry = Math.floor(sum / 10);
+        i--;
+    }
+    if (carry != 0) {
+        digits.unshift(1);
+    }
+    return digits
+};
 ```
 
 - question: lc415 字符串相加 link: https://leetcode.cn/problems/add-strings/
@@ -2780,7 +2908,7 @@ class Solution:
 ```
 
 ### 位运算
- 
+
 - question: lc191 剑指 15 位1的个数 link:
     - answer:
 ```python
