@@ -2972,7 +2972,29 @@ class Solution:
         return ans[::-1] 
 ```
 ```java
-
+// 诸位相加思路
+/**
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ */
+var addStrings = function(num1, num2) {
+    let res = [];
+    let carry = 0;
+    let i = num1.length - 1;
+    let j = num2.length - 1;
+    while ( i >= 0 || j >= 0) {
+        let x = i >= 0 ? parseInt(num1.charAt(i--)) % 10 : 0;
+        let y = j >= 0 ? parseInt(num2.charAt(j--)) % 10 : 0;
+        let sum = carry + x + y;
+        carry = Math.floor(sum/10)
+        res.push(sum%10)
+    }
+    if ( carry == 1) {
+        res.push(1);
+    }
+    return res.reverse().join("");
+};
 ```
 
 - question: lc67 剑指002 二进制求和 link: https://leetcode.cn/problems/add-binary/
@@ -3001,7 +3023,32 @@ class Solution:
         return ans[::-1] 
 ```
 ```java
-
+//诸位相加细节：
+	1、i j length要-1
+    2、别忘了i-- j--
+	3、别忘了特殊进位
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {string}
+ */
+var addBinary = function(a, b) {
+    let res = [];
+    let carry = 0;
+    let i = a.length - 1;
+    let j = b.length - 1;
+    while (i >= 0 || j >= 0) {
+        let x = i >= 0 ? Number(a.charAt(i--)) : 0;
+        let y = j >= 0 ? Number(b.charAt(j--)) : 0;
+        let sum = x + y + carry;
+        carry = Math.floor(sum / 2);
+        res.push(sum % 2);
+    }
+    if (carry != 0) {
+        res.push(1);
+    }
+    return res.reverse().join("")
+};
 ```
 
 - question: lc2 两数相加 link: https://leetcode.cn/problems/add-two-numbers/
@@ -3029,7 +3076,39 @@ class Solution:
         return ans.next 
 ```
 ```java
-
+初识链表：
+    遍历链表使用l1 = l1.next
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+    let carry = 0;
+    let res = new ListNode();
+    let cur = res;
+    while (l1 != null || l2 != null) {
+        let x = l1 != null ? l1.val : 0
+        let y = l2 != null ? l2.val : 0
+        if (l1) l1 = l1.next
+        if (l2) l2 = l2.next
+        let sum = carry + x + y;
+        carry =Math.floor(sum/10);
+        cur.next = new ListNode(sum%10);
+        cur = cur.next
+    }
+    if (carry == 1) {
+        cur.next = new ListNode(1)
+    }
+    return res.next;
+};
 ```
 
 - question: lc43 字符串相乘 link: https://leetcode.cn/problems/multiply-strings/
@@ -3088,7 +3167,23 @@ class Solution:
         return sum(isPrime)
 ```
 ```java
-
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var countPrimes = function(n) {
+    let arr = new Array(n).fill(1);
+    let res = 0;
+    for (let i = 2; i * i <= n; ++i) {
+        if (arr[i]) {
+            res ++;
+            for (let j = i * i; j < n; j += i) {
+                arr[j] = 0
+            }
+        }
+    }
+    return res;
+};
 ```
 
 - question: lc233 剑指43 数字1的个数 link: https://leetcode.cn/problems/number-of-digit-one/
@@ -3097,7 +3192,18 @@ class Solution:
 
 ```
 ```java
-
+var countDigitOne = function(n) {
+    // mulk 表示 10^k
+    // 在下面的代码中，可以发现 k 并没有被直接使用到（都是使用 10^k）
+    // 但为了让代码看起来更加直观，这里保留了 k
+    let mulk = 1;
+    let ans = 0;
+    for (let k = 0; n >= mulk; ++k) {
+        ans += (Math.floor(n / (mulk * 10))) * mulk + Math.min(Math.max(n % (mulk * 10) - mulk + 1, 0), mulk);
+        mulk *= 10;
+    }
+    return ans;
+};
 ```
 
 - question: lc1232 缀点成线 link: https://leetcode.cn/problems/check-if-it-is-a-straight-line/
@@ -3118,11 +3224,42 @@ class Solution:
         return True
 ```
 ```java
-
+/**
+ * @param {number[][]} coordinates
+ * @return {boolean}
+ */
+var checkStraightLine = function(coordinates) {
+    let x0 = coordinates[0][0];
+    let y0 = coordinates[0][1];
+    let k = (coordinates[1][1] - y0) / (coordinates[1][0] - x0)
+    if (x0 == 0 && coordinates[1][0] == 0) {
+        for (let i = 1; i < coordinates.length; i++) {
+            if (coordinates[i][0] != 0) return false;
+        }
+        return true
+    }
+    if (y0 == 0 && coordinates[1][1] == 0) {
+        for (let i = 1; i < coordinates.length; i++) {
+            if (coordinates[i][1] != 0) return false;
+        }
+        return true
+    }
+    for (let i = 1; i < coordinates.length; i++) {
+        let dertax = coordinates[i][0] - x0;
+        let dertay = coordinates[i][1] - y0;
+        x0 = coordinates[i][0];
+        y0 = coordinates[i][1];
+        let kc = dertay / dertax;
+        if (kc != k) {
+            return false;
+        }
+    }
+    return true;
+};
 ```
 
 ### 位运算
- 
+
 - question: lc191 位1的个数 link: https://leetcode.cn/problems/number-of-1-bits/
     - answer:
 ```python
@@ -3156,7 +3293,18 @@ class Solution:
         return ans
 ```
 ```java
-
+/**
+ * @param {number} n - a positive integer
+ * @return {number}
+ */
+var hammingWeight = function(n) {
+    let count = 0;
+    while (n != 0) {
+        n = n & n -1;
+        count ++;
+    }
+    return count;
+};
 ```
 
 - question: lc461 汉明距离 link: https://leetcode.cn/problems/hamming-distance/
