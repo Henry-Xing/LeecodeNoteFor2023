@@ -3830,7 +3830,23 @@ class Solution:
 - question: lc704 ：二分查找 link: https://leetcode.cn/problems/binary-search/
     - answer:
 ```python
+# 二分查找，每次找中间值，mid = (high-low)//2 + low。更新时，如果target小于目标值，则上限等于mid - 1，如果target大于目标值，下线等于mid + 1。
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        low, high = 0, n-1
 
+        while low <= high:
+            mid = (high-low)//2 + low
+
+            if target == nums[mid]:
+                return mid
+            elif target < nums[mid]:
+                high = mid - 1
+            else:
+                low = mid + 1
+        
+        return -1
 ```
 ```java
 
@@ -3839,7 +3855,30 @@ class Solution:
 - question: lc34 ：排序数组中找元素的第一个和最后一个位置 link: https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/
     - answer:
 ```python
+# 把二分查找转换为找到小于等于target的数中最大的一个，同时找到小于等于target+1最大的一个数，两者位置之间的数就是target的空间。
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        n = len(nums)
+        low, high = 0, n-1
 
+        while low <= high:
+            mid = (high-low)//2 + low
+
+            if target > nums[mid]:
+                low = mid + 1
+            else:
+                high = mid - 1
+        
+        return low
+
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+
+        start = self.search(nums, target)
+        if start == len(nums) or nums[start] != target:
+            return [-1, -1]
+        end = self.search(nums, target + 1) - 1
+
+        return [start, end]
 ```
 ```java
 
@@ -3848,7 +3887,18 @@ class Solution:
 - question: lc35 ：搜索插入位置 link: https://leetcode.cn/problems/search-insert-position/
     - answer:
 ```python
-
+# 二分法查找第一个小于等于target的位置
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        left, right = 0, len(nums)-1
+        while left <= right:
+            mid = left + (right - left)//2
+            if nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        
+        return left
 ```
 ```java
 
@@ -3857,7 +3907,21 @@ class Solution:
 - question: lc278 ：第一个错误的版本 link: https://leetcode.cn/problems/first-bad-version/
     - answer:
 ```python
+# 二分查找，如果返回true，说明错误在mid左边。如果返回false，说明在mid右边。
+# The isBadVersion API is already defined for you.
+# def isBadVersion(version: int) -> bool:
 
+class Solution:
+    def firstBadVersion(self, n: int) -> int:
+        left, right = 0, n-1
+        while left <= right:
+            mid = left + (right - left)//2
+            if isBadVersion(mid):
+                right = mid - 1
+            else:
+                left = mid + 1
+        
+        return left
 ```
 ```java
 
@@ -3866,7 +3930,29 @@ class Solution:
 - question: lc33 ：搜索旋转排序数组 link: https://leetcode.cn/problems/search-in-rotated-sorted-array/
     - answer:
 ```python
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        left, right = 0, len(nums) - 1
 
+        while left <= right:
+            mid = left + (right - left)//2
+            
+            if nums[mid] == target:
+                return mid
+            
+            if nums[mid] >= nums[0]:
+                if nums[mid] > target >= nums[0]:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            
+            else:
+                if nums[mid] < target <= nums[len(nums) - 1]:
+                    left = mid + 1
+                else:
+                    right = mid - 1
+        
+        return -1
 ```
 ```java
 
@@ -3875,7 +3961,23 @@ class Solution:
 - question: lc153 ：寻找旋转排序数组中的最小值 link: https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/
     - answer:
 ```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        if len(nums) < 2:
+            return nums[0]
+        left, right = 0, len(nums) - 1
 
+        while left <= right:
+            mid = left + (right - left)//2
+            if nums[mid] >= nums[0]:
+                if nums[0] >= nums[len(nums) - 1]:
+                    left = mid + 1
+                else:
+                    return nums[0]
+            else:
+                right = mid - 1
+        
+        return nums[left]
 ```
 ```java
 
@@ -3884,7 +3986,20 @@ class Solution:
 - question: lc154 ：寻找旋转排序数组中的最小值 II link: https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array-ii/
     - answer:
 ```python
-
+# 分三种情况讨论，第一种，当mid < high时，说明最小值肯定在mid左边，此时high更新为mid。第二种情况，当mid > high，此时最小值一定在mid右边，更新low到mid + 1，第三种情况，当mid == high时，无法确定最小值在哪，只能确定最小值在low和high之间，所以只能左移一位high，不能右移low，因为循环条件是不相等时跳出，而更新low会使得mid错过最小值。
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        low, high = 0, len(nums) - 1
+        while low < high:
+            mid = low + (high - low) // 2
+            if nums[mid] < nums[high]:
+                high = mid 
+            elif nums[mid] > nums[high]:
+                low = mid + 1
+            else:
+                high -= 1
+                
+        return nums[low]
 ```
 ```java
 
@@ -3893,7 +4008,18 @@ class Solution:
 - question: lc852 ：山脉数组的峰顶索引 link: https://leetcode.cn/problems/peak-index-in-a-mountain-array/
     - answer:
 ```python
-
+# 二分查找，找到mid之后比较mid和mid+1，如果mid < mid + 1，最大值在mid右边，left = mid + 1。
+class Solution:
+    def peakIndexInMountainArray(self, arr: List[int]) -> int:
+        left, right = 0, len(arr) - 1
+        while left <= right:
+            mid = left + (right - left)//2
+            if arr[mid] < arr[mid + 1]:
+                left = mid + 1
+            else:
+                right = mid - 1
+        
+        return left
 ```
 ```java
 
@@ -3902,7 +4028,17 @@ class Solution:
 - question: lc1095 ：山脉数组中查找目标值 link: https://leetcode.cn/problems/find-in-mountain-array/
     - answer:
 ```python
-
+class Solution:
+    def peakIndexInMountainArray(self, arr: List[int]) -> int:
+        left, right = 0, len(arr)-1
+        while left <= right:
+            mid = left + (right - left)//2
+            if arr[mid] < arr[mid + 1]:
+                left = mid + 1
+            else:
+                right = mid - 1
+        
+        return left
 ```
 ```java
 
@@ -3911,7 +4047,20 @@ class Solution:
 - question: lc162 ：寻找峰值 link: https://leetcode.cn/problems/find-peak-element/
     - answer:
 ```python
+# 需要增加一个判断防止越界。
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        left, right = 0, len(nums)-1
+        while left <= right:
+            mid = left + (right - left)//2
+            f = lambda x: nums[x] if -1 < x < len(nums) else float(-inf)
 
+            if f(mid) < f(mid + 1):
+                left = mid + 1
+            else:
+                right = mid - 1
+        
+        return left
 ```
 ```java
 
@@ -4072,7 +4221,7 @@ class Solution:
 
 ### 栈与队列
 
-- question: lc20 ：有效的括号 link:
+- question: lc20 ：有效的括号 link: https://leetcode.cn/problems/valid-parentheses/
     - answer:
 ```python
 
@@ -4081,7 +4230,7 @@ class Solution:
 
 ```
 
-- question: lc71 剑指 017 ：简化路径 link:
+- question: lc71 剑指 017 ：简化路径 link: https://leetcode.cn/problems/simplify-path/
     - answer:
 ```python
 
@@ -4090,7 +4239,7 @@ class Solution:
 
 ```
 
-- question: lc394 ：字符串解码 link:
+- question: lc394 ：字符串解码 link: https://leetcode.cn/problems/decode-string/
     - answer:
 ```python
 
@@ -4099,7 +4248,16 @@ class Solution:
 
 ```
 
-- question: lc224 ：基本计算器 link:
+- question: lc224 ：基本计算器 link: https://leetcode.cn/problems/basic-calculator/
+    - answer:
+```python
+
+```
+```java
+
+```
+ 
+- question: lc227 : 基本计算器二 link: https://leetcode.cn/problems/basic-calculator-ii/
     - answer:
 ```python
 
@@ -4108,7 +4266,7 @@ class Solution:
 
 ```
 
-- question: lc227 : 基本计算器二 link:
+- question: lc946 剑指31 ：验证栈序列 link: https://leetcode.cn/problems/validate-stack-sequences/
     - answer:
 ```python
 
@@ -4117,7 +4275,7 @@ class Solution:
 
 ```
 
-- question: lc946 剑指31 ：验证栈序列 link:
+- question: lc739 剑指038 ：每日温度 link: https://leetcode.cn/problems/daily-temperatures/
     - answer:
 ```python
 
@@ -4126,7 +4284,7 @@ class Solution:
 
 ```
 
-- question: lc739 剑指038 ：每日温度 link:
+- question: lc42 ：接雨水 link: https://leetcode.cn/problems/trapping-rain-water/
     - answer:
 ```python
 
@@ -4135,7 +4293,7 @@ class Solution:
 
 ```
 
-- question: lc42 ：接雨水 link:
+- question: lc84 剑指039 ：柱状图中最大的矩形 link: https://leetcode.cn/problems/largest-rectangle-in-histogram/
     - answer:
 ```python
 
@@ -4144,7 +4302,7 @@ class Solution:
 
 ```
 
-- question: lc84 剑指039 ：柱状图中最大的矩形 link:
+- question: lc85 剑指040 ：最大矩形 link: https://leetcode.cn/problems/maximal-rectangle/
     - answer:
 ```python
 
@@ -4153,7 +4311,7 @@ class Solution:
 
 ```
 
-- question: lc85 剑指040 ：最大矩形 link:
+- question: lc321 ：拼接最大数 link: https://leetcode.cn/problems/create-maximum-number/
     - answer:
 ```python
 
@@ -4162,7 +4320,7 @@ class Solution:
 
 ```
 
-- question: lc321 ：拼接最大数 link:
+- question: lc456 : 132模式 link: https://leetcode.cn/problems/132-pattern/
     - answer:
 ```python
 
@@ -4171,7 +4329,7 @@ class Solution:
 
 ```
 
-- question: lc456 : 132模式 link:
+- question: lc151 ：翻转字符串里的单词 link: https://leetcode.cn/problems/reverse-words-in-a-string/
     - answer:
 ```python
 
@@ -4180,7 +4338,7 @@ class Solution:
 
 ```
 
-- question: lc151 ：翻转字符串里的单词 link:
+- question: lc1046 : 最后一块石头的重量 link: https://leetcode.cn/problems/last-stone-weight/
     - answer:
 ```python
 
@@ -4189,7 +4347,7 @@ class Solution:
 
 ```
 
-- question: lc1046 : 最后一块石头的重量 link:
+- question: lc215 ：数组中的第 K 个最大元素 link: https://leetcode.cn/problems/kth-largest-element-in-an-array/
     - answer:
 ```python
 
@@ -4198,7 +4356,15 @@ class Solution:
 
 ```
 
-- question: lc215 ：数组中的第 K 个最大元素 link:
+- question: lc347 ：前 K 个高频元素 link: https://leetcode.cn/problems/top-k-frequent-elements/
+    - answer:
+```python
+
+```
+```java
+
+```
+- question: lc973 : 最接近原点的 K 个点 link: https://leetcode.cn/problems/k-closest-points-to-origin/
     - answer:
 ```python
 
@@ -4207,15 +4373,7 @@ class Solution:
 
 ```
 
-- question: lc347 ：前 K 个高频元素 link:
-    - answer:
-```python
-
-```
-```java
-
-```
-- question: lc973 : 最接近原点的 K 个点 link:
+- question: lc703 ：数据流中的第 K 大元素 link: https://leetcode.cn/problems/kth-largest-element-in-a-stream/
     - answer:
 ```python
 
@@ -4224,7 +4382,7 @@ class Solution:
 
 ```
 
-- question: lc703 ：数据流中的第 K 大元素 link:
+- question: lc295 ：数据流的中位数 link: https://leetcode.cn/problems/find-median-from-data-stream/
     - answer:
 ```python
 
@@ -4233,7 +4391,7 @@ class Solution:
 
 ```
 
-- question: lc295 ：数据流的中位数 link:
+- question: lc4 ：寻找两个正序数组的中位数 link: https://leetcode.cn/problems/median-of-two-sorted-arrays/
     - answer:
 ```python
 
@@ -4242,16 +4400,7 @@ class Solution:
 
 ```
 
-- question: lc4 ：寻找两个正序数组的中位数 link:
-    - answer:
-```python
-
-```
-```java
-
-```
-
-- question: lc239 ：滑动窗口最大值 link:
+- question: lc239 ：滑动窗口最大值 link: https://leetcode.cn/problems/sliding-window-maximum/
     - answer:
 ```python
 
@@ -4262,7 +4411,7 @@ class Solution:
 
 ### 滑动窗口
 
-- question: lc 643 ：子数组最大平均数 I link:
+- question: lc643 ：子数组最大平均数 I link: https://leetcode.cn/problems/maximum-average-subarray-i/
     - answer:
 ```python
 
@@ -4271,7 +4420,7 @@ class Solution:
 
 ```
 
-- question: lc 209 &amp; 剑指 008 ：长度最小的子数组 link:
+- question: lc209 &amp; 剑指 008 ：长度最小的子数组 link: https://leetcode.cn/problems/minimum-size-subarray-sum/
     - answer:
 ```python
 
@@ -4280,7 +4429,7 @@ class Solution:
 
 ```
 
-- question: lc 3 &amp; 剑指 016 ：无重复字符的最长子串【top100】 link:
+- question: lc3 &amp; 剑指 016 ：无重复字符的最长子串 link: https://leetcode.cn/problems/longest-substring-without-repeating-characters/
     - answer:
 ```python
 
@@ -4289,7 +4438,7 @@ class Solution:
 
 ```
 
-- question: lc 76 ：最小覆盖子串【top100】 link:
+- question: lc76 ：最小覆盖子串【top100】 link: https://leetcode.cn/problems/minimum-window-substring/
     - answer:
 ```python
 
@@ -4298,7 +4447,7 @@ class Solution:
 
 ```
 
-- question: lc 485 ：最大连续 1 的个数 link:
+- question: lc485 ：最大连续 1 的个数 link: https://leetcode.cn/problems/max-consecutive-ones/
     - answer:
 ```python
 
@@ -4307,7 +4456,7 @@ class Solution:
 
 ```
 
-- question: lc 487 ：最大连续1的个数 II link:
+- question: lc487 ：最大连续1的个数(vip) II link:
     - answer:
 ```python
 
@@ -4316,7 +4465,7 @@ class Solution:
 
 ```
 
-- question: lc 1004 ：最大连续 1 的个数 III link:
+- question: lc1004 ：最大连续 1 的个数 III link: https://leetcode.cn/problems/max-consecutive-ones-iii/
     - answer:
 ```python
 
@@ -4325,7 +4474,7 @@ class Solution:
 
 ```
 
-- question: lc 1151 ：最少交换次数来组合所有的 1 link:
+- question: lc1151 ：最少交换次数来组合所有的(vip) link:
     - answer:
 ```python
 
@@ -4334,7 +4483,7 @@ class Solution:
 
 ```
 
-- question: lc 30 ：串联所有单词的子串 link:
+- question: lc30 ：串联所有单词的子串 link: https://leetcode.cn/problems/substring-with-concatenation-of-all-words/
     - answer:
 ```python
 
@@ -4343,7 +4492,7 @@ class Solution:
 
 ```
 
-- question: lc 567 &amp; 剑指 014 ：字符串的排列 link:
+- question: lc567 &amp; 剑指 014 ：字符串的排列 link: https://leetcode.cn/problems/permutation-in-string/
     - answer:
 ```python
 
@@ -4352,7 +4501,7 @@ class Solution:
 
 ```
 
-- question: lc 763 ：划分字母区间 link:
+- question: lc763 ：划分字母区间 link: https://leetcode.cn/problems/partition-labels/
     - answer:
 ```python
 
@@ -4361,7 +4510,7 @@ class Solution:
 
 ```
 
-- question: lc 845 ：数组中的最长山脉 link:
+- question: lc845 ：数组中的最长山脉 link: https://leetcode.cn/problems/longest-mountain-in-array/
     - answer:
 ```python
 
@@ -4372,7 +4521,7 @@ class Solution:
 
 ### 综合应用I
 
-- question: lc 1 ：两数之和【top100】 link:
+- question: lc1 ：两数之和 link: https://leetcode.cn/problems/two-sum/
     - answer:
 ```python
 
@@ -4381,7 +4530,7 @@ class Solution:
 
 ```
 
-- question: lc 167 &amp; 剑指 006 ：两数之和：输入有序数组 link:
+- question: lc167 剑指 006 ：两数之和：输入有序数组 link: https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/
     - answer:
 ```python
 
@@ -4390,7 +4539,7 @@ class Solution:
 
 ```
 
-- question: lc 170 ：两数之和：数据结构设计 link:
+- question: lc170 ：两数之和：数据结构设计(vip) link:
     - answer:
 ```python
 
@@ -4399,7 +4548,7 @@ class Solution:
 
 ```
 
-- question: lc 653 ：两数之和：输入 BST link:
+- question: lc653 ：两数之和：输入 BST link: https://leetcode.cn/problems/two-sum-iv-input-is-a-bst/
     - answer:
 ```python
 
@@ -4408,7 +4557,7 @@ class Solution:
 
 ```
 
-- question: lc 15 &amp; 剑指 007 ：三数之和【top100】 link:
+- question: lc15 剑指 007 ：三数之和【top100】 link: https://leetcode.cn/problems/3sum/
     - answer:
 ```python
 
@@ -4417,7 +4566,7 @@ class Solution:
 
 ```
 
-- question: lc 18 ：四数之和 link:
+- question: lc18 ：四数之和 link: https://leetcode.cn/problems/4sum/
     - answer:
 ```python
 
@@ -4426,7 +4575,7 @@ class Solution:
 
 ```
 
-- question: lc 349 : 两个数组的交集 link:
+- question: lc349 : 两个数组的交集 link: https://leetcode.cn/problems/intersection-of-two-arrays/
     - answer:
 ```python
 
@@ -4435,7 +4584,7 @@ class Solution:
 
 ```
 
-- question: lc 350 ：两个数组的交集 II link:
+- question: lc350 ：两个数组的交集 II link: https://leetcode.cn/problems/intersection-of-two-arrays-ii/
     - answer:
 ```python
 
@@ -4444,7 +4593,7 @@ class Solution:
 
 ```
 
-- question: lc 169  &amp; 剑指 39 ：多数元素【top100】 link:
+- question: lc169 剑指39 ：多数元素 link: https://leetcode.cn/problems/majority-element/
     - answer:
 ```python
 
@@ -4453,7 +4602,7 @@ class Solution:
 
 ```
 
-- question: lc 229 ：多数元素变形题 link:
+- question: lc229 ：多数元素变形题 link: https://leetcode.cn/problems/majority-element-ii/
     - answer:
 ```python
 
@@ -4462,7 +4611,7 @@ class Solution:
 
 ```
 
-- question: lc 844 ：比较含退格的字符串 link:
+- question: lc844 ：比较含退格的字符串 link: https://leetcode.cn/problems/backspace-string-compare/
     - answer:
 ```python
 
@@ -4471,7 +4620,7 @@ class Solution:
 
 ```
 
-- question: lc 318 &amp; 剑指 005 ：最大单词长度乘积 link:
+- question: lc318 ：最大单词长度乘积 link: https://leetcode.cn/problems/maximum-product-of-word-lengths/
     - answer:
 ```python
 
@@ -4482,7 +4631,7 @@ class Solution:
 
 ### 链表
 
-- question: lc 203 ：移除链表元素 link:
+- question: lc203 ：移除链表元素 link: https://leetcode.cn/problems/remove-linked-list-elements/
     - answer:
 ```python
 
@@ -4491,7 +4640,7 @@ class Solution:
 
 ```
 
-- question: lc 237 删除链表中的节点 link:
+- question: lc237 删除链表中的节点 link: https://leetcode.cn/problems/delete-node-in-a-linked-list/
     - answer:
 ```python
 
@@ -4500,7 +4649,7 @@ class Solution:
 
 ```
 
-- question: lc 83 ：删除排序链表中的重复元素 link:
+- question: lc83 ：删除排序链表中的重复元素 link: https://leetcode.cn/problems/remove-duplicates-from-sorted-list/
     - answer:
 ```python
 
@@ -4509,7 +4658,7 @@ class Solution:
 
 ```
 
-- question: lc 82 ：删除排序链表中的重复元素 II link:
+- question: lc82 ：删除排序链表中的重复元素II link: https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/
     - answer:
 ```python
 
@@ -4518,7 +4667,7 @@ class Solution:
 
 ```
 
-- question: lc 876 ：链表的中间结点 link:
+- question: lc876 ：链表的中间结点 link: https://leetcode.cn/problems/middle-of-the-linked-list/
     - answer:
 ```python
 
@@ -4527,7 +4676,7 @@ class Solution:
 
 ```
 
-- question: lc 19 &amp; 剑指 021 ：删除链表的倒数第 N 个结点【top100】 link:
+- question: lc19 ：删除链表的倒数第 N 个结点 link: https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
     - answer:
 ```python
 
@@ -4536,7 +4685,7 @@ class Solution:
 
 ```
 
-- question: lc 141 ：环形链表【top100】 link:
+- question: lc141 ：环形链表 link: https://leetcode.cn/problems/linked-list-cycle/
     - answer:
 ```python
 
@@ -4545,7 +4694,7 @@ class Solution:
 
 ```
 
-- question: lc 142 &amp; 剑指 022 ：环形链表 II【top100】 link:
+- question: lc142 ：环形链表 II link: https://leetcode.cn/problems/linked-list-cycle-ii/
     - answer:
 ```python
 
@@ -4554,7 +4703,7 @@ class Solution:
 
 ```
 
-- question: lc 206 &amp; 剑指 024 ：反转链表【top100】 link:
+- question: lc206 ：反转链表 link: https://leetcode.cn/problems/reverse-linked-list/
     - answer:
 ```python
 
@@ -4563,7 +4712,7 @@ class Solution:
 
 ```
 
-- question: lc 92 ：反转链表 II link:
+- question: lc92 ：反转链表 II link: https://leetcode.cn/problems/reverse-linked-list-ii/
     - answer:
 ```python
 
@@ -4572,7 +4721,7 @@ class Solution:
 
 ```
 
-- question: lc 61 ：旋转链表 link:
+- question: lc61 ：旋转链表 link: https://leetcode.cn/problems/rotate-list/
     - answer:
 ```python
 
@@ -4581,7 +4730,7 @@ class Solution:
 
 ```
 
-- question: lc 328 ：奇偶链表 link:
+- question: lc328 ：奇偶链表 link: https://leetcode.cn/problems/odd-even-linked-list/
     - answer:
 ```python
 
@@ -4590,7 +4739,7 @@ class Solution:
 
 ```
 
-- question: lc 725 ：分隔链表 link:
+- question: lc725 ：分隔链表 link: https://leetcode.cn/problems/split-linked-list-in-parts/
     - answer:
 ```python
 
@@ -4599,7 +4748,7 @@ class Solution:
 
 ```
 
-- question: lc 24 ：两两交换链表中的节点 link:
+- question: lc24 ：两两交换链表中的节点 link: https://leetcode.cn/problems/swap-nodes-in-pairs/
     - answer:
 ```python
 
@@ -4608,7 +4757,7 @@ class Solution:
 
 ```
 
-- question: lc 25 ：K 个一组翻转链表 link:
+- question: lc25 ：K 个一组翻转链表 link: https://leetcode.cn/problems/reverse-nodes-in-k-group/
     - answer:
 ```python
 
@@ -4617,7 +4766,7 @@ class Solution:
 
 ```
 
-- question: lc 234 &amp; 剑指 027 ：回文链表【top100】 link:
+- question: lc234 ：回文链表 link: https://leetcode.cn/problems/palindrome-linked-list/
     - answer:
 ```python
 
@@ -4626,7 +4775,7 @@ class Solution:
 
 ```
 
-- question: lc 138 &amp; 剑指 35 ：复制带随机指针的链表 link:
+- question: lc138 ：复制带随机指针的链表 link: https://leetcode.cn/problems/copy-list-with-random-pointer/
     - answer:
 ```python
 
@@ -4635,7 +4784,7 @@ class Solution:
 
 ```
 
-- question: lc 138 ：复制带随机指针的链表 link:
+- question: lc86 ：分隔链表 link: https://leetcode.cn/problems/partition-list/
     - answer:
 ```python
 
@@ -4644,7 +4793,7 @@ class Solution:
 
 ```
 
-- question: lc 86 ：分隔链表 link:
+- question: lc160 ：相交链表 link: https://leetcode.cn/problems/intersection-of-two-linked-lists/
     - answer:
 ```python
 
@@ -4653,7 +4802,7 @@ class Solution:
 
 ```
 
-- question: lc 160 &amp; 剑指 023 ：相交链表【top100】 link:
+- question: lc2 ：两数相加 link: https://leetcode.cn/problems/add-two-numbers/
     - answer:
 ```python
 
@@ -4662,7 +4811,7 @@ class Solution:
 
 ```
 
-- question: lc 2 ：两数相加【top100】 link:
+- question: lc445 ：两数相加 II link: https://leetcode.cn/problems/add-two-numbers-ii/
     - answer:
 ```python
 
@@ -4671,7 +4820,7 @@ class Solution:
 
 ```
 
-- question: lc 445 &amp; 剑指 025 ：两数相加 II link:
+- question: lc21 ：合并两个有序链表 link: https://leetcode.cn/problems/merge-two-sorted-lists/
     - answer:
 ```python
 
@@ -4680,7 +4829,7 @@ class Solution:
 
 ```
 
-- question: lc 21 &amp; 剑指 25 ：合并两个有序链表【top100】 link:
+- question: lc23 ：合并K个升序链表 link: https://leetcode.cn/problems/merge-k-sorted-lists/
     - answer:
 ```python
 
@@ -4689,7 +4838,7 @@ class Solution:
 
 ```
 
-- question: lc 23 &amp; 剑指 078 ：合并K个升序链表【top100】 link:
+- question: lc147 ：对链表进行插入排序 link: https://leetcode.cn/problems/insertion-sort-list/
     - answer:
 ```python
 
@@ -4698,16 +4847,7 @@ class Solution:
 
 ```
 
-- question: lc 147 ：对链表进行插入排序" link:
-    - answer:
-```python
-
-```
-```java
-
-```
-
-- question: lc 148 &amp; 剑指 077 ：排序链表【top100】 link:
+- question: lc148 ：排序链表 link: https://leetcode.cn/problems/sort-list/
     - answer:
 ```python
 
@@ -5151,7 +5291,7 @@ class Solution:
 
 ### 数据结构设计
 
-lc 155 &amp; 剑指 30 ：最小栈 【top100】
+
 lc 225 ：用队列实现栈
 lc 622 ：设计循环队列
 lc 380 &amp; 剑指 030 ：O(1) 时间插入、删除和获取随机元素
@@ -5166,6 +5306,15 @@ lc 547 &amp; 剑指 116 ：省份数量
 lc 200 ：岛屿数量【top100】
 lc 721 ：账户合并
 
+- question: lc 155 ：最小栈 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
 - question:  link:
     - answer:
 ```python
@@ -5175,6 +5324,32 @@ lc 721 ：账户合并
 
 ```
 
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
 ### 综合应用II
 
 lc 217 ：存在重复元素
