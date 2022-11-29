@@ -3260,6 +3260,164 @@ var checkStraightLine = function(coordinates) {
 
 ### 位运算
 
+#### 按位与 &
+
+按位与表示将两个数字转换为二进制数字，然后从低到高对末位比较，如果两个位都是1那么结果就是1，否则为0
+
+```
+// 1的二进制表示为: 00000000 00000000 00000000 00000001
+// 3的二进制表示为: 00000000 00000000 00000000 00000011
+// -----------------------------
+// 1的二进制表示为: 00000000 00000000 00000000 00000001
+console.log(1 & 3)     // 1
+
+
+特殊情况： n = n & n - 1会去掉二进制中存在的的最后一个1
+```
+
+#### 按位或 |
+
+按位或表示将两个数字转换为二进制数字，然后从低到高对末位比较，如果两个位只要有一个1，那么结果就为1，否则为0；
+
+```
+// 1的二进制表示为: 00000000 00000000 00000000 00000001
+// 3的二进制表示为: 00000000 00000000 00000000 00000011
+// -----------------------------
+// 3的二进制表示为: 00000000 00000000 00000000 00000011
+console.log(1 | 3)     // 3
+```
+
+#### 按位异或(XOR)  ^
+
+如果对应两个操作位有且仅有一个1时结果为1，其他都是0。
+
+```
+// 1的二进制表示为: 00000000 00000000 00000000 00000001
+// 3的二进制表示为: 00000000 00000000 00000000 00000011
+// -----------------------------
+// 2的二进制表示为: 00000000 00000000 00000000 00000010
+console.log(1 ^ 3)     // 2
+```
+
+####  按位非(NOT)
+
+~ 运算符是对位求反，1变0, 0变1，也就是求二进制的反码。
+
+```
+// 1的二进制表示为: 00000000 00000000 00000000 00000001
+// 3的二进制表示为: 00000000 00000000 00000000 00000011
+// -----------------------------
+// 1反码二进制表示: 11111111 11111111 11111111 11111110
+// 由于第一位（符号位）是1，所以这个数是一个负数。JavaScript 内部采用补码形式表示负数，即需要将这个数减去1，再取一次反，然后加上负号，才能得到这个负数对应的10进制值。
+// -----------------------------
+// 1的反码减1：     11111111 11111111 11111111 11111101
+// 反码取反：       00000000 00000000 00000000 00000010
+// 表示为10进制加负号：-2
+console.log(~ 1)     // -2
+```
+
+#### 左移（Left shift）<<
+
+<<运算符使指定值的二进制数所有位都左移指定次数，其移动规则：丢弃高位，低位补0即按二进制形式把所有的数字向左移动对应的位数，高位移出(舍弃)，低位的空位补零。
+
+```
+// 1的二进制表示为: 00000000 00000000 00000000 00000001
+// -----------------------------
+// 2的二进制表示为: 00000000 00000000 00000000 00000010
+console.log(1 << 1)     // 2
+```
+
+6. 有符号右移>>
+>>该操作符会将指定操作数的二进制位向右移动指定的位数。向右被移出的位被丢弃，拷贝最左侧的位以填充左侧。由于新的最左侧的位总是和以前相同，符号位没有被改变。所以被称作“符号传播”。
+
+// 1的二进制表示为: 00000000 00000000 00000000 00000001
+// -----------------------------
+// 0的二进制表示为: 00000000 00000000 00000000 00000000
+console.log(1 >> 1)     // 0
+
+```
+// 1的二进制表示为: 00000000 00000000 00000000 00000001
+// -----------------------------
+// 0的二进制表示为: 00000000 00000000 00000000 00000000
+console.log(1 >> 1)     // 0
+```
+
+#### 7. 无符号右移`>>>`
+
+`>>>`该操作符会将第一个操作数向右移动指定的位数。向右被移出的位被丢弃，左侧用0填充。因为符号位变成了 0，所以结果总是非负的。（译注：即便右移 0 个比特，结果也是非负的。）
+
+对于非负数，有符号右移和无符号右移总是返回相同的结果。例如， `9 >>> 2` 得到 `2 和 9 >> 2` 相同。
+
+#### 位运算的妙用
+
+1. 使用&运算符判断一个数的奇偶
+
+```arduino
+// 偶数 & 1 = 0
+// 奇数 & 1 = 1
+console.log(2 & 1)    // 0
+console.log(3 & 1)    // 1
+复制代码
+```
+
+1. 使用`~, >>, <<, >>>, |`来取整
+
+```arduino
+console.log(~~ 6.83)    // 6
+console.log(6.83 >> 0)  // 6
+console.log(6.83 << 0)  // 6
+console.log(6.83 | 0)   // 6
+// >>>不可对负数取整
+console.log(6.83 >>> 0)   // 6
+复制代码
+```
+
+1. 使用`^`来完成值交换
+
+```css
+var a = 5
+var b = 8
+a ^= b
+b ^= a
+a ^= b
+console.log(a)   // 8
+console.log(b)   // 5
+复制代码
+```
+
+1. 使用`&, >>, |`来完成rgb值和16进制颜色值之间的转换
+
+```javascript
+/**
+ * 16进制颜色值转RGB
+ * @param  {String} hex 16进制颜色字符串
+ * @return {String}     RGB颜色字符串
+ */
+  function hexToRGB(hex) {
+    var hexx = hex.replace('#', '0x')
+    var r = hexx >> 16
+    var g = hexx >> 8 & 0xff
+    var b = hexx & 0xff
+    return `rgb(${r}, ${g}, ${b})`
+}
+
+/**
+ * RGB颜色转16进制颜色
+ * @param  {String} rgb RGB进制颜色字符串
+ * @return {String}     16进制颜色字符串
+ */
+function RGBToHex(rgb) {
+    var rgbArr = rgb.split(/[^\d]+/)
+    var color = rgbArr[1]<<16 | rgbArr[2]<<8 | rgbArr[3]
+    return '#'+ color.toString(16)
+}
+// -------------------------------------------------
+hexToRGB('#ffffff')               // 'rgb(255,255,255)'
+RGBToHex('rgb(255,255,255)')      // '#ffffff'
+```
+
+
+
 - question: lc191 位1的个数 link: https://leetcode.cn/problems/number-of-1-bits/
     - answer:
 ```python
@@ -3293,6 +3451,7 @@ class Solution:
         return ans
 ```
 ```java
+//每次n & n-1 可以减少一个1，当n为0时，结束循环，记录循环次数则是1的个数
 /**
  * @param {number} n - a positive integer
  * @return {number}
@@ -3324,7 +3483,21 @@ class Solution:
         return ans
 ```
 ```java
-
+// 首先使用异或获得一个展示全部不同的数a,然后统计1的个数
+/**
+ * @param {number} x
+ * @param {number} y
+ * @return {number}
+ */
+var hammingDistance = function(x, y) {
+    let a = x ^ y;
+    let count = 0;
+    while (a) {
+        a &= (a - 1)
+        count++;
+    }
+    return count
+};
 ```
 
 - question: lc477 汉明距离总和 link: https://leetcode.cn/problems/total-hamming-distance/
@@ -3349,7 +3522,29 @@ class Solution:
         return ans
 ```
 ```java
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var totalHammingDistance = function (nums) {
+    // 由于二进制数字中每一位是相互独立的，所以求n个数字二进制位不同的数量
+    // 就等于  n个数字中在不同的二进制位上不同的数量 的总和。
+    // 这里解释一下[二进制位不同数字]：其实就是一部分是1，一部分是0
+    // 想象一下，现在我们需要计算四个数字的二级制中第二位不同的数量 
+    // 如果四个数字中 有两个数字为1，其余两个为0，
+    // 那么在2这个二进制位上不同的数就有2*2=4个
+    // 同理求出32个二进制位上面不同的个数，最终求和即可,代码如下
+    let ans = 0, n = nums.length
+    for (let i = 0; i < 32; i++) {
+        let c = 0 //  n个数字在第i位是1的个数
+        for (let x of nums) {
+            if ((x >> i) & 1) c++
+        }
+        ans += c * (n - c)
+    }
+    return ans
 
+};
 ```
 
 - question: lc231 2的幂 link: https://leetcode.cn/problems/power-of-two/
@@ -3365,7 +3560,13 @@ class Solution:
         return n > 0 and n & (n - 1) == 0
 ```
 ```java
-
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isPowerOfTwo = function(n) {
+    return n>0 && (n & (n - 1)) == 0;
+};
 ```
 
 - question: lc371 两整数之和 link: https://leetcode.cn/problems/sum-of-two-integers/
@@ -3389,6 +3590,21 @@ class Solution:
 
 ```
 ```java
+// 如何实现位运算的加法？使用三个元素
+
+/**
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+var getSum = function(a, b) {
+    while (b!=0) {
+        let carry = (a & b) << 1;
+        a = a ^ b;
+        b = carry;
+    }
+    return a;
+};
 
 ```
 
@@ -3398,6 +3614,27 @@ class Solution:
 
 ```
 ```java
+/**
+ * @param {number} dividend
+ * @param {number} divisor
+ * @return {number}
+ */
+var divide = function(dividend, divisor) {
+    const MAX = Math.pow(2, 31) - 1;
+    const MIN = -Math.pow(2, 31)
+    if (dividend == MIN && divisor == -1) {
+        return MAX;
+    } 
+    let sign = dividend > 0 ^ divisor > 0;
+    let res = 0;
+    dividend = dividend > 0 ? - dividend : dividend;
+    divisor = divisor > 0 ? - divisor : divisor;
+    while (dividend <= divisor) {
+        dividend -= divisor;
+        res++;
+    }
+    return sign?-res:res;
+};
 
 ```
 
