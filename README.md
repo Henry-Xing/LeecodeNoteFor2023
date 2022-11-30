@@ -4461,7 +4461,23 @@ class Solution:
 - question: lc20 ：有效的括号 link: https://leetcode.cn/problems/valid-parentheses/
     - answer:
 ```python
+# 构建一个stack和字典，字典存储左边对应的右边，当c in s在字典中时，压入stack，当不在字典中时，首先检查此时stack是否为空，为空说明之前没有右边进栈直接return False，如果不为空，则检查弹出的字符在字典中是否对应当前字符。循环结束后需要检查stack是否为空，如果一一匹配则为空。
+class Solution:
+    def isValid(self, s: str) -> bool:
+        if len(s) % 2:
+            return False
+            
+        dic = {'(':')', '{':'}', '[':']'}
+        stack = []
 
+        for c in s:
+            if c in dic:
+                stack.append(c)
+            else:
+                if not stack or dic[stack.pop()] != c:
+                    return False
+        
+        return not stack
 ```
 ```java
 
