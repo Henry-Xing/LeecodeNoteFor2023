@@ -4486,7 +4486,20 @@ class Solution:
 - question: lc71 剑指 017 ：简化路径 link: https://leetcode.cn/problems/simplify-path/
     - answer:
 ```python
+# 先用"/"分割path，当遇到".."时，表示返回上级路径，所以stack弹出一个列表，当遇到"."时，不用变动。当不为空时，进入stack。
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        stand = path.split("/")
+        stack = []
 
+        for name in stand:
+            if name == "..":
+                if stack:
+                    stack.pop()
+            elif name and name != '.':
+                stack.append(name)
+        
+        return "/"+"/".join(stack)
 ```
 ```java
 
@@ -4495,7 +4508,35 @@ class Solution:
 - question: lc394 ：字符串解码 link: https://leetcode.cn/problems/decode-string/
     - answer:
 ```python
-
+# 需要
+class Solution:
+    def decodeString(self, s: str) -> str:
+        stack = []
+        for c in s:
+            if c != ']':
+                if "0" <= c <= "9":
+                    if stack:
+                        c_ = stack.pop()
+                        if type(c_) == int:
+                            stack.append(c_ * 10 + ord(c) - ord("0"))
+                        else:
+                            stack.append(c_)
+                            stack.append(ord(c) - ord("0"))
+                    else:
+                        stack.append(ord(c) - ord("0"))
+                else:
+                    stack.append(c)
+            else:
+                temp = ""
+                c_ = ""
+                while c_ != "[":
+                    c_ = stack.pop()
+                    if c_ != "[":
+                        temp += c_[::-1]
+                    elif c_ == "[":
+                        stack.append("".join([temp[::-1] for _ in range(stack.pop())]))
+        
+        return "".join(stack)
 ```
 ```java
 
@@ -4504,7 +4545,38 @@ class Solution:
 - question: lc224 ：基本计算器 link: https://leetcode.cn/problems/basic-calculator/
     - answer:
 ```python
+# 本质上是将括号拆开然后直接进行计算，当前的计算符受括号前的计算符影响，如果当前为正，则当前计算符是括号前的计算符，如果当前为负，则当前计算符与括号前计算符相反。遇到数字，先得到完整数字，再乘上当前符号并让最终结果加上，扫描一遍返回结果。
+class Solution:
+    def calculate(self, s: str) -> int:
+        ops = [1]
+        sign = 1
 
+        ret = 0
+        n = len(s)
+        i = 0
+        while i < n:
+            if s[i] == ' ':
+                i += 1
+            elif s[i] == '+':
+                sign = ops[-1]
+                i += 1
+            elif s[i] == '-':
+                sign = -ops[-1]
+                i += 1
+            elif s[i] == '(':
+                ops.append(sign)
+                i += 1
+            elif s[i] == ')':
+                ops.pop()
+                i += 1
+            else:
+                num = 0
+                while i < n and s[i].isdigit():
+                    num = num * 10 + ord(s[i]) - ord('0')
+                    i += 1
+                ret += num * sign
+                
+        return ret
 ```
 ```java
 
@@ -4513,7 +4585,32 @@ class Solution:
 - question: lc227 : 基本计算器二 link: https://leetcode.cn/problems/basic-calculator-ii/
     - answer:
 ```python
+# 四种运算符，如果是加号，直接入栈，减号，取负值入栈，乘号，弹出栈顶相乘后入栈，除号，弹出栈顶相除入栈，最后把栈求和。
+class Solution:
+    def calculate(self, s: str) -> int:
+        n = len(s)
+        sign = "+"
+        num = 0
+        ans = []
 
+        for i in range(n):
+            if s[i] != " " and s[i].isdigit():
+                num = num*10 + int(s[i])
+            
+            if i == n - 1 or s[i] in "+-*/":
+                if sign == "+":
+                    ans.append(num)
+                elif sign == "-":
+                    ans.append(-num)
+                elif sign == "*":
+                    ans.append(ans.pop()*num)
+                elif sign == "/":
+                    ans.append(int(ans.pop()/num if num != 0 else 0))
+                
+                sign = s[i]
+                num = 0
+        
+        return sum(ans)
 ```
 ```java
 
