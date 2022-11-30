@@ -4493,7 +4493,7 @@ class Solution:
 ```java
 
 ```
- 
+
 - question: lc227 : 基本计算器二 link: https://leetcode.cn/problems/basic-calculator-ii/
     - answer:
 ```python
@@ -5095,7 +5095,7 @@ class Solution:
 
 ### 二叉树
 
-- question: lc 144 ：二叉树的前序遍历 link:
+- question: lc 144 ：二叉树的前序遍历 link: https://leetcode.cn/problems/binary-tree-preorder-traversal/
     - answer:
 ```python
 
@@ -5104,7 +5104,7 @@ class Solution:
 
 ```
 
-- question: lc 94 ：二叉树的中序遍历【top100】" link:
+- question: lc 94 ：二叉树的中序遍历【top100】" link: https://leetcode.cn/problems/binary-tree-inorder-traversal/
     - answer:
 ```python
 
@@ -5113,7 +5113,7 @@ class Solution:
 
 ```
 
-- question: lc 145 ：二叉树的后序遍历 link:
+- question: lc 145 ：二叉树的后序遍历 link: https://leetcode.cn/problems/binary-tree-postorder-traversal/
     - answer:
 ```python
 
@@ -5124,7 +5124,7 @@ class Solution:
 
 #### BFS与DFS
 
-- question: lc 102 &amp; 剑指 32-2 ： 二叉树的层序遍历【top100】 link:
+- question: lc 102 &amp; 剑指 32-2 ： 二叉树的层序遍历【top100】 link: https://leetcode.cn/problems/binary-tree-level-order-traversal/
     - answer:
 ```python
 
@@ -5133,7 +5133,7 @@ class Solution:
 
 ```
 
-- question: lc 107 ：二叉树的层序遍历 II link:
+- question: lc 107 ：二叉树的层序遍历 II link: https://leetcode.cn/problems/binary-tree-level-order-traversal-ii/
     - answer:
 ```python
 
@@ -5142,7 +5142,7 @@ class Solution:
 
 ```
 
-- question: lc 104 &amp; 剑指 55-1 ：二叉树的最大深度【top100】 link:
+- question: lc 104 &amp; 剑指 55-1 ：二叉树的最大深度【top100】 link: https://leetcode.cn/problems/maximum-depth-of-binary-tree/
     - answer:
 ```python
 
@@ -5151,7 +5151,7 @@ class Solution:
 
 ```
 
-- question: lc 543 ：二叉树的直径【top100】 link:
+- question: lc 543 ：二叉树的直径【top100】 link: https://leetcode.cn/problems/diameter-of-binary-tree/
     - answer:
 ```python
 
@@ -5160,7 +5160,7 @@ class Solution:
 
 ```
 
-- question: lc 110 &amp; 剑指 55-2 ：平衡二叉树 link:
+- question: lc 110 &amp; 剑指 55-2 ：平衡二叉树 link: https://leetcode.cn/problems/balanced-binary-tree/
     - answer:
 ```python
 
@@ -5169,7 +5169,7 @@ class Solution:
 
 ```
 
-- question: lc 111 ：二叉树的最小深度 link:
+- question: lc 111 ：二叉树的最小深度 link: https://leetcode.cn/problems/minimum-depth-of-binary-tree/
     - answer:
 ```python
 
@@ -5178,7 +5178,7 @@ class Solution:
 
 ```
 
-- question: lc 404 ：左叶子之和 link:
+- question: lc 404 ：左叶子之和 link: https://leetcode.cn/problems/sum-of-left-leaves/
     - answer:
 ```python
 
@@ -5187,7 +5187,7 @@ class Solution:
 
 ```
 
-- question: lc 103 &amp; 剑指 32-3 ：二叉树的锯齿形层序遍历 link:
+- question: lc 103 &amp; 剑指 32-3 ：二叉树的锯齿形层序遍历 link: https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/
     - answer:
 ```python
 
@@ -5196,7 +5196,7 @@ class Solution:
 
 ```
 
-- question: lc 515 &amp; 剑指 044 ：在每个树行中找最大值 link:
+- question: lc 515 &amp; 剑指 044 ：在每个树行中找最大值 link: https://leetcode.cn/problems/find-largest-value-in-each-tree-row/
     - answer:
 ```python
 
@@ -5205,7 +5205,7 @@ class Solution:
 
 ```
 
-- question: lc 199 &amp; 剑指 046 ：二叉树的右视图 link:
+- question: lc 199 &amp; 剑指 046 ：二叉树的右视图 link: https://leetcode.cn/problems/binary-tree-right-side-view/
     - answer:
 ```python
 
@@ -5214,7 +5214,7 @@ class Solution:
 
 ```
 
-- question: lc 100 ：相同的树 link:
+- question: lc 100 ：相同的树 link: https://leetcode.cn/problems/same-tree/
     - answer:
 ```python
 
@@ -5223,7 +5223,7 @@ class Solution:
 
 ```
 
-- question: lc 101 &amp; 剑指 28 ：对称二叉树 【top100】 link:
+- question: lc 101 &amp; 剑指 28 ：对称二叉树 【top100】 link: https://leetcode.cn/problems/symmetric-tree/
     - answer:
 ```python
 
@@ -5232,7 +5232,7 @@ class Solution:
 
 ```
 
-- question: lc 662 ：二叉树最大宽度 link:
+- question: lc 662 ：二叉树最大宽度 link: https://leetcode.cn/problems/maximum-width-of-binary-tree/
     - answer:
 ```python
 
@@ -5241,7 +5241,7 @@ class Solution:
 
 ```
 
-- question: lc 222 ：完全二叉树的节点个数 link:
+- question: lc 222 ：完全二叉树的节点个数 link: https://leetcode.cn/problems/count-complete-tree-nodes/
     - answer:
 ```python
 
@@ -5250,7 +5250,7 @@ class Solution:
 
 ```
 
-- question: lc 114 ：二叉树展开为链表【top100】 link:
+- question: lc 114 ：二叉树展开为链表【top100】 link: https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/
     - answer:
 ```python
 
@@ -5259,7 +5259,7 @@ class Solution:
 
 ```
 
-- question: lc 236 &amp; 剑指 68-2 ：二叉树的最近公共祖先【top100】 link:
+- question: lc 236 &amp; 剑指 68-2 ：二叉树的最近公共祖先【top100】 link: https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/
     - answer:
 ```python
 
@@ -5270,7 +5270,7 @@ class Solution:
 
 #### 回溯思想
 
-- question: lc 112 ：路径总和 link:
+- question: lc 112 ：路径总和 link: https://leetcode.cn/problems/path-sum/
     - answer:
 ```python
 
@@ -5279,7 +5279,7 @@ class Solution:
 
 ```
 
-- question: lc 113 &amp; 剑指 34 ：路径总和 II link:
+- question: lc 113 &amp; 剑指 34 ：路径总和 II link: https://leetcode.cn/problems/path-sum-ii/
     - answer:
 ```python
 
@@ -5288,7 +5288,7 @@ class Solution:
 
 ```
 
-- question: lc 257 ：二叉树的所有路径 link:
+- question: lc 257 ：二叉树的所有路径 link: https://leetcode.cn/problems/binary-tree-paths/
     - answer:
 ```python
 
@@ -5297,7 +5297,7 @@ class Solution:
 
 ```
 
-- question: lc 437 ：路径总和 III【top100】 link:
+- question: lc 437 ：路径总和 III【top100】 link: https://leetcode.cn/problems/path-sum-iii/
     - answer:
 ```python
 
@@ -5306,7 +5306,7 @@ class Solution:
 
 ```
 
-- question: lc 124 ：二叉树中的最大路径和【top100】 link:
+- question: lc 124 ：二叉树中的最大路径和【top100】 link: https://leetcode.cn/problems/binary-tree-maximum-path-sum/
     - answer:
 ```python
 
@@ -5315,7 +5315,7 @@ class Solution:
 
 ```
 
-- question: lc 226 &amp; 剑指 226 ：翻转二叉树【top100】 link:
+- question: lc 226 &amp; 剑指 226 ：翻转二叉树【top100】 link: https://leetcode.cn/problems/invert-binary-tree/
     - answer:
 ```python
 
@@ -5324,7 +5324,7 @@ class Solution:
 
 ```
 
-- question: lc 105 &amp; 剑指 7 ：从前序与中序遍历序列构造二叉树【top100】 link:
+- question: lc 105 &amp; 剑指 7 ：从前序与中序遍历序列构造二叉树【top100】 link: https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
     - answer:
 ```python
 
@@ -5333,7 +5333,7 @@ class Solution:
 
 ```
 
-- question: lc 106 ：从中序与后序遍历序列构造二叉树 link:
+- question: lc 106 ：从中序与后序遍历序列构造二叉树 link: https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/
     - answer:
 ```python
 
@@ -5342,7 +5342,7 @@ class Solution:
 
 ```
 
-- question: lc 116 ：填充每个节点的下一个右侧节点指针 link:
+- question: lc 116 ：填充每个节点的下一个右侧节点指针 link: https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/
     - answer:
 ```python
 
@@ -5353,7 +5353,7 @@ class Solution:
 
 #### 二叉搜索树
 
-- question: lc 701 ：二叉搜索树中的插入操作 link:
+- question: lc 701 ：二叉搜索树中的插入操作 link: https://leetcode.cn/problems/insert-into-a-binary-search-tree/
     - answer:
 ```python
 
@@ -5362,7 +5362,7 @@ class Solution:
 
 ```
 
-- question: lc 108 ：将有序数组转换为二叉搜索树 link:
+- question: lc 108 ：将有序数组转换为二叉搜索树 link: https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/
     - answer:
 ```python
 
@@ -5371,7 +5371,7 @@ class Solution:
 
 ```
 
-- question: lc 235 &amp; 剑指 68-1 ：二叉搜索树的最近公共祖先 link:
+- question: lc 235 &amp; 剑指 68-1 ：二叉搜索树的最近公共祖先 link: https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/
     - answer:
 ```python
 
@@ -5380,7 +5380,7 @@ class Solution:
 
 ```
 
-- question: lc 98 ：验证二叉搜索树【top100】 link:
+- question: lc 98 ：验证二叉搜索树【top100】 link: https://leetcode.cn/problems/validate-binary-search-tree/
     - answer:
 ```python
 
@@ -5389,7 +5389,7 @@ class Solution:
 
 ```
 
-- question: lc 501 ：二叉搜索树中的众数 link:
+- question: lc 501 ：二叉搜索树中的众数 link: https://leetcode.cn/problems/find-mode-in-binary-search-tree/
     - answer:
 ```python
 
@@ -5398,7 +5398,7 @@ class Solution:
 
 ```
 
-- question: lc 99 ：恢复二叉搜索树 link:
+- question: lc 99 ：恢复二叉搜索树 link: https://leetcode.cn/problems/recover-binary-search-tree/
     - answer:
 ```python
 
@@ -5407,7 +5407,7 @@ class Solution:
 
 ```
 
-- question: lc 538 &amp; 剑指 054 ：把二叉搜索树转换为累加树【top100】 link:
+- question: lc 538 &amp; 剑指 054 ：把二叉搜索树转换为累加树【top100】 link: https://leetcode.cn/problems/convert-bst-to-greater-tree/
     - answer:
 ```python
 
@@ -5416,7 +5416,7 @@ class Solution:
 
 ```
 
-- question: lc 589 ：N 叉树的前序遍历 link:
+- question: lc 589 ：N 叉树的前序遍历 link: https://leetcode.cn/problems/n-ary-tree-preorder-traversal/
     - answer:
 ```python
 
@@ -5425,7 +5425,7 @@ class Solution:
 
 ```
 
-- question: lc 590 ：N 叉树的后序遍历 link:
+- question: lc 590 ：N 叉树的后序遍历 link: https://leetcode.cn/problems/n-ary-tree-postorder-traversal/
     - answer:
 ```python
 
@@ -5434,7 +5434,7 @@ class Solution:
 
 ```
 
-- question: lc 429 ：N 叉树的层序遍历 link:
+- question: lc 429 ：N 叉树的层序遍历 link: https://leetcode.cn/problems/n-ary-tree-level-order-traversal/
     - answer:
 ```python
 
@@ -5443,7 +5443,7 @@ class Solution:
 
 ```
 
-- question: lc 690 ：员工的重要性 link:
+- question: lc 690 ：员工的重要性 link: https://leetcode.cn/problems/employee-importance/
     - answer:
 ```python
 
@@ -5454,7 +5454,7 @@ class Solution:
 
 #### 图的 DFS 和 BFS
 
-- question: lc 733 ：图像渲染 link:
+- question: lc 733 ：图像渲染 link: https://leetcode.cn/problems/flood-fill/
     - answer:
 ```python
 
@@ -5463,7 +5463,7 @@ class Solution:
 
 ```
 
-- question: lc 463 ：岛屿的周长 link:
+- question: lc 463 ：岛屿的周长 link: https://leetcode.cn/problems/island-perimeter/
     - answer:
 ```python
 
@@ -5472,7 +5472,7 @@ class Solution:
 
 ```
 
-- question: lc 200 ：岛屿数量【top100】 link:
+- question: lc 200 ：岛屿数量【top100】 link: https://leetcode.cn/problems/number-of-islands/
     - answer:
 ```python
 
@@ -5481,7 +5481,7 @@ class Solution:
 
 ```
 
-- question: lc 695 ：岛屿的最大面积 link:
+- question: lc 695 ：岛屿的最大面积 link: https://leetcode.cn/problems/max-area-of-island/
     - answer:
 ```python
 
@@ -5490,7 +5490,7 @@ class Solution:
 
 ```
 
-- question: lc 130 ：被围绕的区域 link:
+- question: lc 130 ：被围绕的区域 link: https://leetcode.cn/problems/surrounded-regions/
     - answer:
 ```python
 
@@ -5499,7 +5499,7 @@ class Solution:
 
 ```
 
-- question: lc 1034 ：边框着色 link:
+- question: lc 1034 ：边框着色 link: https://leetcode.cn/problems/coloring-a-border/
     - answer:
 ```python
 
@@ -5508,7 +5508,7 @@ class Solution:
 
 ```
 
-- question: lc 529 ：扫雷游戏 link:
+- question: lc 529 ：扫雷游戏 link: https://leetcode.cn/problems/minesweeper/
     - answer:
 ```python
 
@@ -5517,7 +5517,7 @@ class Solution:
 
 ```
 
-- question: lc 994 ：腐烂的橘子 link:
+- question: lc 994 ：腐烂的橘子 link: https://leetcode.cn/problems/rotting-oranges/
     - answer:
 ```python
 
@@ -5527,7 +5527,6 @@ class Solution:
 ```
 
 ### 数据结构设计
-
 
 lc 225 ：用队列实现栈
 lc 622 ：设计循环队列
