@@ -4312,7 +4312,7 @@ class Solution:
 
 ```
 
-- question: lc240 ：搜索二维矩阵II【top100】 link: https://leetcode.cn/problems/search-a-2d-matrix-ii/
+- question: lc240 ：搜索二维矩阵II link: https://leetcode.cn/problems/search-a-2d-matrix-ii/
     - answer:
 ```python
 
