@@ -4619,7 +4619,23 @@ class Solution:
 - question: lc946 剑指31 ：验证栈序列 link: https://leetcode.cn/problems/validate-stack-sequences/
     - answer:
 ```python
+# 模拟一个新的栈，根据pushed和popped来模拟。每次从pushed取出一个push到模拟栈中，如果此时模拟栈的栈顶与popped当前位相等，则将模拟栈pop并将popped的当前为后移一位，当pushed被遍历完后，检查模拟栈是否为空，如果为空，则可以根据pushed和popped来实现一个栈。
+class Solution:
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        if len(popped) != len(pushed):
+            return False
 
+        sim = []
+        n = len(pushed)
+        j = 0
+
+        for i in range(n):
+            sim.append(pushed[i])
+            while sim and sim[-1] == popped[j]:
+                sim.pop()
+                j += 1
+        
+        return len(sim) == 0
 ```
 ```java
 
@@ -4755,7 +4771,23 @@ class Solution:
 - question: lc239 ：滑动窗口最大值 link: https://leetcode.cn/problems/sliding-window-maximum/
     - answer:
 ```python
+# 创建堆来维护窗口最大值。python中import heap 可以使用内置堆操作。heapq.heapify(list)，将一个list转为堆，堆顶是最小值，最小堆，所以寻找最大值时，需要先将所有元素取负值。heapq.heappush(heap, value)将value插入堆中并自动调整堆，heapq.pop(heap)弹出堆顶最小值，并自动调整堆。
+# 此题中，需要存储的结构是（value，index），value用于排序生成堆，index用于判断是否在窗口内。每次插入一个值，同时判断此时堆顶是否在当前窗口内，如果不在则弹出，最后将堆顶插入返回数组中。
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        q = [(-nums[i], i) for i in range(k)]
+        heapq.heapify(q)
 
+        ans = [-q[0][0]]
+
+        for i in range(k, n):
+            heapq.heappush(q, (-nums[i], i))
+            while q[0][1] <= i - k:
+                heapq.heappop(q)
+            ans.append(-q[0][0])
+        
+        return ans
 ```
 ```java
 
@@ -4764,22 +4796,58 @@ class Solution:
 - question: lc643 ：子数组最大平均数 I link: https://leetcode.cn/problems/maximum-average-subarray-i/
     - answer:
 ```python
+# 滑动窗口来实现，每次计算窗口内之和，加上右边进位值，减去左边值，与当前最大值比较，维护最大值，返回最大值除k。
+class Solution:
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        maxSum = 0
+        for i in range(k):
+            maxSum += nums[i]
 
+        left, right = 0, k
+        temp = maxSum
+
+        while right < len(nums):
+            temp = temp - nums[left] + nums[right]
+            maxSum = max(maxSum, temp)
+            left += 1
+            right += 1
+        
+        return maxSum / k
 ```
 ```java
 
 ```
 
-- question: lc209 &amp; 剑指 008 ：长度最小的子数组 link: https://leetcode.cn/problems/minimum-size-subarray-sum/
+- question: lc209 剑指 008 ：长度最小的子数组 link: https://leetcode.cn/problems/minimum-size-subarray-sum/
     - answer:
 ```python
+# 两种方法
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        left, right = 0, 0
+        ans = len(nums) + 1
+        temp = 0
+
+        while right < len(nums):
+            temp += nums[right]
+            while temp >= target:
+                ans = min(ans, right - left + 1)
+                temp -= nums[left]
+                left += 1
+            right += 1
+        
+        return ans if ans != len(nums) + 1 else 0
+
 
 ```
 ```java
 
 ```
 
-- question: lc3 &amp; 剑指 016 ：无重复字符的最长子串 link: https://leetcode.cn/problems/longest-substring-without-repeating-characters/
+- question: lc3 剑指 016 ：无重复字符的最长子串 link: https://leetcode.cn/problems/longest-substring-without-repeating-characters/
     - answer:
 ```python
 
