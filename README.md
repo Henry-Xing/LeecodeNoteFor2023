@@ -4750,6 +4750,8 @@ class Solution:
 
 ```
 
+### 滑动窗口
+
 - question: lc239 ：滑动窗口最大值 link: https://leetcode.cn/problems/sliding-window-maximum/
     - answer:
 ```python
@@ -4758,8 +4760,6 @@ class Solution:
 ```java
 
 ```
-
-### 滑动窗口
 
 - question: lc643 ：子数组最大平均数 I link: https://leetcode.cn/problems/maximum-average-subarray-i/
     - answer:
