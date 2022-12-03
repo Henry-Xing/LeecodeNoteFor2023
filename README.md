@@ -5728,7 +5728,7 @@ class Solution:
 
 ```
 
-- question: lc 200 ：岛屿数量【top100】 link: https://leetcode.cn/problems/number-of-islands/
+- question: lc 200 ：岛屿数量 link: https://leetcode.cn/problems/number-of-islands/
     - answer:
 ```python
 
@@ -5876,7 +5876,7 @@ lc 78 和 90 &amp; 剑指 079：子集【top100】
 lc 17 ：电话号码的字母组合【top100】
 lc 93 &amp; 剑指 087 ：复原 IP 地址
 lc 22 &amp; 剑指 085 ：括号生成【top100】
-lc 51 ：N 皇后
+lc 51 ：N 皇后（经典） https://leetcode.cn/problems/n-queens/
 lc 37 ：数独问题
 lc 401 ：二进制手表
 lc 131 &amp; 剑指 086 ：分割回文串
