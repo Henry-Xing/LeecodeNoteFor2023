@@ -3655,7 +3655,14 @@ class Solution:
         return ans
 ```
 ```java
-
+// 相同的数做异或操作会得到0，因为其他数都有两个个，异或掉可得到0。
+var singleNumber = function(nums) {
+    let n = 0;
+    for(let num of nums) {
+        n ^= num;
+    }
+    return n;
+};
 ```
 
 - question: lc137 只出现一次的数字II link: https://leetcode.cn/problems/single-number-ii/
@@ -3685,7 +3692,27 @@ class Solution:
 
 ```
 ```java
+// 使用js的map, 注意遍历map的方式为let [key, value] of map
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+    let map = new Map();
+    for (let num of nums) {
+        if (map.has(num)) {
+            map.set(num, map.get(num) + 1)
+        } else {
+            map.set(num, 1);
+        }
+    }
 
+    for (let [key, value] of map) {
+        if (value == 1) {
+            return key
+        }
+    }
+};
 ```
 
 - question: lc1318 或运算的最小翻转次数 link: https://leetcode.cn/problems/minimum-flips-to-make-a-or-b-equal-to-c/
@@ -3716,7 +3743,45 @@ class Solution:
         return ans
 ```
 ```java
+// 获得二进制的最后一位let bit_a = a >> k & 1;
+// 修改二进制的最后一位 a -= Math.pow(2, k);
 
+/**
+ * @param {number} a
+ * @param {number} b
+ * @param {number} c
+ * @return {number}
+ */
+var minFlips = function(a, b, c) {
+    let k = 0;
+    let count = 0;
+    while ((a | b) != c) {
+        let bit_a = a >> k & 1;
+        let bit_b = b >> k & 1;
+        let bit_c = c >> k & 1;
+        console.log("a", a, "b", b)
+        if (bit_c !== (bit_a | bit_b)) {
+            if (bit_c == 1) {
+                count ++;
+                console.log("k = ", k, "count = ", count)
+                a += Math.pow(2, k);
+            } else {
+                if (bit_a == 1) {
+                    a -= Math.pow(2, k);
+                    count ++;
+                    console.log("k = ", k, "count = ", count)
+                } 
+                if (bit_b == 1) {
+                    b -= Math.pow(2, k);
+                    count++
+                    console.log("k = ", k, "count = ", count)
+                }
+            }
+        }
+        k++;
+    }
+    return count;
+};
 ```
 
 - question: lc201 数字范围按位与 link: https://leetcode.cn/problems/bitwise-and-of-numbers-range/
@@ -3744,7 +3809,28 @@ class Solution:
 
 ```
 ```java
+//方法1：暴力法，从left与到right
+//方法二：利用n & n-1 消掉最后一个1的性质
+/**
+ * @param {number} left
+ * @param {number} right
+ * @return {number}
+ */
+var rangeBitwiseAnd = function(left, right) {
+    let res = left;
+    while (left < right) {
+        left++;
+        res &= left;
+    }
+    return res
+};
 
+var rangeBitwiseAnd = function(left, right) {
+        while (left < right)
+            right &= right - 1
+        
+        return right
+};
 ```
 
 - question: lc476 数字的补数 link: https://leetcode.cn/problems/number-complement/
@@ -3762,7 +3848,20 @@ class Solution:
         return num ^ ((1<<k)-1)
 ```
 ```java
-
+var findComplement = function(num) {
+    let n = num;
+    let k = 0;
+    let res = 0;
+    
+    while (n != 0) {
+        k_bit = num >> k & 1;
+        n -= k_bit * Math.pow(2, k);
+        res += (k_bit==0 ? Math.pow(2, k) : 0);
+        console.log(k_bit, res);
+        k++
+    }
+    return res;
+};
 ```
 
 - question: lc405 数字转换为十六进制数 link: https://leetcode.cn/problems/convert-a-number-to-hexadecimal/
@@ -3787,6 +3886,32 @@ class Solution:
 ```
 ```java
 
+//方法1调库，num若为负整数num + 2 ** 32来补码运算
+//方法2逐4位转换
+// 循环体中的代码就是解决此问题的核心思想 核心思路：
+
+// 每次拿到num的最后4位二进制，通过num&0xf拿（也可以这样num&15）
+// 根据num&0xf返回的值，从数组中找到对应元素，添加到ans中
+// 然后直接无符号右移，因为2进制转16进制符号位也要参与运算（学过计组的应该很熟悉）
+// 循环上面三个步骤，最后ans进行处理就能拿到最终结果
+/**
+ * @param {number} num
+ * @return {string}
+ */
+// var toHex = function(num) {
+//     return num >= 0 ? num.toString(16) : (num + 2 ** 32).toString(16);
+// };
+
+var toHex = function(num) {
+    if(num === 0) return "0";
+    let ans = '';
+    const str = "0123456789abcdef";
+    while(num){
+        ans = str[num & 0xf] + ans;
+        num >>>= 4;
+    }
+    return ans;
+};
 ```
 
 - question: lc190 颠倒二进制位 link: https://leetcode.cn/problems/reverse-bits/
@@ -3807,7 +3932,22 @@ class Solution:
         return ans
 ```
 ```java
-
+/**
+ * @param {number} n - a positive integer
+ * @return {number} - a positive integer
+ */
+var reverseBits = function(n) {
+    k = 0;
+    let n2 = n
+    let res = 0;
+    while (n!=0) {
+        n_bit = n2 >> k & 1;
+        res += n_bit * Math.pow(2, 31-k)
+        n -= n_bit * Math.pow(2, k)
+        k++
+    }
+    return res;
+};
 ```
 
 ### 排序
