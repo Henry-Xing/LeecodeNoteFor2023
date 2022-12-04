@@ -4759,7 +4759,23 @@ class Solution:
 - question: lc946 剑指31 ：验证栈序列 link: https://leetcode.cn/problems/validate-stack-sequences/
     - answer:
 ```python
+# 模拟一个新的栈，根据pushed和popped来模拟。每次从pushed取出一个push到模拟栈中，如果此时模拟栈的栈顶与popped当前位相等，则将模拟栈pop并将popped的当前为后移一位，当pushed被遍历完后，检查模拟栈是否为空，如果为空，则可以根据pushed和popped来实现一个栈。
+class Solution:
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        if len(popped) != len(pushed):
+            return False
 
+        sim = []
+        n = len(pushed)
+        j = 0
+
+        for i in range(n):
+            sim.append(pushed[i])
+            while sim and sim[-1] == popped[j]:
+                sim.pop()
+                j += 1
+        
+        return len(sim) == 0
 ```
 ```java
 
@@ -4895,7 +4911,23 @@ class Solution:
 - question: lc239 ：滑动窗口最大值 link: https://leetcode.cn/problems/sliding-window-maximum/
     - answer:
 ```python
+# 创建堆来维护窗口最大值。python中import heap 可以使用内置堆操作。heapq.heapify(list)，将一个list转为堆，堆顶是最小值，最小堆，所以寻找最大值时，需要先将所有元素取负值。heapq.heappush(heap, value)将value插入堆中并自动调整堆，heapq.pop(heap)弹出堆顶最小值，并自动调整堆。
+# 此题中，需要存储的结构是（value，index），value用于排序生成堆，index用于判断是否在窗口内。每次插入一个值，同时判断此时堆顶是否在当前窗口内，如果不在则弹出，最后将堆顶插入返回数组中。
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        n = len(nums)
+        q = [(-nums[i], i) for i in range(k)]
+        heapq.heapify(q)
 
+        ans = [-q[0][0]]
+
+        for i in range(k, n):
+            heapq.heappush(q, (-nums[i], i))
+            while q[0][1] <= i - k:
+                heapq.heappop(q)
+            ans.append(-q[0][0])
+        
+        return ans
 ```
 ```java
 
@@ -4904,25 +4936,93 @@ class Solution:
 - question: lc643 ：子数组最大平均数 I link: https://leetcode.cn/problems/maximum-average-subarray-i/
     - answer:
 ```python
+# 滑动窗口来实现，每次计算窗口内之和，加上右边进位值，减去左边值，与当前最大值比较，维护最大值，返回最大值除k。
+class Solution:
+    def findMaxAverage(self, nums: List[int], k: int) -> float:
+        maxSum = 0
+        for i in range(k):
+            maxSum += nums[i]
 
+        left, right = 0, k
+        temp = maxSum
+
+        while right < len(nums):
+            temp = temp - nums[left] + nums[right]
+            maxSum = max(maxSum, temp)
+            left += 1
+            right += 1
+        
+        return maxSum / k
 ```
 ```java
 
 ```
 
-- question: lc209 &amp; 剑指 008 ：长度最小的子数组 link: https://leetcode.cn/problems/minimum-size-subarray-sum/
+- question: lc209 剑指 008 ：长度最小的子数组 link: https://leetcode.cn/problems/minimum-size-subarray-sum/
     - answer:
 ```python
+# 两种方法，第一种，用前缀和另存一个数组，然后在遍历一次前缀和数组，每个s[i]，找到s[i+m] >= s[i] + target，此时m为最小区间。
+# 第二种方法，滑动窗口，右边不停往右移动，当当前和大于target时左边左移直到刚好小于等于target。
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        left, right = 0, 0
+        ans = len(nums) + 1
+        temp = 0
 
+        while right < len(nums):
+            temp += nums[right]
+            while temp >= target:
+                ans = min(ans, right - left + 1)
+                temp -= nums[left]
+                left += 1
+            right += 1
+        
+        return ans if ans != len(nums) + 1 else 0
 ```
 ```java
 
 ```
 
-- question: lc3 &amp; 剑指 016 ：无重复字符的最长子串 link: https://leetcode.cn/problems/longest-substring-without-repeating-characters/
+- question: lc3 剑指 016 ：无重复字符的最长子串 link: https://leetcode.cn/problems/longest-substring-without-repeating-characters/
     - answer:
 ```python
+# 滑动窗口，检查是否新入的元素在窗口内，如果在窗口内，则缩小窗口直到元素不在窗口内。
+# 维护left时，可以新建一个循环，也可以用一个字典存储之前的right出现位置，如果left小于它，则更新成上一个right的位置加一，并且更新right现在的位置。
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        # n = len(s)
+        # ans = 0
+        # left, right = 0,0
+        # temp = 0
+        # while right < n:
+        #     temp += 1
+        #     while left < right and s[right] in s[left:right]:
+        #         left += 1
+        #         temp -= 1
+        #     ans = max(ans, temp)
+        #     right += 1
+        # return ans
 
+        n = len(s)
+        dic = {}
+        ans = 0
+        left, right = 0,0
+        temp = 0
+        while right < n:
+            temp += 1
+            if s[right] in dic:
+                if left < dic[s[right]] + 1:
+                    left = dic[s[right]] + 1
+                    temp = right - left + 1
+                dic[s[right]] = right
+            else:
+                dic[s[right]] = right
+            ans = max(ans, temp)
+            right += 1
+        return ans
 ```
 ```java
 
@@ -4931,7 +5031,42 @@ class Solution:
 - question: lc76 ：最小覆盖子串【top100】 link: https://leetcode.cn/problems/minimum-window-substring/
     - answer:
 ```python
+# 利用两个字典及滑动窗口的思想。首先写一个函数判断两个字典是否属于包含关系，dic1包含dic2表现为dic1与dic2key相同，且每个key的值都大于等于dic2。先初始化模板的字典，然后遍历s，如果s出现在模板中，则将其对应的s字典值加一。当两个字典属于包含关系时，移动左指针，使得两个字典刚好不包含。
+class Solution:
+    def eqDic(self, dic1, dic2):
+        for i in dic1:
+            if dic1.get(i, 0) > dic2.get(i, 0):
+                return False
+        return True
 
+    def minWindow(self, s: str, t: str) -> str:
+        dicT = {}
+        dicS = {}
+
+        for i in range(len(t)):
+            dicT[t[i]] = dicT.get(t[i], 0) + 1
+        
+        left = 0
+        ans = ""
+        temp = float("inf")
+
+        for right in range(len(s)):
+            if s[right] in dicT:
+                dicS[s[right]] = dicS.get(s[right], 0) + 1
+
+            while self.eqDic(dicT, dicS):
+                if s[left] in dicT:
+                    dicS[s[left]] = dicS.get(s[left], 0) - 1
+                    if dicS[s[left]] < 0:
+                        del dicS[s[left]]
+
+                if right - left + 1 < temp:
+                    temp = right - left + 1
+                    ans = s[left : right + 1]
+
+                left += 1
+        
+        return ans
 ```
 ```java
 
@@ -4940,7 +5075,15 @@ class Solution:
 - question: lc485 ：最大连续 1 的个数 link: https://leetcode.cn/problems/max-consecutive-ones/
     - answer:
 ```python
-
+class Solution:
+    def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
+        left = 0
+        ans = 0
+        for right in range(len(nums)):
+            if nums[right] == 0:
+                left = right + 1
+            ans = max(right - left + 1, ans)
+        return ans 
 ```
 ```java
 
@@ -5725,7 +5868,7 @@ class Solution:
 
 ```
 
-- question: lc 200 ：岛屿数量【top100】 link: https://leetcode.cn/problems/number-of-islands/
+- question: lc 200 ：岛屿数量 link: https://leetcode.cn/problems/number-of-islands/
     - answer:
 ```python
 
@@ -5873,7 +6016,7 @@ lc 78 和 90 &amp; 剑指 079：子集【top100】
 lc 17 ：电话号码的字母组合【top100】
 lc 93 &amp; 剑指 087 ：复原 IP 地址
 lc 22 &amp; 剑指 085 ：括号生成【top100】
-lc 51 ：N 皇后
+lc 51 ：N 皇后（经典） https://leetcode.cn/problems/n-queens/
 lc 37 ：数独问题
 lc 401 ：二进制手表
 lc 131 &amp; 剑指 086 ：分割回文串
