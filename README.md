@@ -3956,85 +3956,91 @@ var reverseBits = function(n) {
 - question: lc912 ：排序数组 link: https://leetcode.cn/problems/sort-an-array/
     - answer:
 ```python
-import random
 # quick sort
+# 快速排序的核心在于每次先得到一个pivit，比较pivit与当前值，如果当前值小于pivit，则左标记加一，与左标记交换，最终左标记加一是pivit的位置，
+import random
 class Solution:
-    # 从 arr[low: high + 1] 中随机挑选一个基准数，并进行移动排序
-    def randomPartition(self, arr: [int], low: int, high: int):
-        # 随机挑选一个基准数
-        i = random.randint(low, high)
-        # 将基准数与最低位互换
-        arr[i], arr[low] = arr[low], arr[i]
-        # 以最低位为基准数，然后将序列中比基准数大的元素移动到基准数右侧，比他小的元素移动到基准数左侧。最后将基准数放到正确位置上
-        return self.partition(arr, low, high)
-    
-    # 以最低位为基准数，然后将序列中比基准数大的元素移动到基准数右侧，比他小的元素移动到基准数左侧。最后将基准数放到正确位置上
-    def partition(self, arr: [int], low: int, high: int):
-        pivot = arr[low]            # 以第 1 为为基准数
-        i = low + 1                 # 从基准数后 1 位开始遍历，保证位置 i 之前的元素都小于基准数
+    def randomPartition(self, nums, left, right):
+        i = random.randint(left, right)
+        nums[i], nums[right] = nums[right], nums[i]
         
-        for j in range(i, high + 1):
-            # 发现一个小于基准数的元素
-            if arr[j] < pivot:
-                # 将小于基准数的元素 arr[j] 与当前 arr[i] 进行换位，保证位置 i 之前的元素都小于基准数
-                arr[i], arr[j] = arr[j], arr[i]
-                # i 之前的元素都小于基准数，所以 i 向右移动一位
+        return self.partition(nums, left, right)
+
+    def partition(self, nums, left, right):
+        pivit = nums[right]
+        i = left - 1
+        for j in range(left, right):
+            if nums[j] <= pivit:
                 i += 1
-        # 将基准节点放到正确位置上
-        arr[i - 1], arr[low] = arr[low], arr[i - 1]
-        # 返回基准数位置
-        return i - 1
+                nums[j], nums[i] = nums[i], nums[j]
+        
+        nums[i + 1], nums[right] = nums[right], nums[i + 1]
+        return i + 1
 
-    def quickSort(self, arr, low, high):
-        if low < high:
-            # 按照基准数的位置，将序列划分为左右两个子序列
-            pi = self.randomPartition(arr, low, high)
-            # 对左右两个子序列分别进行递归快速排序
-            self.quickSort(arr, low, pi - 1)
-            self.quickSort(arr, pi + 1, high)
-
-        return arr
+    def quickSort(self, nums, left, right):
+        if left < right:
+            pos = self.randomPartition(nums, left, right)
+            self.quickSort(nums, left, pos - 1)
+            self.quickSort(nums, pos + 1, right)
 
     def sortArray(self, nums: List[int]) -> List[int]:
-        return self.quickSort(nums, 0, len(nums) - 1)
+        self.quickSort(nums, 0, len(nums)-1)
+        return nums 
 
 # merge sort
+# 归并排序的核心在于递归的去进行排序。最小单元则是两个长度为1的list合并为一个list，这时小的先排入list。
 class Solution:
-    def merge(self, left_arr, right_arr):           # 归并过程
-        arr = []
-        left_i, right_i = 0, 0
-        while left_i < len(left_arr) and right_i < len(right_arr):
-            # 将两个有序子序列中较小元素依次插入到结果数组中
-            if left_arr[left_i] < right_arr[right_i]:
-                arr.append(left_arr[left_i])
-                left_i += 1
-            else:
-                arr.append(right_arr[right_i])
-                right_i += 1
-        
-        while left_i < len(left_arr):
-            # 如果左子序列有剩余元素，则将其插入到结果数组中
-            arr.append(left_arr[left_i])
-            left_i += 1
-            
-        while right_i < len(right_arr):
-            # 如果右子序列有剩余元素，则将其插入到结果数组中
-            arr.append(right_arr[right_i])
-            right_i += 1
-        
-        return arr                                  # 返回排好序的结果数组
-
-    def mergeSort(self, arr):                       # 分割过程
-        if len(arr) <= 1:                           # 数组元素个数小于等于 1 时，直接返回原数组
-            return arr
-        
-        mid = len(arr) // 2                         # 将数组从中间位置分为左右两个数组。
-        left_arr = self.mergeSort(arr[0: mid])      # 递归将左子序列进行分割和排序
-        right_arr =  self.mergeSort(arr[mid:])      # 递归将右子序列进行分割和排序
-        return self.merge(left_arr, right_arr)      # 把当前序列组中有序子序列逐层向上，进行两两合并。
-
     def sortArray(self, nums: List[int]) -> List[int]:
-        return self.mergeSort(nums)
+        def mergeSort(nums, left, right):
+            if left == right:
+                return
+
+            mid = left + (right - left)//2
+            mergeSort(nums, left, mid)
+            mergeSort(nums, mid + 1, right)
+
+            temp = []
+            i, j = left, mid + 1
+            while i <= mid or right >= j:
+                if i > mid or (j <= right and nums[j] < nums[i]):
+                    temp.append(nums[j])
+                    j += 1
+                else:
+                    temp.append(nums[i])
+                    i += 1
+            nums[left:right+1] = temp
+        mergeSort(nums, 0, len(nums)-1)
+        return nums
+
+# heap sort
+# 堆排序的核心在于构建堆的过程，先初始化堆，使得堆中每个元素num[i] > num[2*i + 1] 且 num[i] > num[2*i + 2]，此时，堆顶就是最大值。开始排序后，每次将堆顶交换到右边，同时左边剩下的堆重新构建一次。
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        def maxHeap(heap, root, length):
+            p = root
+            while 2*p + 1 < length:
+                left = 2*p + 1
+                right = 2*p + 2
+                if right >= length or heap[right] < heap[left]:
+                    cur = left
+                else:
+                    cur = right
+                if heap[p] < heap[cur]:
+                    heap[p], heap[cur] = heap[cur], heap[p]
+                    p = cur
+                else:
+                    break
+
+        def initHeap(heap):
+            for i in reversed(range(len(heap))):
+                maxHeap(heap, i, len(heap))
+        
+        initHeap(nums)
+        for i in reversed(range(len(nums))):
+            nums[0], nums[i] = nums[i], nums[0]
+            maxHeap(nums, 0, i)
+        
+        return nums
 ```
 ```java
 
