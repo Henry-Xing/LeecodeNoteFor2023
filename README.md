@@ -5282,7 +5282,21 @@ class Solution:
 - question: lc237 删除链表中的节点 link: https://leetcode.cn/problems/delete-node-in-a-linked-list/
     - answer:
 ```python
+# 删除某个节点，同时不给出head，只给当前要删除node的地址时，直接把当前node的val变成下一个node的val，同时node的下一个节点变成，下一个节点的下一个节点。相当于直接跳过当前要删除的node，实际上内存中并未删除。
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
+class Solution:
+    def deleteNode(self, node):
+        """
+        :type node: ListNode
+        :rtype: void Do not return anything, modify node in-place instead.
+        """
+        node.val = node.next.val
+        node.next = node.next.next
 ```
 ```java
 
@@ -5291,7 +5305,25 @@ class Solution:
 - question: lc83 ：删除排序链表中的重复元素 link: https://leetcode.cn/problems/remove-duplicates-from-sorted-list/
     - answer:
 ```python
+# 因为已经排序，所以只需要比较当前值与下一个值，如果下一个值与当前值相同，则直接将下一个值跳过，直接指向下一个值的下一个值。
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
 
+        p = head
+        while p.next:
+            if p.val == p.next.val:
+                p.next = p.next.next  
+            else:
+                p = p.next
+
+        return head
 ```
 ```java
 
@@ -5300,7 +5332,28 @@ class Solution:
 - question: lc82 ：删除排序链表中的重复元素II link: https://leetcode.cn/problems/remove-duplicates-from-sorted-list-ii/
     - answer:
 ```python
+# 与前一题的不同点在于本题要检查的值不是当前值与下一值，而是下一值与下下一值，并且需要在相同时不停向下遍历删除node。
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
 
+        ans = ListNode(0, head)
+        p = ans
+        while p.next and p.next.next:
+            if p.next.val == p.next.next.val:
+                cur = p.next.val
+                while p.next and p.next.val == cur:
+                    p.next = p.next.next  
+            else:
+                p = p.next
+
+        return ans.next
 ```
 ```java
 
