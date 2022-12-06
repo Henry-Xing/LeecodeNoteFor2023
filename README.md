@@ -5362,7 +5362,24 @@ class Solution:
 - question: lc876 ：链表的中间结点 link: https://leetcode.cn/problems/middle-of-the-linked-list/
     - answer:
 ```python
+# 利用快慢指针，快指针一次走两格，慢指针一次走一格，当快指针走完时，慢指针刚好指向中间位置。
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
 
+        slow, fast = head, head
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        return slow
 ```
 ```java
 
@@ -5371,7 +5388,29 @@ class Solution:
 - question: lc19 ：删除链表的倒数第 N 个结点 link: https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
     - answer:
 ```python
+# 速度相同的指针，但第一个指针比第二个指针的起始位置多n，那么当第一个指针走到头的时候，第二个指针就刚好差n个到头，也就是倒数第n项，但这样删除起来比较麻烦，所以可以使得第一个指针比第二个指针多n - 1，那么直接把第二个指针的下一个赋值成下下个。
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        if not head:
+            return head
 
+        f,temp = head, ListNode(0, head)
+        s = temp
+        for i in range(n):
+            f = f.next
+        
+        while f:
+            s = s.next
+            f = f.next
+        
+        s.next = s.next.next
+
+        return temp.next222
 ```
 ```java
 
@@ -5380,7 +5419,25 @@ class Solution:
 - question: lc141 ：环形链表 link: https://leetcode.cn/problems/linked-list-cycle/
     - answer:
 ```python
+# 利用快慢指针，如果两个指针会相遇，则说明有环，如果两个指针不会相遇就走到头，说明没环。
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if not head:
+            return False
 
+        fast, slow = head, head
+        while fast.next and fast.next.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:
+                return True
+        
+        return False
 ```
 ```java
 
@@ -5389,7 +5446,28 @@ class Solution:
 - question: lc142 ：环形链表 II link: https://leetcode.cn/problems/linked-list-cycle-ii/
     - answer:
 ```python
-
+# 快慢指针相遇时，慢指针只走了一部分的环，而快指针则走了n次环和一部分的环，说明n次环和入环前的距离加上这部分环的距离是相等的，此时再用一个慢指针从head开始出发，走到与慢指针相遇，因为速度相同，所以慢指针的新指针的路程相同，可以得出慢指针走了m次环加剩余部分的环，这部分刚好等于起点到环起点的距离。于是，当新指针与满指针相遇时，就是在环入口处。
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
+        fast, slow = head, head
+        while fast.next and fast.next.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:
+                second = head
+                while second != slow:
+                    second = second.next
+                    slow = slow.next
+                return second
+        
+        return None
 ```
 ```java
 
@@ -5398,7 +5476,26 @@ class Solution:
 - question: lc206 ：反转链表 link: https://leetcode.cn/problems/reverse-linked-list/
     - answer:
 ```python
+# 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
 
+        prev = None
+        cur = head
+        while cur:
+            curNext = cur.next
+            cur.next = prev
+            prev = cur
+            cur = curNext
+
+        return prev
 ```
 ```java
 
@@ -5407,7 +5504,54 @@ class Solution:
 - question: lc92 ：反转链表 II link: https://leetcode.cn/problems/reverse-linked-list-ii/
     - answer:
 ```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
+        if not head:
+            return head
+        
+        tempNode = ListNode(0, head)
+        p = tempNode
 
+        for _ in range(left - 1):
+            p = p.next
+        
+        # 记录需要断开点的前一位
+        pre = p
+
+        for _ in range(right-left+1):
+            p = p.next
+
+        # 记录需要终止反转的位置
+        succ = p
+
+        # leftNode记录开始反转的位置，righNode记录反转后需要接在尾部的位置
+        leftNode = pre.next
+        rightNode = succ.next
+
+        # 原链表中，断开反转位置与接入位置
+        pre.next = None
+        succ.next = None
+        
+        # 反转链表， 反转后的尾部为leftNode，起始位置为原来的succ终止位置。
+        preNode = None
+        temp = leftNode
+        while temp:
+            curNext = temp.next
+            temp.next = preNode
+            preNode = temp
+            temp = curNext
+
+        # 将反转前一位接上反转的首部
+        pre.next = succ
+        # 将反转的最后一位接上原来断开的尾部
+        leftNode.next = rightNode
+
+        return tempNode.next
 ```
 ```java
 
