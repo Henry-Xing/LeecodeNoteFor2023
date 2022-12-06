@@ -5899,16 +5899,81 @@ class Solution:
 - question: lc 144 ：二叉树的前序遍历 link: https://leetcode.cn/problems/binary-tree-preorder-traversal/
     - answer:
 ```python
+# 两种方法，第一种递归，构建一个方法，先把根节点加入答案中，再去迭代左右节点。
+# 第二种方法，迭代的方法，需要利用stack，把当前节点值加入答案中后，需要将节点入栈，当前节点转换为左节点，当左节点为空时，则从stack中pop出一个点，将当前节点设置为此节点的右节点。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        # ans = []
+        # def preSearch(node):
+        #     if not node:
+        #         return
+        #     ans.append(node.val)
+        #     preSearch(node.left)
+        #     preSearch(node.right)
+        # preSearch(root)
+        # return ans
 
+        ans = []
+        node = root
+        stack = []
+        
+        while node or stack:
+            while node:
+                ans.append(node.val)
+                stack.append(node)
+                node = node.left
+            node = stack.pop().right
+        
+        return ans
+            
 ```
 ```java
 
 ```
 
-- question: lc 94 ：二叉树的中序遍历【top100】" link: https://leetcode.cn/problems/binary-tree-inorder-traversal/
+- question: lc 94 ：二叉树的中序遍历 link: https://leetcode.cn/problems/binary-tree-inorder-traversal/
     - answer:
 ```python
+# 递归比较简单，只需要改变顺序就行，迭代需要注意插值的位置是跳出内层循环后插值。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        # ans = []
+        # def inorder(node):
+        #     if not node:
+        #         return
+        #     inorder(node.left)
+        #     ans.append(node.val)
+        #     inorder(node.right)
+        
+        # inorder(root)
 
+        # return ans
+
+        ans = []
+        stack = []
+        node = root
+
+        while node or stack:
+            while node:
+                stack.append(node)
+                node = node.left
+            node = stack.pop()
+            ans.append(node.val)
+            node = node.right
+        
+        return ans
 ```
 ```java
 
@@ -5917,7 +5982,45 @@ class Solution:
 - question: lc 145 ：二叉树的后序遍历 link: https://leetcode.cn/problems/binary-tree-postorder-traversal/
     - answer:
 ```python
+# 递归比较简单，迭代的时候，需要用一个变量来记录此节点是否右节点已经遍历完了。当访问完一棵子树的时候，我们用prev指向该节点。这样，在回溯到父节点的时候，我们可以依据prev是指向左子节点，还是右子节点，来判断父节点的访问情况。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        # ans = []
+        # def postorder(node):
+        #     if not node:
+        #         return
+        #     postorder(node.left)
+        #     postorder(node.right)
+        #     ans.append(node.val)
+        
+        # postorder(root)
+        # return ans
+        ans = []
+        stack = []
 
+        node = root
+        pre = None
+
+        while node or stack:
+            while node:
+                stack.append(node)
+                node = node.left
+            node = stack.pop()
+            if not node.right or node.right == pre:
+                ans.append(node.val)
+                pre = node
+                node = None
+            else:
+                stack.append(node)
+                node = node.right
+        
+        return ans
 ```
 ```java
 
