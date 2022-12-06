@@ -4043,6 +4043,105 @@ class Solution:
         return nums
 ```
 ```java
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+//方法1 调库 
+// var sortArray = function(nums) {
+//     nums.sort((a, b) => a-b)
+//     return nums
+// };
+
+//方法2 冒泡
+// var sortArray = function(nums) {
+//     for (let i = 0; i < nums.length - 1; i++) {
+//         for (let j = 0; j < nums.length - i - 1; j++) {
+//             if (nums[j] > nums[j+1]) swap(nums, j, j+1);
+//         }
+//     }
+//     return nums
+// }
+// function swap (nums, i, i2) {
+//     let temp = nums[i];
+//     nums[i] = nums[i2];
+//     nums[i2] = temp;
+// }
+
+
+//方法3 快速排序
+// var sortArray = function(nums) {
+//     return quickSort(nums, 0, nums.length - 1)
+// }
+
+// var quickSort = function(nums, l, r) {
+//     // console.log(nums, l, r)
+//     if (l > r) {
+//         return nums
+//     }
+    
+//     let left = l;
+//     let right = r;
+//     let pivot = nums[left];
+//     while (left < right) {
+//         while (left < right && pivot <= nums[right]) {
+//             right--;
+//         }
+//         if (pivot > nums[right]) {
+//             nums[left] = nums[right];
+//             left++;
+//         }
+//         while (left < right && pivot >= nums[left]) {
+//             left++;
+//         }
+//         if (pivot < nums[left]) {
+//             nums[right] = nums[left];
+//             right--;
+//         }
+//         if (left >= right) {
+//             nums[left] = pivot
+//         }
+//     }
+//     quickSort(nums,l,left-1);
+//     quickSort(nums,right+1, r);
+//     return nums;
+// }
+
+
+// 方法4 merge sort
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var sortArray = function(nums) {
+    if(nums.length < 2) return nums;
+    let midIndex = Math.floor(nums.length / 2);
+    let left = nums.slice(0, midIndex);
+    let right = nums.slice(midIndex);
+    return merge(sortArray(left), sortArray(right));
+};
+const merge = (left, right) => {
+    let res = [];
+    let i = 0;
+    let j = 0;
+    let lenL = left.length;
+    let lenR = right.length;
+    while(i < lenL && j < lenR) {
+        if(left[i] < right[j]) {
+            res.push(left[i]);
+            i++;
+        }
+        else {
+            res.push(right[j]);
+            j++;
+        }
+    }
+    while(i < lenL) res.push(left[i++]);
+    while(j < lenR) res.push(right[j++]);
+    return res;
+}
+
+
 
 ```
 
@@ -4057,6 +4156,15 @@ class Solution:
         return max(nums[-1]*nums[-2]*nums[-3], nums[0]*nums[1]*nums[-1])
 ```
 ```java
+// 如果数组中全是非负数，则排序后最大的三个数相乘即为最大乘积；如果全是非正数，则最大的三个数相乘同样也为最大乘积。如果数组中有正数有负数，则最大乘积既可能是三个最大正数的乘积，也可能是两个最小负数（即绝对值最大）与最大正数的乘积。
+
+//综上，我们在给数组排序后，分别求出三个最大正数的乘积，以及两个最小负数与最大正数的乘积，二者之间的最大值即为所求答案。
+
+var maximumProduct = function(nums) {
+    nums.sort((a, b) => a - b);
+    const n = nums.length;
+    return Math.max(nums[0] * nums[1] * nums[n - 1], nums[n - 1] * nums[n - 2] * nums[n - 3]);
+};
 
 ```
 
@@ -4088,6 +4196,41 @@ class Solution:
             i -= 1
 ```
 ```java
+/**
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ */
+
+//方法一: 调库， 先merge 再sort
+var merge = function(nums1, m, nums2, n) {
+    nums1.splice(m, nums1.length - m, ...nums2);
+    nums1.sort((a, b) => a - b);
+};
+
+//方法2：双指针
+var merge = function(nums1, m, nums2, n) {
+    let p1 = 0, p2 = 0;
+    const sorted = new Array(m + n).fill(0);
+    var cur;
+    while (p1 < m || p2 < n) {
+        if (p1 === m) {
+            cur = nums2[p2++];
+        } else if (p2 === n) {
+            cur = nums1[p1++];
+        } else if (nums1[p1] < nums2[p2]) {
+            cur = nums1[p1++];
+        } else {
+            cur = nums2[p2++];
+        }
+        sorted[p1 + p2 - 1] = cur;
+    }
+    for (let i = 0; i != m + n; ++i) {
+        nums1[i] = sorted[i];
+    }
+};
 
 ```
 
@@ -4097,7 +4240,66 @@ class Solution:
 
 ```
 ```java
+var reversePairs = function(nums) {
+  let res = 0
+  mergeSort(0,nums.length)
+  return res
+  function mergeSort(l,r){
+    // 区间长度小于等于2时
+    if(r-l<=2){
+      // 统计区间内部逆序对,同时排序
+      if(r-l===2&&nums[l]>nums[l+1]){
+        let temp = nums[l]
+        nums[l] = nums[l+1]
+        nums[l+1] = temp
+        res++
+      }
+      return
+    }
+    // 区间长度大于二，可以继续分割
+    let mid = Math.floor((l+r)/2)
+    mergeSort(l,mid)
+    mergeSort(mid,r)
+    merge(l,mid,r)
+  }
 
+  function merge(l,mid,r){
+    let i = 0
+    let j = 0
+    let k = l
+    let arr1 = nums.slice(l,mid)
+    let arr2 = nums.slice(mid,r)
+    while(i<arr1.length&&j<arr2.length){
+      // 出现逆序
+      if(arr1[i]>arr2[j]){
+        nums[k] = arr2[j]
+        j++
+        k++
+        // 统计不同区间的逆序对个数，左边数组当前元素以及右边的几个元素都可以加进去
+        res+=arr1.length-i
+      } else{
+        nums[k] = arr1[i]
+        i++
+        k++
+      }
+    }
+    while(i<arr1.length){
+      nums[k] = arr1[i]
+      i++
+      k++
+    }
+    while(j<arr2.length){
+      nums[k] = arr2[j]
+      j++
+      k++
+    }
+  }
+};
+
+作者：11111111111-6
+链接：https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/solution/by-11111111111-6-tao9/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 ```
 
 - question: lc315 ：计算右侧小于当前元素的个数 link: https://leetcode.cn/problems/count-of-smaller-numbers-after-self/
