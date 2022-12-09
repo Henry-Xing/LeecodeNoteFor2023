@@ -6031,7 +6031,36 @@ class Solution:
 - question: lc 102 &amp; 剑指 32-2 ： 二叉树的层序遍历【top100】 link: https://leetcode.cn/problems/binary-tree-level-order-traversal/
     - answer:
 ```python
+# 利用队列，将不为空的左右节点同时插入队列中，每层都把que弄空一次。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+from queue import Queue
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
 
+        que = Queue()
+        que.put(root)
+        ans = []
+        
+        while que.qsize() != 0:
+            level = []
+            n = que.qsize()
+            for _ in range(n):
+                curNode = que.get()
+                level.append(curNode.val)
+                if curNode.left:
+                    que.put(curNode.left)
+                if curNode.right:
+                    que.put(curNode.right)
+            ans.append(level)
+        
+        return ans
 ```
 ```java
 
@@ -6040,7 +6069,36 @@ class Solution:
 - question: lc 107 ：二叉树的层序遍历 II link: https://leetcode.cn/problems/binary-tree-level-order-traversal-ii/
     - answer:
 ```python
+# 自上往下的层序遍历后反向切片输出。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+from queue import Queue
+class Solution:
+    def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
 
+        que = Queue()
+        que.put(root)
+        ans = []
+        
+        while que.qsize() != 0:
+            level = []
+            n = que.qsize()
+            for _ in range(n):
+                curNode = que.get()
+                level.append(curNode.val)
+                if curNode.left:
+                    que.put(curNode.left)
+                if curNode.right:
+                    que.put(curNode.right)
+            ans.append(level)
+        
+        return ans[::-1]
 ```
 ```java
 
@@ -6049,7 +6107,22 @@ class Solution:
 - question: lc 104 &amp; 剑指 55-1 ：二叉树的最大深度【top100】 link: https://leetcode.cn/problems/maximum-depth-of-binary-tree/
     - answer:
 ```python
+# 递归DFS，左右节点数最大值加一
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        
+        left = self.maxDepth(root.left)
+        right = self.maxDepth(root.right)
 
+        return max(left, right) + 1
 ```
 ```java
 
