@@ -6131,7 +6131,29 @@ class Solution:
 - question: lc 543 ：二叉树的直径【top100】 link: https://leetcode.cn/problems/diameter-of-binary-tree/
     - answer:
 ```python
+# 二叉树直径是两点之间最短距离的最大值。两点之间的最短距离可以理解为一个根节点的左右深度的最大值之和-1，-1是因为求和时会把根节点算两次，所以需要剪掉一次。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        self.ans = 0
+        def dfs(node):
+            if not node:
+                return 0
+            
+            left = dfs(node.left)
+            right = dfs(node.right)
 
+            self.ans = max(self.ans, left + right + 1)
+
+            return max(left, right) + 1
+        
+        dfs(root)
+        return self.ans - 1
 ```
 ```java
 
@@ -6140,7 +6162,31 @@ class Solution:
 - question: lc 110 &amp; 剑指 55-2 ：平衡二叉树 link: https://leetcode.cn/problems/balanced-binary-tree/
     - answer:
 ```python
+# 自下往上遍历，如果有一个子树不是平衡的，那么整体一定不平衡。所以设置flag，当有不平衡的子树出现则flag=False，最后检查flag是否变换过。也可以不用flag，而当不平衡和字数深度为-1时返回-1.
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        self.flag = True
+        def dfs(node):
+            if not node:
+                return 0
 
+            left = dfs(node.left)
+            right = dfs(node.right)
+
+            if abs(left - right) > 1 :
+                self.flag = False
+
+            return max(left, right) + 1
+        
+        dfs(root)
+
+        return self.flag
 ```
 ```java
 
@@ -6149,7 +6195,21 @@ class Solution:
 - question: lc 111 ：二叉树的最小深度 link: https://leetcode.cn/problems/minimum-depth-of-binary-tree/
     - answer:
 ```python
-
+# 首先要考虑到叶子节点是左右节点都为空时才能算作叶子节点。当左右不为空时，则返回左右深度的最小值加一，当左右有空时，则返回不为空的深度，也就是左右相加再加一。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        left = self.minDepth(root.left)
+        right = self.minDepth(root.right)
+        
+        return min(left, right) + 1 if root.left and root.right else left + right + 1
 ```
 ```java
 
@@ -6158,7 +6218,27 @@ class Solution:
 - question: lc 404 ：左叶子之和 link: https://leetcode.cn/problems/sum-of-left-leaves/
     - answer:
 ```python
-
+# 先写一个判断叶子节点的lambda，递归过程中，如果左节点是叶子节点，则直接加上，否则继续递归，如果右节点不是叶子节点则可以继续递归否则不继续递归。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        isLeaf = lambda node: not node.left and not node.right
+        def dfs(node):
+            ans = 0
+            if not node:
+                return 0
+            if node.left:
+                ans += node.left.val if isLeaf(node.left) else dfs(node.left)
+            if node.right and not isLeaf(node.right):
+                ans += dfs(node.right)
+            
+            return ans
+        return dfs(root)
 ```
 ```java
 
@@ -6167,7 +6247,45 @@ class Solution:
 - question: lc 103 &amp; 剑指 32-3 ：二叉树的锯齿形层序遍历 link: https://leetcode.cn/problems/binary-tree-zigzag-level-order-traversal/
     - answer:
 ```python
+# 在层序遍历的基础上，调整每次插入的顺序以及弹出的顺序。当此时需要从左到右遍历时，按照层序遍历的方法弹出和插入，先弹出队首，插入队尾，先插入左边再插入右边。当从右往左遍历时，需要将弹出顺序及插入顺序进行相反的操作，并且此时从队尾弹出，队首插入，先插入右边再插入左边。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
 
+        q = collections.deque([root])
+        leftOrder = True
+        ans = []
+
+        while q:
+            level = list()
+            size = len(q)
+            for _ in range(size):
+                if leftOrder:
+                    node = q.popleft()
+                    if node.left:
+                        q.append(node.left)
+                    if node.right:
+                        q.append(node.right)
+
+                else:
+                    node = q.pop()
+                    if node.right:
+                        q.appendleft(node.right)
+                    if node.left:
+                        q.appendleft(node.left)
+                level.append(node.val)
+                
+            ans.append(level)
+            leftOrder = not leftOrder
+
+        return ans
 ```
 ```java
 
@@ -6176,7 +6294,34 @@ class Solution:
 - question: lc 515 &amp; 剑指 044 ：在每个树行中找最大值 link: https://leetcode.cn/problems/find-largest-value-in-each-tree-row/
     - answer:
 ```python
+# 层序遍历的过程中寻找每层的最大值并插入到最终结果中。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def largestValues(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        
+        q = collections.deque([root])
+        ans = []
 
+        while q:
+            size = len(q)
+            levelMax = -float("inf")
+            for _ in range(size):
+                node = q.popleft()
+                levelMax = max(levelMax, node.val)
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            ans.append(levelMax)
+        return ans
+                
 ```
 ```java
 
@@ -6185,7 +6330,33 @@ class Solution:
 - question: lc 199 &amp; 剑指 046 ：二叉树的右视图 link: https://leetcode.cn/problems/binary-tree-right-side-view/
     - answer:
 ```python
+# 层序遍历时，每次只把每层最后一个加入到结果中。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        
+        q = collections.deque([root])
+        ans = []
 
+        while q:
+            size = len(q)
+            node = None
+            for _ in range(size):
+                node = q.popleft()
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            ans.append(node.val)
+        
+        return ans
 ```
 ```java
 
@@ -6194,13 +6365,25 @@ class Solution:
 - question: lc 100 ：相同的树 link: https://leetcode.cn/problems/same-tree/
     - answer:
 ```python
-
+# 直接dfs判断值的同时递归
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        if not p or not q:
+            return p == q
+        else:
+            return p.val == q.val and self.isSameTree(p.right, q.right) and self.isSameTree(p.left, q.left)
 ```
 ```java
 
 ```
 
-- question: lc 101 &amp; 剑指 28 ：对称二叉树 【top100】 link: https://leetcode.cn/problems/symmetric-tree/
+- question: lc 101 ：对称二叉树 link: https://leetcode.cn/problems/symmetric-tree/
     - answer:
 ```python
 
