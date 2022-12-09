@@ -6386,7 +6386,24 @@ class Solution:
 - question: lc 101 ：对称二叉树 link: https://leetcode.cn/problems/symmetric-tree/
     - answer:
 ```python
+# 类似于检查二叉树是否相等，将二叉树拆成两个二叉树进行比较，但不同点在于每次迭代时，左边的左子树与右边的右子树相比，左边的右子树与右边的右子树相比。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        if not root:
+            return True
 
+        def dfs(node1, node2):
+            if not node1 or not node2:
+                return node1 == node2
+            else:
+                return node1.val == node2.val and dfs(node1.left, node2.right) and dfs(node1.right, node2.left)
+        return dfs(root.left, root.right)
 ```
 ```java
 
@@ -6395,7 +6412,28 @@ class Solution:
 - question: lc 662 ：二叉树最大宽度 link: https://leetcode.cn/problems/maximum-width-of-binary-tree/
     - answer:
 ```python
-
+# 记录每个子节点的节点与节点位置，结果是每一行的最后一个节点的位置减掉第一个位置加一。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        q = [[root,1]]
+        ans = 1
+        while q:
+            level = []
+            for node, index in q:
+                if node.left:
+                    level.append([node.left, index*2])
+                if node.right:
+                    level.append([node.right, index*2+1])
+            ans = max(ans, q[-1][1] - q[0][1] + 1)
+            q = level
+        
+        return ans
 ```
 ```java
 
