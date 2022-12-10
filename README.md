@@ -4344,7 +4344,44 @@ var reversePairs = function(nums) {
 
 ```
 ```java
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var sortColors = function(nums) {
+    quickSort(nums, 0, nums.length - 1);
+};
 
+let quickSort = (nums, left, right) => {
+    if (left > right) {
+        return nums;
+    }
+    let l = left;
+    let r = right;
+    let pivot = nums[l];
+    while (l < r) {
+        while (l < r && pivot <= nums[r]) {
+            r--;
+        }
+        if (pivot > nums[r]) {
+            nums[l] = nums[r]
+            l++;
+        }
+        while (l < r && nums[l] <= pivot) {
+            l++;
+        }
+        if (nums[l] > pivot ) {
+            nums[r] = nums[l];
+            r--;
+        }
+        if (l >= r) {
+            nums[l] = pivot;
+        }
+    }
+    quickSort(nums, left, l - 1);
+    quickSort(nums, l + 1, right);
+
+}
 ```
 
 - question: lc179剑指45 ：最大数 link: https://leetcode.cn/problems/largest-number/
@@ -4353,6 +4390,22 @@ var reversePairs = function(nums) {
 
 ```
 ```java
+/**
+ * @param {number[]} nums
+ * @return {string}
+ */
+var largestNumber = function(nums) {
+    nums.sort((a,b) => {
+        var stra = b.toString() + a.toString(), strb = a.toString() + b.toString();
+        if (stra > strb) {
+            return 1
+        } else {
+            return -1
+        }
+    });
+    if (nums[0] == 0) return '0'
+    return nums.join('');
+};
 
 ```
 
@@ -4362,7 +4415,40 @@ var reversePairs = function(nums) {
 
 ```
 ```java
-
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+var merge = function(intervals) {
+    // 先进行排序 （区间第一个元素）从小到大
+    const sortedIntervals = intervals.sort((a, b) => a[0] - b[0]);
+    const result = [];
+    // 取出第一个区间
+    let current = sortedIntervals[0];
+    for (let i = 1; i < sortedIntervals.length; i++) {
+        // 循环比较后面的区间
+        const interval = sortedIntervals[i];
+        // 如果下一个区间的最小值 存在于当前比较的区间（小于当前区间的最大值） 则合并
+        if (interval[0] <= current[1]) {
+            // 合并取两个区间最大值的最大者
+            current[1] = Math.max(current[1], interval[1]); // case 1
+        } else {
+            // 如果不在前一个区间内 说明当前区间与下一个区间不连续 则把当前区间添加到结果集
+            result.push(current);
+            // 更新比较的当前区间为下一个区间
+            current = interval; // case 2
+        }
+    }
+    // 遍历结束之后两种情况 
+    // case 1 最后一个区间被合并，则需要将current添加到结果集
+    // case 2 最后一个区间没有被合并，也需要将current添加到结果集
+    result.push(current);
+    return result;
+};
 ```
 
 - question: lc57 ：插入区间 link: https://leetcode.cn/problems/insert-interval/
@@ -4371,7 +4457,41 @@ var reversePairs = function(nums) {
 
 ```
 ```java
+/**
+ * @param {number[][]} intervals
+ * @param {number[]} newInterval
+ * @return {number[][]}
+ */
+var insert = function(intervals, newInterval) {
+    let len = intervals.length;
+    let res = [];
+    for (let i = 0; i < intervals.length; i++) {
+        if (newInterval[0] < intervals[i][0]) {
+            intervals.splice(i, 0, newInterval);
+            break;
+        } 
+    }
+    if (intervals.length == len) {
+        intervals.push(newInterval)
+    }
 
+
+    let cur = intervals[0];
+    for (let i = 1; i < intervals.length; i++) {
+        let interval = intervals[i]
+        if (interval[0] <= cur[1] ) {
+            cur[1] = Math.max(interval[1], cur[1]);
+            console.log(cur)
+        } else {
+            res.push(cur);
+            cur = interval
+        }
+    }
+    res.push(cur);
+    return res;
+
+
+};
 ```
 
 - question: lc905 ：按奇偶排序数组 link: https://leetcode.cn/problems/sort-array-by-parity/
