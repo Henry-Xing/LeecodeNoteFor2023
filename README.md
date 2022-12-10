@@ -6869,21 +6869,122 @@ class Solution:
 
 ### 数据结构设计
 
-lc 225 ：用队列实现栈
-lc 622 ：设计循环队列
-lc 380 &amp; 剑指 030 ：O(1) 时间插入、删除和获取随机元素
-lc 381 ：O(1) 时间插入、删除和获取随机元素 - 允许重复
-缓存机制
-FIFO 缓存机制
-lc 146 &amp; 剑指 031 ：LRU 缓存机制
-lc 460 ：LFU 缓存
-并查集 20-11
-并查集优化 20-12
-lc 547 &amp; 剑指 116 ：省份数量
-lc 200 ：岛屿数量【top100】
-lc 721 ：账户合并
+- question: lc 155 ：最小栈 link: https://leetcode.cn/problems/min-stack/
+    - answer:
+```python
+# 用一个辅助栈去存储每次入栈时的当前值与之前的最小值的最小值，弹出时，同时弹出主栈与辅助栈顶值。
+class MinStack:
 
-- question: lc 155 ：最小栈 link:
+    def __init__(self):
+        self.stack = []
+        self.minStack = [math.inf]
+
+
+    def push(self, val: int) -> None:
+        self.stack.append(val)
+        self.minStack.append(min(self.minStack[-1], val))
+
+
+    def pop(self) -> None:
+        self.stack.pop()
+        self.minStack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        return self.minStack[-1]
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(val)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
+```
+```java
+
+```
+
+- question: lc 225 ：用队列实现栈 link: https://leetcode.cn/problems/implement-stack-using-queues/
+    - answer:
+```python
+# 两个队列实现一个栈，每次入栈时，将入栈值插入空队中，然后将另一个队的值不停弹出且插入到空队中，直到全部插入，将两个队地址交换。
+class MyStack:
+
+    def __init__(self):
+        self.q1 = collections.deque()
+        self.q2 = collections.deque()
+
+    def push(self, x: int) -> None:
+        self.q2.append(x)
+        while self.q1:
+            self.q2.append(self.q1.popleft())
+        self.q1, self.q2 = self.q2, self.q1
+
+    def pop(self) -> int:
+        return self.q1.popleft()
+
+    def top(self) -> int:
+        return self.q1[0]
+
+    def empty(self) -> bool:
+        return not self.q1
+
+# Your MyStack object will be instantiated and called as such:
+# obj = MyStack()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.empty()
+```
+```java
+
+```
+
+- question: lc 622 ：设计循环队列 link: https://leetcode.cn/problems/design-circular-queue/
+    - answer:
+```python
+# front记录队首，rear记录队尾，因为每次插值时插入rear的位置之后rear加一，所以初始化空间为k+1，且rear的位置一直为空，而队尾真正的位置是rear+1.
+class MyCircularQueue:
+
+    def __init__(self, k: int):
+        self.q = [0] * (k + 1)
+        self.front = 0
+        self.rear = 0
+
+    def enQueue(self, value: int) -> bool:
+        if self.isFull():
+            return False
+        else:
+            self.q[self.rear] = value
+            self.rear = (self.rear + 1) % len(self.q)
+            return True
+
+    def deQueue(self) -> bool:
+        if self.isEmpty():
+            return False
+        else:
+            self.front = (self.front + 1) % len(self.q)
+            return True
+
+    def Front(self) -> int:
+        return -1 if self.isEmpty() else self.q[self.front]
+
+    def Rear(self) -> int:
+        return -1 if self.isEmpty() else self.q[self.rear - 1]
+
+    def isEmpty(self) -> bool:
+        return self.rear == self.front
+
+    def isFull(self) -> bool:
+        return (self.rear + 1) % len(self.q) == self.front
+```
+```java
+
+```
+
+- question: lc 380 ：O(1)时间插入、删除和获取随机元素 link: https://leetcode.cn/problems/insert-delete-getrandom-o1/
     - answer:
 ```python
 
@@ -6892,7 +6993,7 @@ lc 721 ：账户合并
 
 ```
 
-- question:  link:
+- question: lc 381 ：O(1) 时间插入、删除和获取随机元素 - 允许重复 link:
     - answer:
 ```python
 
@@ -6901,7 +7002,7 @@ lc 721 ：账户合并
 
 ```
 
-- question:  link:
+- question: lc 146 &amp; 剑指 031 ：LRU 缓存机制 link:
     - answer:
 ```python
 
@@ -6910,7 +7011,7 @@ lc 721 ：账户合并
 
 ```
 
-- question:  link:
+- question: lc 460 ：LFU 缓存 link:
     - answer:
 ```python
 
@@ -6919,7 +7020,25 @@ lc 721 ：账户合并
 
 ```
 
-- question:  link:
+- question: lc 547 &amp; 剑指 116 ：省份数量 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 200 ：岛屿数量【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 721 ：账户合并 link:
     - answer:
 ```python
 
@@ -7032,8 +7151,8 @@ lc 746 &amp; 剑指 088 ：使用最小花费爬楼梯
 lc 198 &amp; 剑指 089 ：打家劫舍【top100】
 lc 213 &amp; 剑指 090 ：打家劫舍 II
 lc 337 ：打家劫舍 III【top100】
-0 - 1 背包问题 28-7
-#### 完全背包问题 28-8
+
+#### 背包问题/完全背包问题
 lc 322 &amp; 剑指 103 ：零钱兑换
 lc 518 ：零钱兑换 II
 lc 377 &amp; 剑指 104 ：组合总和 Ⅳ
