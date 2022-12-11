@@ -7074,7 +7074,7 @@ class RandomizedCollection:
 
 ```
 
-- question: lc 146 ：LRU 缓存机制 link:
+- question: lc 146 ：LRU 缓存机制 link: https://leetcode.cn/problems/lru-cache/
     - answer:
 ```python
 
