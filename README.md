@@ -6987,22 +6987,94 @@ class MyCircularQueue:
 - question: lc 380 ：O(1)时间插入、删除和获取随机元素 link: https://leetcode.cn/problems/insert-delete-getrandom-o1/
     - answer:
 ```python
+# 用字典进行查询及删除，用list进行随机选择。字典里key是要存储的值，value是对应list的index。删除时，把list最后一个值与要删除的值交换并pop，且最后一个值的dic要更新。
+import random
+class RandomizedSet:
 
+    def __init__(self):
+        self.dic = {}
+        self.lis = []
+
+
+    def insert(self, val: int) -> bool:
+        if val in self.dic:
+            return False
+        else:
+            self.dic[val] = len(self.lis)
+            self.lis.append(val)
+            return True
+
+
+    def remove(self, val: int) -> bool:
+        if val in self.dic:
+            self.lis[self.dic[val]] = self.lis[-1]
+            self.dic[self.lis[-1]] = self.dic[val]
+            del self.dic[val]
+            self.lis.pop()
+            return True 
+        else:
+            return False
+
+
+    def getRandom(self) -> int:
+        # index = randint(0,len(self.lis)-1)
+        # return self.lis[index]
+        return choice(self.lis)
 ```
 ```java
 
 ```
 
-- question: lc 381 ：O(1) 时间插入、删除和获取随机元素 - 允许重复 link:
+- question: lc 381 ：O(1) 时间插入，删除和获取随机元素，允许重复 link: https://leetcode.cn/problems/insert-delete-getrandom-o1-duplicates-allowed/
     - answer:
 ```python
+class RandomizedCollection:
 
+    def __init__(self):
+        self.dic = {}
+        self.lis = []
+
+    def insert(self, val: int) -> bool:
+        if val in self.dic:
+            self.dic[val].append(len(self.lis))
+            self.lis.append(val)
+            return False
+        else:
+            self.dic[val] = [len(self.lis)]
+            self.lis.append(val)
+            return True
+
+    def remove(self, val: int) -> bool:
+        if val in self.dic:
+            # 获得要删除元素的最后一个index
+            
+            index = self.dic[val][-1]
+            # 在lis中，将要删除元素的值赋为lis最后一个的值
+            self.lis[index] = self.lis[-1]
+            # 在字典中将lis最后一个值的索引改为要删除元素在lis中的索引
+            self.dic[self.lis[-1]][-1] = index
+            # 插入后需要重新排序数组，否则会超出限制。
+            self.dic[self.lis[-1]].sort()
+            # 在字典中将要删除元素的索引弹出，在list中弹出最后一个元素
+            self.dic[val].pop()
+            self.lis.pop()
+            # 检查此时要删除元素在字典中的list是否为空，如果为空则删除
+            if not self.dic[val]:
+                del self.dic[val]
+            
+            return True
+        else:
+            return False
+
+
+    def getRandom(self) -> int:
+        return choice(self.lis)
 ```
 ```java
 
 ```
 
-- question: lc 146 &amp; 剑指 031 ：LRU 缓存机制 link:
+- question: lc 146 ：LRU 缓存机制 link:
     - answer:
 ```python
 
