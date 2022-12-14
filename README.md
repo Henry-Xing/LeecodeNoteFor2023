@@ -7154,13 +7154,101 @@ class LRUCache:
 - question: lc 547 ：省份数量 link: https://leetcode.cn/problems/number-of-provinces/
     - answer:
 ```python
+# 利用dfs的方式去遍历所有省份。当前城市的连接城市继续寻找下一个连接城市，直到没有连接的城市，省份数加一，继续找一个没有访问过的城市作为起点，往下遍历。
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        n = len(isConnected)
+        visited = set()
+        ans = 0
 
+        def dfs(start):
+            for end in range(n):
+                if isConnected[start][end] and end not in visited:
+                    visited.add(end)
+                    dfs(end)
+        
+        for start in range(n):
+            if start not in visited:
+                dfs(start)
+                ans += 1
+        
+        return ans
 ```
 ```java
 
 ```
 
 - question: lc 200 ：岛屿数量 link: https://leetcode.cn/problems/number-of-islands/
+    - answer:
+```python
+# 用dfs的方式遍历图，因为岛屿只和上下左右有关。dfs时每次遍历点要进行标记，然后注意停止条件。
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        def dfs(grid, row, col):
+            if row < 0 or row >= nr or col < 0 or col >= nc or grid[row][col] != "1":
+                return
+            else:
+                grid[row][col] = "2"
+            
+            dfs(grid, row, col+1)
+            dfs(grid, row, col-1)
+            dfs(grid, row+1, col)
+            dfs(grid, row-1, col)
+        
+        nr = len(grid)
+        nc = len(grid[0])
+        ans = 0
+
+        for i in range(nr):
+            for j in range(nc):
+                if grid[i][j] == "1":
+                    ans += 1
+                    dfs(grid, i, j)
+
+        return ans
+```
+```java
+
+```
+
+- question: lc 463 ：岛屿的周长 link: https://leetcode.cn/problems/island-perimeter/
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 695 ：岛屿的最大面积 link: https://leetcode.cn/problems/max-area-of-island/
+    - answer:
+```python
+# dfs遍历图,每次加一,遇到海和不符合要求的停止并返回0.最终放回最大面积.
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        def dfs(grid, row, col):
+            if row < 0 or row >= nr or col < 0 or col >= nc or grid[row][col] != 1:
+                return 0
+            else:
+                grid[row][col] = 2
+                return 1 + dfs(grid, row, col+1) + dfs(grid, row, col-1) + dfs(grid, row+1, col) + dfs(grid, row-1, col)
+        
+        nr = len(grid)
+        nc = len(grid[0])
+        ans = 0
+
+        for i in range(nr):
+            for j in range(nc):
+                if grid[i][j] == 1:
+                    ans = max(ans, dfs(grid, i, j))
+                
+        return ans
+```
+```java
+
+```
+
+- question: lc 827 ：最大人工岛link: 
     - answer:
 ```python
 
