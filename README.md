@@ -7077,13 +7077,72 @@ class RandomizedCollection:
 - question: lc 146 ：LRU 缓存机制 link: https://leetcode.cn/problems/lru-cache/
     - answer:
 ```python
+# 用双向链表存储数据，用字典存储节点信息。当查询信息和插入时，需要将节点移动到首部，当字典存满后，需要删除尾部节点。所以重点在于写一个插入首部节点的方法以及删除尾部节点的方法。要实现移动到首部，需要实现插入首部和删除节点，移动过程是先删除节点再在首部插入。插入首部是通过首部标记，将新节点插入其中。删除尾部节点是通过尾部标记得到尾部前一个节点，删除。同时如果是新加入的节点，则size++，如果是已经存在的，则只更新value。
+class LinkedNode:
+    def __init__(self, key = 0, value = 0):
+        self.key = key
+        self.value = value
+        self.next = None
+        self.pre = None
 
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.cache = dict()
+        self.head = LinkedNode()
+        self.tail = LinkedNode()
+        self.capacity = capacity
+        self.size = 0
+        self.head.next = self.tail
+        self.tail.pre = self.head
+
+    def get(self, key: int) -> int:
+        if key not in self.cache:
+            return -1
+        else:
+            node = self.cache[key]
+            self.moveToHead(node)
+            return node.value
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.cache:
+            node = self.cache[key]
+            node.value = value
+            self.moveToHead(node)
+        else:
+            node = LinkedNode(key, value)
+            self.cache[key] = node
+            self.addToHead(node)
+            self.size += 1
+            if self.size > self.capacity:
+                node = self.removeTail()
+                self.cache.pop(node.key)
+                self.size -= 1
+            
+    def addToHead(self, node):
+        node.pre = self.head
+        node.next = self.head.next
+        self.head.next.pre = node
+        self.head.next = node
+    
+    def moveToHead(self, node):
+        self.removeNode(node)
+        self.addToHead(node)
+    
+    def removeNode(self, node):
+        node.pre.next = node.next
+        node.next.pre = node.pre
+
+    def removeTail(self):
+        node = self.tail.pre
+        self.removeNode(node)
+        return node
 ```
 ```java
 
 ```
 
-- question: lc 460 ：LFU 缓存 link:
+- question: lc 460 ：LFU 缓存 link: https://leetcode.cn/problems/lfu-cache/
     - answer:
 ```python
 
@@ -7092,7 +7151,7 @@ class RandomizedCollection:
 
 ```
 
-- question: lc 547 &amp; 剑指 116 ：省份数量 link:
+- question: lc 547 ：省份数量 link: https://leetcode.cn/problems/number-of-provinces/
     - answer:
 ```python
 
