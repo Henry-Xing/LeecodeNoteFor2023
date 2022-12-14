@@ -7160,7 +7160,7 @@ class LRUCache:
 
 ```
 
-- question: lc 200 ：岛屿数量【top100】 link:
+- question: lc 200 ：岛屿数量 link: https://leetcode.cn/problems/number-of-islands/
     - answer:
 ```python
 
@@ -7169,7 +7169,7 @@ class LRUCache:
 
 ```
 
-- question: lc 721 ：账户合并 link:
+- question: lc 721 ：账户合并 link: https://leetcode.cn/problems/accounts-merge/
     - answer:
 ```python
 
