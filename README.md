@@ -7260,7 +7260,49 @@ class Solution:
 - question: lc 721 ：账户合并 link: https://leetcode.cn/problems/accounts-merge/
     - answer:
 ```python
+# 本题核心在于并查集的创建过程，首先是初始化过程，初始化时，每个邮件视为单独的一个集合，所以初始化长度则为邮件数量。之后是合并操作。每批邮件以同用户名下第一个邮件的index为目标进行合并，同时合并到同一个index下。之后遇到在此名字下的邮件但unionList[index] != index说明此email在之前的名字下就出现过，于是要将之前的与当前的合并为同一个index下。 
+class UnionFind:
+    def __init__(self, n):
+        self.unionList = list(range(n))
 
+    def find(self, index):
+        if self.unionList[index] != index:
+            self.unionList[index] = self.find(self.unionList[index])
+        return self.unionList[index]
+
+    def merge(self, index1, index2):
+        self.unionList[self.find(index2)] = self.find(index1) 
+
+
+class Solution:
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        emailName = {}
+        emailIndex = {}
+
+        for acc in accounts:
+            name = acc[0]
+            for email in acc[1:]:
+                if email not in emailIndex:
+                    emailIndex[email] = len(emailIndex)
+                    emailName[email] = name
+
+        union = UnionFind(len(emailIndex))
+
+        for acc in accounts:
+            first = emailIndex[acc[1]]
+            for email in acc[2:]:
+                union.merge(first, emailIndex[email])
+
+        ans = {}
+
+        for email, index in emailIndex.items():
+            index = union.find(index)
+            if index in ans:
+                ans[index].append(email)
+            else:
+                ans[index] = [email]
+        
+        return [[emailName[emails[0]]] + sorted(emails) for emails in ans.values()]
 ```
 ```java
 
@@ -7291,23 +7333,7 @@ lc 440 ：字典序的第K小数字
 
 ### 回溯算法
 
-lc 112 和 113 &amp; 剑指 34 ：路径总和
-lc 46 和 47 &amp; 剑指 083 和 084 ：全排列【top100】
-lc 77 &amp; 剑指 080 ：组合
-lc 39 和 40 &amp; 剑指 081 和 082  ：组合总和【top100】
-lc 78 和 90 &amp; 剑指 079：子集【top100】
-lc 17 ：电话号码的字母组合【top100】
-lc 93 &amp; 剑指 087 ：复原 IP 地址
-lc 22 &amp; 剑指 085 ：括号生成【top100】
-lc 51 ：N 皇后（经典） https://leetcode.cn/problems/n-queens/
-lc 37 ：数独问题
-lc 401 ：二进制手表
-lc 131 &amp; 剑指 086 ：分割回文串
-lc 842 ：将数组拆分成斐波那契序列
-lc 79 &amp; 剑指 12 ： 单词搜索 【top100】
-lc 679 ：24 点游戏
-
-- question:  link:
+- question: lc 112 ：路径总和 link:
     - answer:
 ```python
 
@@ -7315,6 +7341,143 @@ lc 679 ：24 点游戏
 ```java
 
 ```
+
+- question: lc 113 ：路径总和 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+
+- question: lc 46 和 47 &amp; 剑指 083 和 084 ：全排列【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 77 &amp; 剑指 080 ：组合 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 39 和 40 &amp; 剑指 081 和 082  ：组合总和【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 78 和 90 &amp; 剑指 079：子集【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 17 ：电话号码的字母组合【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 93 &amp; 剑指 087 ：复原 IP 地址 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 22 &amp; 剑指 085 ：括号生成【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 51 ：N 皇后（经典）link: https://leetcode.cn/problems/n-queens/ 
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 37 ：数独问题 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 401 ：二进制手表 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 131 &amp; 剑指 086 ：分割回文串 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 842 ：将数组拆分成斐波那契序列 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 79 &amp; 剑指 12 ： 单词搜索 【top100】 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 679 ：24 点游戏 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
 
 ### 贪心算法
 
@@ -7350,6 +7513,32 @@ lc 330 ：按要求补齐数组
 
 ```
 
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
 ### 动态规划
 
 lc 509 &amp; 剑指 10-1 ：斐波那契数列问题 - 动态规划入门
