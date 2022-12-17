@@ -7333,7 +7333,300 @@ lc 440 ：字典序的第K小数字
 
 ### 回溯算法
 
-- question: lc 112 ：路径总和 link:
+- question: lc 112 ：路径总和 link: https://leetcode.cn/problems/path-sum/submissions/389620646/
+    - answer:
+```python
+# 用bfs去遍历二叉树的同时，用两个队列分别存储节点和当前路径长度。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        if not root:
+            return False
+        
+        qNode = collections.deque([root])
+        qVal = collections.deque([root.val])
+
+        while qNode:
+            node = qNode.popleft()
+            temp = qVal.popleft()
+            if not node.right and not node.left:
+                if temp == targetSum:
+                    return True
+            
+            if node.left:
+                qNode.append(node.left)
+                qVal.append(temp + node.left.val)
+            
+            if node.right:
+                qNode.append(node.right)
+                qVal.append(temp + node.right.val)
+            
+        return False
+                
+```
+```java
+
+```
+
+- question: lc 113 ：路径总和 link: https://leetcode.cn/problems/path-sum-ii/
+    - answer:
+```python
+# 类似上一题的方法，用bfs去遍历的同时存下路径，符合要求则加入放回结果中。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        if not root:
+            return []
+        
+        qNode = collections.deque([root])
+        qRout = collections.deque()
+        qRout.append([root.val])
+
+        ans = []
+
+        while qNode:
+            node = qNode.popleft()
+            rout = qRout.popleft()
+
+            if not node.right and not node.left:
+                if sum(rout) == targetSum:
+                    ans.append(rout)
+            
+            if node.left:
+                qNode.append(node.left)
+                qRout.append(rout + [node.left.val])
+            
+            if node.right:
+                qNode.append(node.right)
+                qRout.append(rout + [node.right.val])
+        
+        return ans
+```
+```java
+
+```
+
+- question: lc 46 全排列 link: https://leetcode.cn/problems/permutations/
+    - answer:
+```python
+# python itertools 提供permutations和combinations两个方法可以直接做排列组合。
+# 用回溯的思想做全排列。
+# from itertools import permutations
+# class Solution:
+#     def permute(self, nums: List[int]) -> List[List[int]]:
+#         return list(permutations(nums))
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        if not nums:
+            return []
+
+        ans = []
+        n = len(nums)
+
+        def process(start):
+            if start == n:
+                # print("1",nums)
+                # print("2",nums[:])
+                # 如果append(nums)是将nums地址传入，后面的任何操作都会导致之前已经append的nums改变。
+                ans.append(nums[:])
+                # print("3",ans)
+            
+            for i in range(start, n):
+                nums[i], nums[start] = nums[start], nums[i]
+                process(start + 1)
+                nums[i], nums[start] = nums[start], nums[i]
+        
+        process(0)
+
+        return ans
+```
+```java
+
+```
+
+- question: lc 47 全排列 link:
+    - answer:
+```python
+# from itertools import permutations 
+# class Solution:
+#     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+#         return list(set(permutations(nums, len(nums))))
+
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        if not nums:
+            return []
+        
+        ans = []
+        n = len(nums)
+
+        def process(start):
+            if start == n:
+                if nums[:] not in ans:
+                    ans.append(nums[:])
+
+            for i in range(start, n):
+                nums[i], nums[start] = nums[start], nums[i]
+                process(start + 1)
+                nums[i], nums[start] = nums[start], nums[i]
+        
+        process(0)
+
+        return ans
+```
+```java
+
+```
+
+- question: lc 77 ：组合 link: https://leetcode.cn/problems/combinations/description/
+    - answer:
+```python
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        ans = []
+        
+        def process(start, temp):
+            if len(temp) == k:
+                ans.append(temp[:])
+                return
+            if (n+1-start + len(temp)) < k:
+                return
+            
+            for i in range(start, n + 1):
+                # 增减枝
+                temp.append(i)
+                process(i+1, temp)
+                temp.pop()
+        
+        process(1, [])
+
+        return ans
+```
+```java
+
+```
+
+- question: lc 39 ：组合总和 link: https://leetcode.cn/problems/combination-sum/description/
+    - answer:
+```python
+# 当前点可选择点是当前位置到结尾的位置的所有值，递归结束后需要剪枝pop
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+
+        def process(temp, target, start):
+            if target == 0:
+                ans.append(temp[:])
+                return 
+            if target < 0:
+                return
+            if target > 0:
+                for i in range(start, len(candidates)):
+                    temp.append(candidates[i])
+                    process(temp, target - candidates[i], i)
+                    temp.pop()
+        
+        ans = []
+        process([], target, 0)
+
+        return ans
+```
+```java
+
+```
+
+- question: lc 40 ：组合总和 link: https://leetcode.cn/problems/combination-sum-ii/
+    - answer:
+```python
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+
+        def process(temp, target, start):
+            if target == 0:
+                ans.append(temp[:])
+                return
+            if target < 0:
+                return
+            
+            for i in range(start, n):
+                if candidates[i] > target:
+                    return
+                if i > start and candidates[i - 1] == candidates[i]:
+                    continue
+
+                temp.append(candidates[i])
+                process(temp, target - candidates[i], i + 1)
+                temp.pop()
+        
+        ans = []
+        n = len(candidates)
+        candidates.sort()
+        process([], target, 0)
+
+        return ans
+```
+```java
+
+```
+
+- question: lc 78 ：子集 link: https://leetcode.cn/problems/subsets/description/
+    - answer:
+```python
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+
+        def process(temp, start):
+            ans.append(temp[:])
+            for i in range(start, n):
+                temp.append(nums[i])
+                process(temp, i + 1)
+                temp.pop()
+        
+        ans = []
+        n = len(nums)
+        process([], 0)
+
+        return ans
+```
+```java
+
+```
+
+- question: lc 90 ：子集 link: https://leetcode.cn/problems/subsets-ii/
+    - answer:
+```python
+# 先用排序和筛选可以符合约束条件
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        def process(temp, start):
+            if temp not in ans:
+                ans.append(temp[:])
+            for i in range(start, n):
+                temp.append(nums[i])
+                process(temp, i + 1)
+                temp.pop()
+        nums.sort()
+        ans = []
+        n = len(nums)
+        process([], 0)
+
+        return ans
+```
+```java
+
+```
+
+- question: lc 17 ：电话号码的字母组合 link: https://leetcode.cn/problems/letter-combinations-of-a-phone-number/
     - answer:
 ```python
 
@@ -7342,7 +7635,7 @@ lc 440 ：字典序的第K小数字
 
 ```
 
-- question: lc 113 ：路径总和 link:
+- question: lc 93 ：复原 IP 地址 link: https://leetcode.cn/problems/restore-ip-addresses/
     - answer:
 ```python
 
@@ -7351,62 +7644,7 @@ lc 440 ：字典序的第K小数字
 
 ```
 
-
-- question: lc 46 和 47 &amp; 剑指 083 和 084 ：全排列【top100】 link:
-    - answer:
-```python
-
-```
-```java
-
-```
-
-- question: lc 77 &amp; 剑指 080 ：组合 link:
-    - answer:
-```python
-
-```
-```java
-
-```
-
-- question: lc 39 和 40 &amp; 剑指 081 和 082  ：组合总和【top100】 link:
-    - answer:
-```python
-
-```
-```java
-
-```
-
-- question: lc 78 和 90 &amp; 剑指 079：子集【top100】 link:
-    - answer:
-```python
-
-```
-```java
-
-```
-
-- question: lc 17 ：电话号码的字母组合【top100】 link:
-    - answer:
-```python
-
-```
-```java
-
-```
-
-- question: lc 93 &amp; 剑指 087 ：复原 IP 地址 link:
-    - answer:
-```python
-
-```
-```java
-
-```
-
-- question: lc 22 &amp; 剑指 085 ：括号生成【top100】 link:
+- question: lc 22 ：括号生成 link: https://leetcode.cn/problems/generate-parentheses/
     - answer:
 ```python
 
@@ -7424,7 +7662,7 @@ lc 440 ：字典序的第K小数字
 
 ```
 
-- question: lc 37 ：数独问题 link:
+- question: lc 37 ：数独问题 link: https://leetcode.cn/problems/sudoku-solver/
     - answer:
 ```python
 
@@ -7433,7 +7671,7 @@ lc 440 ：字典序的第K小数字
 
 ```
 
-- question: lc 401 ：二进制手表 link:
+- question: lc 401 ：二进制手表 link: https://leetcode.cn/problems/binary-watch/
     - answer:
 ```python
 
@@ -7442,7 +7680,7 @@ lc 440 ：字典序的第K小数字
 
 ```
 
-- question: lc 131 &amp; 剑指 086 ：分割回文串 link:
+- question: lc 131 ：分割回文串 link: https://leetcode.cn/problems/palindrome-partitioning/
     - answer:
 ```python
 
@@ -7451,7 +7689,7 @@ lc 440 ：字典序的第K小数字
 
 ```
 
-- question: lc 842 ：将数组拆分成斐波那契序列 link:
+- question: lc 842 ：将数组拆分成斐波那契序列 link: https://leetcode.cn/problems/split-array-into-fibonacci-sequence/
     - answer:
 ```python
 
@@ -7460,7 +7698,7 @@ lc 440 ：字典序的第K小数字
 
 ```
 
-- question: lc 79 &amp; 剑指 12 ： 单词搜索 【top100】 link:
+- question: lc 79 ： 单词搜索 link: https://leetcode.cn/problems/word-search/
     - answer:
 ```python
 
@@ -7469,7 +7707,7 @@ lc 440 ：字典序的第K小数字
 
 ```
 
-- question: lc 679 ：24 点游戏 link:
+- question: lc 679 ：24 点游戏 link: https://leetcode.cn/problems/24-game/
     - answer:
 ```python
 
