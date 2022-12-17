@@ -7629,7 +7629,35 @@ class Solution:
 - question: lc 17 ：电话号码的字母组合 link: https://leetcode.cn/problems/letter-combinations-of-a-phone-number/
     - answer:
 ```python
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
 
+        dic = {"2":"abc",
+        "3":"def",
+        "4":"ghi",
+        "5":"jkl",
+        "6":"mno",
+        "7":"pqrs",
+        "8":"tuv",
+        "9":"wxyz"}
+
+        k = len(digits)
+        ans = []
+
+        def process(i, temp):
+            if len(temp) == k:
+                ans.append("".join(temp))
+            else:
+                for c in dic[digits[i]]:
+                    temp.append(c)
+                    process(i + 1, temp)
+                    temp.pop()
+
+        process(0, [])
+
+        return ans
 ```
 ```java
 
