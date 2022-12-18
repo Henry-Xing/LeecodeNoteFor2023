@@ -7667,7 +7667,40 @@ class Solution:
 - question: lc 93 ：复原 IP 地址 link: https://leetcode.cn/problems/restore-ip-addresses/
     - answer:
 ```python
+# dfs每次确定一个位置，然后向下延申，直到所有都填入后发现不可行则退回。
+class Solution:
+    def restoreIpAddresses(self, s: str) -> List[str]:
 
+        def dfs(start: int, IDnums: int):
+            if IDnums == 4:
+                if start == len(s):
+                    ans.append(".".join([str(c) for c in temp]))
+                return
+
+            if start == len(s):
+                return
+
+            if s[start] == "0":
+                temp[IDnums] = 0
+                dfs(start + 1, IDnums + 1)
+                return
+
+            cur = 0
+            for i in range(start, len(s)):
+                cur = cur * 10 + int(s[i])
+                if 0 < cur <= 255:
+                    temp[IDnums] = cur
+                    dfs(i + 1, IDnums + 1)
+                else:
+                    break
+            
+        temp = [0] * 4
+
+        ans = []
+
+        dfs(0, 0)
+
+        return ans
 ```
 ```java
 
@@ -7676,7 +7709,30 @@ class Solution:
 - question: lc 22 ：括号生成 link: https://leetcode.cn/problems/generate-parentheses/
     - answer:
 ```python
+# 左括号和右括号分别计数，使用回溯的方法，当左括号数少与n时，可以插入左括号，同时进入下一次迭代，当右括号数小于左括号数时，可以插入右括号并进行下一次迭代，每次迭代完后需要把temp pop一下，回溯到前一个状态。
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
 
+        def dfs(temp, left, right):
+            print(temp)
+            if len(temp) == n*2:
+                ans.append("".join(temp))
+                return
+            if len(temp) < n*2:
+                if left < n:
+                    temp.append('(')
+                    dfs(temp, left + 1, right)
+                    temp.pop()
+                if right < left:
+                    temp.append(')')
+                    dfs(temp, left, right + 1)
+                    temp.pop()
+        
+        ans = []
+
+        dfs([], 0, 0)
+
+        return ans
 ```
 ```java
 
