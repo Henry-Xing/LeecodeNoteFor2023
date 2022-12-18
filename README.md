@@ -7741,7 +7741,44 @@ class Solution:
 - question: lc 51 ：N 皇后（经典）link: https://leetcode.cn/problems/n-queens/ 
     - answer:
 ```python
+# 有四个约束条件来约束皇后，不能在同一行，不能在同一列，不能在同左向右斜线，不能在同右向左斜线。row可以直接通过参数控制不在同一行，col和两个斜线分别用一个list来记录已经被占掉的位置。同时左向右斜线的同斜线上行列之差是相等的，于是只用记录行列之差即可记录此斜线是否被占用。右向左斜线的行列之和是相同的的，于是只用记录行列之和即可记录此斜线是否被占用。利用回溯的思想，递归完成后，需要删除之前的，使得回溯到上一状态。
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
 
+        def dfs(row: int):
+            if row == n:
+                board = []
+                for i in range(n):
+                    rowLine[queens[i]] = 'Q'
+                    # 将此行内记录的列值赋值为“Q”
+                    board.append("".join(rowLine))
+                    rowLine[queens[i]] = '.'
+                    # 还原
+                ans.append(board)
+                return
+            
+            for j in range(n):
+                if j in col or row + j in diag1 or row - j in diag2:
+                    continue
+                else:
+                    queens[row] = j
+                    col.append(j)
+                    diag1.append(row + j)
+                    diag2.append(row - j)
+                    dfs(row + 1)
+                    col.pop()
+                    diag1.pop()
+                    diag2.pop()
+
+        ans = []
+        col = []
+        diag1 = []
+        diag2 = []
+        queens = [-1] * n
+        rowLine = ['.'] * n
+        dfs(0)
+
+        return ans
 ```
 ```java
 
