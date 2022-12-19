@@ -8073,6 +8073,7 @@ class Solution:
 - question: lc 45 ：跳跃游戏 Ⅱ link: https://leetcode.cn/problems/jump-game-ii/
     - answer:
 ```python
+# 用与1类似的方法，找到目前的最大覆盖中心，而当前点的覆盖中心中的最大覆盖中心被用作下一次更新计算的标记值。
 class Solution:
     def jump(self, nums: List[int]) -> int:
         # n = len(nums)
@@ -8111,19 +8112,59 @@ class Solution:
 
 ```
 
-- question: lc 1578 ：避免重复字母的最小删除成本 link:
+- question: lc 1578 ：使绳子变成彩色的最短时间 link: https://leetcode.cn/problems/minimum-time-to-make-rope-colorful/description/
     - answer:
 ```python
+# 在相同的片段中，把比较小的损耗加上，只留下最大值的那个气球。
+class Solution:
+    def minCost(self, colors: str, neededTime: List[int]) -> int:
+        totalTime = 0
+        n = len(colors)
+        pos = 0
+        while pos < n - 1:
+            if colors[pos] == colors[pos + 1]:
+                start = pos
+                tempMax = neededTime[pos]
+                temp = 0
+                while pos < n - 1 and colors[pos] == colors[pos + 1]:
+                    if neededTime[pos + 1] < tempMax:
+                        temp += neededTime[pos + 1]
+                    else:
+                        temp += tempMax
+                        tempMax = neededTime[pos + 1]
+                    pos += 1
 
+                totalTime += temp
+            else:
+                pos += 1
+        
+        return totalTime
 ```
 ```java
 
 ```
 
-- question: lc 402 ：移掉K位数字 link:
+- question: lc 402 ：移掉K位数字 link: https://leetcode.cn/problems/remove-k-digits/
     - answer:
 ```python
+# 用栈存储，栈顶是最小值。每次弹出最小值删去。因为最小的数肯定是前缀最小。
+class Solution:
+    def removeKdigits(self, num: str, k: int) -> str:
 
+        numStack = []
+
+        for digit in num:
+            while k and numStack and numStack[-1] > digit:
+                numStack.pop()
+                k -= 1
+            numStack.append(digit)
+        
+        
+        final = numStack[:len(numStack)-k]
+
+        ans = "".join(final).lstrip("0")
+
+        return  ans if ans else "0"
 ```
 ```java
 
