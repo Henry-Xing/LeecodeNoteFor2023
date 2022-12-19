@@ -8054,7 +8054,17 @@ class Solution:
 - question: lc 55 ：跳跃游戏 link: https://leetcode.cn/problems/jump-game/
     - answer: 
 ```python
+# 设置k为当前所能到达的最远距离，不停更新这个最远范围，当当前位置是在范围内的，那么最大范围更新为当前位置加上能跳的距离和当前范围的最大值。当当前位置不在范围内时，说明此时已经不能到达了，也更不可能到达最后一格。
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        n = len(nums)
+        k = 0
 
+        for i in range(n):
+            if i > k: return False
+            k = max(k, i + nums[i])
+        
+        return True
 ```
 ```java
 
@@ -8063,7 +8073,39 @@ class Solution:
 - question: lc 45 ：跳跃游戏 Ⅱ link: https://leetcode.cn/problems/jump-game-ii/
     - answer:
 ```python
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        # n = len(nums)
+        # if n <= 1:
+        #     return 0
+        # pos = 0
+        # ans = 0
+        # while pos < n:
+        #     if nums[pos]:
+        #         mp = pos + 1
+        #         if pos + nums[pos] + 1 >= n:
+        #             ans += 1
+        #             break
+        #         for i in range(pos+1, pos + nums[pos] + 1):
+        #             if nums[i] + i > nums[mp] + mp:
+        #                 mp = i
+        #         pos = mp
+        #         ans += 1
+        #     else:
+        #         return 0
+        # return ans
 
+        n = len(nums)
+        cover, ans, end = 0, 0, 0
+
+        for i in range(n -1):
+            if i <= cover:
+                cover = max(cover, i + nums[i])
+                if i == end:
+                    end = cover
+                    ans += 1
+        
+        return ans
 ```
 ```java
 
