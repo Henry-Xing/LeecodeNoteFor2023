@@ -7310,20 +7310,90 @@ class Solution:
 ```
 ### 综合应用II
 
-lc 217 ：存在重复元素
-lc 219 ：存在重复元素 II
-lc 220 &amp; 剑指 057 ：存在重复元素 III
-lc 258 ：各位相加
-lc 202 ：快乐数
-lc 263 ：丑数
+- question: lc 217 ：存在重复元素 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 219 ：存在重复元素 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 220 ：存在重复元素 III link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 258 ：各位相加 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 202 ：快乐数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 263 ：丑数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
 
 #### 字典树 - 前缀树 - Tire
-lc 208 &amp; 剑指 062 ：实现 Trie (前缀树)【top100】
-lc 642 ：搜索自动补全系统
-lc 421 &amp; 剑指 067 ：数组中两个数的最大异或值
-lc 440 ：字典序的第K小数字
 
-- question:  link:
+- question: lc 208 ：实现 Trie (前缀树) link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 642 ：搜索自动补全系统 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 421 ：数组中两个数的最大异或值 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 440 ：字典序的第K小数字 link:
     - answer:
 ```python
 
@@ -7787,7 +7857,44 @@ class Solution:
 - question: lc 37 ：数独问题 link: https://leetcode.cn/problems/sudoku-solver/
     - answer:
 ```python
+# 首先创建三个数组分别存储行，列，3x3的填入情况。读取已经存在的board，讲未填入的位置信息存入space中，将已经填入的数字在之前的三个数组中进行标记。同时创建一个全局变量来标记是否完成填充，因为有且只有一个解，所以一旦填充完成，则可以直接返回。之后利用dfs，每次先从space中获取未填入的位置信息，之后遍历此位置可能填入的数字，每次选择数字后，首先检查此数字在当前位置是否已经被占用，如果没被占用，则先标记，然后进行下一递归获取下一个位置。当所有未填入位置都被赋值后，则可以直接返回，
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
 
+        def dfs(pos: int):
+            if pos == len(space):
+                self.valid = True
+                return
+            i,j = space[pos]
+            for digit in range(9):
+                if row[i][digit] == col[j][digit] == block[i//3][j//3][digit] == False:
+                    row[i][digit] = col[j][digit] = block[i//3][j//3][digit] = True
+                    board[i][j] = str(digit + 1)
+                    dfs(pos + 1)
+                    row[i][digit] = col[j][digit] = block[i//3][j//3][digit] = False
+                if self.valid:
+                    return
+
+
+        row = [[False] * 9 for _ in range(9)]
+        col = [[False] * 9 for _ in range(9)]
+        block = [[[False] * 9 for i in range(3)] for j in range(9)]
+
+        self.valid = False
+
+        space = []
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] == '.':
+                    space.append((i,j))
+                else:
+                    digit = int(board[i][j]) - 1
+                    row[i][digit] = col[j][digit] = block[i//3][j//3][digit] = True
+        
+        dfs(0)
 ```
 ```java
 
@@ -7796,7 +7903,29 @@ class Solution:
 - question: lc 401 ：二进制手表 link: https://leetcode.cn/problems/binary-watch/
     - answer:
 ```python
+# 利用回溯的方法来做，因为二进制很麻烦。提前把二进制转换后的数写到一个数组里[8, 4, 2, 1, 32, 16, 8, 4, 2, 1]，每次取一个数，表示当前灯亮起。同时检查约束条件。
+class Solution:
+    def readBinaryWatch(self, turnedOn: int) -> List[str]:
 
+        def dfs(start, h, m, lights):
+            if lights == turnedOn:
+                if m < 10:
+                    ans.append(str(h)+":"+"0"+str(m))
+                else:
+                    ans.append(str(h)+":"+str(m))
+                return
+            
+            for i in range(start, len(nums)):
+                if i < 4 and h + nums[i] <= 11:
+                        dfs(i + 1, h + nums[i], m, lights + 1)
+                if i >= 4 and m + nums[i] <= 59:
+                        dfs(i + 1, h, m + nums[i], lights + 1)
+        
+        ans = []
+        nums = [8, 4, 2, 1, 32, 16, 8, 4, 2, 1] # 前四个为小时，后六个为分钟
+        dfs(0, 0, 0, 0)
+        
+        return ans
 ```
 ```java
 
@@ -7805,7 +7934,38 @@ class Solution:
 - question: lc 131 ：分割回文串 link: https://leetcode.cn/problems/palindrome-partitioning/
     - answer:
 ```python
+# 预处理字符串的回文子串。之后通过查表可以知道是否是回文串。利用dfs的方式，固定起点，递归终点。
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        # precheck
+        n = len(s)
 
+        # this way is wrong because it just copy n time address for list.
+        # f = [[True] * n] * n
+
+        f = [[True] * n for _ in range(n)]
+
+        for i in reversed(range(n - 1)):
+                for j in range(i + 1, n):
+                    f[i][j] = (s[i] == s[j]) and f[i + 1][j - 1]
+
+        ans = []
+        temp = []
+
+        def dfs(start):
+            if start == n:
+                ans.append(temp[:])
+                return
+            
+            for j in range(start, n):
+                if f[start][j]:
+                    temp.append(s[start:j+1])
+                    dfs(j + 1)
+                    temp.pop()
+        
+        dfs(0)
+
+        return ans
 ```
 ```java
 
@@ -7820,7 +7980,7 @@ class Solution:
 
 ```
 
-- question: lc 79 ： 单词搜索 link: https://leetcode.cn/problems/word-search/
+- question: lc 79 ：单词搜索 link: https://leetcode.cn/problems/word-search/
     - answer:
 ```python
 
@@ -7841,30 +8001,57 @@ class Solution:
 
 ### 贪心算法
 
-lc 455 ：分发饼干 - 贪心思想
-lc 322 &amp; 剑指 103 ：零钱兑换 - 贪心 + 回溯【top100】
-贪心算法特点总结 25-4
-lc 45 ：跳跃游戏 Ⅱ
-lc 55 ：跳跃游戏【top100】
-lc 1578 ：避免重复字母的最小删除成本
-lc 402 ：移掉K位数字
-lc 409 ：最长回文串
-lc 680 &amp; 剑指 019 ：验证回文字符串 Ⅱ
-lc 316 ：去除重复字母
-lc 1047 ：删除字符串中的所有相邻重复项
-lc 1209 ：删除字符串中的所有相邻重复项 II
-lc 976 ：三角形的最大周长
-lc 674 ：最长连续递增序列
-lc 738 ：单调递增的数字
-lc 134 ： 加油站
-lc 767 ：重构字符串
-lc 621 ： 任务调度器【top100】
-lc 670 ：最大交换
-lc 861 ：翻转矩阵后的得分
-lc 1029 ：两地调度
-lc 330 ：按要求补齐数组
+- question: lc 455 ：分发饼干 - 贪心思想 link: https://leetcode.cn/problems/assign-cookies/description/
+    - answer:
+```python
+# 双指针加贪心策略，贪心策略是先用尽量小的饼干满足胃口小的孩子，这样能满足的人数最多。先排序再筛选。
+class Solution:
+    def findContentChildren(self, g: List[int], s: List[int]) -> int:
+        g.sort()
+        s.sort()
 
-- question:  link:
+        i, j, ans = 0, 0, 0
+
+        n, m = len(g), len(s)
+
+        while i < n and j < m:
+            while j < m:
+                if g[i] > s[j]:
+                    j += 1
+                else:
+                    break
+            if j < m:
+                ans += 1
+            i += 1
+            j += 1
+        
+        return ans
+```
+```java
+
+```
+
+- question: lc 322 ：零钱兑换 link: https://leetcode.cn/problems/coin-change/
+    - answer:
+```python
+# 动态规划的方法。F(x) = min(F(x), F(x-coin) + 1)
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [inf] * (amount + 1)
+
+        dp[0] = 0
+
+        for coin in coins:
+            for x in range(coin, amount + 1):
+                dp[x] = min(dp[x - coin] + 1, dp[x])
+        
+        return dp[amount] if dp[amount] != inf else -1  
+```
+```java
+
+```
+
+- question: lc 45 ：跳跃游戏 Ⅱ link: https://leetcode.cn/problems/jump-game-ii/
     - answer:
 ```python
 
@@ -7873,7 +8060,16 @@ lc 330 ：按要求补齐数组
 
 ```
 
-- question:  link:
+- question: lc 55 ：跳跃游戏 link: https://leetcode.cn/problems/jump-game/
+    - answer: 
+```python
+
+```
+```java
+
+```
+
+- question: lc 1578 ：避免重复字母的最小删除成本 link:
     - answer:
 ```python
 
@@ -7882,7 +8078,7 @@ lc 330 ：按要求补齐数组
 
 ```
 
-- question:  link:
+- question: lc 402 ：移掉K位数字 link:
     - answer:
 ```python
 
@@ -7891,7 +8087,7 @@ lc 330 ：按要求补齐数组
 
 ```
 
-- question:  link:
+- question: lc 409 ：最长回文串 link:
     - answer:
 ```python
 
@@ -7899,57 +8095,560 @@ lc 330 ：按要求补齐数组
 ```java
 
 ```
+
+- question: lc 680 ：验证回文字符串 Ⅱ link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 316 ：去除重复字母 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 1047 ：删除字符串中的所有相邻重复项 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 1209 ：删除字符串中的所有相邻重复项 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 976 ：三角形的最大周长 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 674 ：最长连续递增序列 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 738 ：单调递增的数字 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 134 ： 加油站 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 767 ：重构字符串 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 621 ： 任务调度器 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 670 ：最大交换 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 861 ：翻转矩阵后的得分 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 1029 ：两地调度 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 330 ：按要求补齐数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
 ### 动态规划
 
-lc 509 &amp; 剑指 10-1 ：斐波那契数列问题 - 动态规划入门
-lc 322 &amp; 剑指 103 ：零钱兑换
-动态规划总结 27-4
-lc 64 &amp; 剑指 099 ：最小路径和【top100】
-lc 53 &amp; 剑指 42 ：最大子数组之和【top100】
-lc 53 &amp; 剑指 42 ：最大子数组之和【top100】
-lc 647、5、131 &amp; 剑指 086 、020  ：回文子串【top100】
-lc 516 ：最长回文子序列
-lc 300 ：最长上升子序列【top100】
-lc 1143 &amp; 剑指 095 ：最长公共子序列
-lc 72 ：编辑距离【top100】
-lc 44 ：通配符匹配
-lc 486 ：预测赢家
-lc 70 &amp; 剑指 10 - 2： 爬楼梯【top100】
-lc 746 &amp; 剑指 088 ：使用最小花费爬楼梯
-lc 198 &amp; 剑指 089 ：打家劫舍【top100】
-lc 213 &amp; 剑指 090 ：打家劫舍 II
-lc 337 ：打家劫舍 III【top100】
+- question: lc 509 ：斐波那契数列问题 - 动态规划入门 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 322 ：零钱兑换 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 64 ：最小路径和 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 53 ：最大子数组之和 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 53 ：最大子数组之和 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 647 ：回文子串link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 5 ：回文子串link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 131 ：回文子串link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 516 ：最长回文子序列 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 300 ：最长上升子序列 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 1143 ：最长公共子序列 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 72 ：编辑距离 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 44 ：通配符匹配 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 486 ：预测赢家 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 70 ： 爬楼梯 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 746 ：使用最小花费爬楼梯 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 198 ：打家劫舍 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 213 ：打家劫舍 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 337 ：打家劫舍 III link:
+    - answer:
+```python
+
+```
+```java
+
+```
 
 #### 背包问题/完全背包问题
-lc 322 &amp; 剑指 103 ：零钱兑换
-lc 518 ：零钱兑换 II
-lc 377 &amp; 剑指 104 ：组合总和 Ⅳ
-lc 494 &amp; 剑指 102 ：目标和【top100】
-lc 416 &amp; 剑指 101 ：分割等和子集【top100】
-lc 279 ：完全平方数【top100】
-lc 474 ：一和零
-lc 139 ：单词拆分【top100】
-lc 62 &amp; 剑指 098 ：不同路径【top100】
-lc 63 ：不同路径 II
-lc 120 &amp; 剑指 100 ：三角形最小路径和
-lc 97 &amp; 剑指 096 ：交错字符串
-lc 221 ： 最大正方形【top100】
+
+- question: lc 322 ：零钱兑换 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 518 ：零钱兑换 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 377 ：组合总和 Ⅳ link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 494 ：目标和 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 416 ：分割等和子集 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 279 ：完全平方数 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 474 ：一和零 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 139 ：单词拆分 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 62 ：不同路径 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 63 ：不同路径 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 120 ：三角形最小路径和 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 97 ：交错字符串 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 221 ： 最大正方形 link:
+    - answer:
+```python
+
+```
+```java
+
+```
 #### 系列算法题：买卖股票的最佳时机
-lc 121 &amp; 剑指 63 ：买卖股票的最佳时机【top100】
-lc 122 ：买卖股票的最佳时机 II
-lc 123 ：买卖股票的最佳时机 III
-lc 188 ：买卖股票的最佳时机 IV
-lc 309 ：最佳买卖股票时机含冷冻期【top100】
-lc 714 ：买卖股票的最佳时机含手续费
-lc 139. 单词拆分【top100】"
-lc 140. 单词拆分 II
-lc 91. 解码方法
-lc 32. 最长有效括号【top100】
-lc 10 &amp; 剑指 19. 正则表达式匹配【top100】
-lc 718. 最长重复子数组
-lc 354. 俄罗斯套娃信封问题
-lc 152. 乘积最大子数组【top100】
-lc 376. 摆动序列
+
+- question: lc 121 ：买卖股票的最佳时机 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 122 ：买卖股票的最佳时机 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 123 ：买卖股票的最佳时机 III link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 188 ：买卖股票的最佳时机 IV link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 309 ：最佳买卖股票时机含冷冻期 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 714 ：买卖股票的最佳时机含手续费 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 139. 单词拆分 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 140. 单词拆分 II link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 91. 解码方法 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 32. 最长有效括号 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 10 正则表达式匹配 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 718 最长重复子数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 354 俄罗斯套娃信封问题 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 152 乘积最大子数组 link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question: lc 376 摆动序列 link:
+    - answer:
+```python
+
+```
+```java
+
+```
 
 - question:  link:
     - answer:
@@ -7960,13 +8659,3 @@ lc 376. 摆动序列
 
 ```
 
-###
-
-- question:  link:
-    - answer:
-```python
-
-```
-```java
-
-```
