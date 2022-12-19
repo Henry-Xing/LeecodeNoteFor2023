@@ -8051,8 +8051,8 @@ class Solution:
 
 ```
 
-- question: lc 45 ：跳跃游戏 Ⅱ link: https://leetcode.cn/problems/jump-game-ii/
-    - answer:
+- question: lc 55 ：跳跃游戏 link: https://leetcode.cn/problems/jump-game/
+    - answer: 
 ```python
 
 ```
@@ -8060,8 +8060,8 @@ class Solution:
 
 ```
 
-- question: lc 55 ：跳跃游戏 link: https://leetcode.cn/problems/jump-game/
-    - answer: 
+- question: lc 45 ：跳跃游戏 Ⅱ link: https://leetcode.cn/problems/jump-game-ii/
+    - answer:
 ```python
 
 ```
