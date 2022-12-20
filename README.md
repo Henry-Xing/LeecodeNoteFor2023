@@ -8392,7 +8392,7 @@ class Solution:
 - question: lc 647 ：回文子串 link: https://leetcode.cn/problems/palindromic-substrings/
     - answer:
 ```python
-# 动态规划的方法，时间复杂度o(n^2) 空间复杂度o(n^2) 
+# 动态规划的方法，时间复杂度o(n^2) 空间复杂度o(n^2) 用动态规划时，注意到只有一半的数组会被用到，而且斜线上的点是不会被遍历的，每个单独的元素都可以视作一个回文串，于是结果要加上n。
 class Solution:
     def countSubstrings(self, s: str) -> int:
         n = len(s)
@@ -8406,6 +8406,8 @@ class Solution:
                     ans += 1
 
         return ans
+# Manacher 算法
+
 ```
 ```java
 
