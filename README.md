@@ -7946,8 +7946,8 @@ class Solution:
         f = [[True] * n for _ in range(n)]
 
         for i in reversed(range(n - 1)):
-                for j in range(i + 1, n):
-                    f[i][j] = (s[i] == s[j]) and f[i + 1][j - 1]
+            for j in range(i + 1, n):
+                f[i][j] = (s[i] == s[j]) and f[i + 1][j - 1]
 
         ans = []
         temp = []
@@ -8359,13 +8359,59 @@ class Solution:
 - question: lc 53 ：最大子数组之和 link: https://leetcode.cn/problems/maximum-subarray/
     - answer:
 ```python
+# 每次比较当前项与前一项之和与自身相比是否增大。如果不增大则当前项的值就是自己。
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        
+        for i in range(len(nums)):
+            if i != 0:
+                nums[i] = max(nums[i], nums[i-1] + nums[i])
 
+        return max(nums)
 ```
 ```java
 
 ```
 
-- question: lc 53 ：最大子数组之和 link:
+- question: 剑指 Offer 42 ：最大子数组之和 link: https://leetcode.cn/problems/lian-xu-zi-shu-zu-de-zui-da-he-lcof/description/
+    - answer:
+```python
+# 与前一题一模一样。
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        for i in range(len(nums)):
+            if i != 0:
+                nums[i] = max(nums[i], nums[i-1] + nums[i])
+        
+        return max(nums)
+```
+```java
+
+```
+
+- question: lc 647 ：回文子串 link: https://leetcode.cn/problems/palindromic-substrings/
+    - answer:
+```python
+# 动态规划的方法，时间复杂度o(n^2) 空间复杂度o(n^2) 
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        n = len(s)
+        ans = n
+        space = [[True] * n for _ in range(n)]
+
+        for i in reversed(range(n - 1)):
+            for j in range(i+1, n):
+                space[i][j] = space[i+1][j-1] and (s[i] == s[j])
+                if  space[i][j]:
+                    ans += 1
+
+        return ans
+```
+```java
+
+```
+
+- question: lc 5 ：回文子串 link:
     - answer:
 ```python
 
@@ -8374,25 +8420,7 @@ class Solution:
 
 ```
 
-- question: lc 647 ：回文子串link:
-    - answer:
-```python
-
-```
-```java
-
-```
-
-- question: lc 5 ：回文子串link:
-    - answer:
-```python
-
-```
-```java
-
-```
-
-- question: lc 131 ：回文子串link:
+- question: lc 131 ：回文子串 link:
     - answer:
 ```python
 
