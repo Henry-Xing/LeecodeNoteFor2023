@@ -8391,6 +8391,8 @@ class Solution:
 
 - question: lc 647 ：回文子串 link: https://leetcode.cn/problems/palindromic-substrings/
     - answer:
+
+    Manacher算法 link: https://liuchang.men/2020/12/29/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94Manacher%E7%AE%97%E6%B3%95/
 ```python
 # 动态规划的方法，时间复杂度o(n^2) 空间复杂度o(n^2) 用动态规划时，注意到只有一半的数组会被用到，而且斜线上的点是不会被遍历的，每个单独的元素都可以视作一个回文串，于是结果要加上n。
 class Solution:
@@ -8406,8 +8408,6 @@ class Solution:
                     ans += 1
 
         return ans
-# Manacher 算法
-
 ```
 ```java
 
@@ -8416,40 +8416,130 @@ class Solution:
 - question: lc 5 ：回文子串 link:
     - answer:
 ```python
+# Manacher算法
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        # Manacher算法
+        # 预处理
+        strs = '#' + '#'.join(list(s)) + '#'
+        n = len(strs)
 
+        # 暴力方法扩展，当左右相同时往外扩展，返回回文半径，因为端点一定是#，所以需要减掉2。
+        def expend(left, right):
+            while left >= 0 and right < n and strs[left] == strs[right]:
+                left -= 1
+                right += 1
+            return (right - left - 2) >> 1
+
+        # 标记最大回文串的起始和终止位置
+        end, start = -1, 0
+        # 初始化一个数组，存储每个位置的回文半径。
+        arm_len = [0] * n
+        # 初始化当前最大半径的中心以及最大回文半径。
+        center = -1
+        right = -1
+        
+        # 主循环，主要有两个分支，i<=right表示当前位置在回文区内，可以通过当前点与当前回文中心的镜像点2*center - i的回文半径得到当前最小的回文半径，直接跳过当前最小的回文半径来寻找回文半径；i>right表示当前位置在回文区外，则只能暴力获得新的回文半径。每次找到当前点的回文半径后，需要与当前最大回文半径进行比较，维护最大的回文半径及对应的回文中心，并维护需要返回的最大回文串的起始和终止位置
+        for i in range(n):
+            if i > right:
+                cur_len = expend(i, i)
+            if i <= right:
+                # 计算当前i关于center的镜像点i_，因为i + i_ = 2*center。
+                i_ = 2*center - i
+                # 可以跳过的区域是镜像点的回文半径与当前点与最大回文半径之差的最小值。
+                cur_len = min(arm_len[i_], right - i)
+                cur_len = expend(i-cur_len, i+cur_len)
+            
+            # 记录当前点的回文半径
+            arm_len[i] = cur_len
+
+            # 维护最大半径和中心点
+            if i + cur_len > right:
+                right = i + cur_len
+                center = i
+            # 维护返回起始点和终止点
+            if 2 * cur_len + 1 > end - start:
+                start = i - cur_len
+                end = i + cur_len
+
+        return "".join(strs[start:end+1].split("#"))
 ```
 ```java
 
 ```
 
-- question: lc 131 ：回文子串 link:
-    - answer:
-```python
+- question: lc 131 ：回文子串 link: https://leetcode.cn/problems/palindrome-partitioning/description/
 
-```
-```java
-
-```
 
 - question: lc 516 ：最长回文子序列 link:
     - answer:
 ```python
+# 动态规划的方法。因为可以删除数字，所以如果当前i和j不相同时，说明可以删除其中一个，那么当前位置的回文串长度就是两者删掉一个的最大值max(f[i+1][j], f[i][j-1])。最后返回0~n的回文串长度。
+class Solution:
+    def longestPalindromeSubseq(self, s: str) -> int:
+        n = len(s)
+        f = [[0] * n for _ in range(n)]
+        f[0][0] = 1
 
+        for i in reversed(range(n-1)):
+            f[i][i] = 1
+            for j in range(i+1, n):
+                if s[i] == s[j]:
+                    f[i][j] = f[i+1][j-1] + 2
+                else:
+                    f[i][j] = max(f[i+1][j], f[i][j-1])
+
+        return f[0][n-1]
 ```
 ```java
 
 ```
 
-- question: lc 300 ：最长上升子序列 link:
+- question: lc 300 ：最长上升子序列 link: https://leetcode.cn/problems/longest-increasing-subsequence/description/
     - answer:
 ```python
+# 两种方法，第一种o(n^2)动态规划，当前位置需要找到之前的所有比它小的里面最大的一个加1。第二种方法o(nlogn)，贪心加二分查找，贪心是因为在上升子序列中，我们应该找尽量小的数放到子序列里，才能使得长度足够长。于是维护一个数组，表示为长度为i的数组的尾部数值。维护这个数组我们可以得到每个长度的最后一个数。当当前值大于数组最后一个数时，直接加入数组中，当当前数小于最后一个数时，在数组中找到第一个大于当前数的位置，替换为当前值。最后放回数组长度，即是最大上升子序列的长度。
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        # if not nums:
+        #     return 0
 
+        # n = len(nums)
+        # f = [1] * n
+
+        # for i in range(n):
+        #     for j in range(i):
+        #         if nums[j] < nums[i]:
+        #             f[i] = max(f[i], f[j] + 1)
+        
+        # return max(f)
+
+        n = len(nums)
+        f = [nums[0]]
+        
+        for i in range(n):
+            if nums[i] > f[-1]:
+                f.append(nums[i])
+            else:
+                left, right = 0, len(f) - 1
+                pos = right
+                while left <= right:
+                    mid = left + (right - left)//2
+                    if f[mid] < nums[i]:
+                        left = mid + 1
+                    # 找到第一个比nums[i]大的数更新为nums[i]
+                    else:
+                        pos = mid
+                        right = mid - 1
+                f[pos] = nums[i]
+        
+        return len(f)
 ```
 ```java
 
 ```
 
-- question: lc 1143 ：最长公共子序列 link:
+- question: lc 1143 ：最长公共子序列 link: https://leetcode.cn/problems/longest-common-subsequence/
     - answer:
 ```python
 
