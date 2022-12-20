@@ -8307,34 +8307,56 @@ class Solution:
 
 ### 动态规划
 
-- question: lc 509 ：斐波那契数列问题 - 动态规划入门 link:
+- question: lc 509 ：斐波那契数列问题 link:
     - answer:
 ```python
+# 动态规划，用两个值可以记录前两项，当前项等于前两项之和，然后维护前两项。
+class Solution:
+    def fib(self, n: int) -> int:
+        if n < 2:
+            return n
 
+        first = 0
+        second = 1
+        x = second
+
+        for i in range(2, n + 1):
+            x = first + second
+            first = second
+            second = x
+
+        return x
 ```
 ```java
 
 ```
 
-- question: lc 322 ：零钱兑换 link:
+- question: lc 322 ：零钱兑换 link: https://leetcode.cn/problems/coin-change/description/
+
+- question: lc 64 ：最小路径和 link: https://leetcode.cn/problems/minimum-path-sum/description/
     - answer:
 ```python
-
+# 动态规划的思想，除边界外，当前点到达的距离是左前方和上方的最小值加上当前点的值。动态维护这个矩阵，最终放回最后一格的值。
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if i == j == 0:
+                    continue
+                elif i == 0:
+                    grid[i][j] = grid[i][j-1] + grid[i][j]
+                elif j == 0:
+                    grid[i][j] = grid[i-1][j] + grid[i][j]
+                else:
+                    grid[i][j] = min(grid[i][j-1], grid[i-1][j]) + grid[i][j]
+        
+        return grid[-1][-1]
 ```
 ```java
 
 ```
 
-- question: lc 64 ：最小路径和 link:
-    - answer:
-```python
-
-```
-```java
-
-```
-
-- question: lc 53 ：最大子数组之和 link:
+- question: lc 53 ：最大子数组之和 link: https://leetcode.cn/problems/maximum-subarray/
     - answer:
 ```python
 
@@ -8480,14 +8502,7 @@ class Solution:
 
 #### 背包问题/完全背包问题
 
-- question: lc 322 ：零钱兑换 link:
-    - answer:
-```python
-
-```
-```java
-
-```
+- question: lc 322 ：零钱兑换 link: https://leetcode.cn/problems/coin-change/description/
 
 - question: lc 518 ：零钱兑换 II link:
     - answer:
