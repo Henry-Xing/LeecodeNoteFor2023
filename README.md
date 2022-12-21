@@ -8770,6 +8770,7 @@ class Solution:
                         f[i][x][y] = f[i-1][x][y]
         
         return f[-1][-1][-1]
+
 # 二维数组,0的个数,1的个数,反向遍历
 class Solution:
     def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
@@ -8783,8 +8784,7 @@ class Solution:
                 for y in reversed(range(ones, n+1)):
                     f[x][y] = max(f[x-zeros][y-ones]+1, f[x][y])
         
-        return f[-1][-1]
-                    
+        return f[-1][-1]        
 ```
 ```java
 
