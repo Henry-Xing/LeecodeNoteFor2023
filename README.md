@@ -8416,7 +8416,7 @@ class Solution:
 - question: lc 5 ：回文子串 link:
     - answer:
 ```python
-# Manacher算法
+# Manacher算法 o(nlogn)
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         # Manacher算法
@@ -8542,7 +8542,22 @@ class Solution:
 - question: lc 1143 ：最长公共子序列 link: https://leetcode.cn/problems/longest-common-subsequence/
     - answer:
 ```python
+# 转移函数为，f[i][j]表示text2[:i]和text1[:j]公共子序列。当text[i-1] == text2[j-1]时，只需要在原有基础上加一就行，如果不相等则取最大值。
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        n = len(text1)
+        m = len(text2)
 
+        f = [[0] * (n+1) for _ in range(m+1)]
+
+        for i in range(1, m+1):
+            for j in range(1, n+1):
+                if text1[j-1] == text2[i-1]:
+                    f[i][j] = f[i-1][j-1] + 1
+                else:
+                    f[i][j] = max(f[i-1][j], f[i][j-1])
+    
+        return f[-1][-1]
 ```
 ```java
 
@@ -8624,55 +8639,152 @@ class Solution:
 
 - question: lc 322 ：零钱兑换 link: https://leetcode.cn/problems/coin-change/description/
 
-- question: lc 518 ：零钱兑换 II link:
+- question: lc 518 ：零钱兑换 II link: https://leetcode.cn/problems/coin-change-ii/
     - answer:
 ```python
+# 动态规划叠加。当前数值的组合数等于当前值加上当前值加上所有币值的组合数。
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+        f = [0] * (amount + 1)
+        f[0] = 1
 
+        for coin in coins:
+            for x in range(coin, amount + 1):
+                f[x] += f[x - coin]
+        
+        return f[-1]
 ```
 ```java
 
 ```
 
-- question: lc 377 ：组合总和 Ⅳ link:
+- question: lc 377 ：组合总和 Ⅳ link: https://leetcode.cn/problems/combination-sum-iv/
     - answer:
 ```python
+# 类似518和322，如果考虑不同顺序视作不同组合，那么先遍历x再遍历要组合的数字。如果不同顺序是同组合，那么先遍历要组合的数字，再遍历当前值。
+class Solution:
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+        f = [0] * (target + 1)
+        f[0] = 1
 
+        for x in range(1, target+1):
+            for n in nums:
+                if n <= x:
+                    f[x] += f[x-n]
+        
+        return f[-1]
 ```
 ```java
 
 ```
 
-- question: lc 494 ：目标和 link:
+- question: lc 494 ：目标和 link: https://leetcode.cn/problems/target-sum/description/
     - answer:
 ```python
+# 首先把问题转换，把数组拆分为两个部分，一个部分是加法和pos，一部分是减法和neg，那么pos - neg == target. 同时pos + neg = sum 可以解出， neg = (sum - target) / 2。 所以就是要在数组中找到一个子集之和为neg。转换为类似于 lc 377 的问题，但注意到377中每个元素都是不同的，而这个问题中，元素是有相同的存在。于是在内层循环中，需要倒着来遍历，使得相同元素不会重复加入到结果中。
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        sums = sum(nums)
 
+        if sums >= target and (sums - target) % 2 == 0:
+            neg =  (sums - target) >> 1
+        else:
+            return 0
+
+        f = [0] * (neg + 1)
+        f[0] = 1
+
+        for n in nums:
+            for x in reversed(range(n, neg + 1)):
+                f[x] += f[x-n]
+        
+        return f[-1]
 ```
 ```java
 
 ```
 
-- question: lc 416 ：分割等和子集 link:
+- question: lc 416 ：分割等和子集 link: https://leetcode.cn/problems/partition-equal-subset-sum/description/
     - answer:
 ```python
+# 类似前面的问题。首先把问题转换为在数组中寻找能求和出sum/2的组合，如果有这种组合，那么就是可以分割的。
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        sums = sum(nums)
 
+        if sums%2 == 0:
+            target = sums >> 1
+        else:
+            return False
+
+        f = [False] * (target + 1)
+
+        f[0] = True
+
+        for n in nums:
+            for x in reversed(range(n, target+1)):
+                f[x] = f[x] or f[x-n]
+        
+        return f[-1]
 ```
 ```java
 
 ```
 
-- question: lc 279 ：完全平方数 link:
+- question: lc 279 ：完全平方数 link: https://leetcode.cn/problems/perfect-squares/description/
     - answer:
 ```python
+# 动态规划查找当前值与当前值减掉一个平方数加一之间的最小值.
+class Solution:
+    def numSquares(self, n: int) -> int:
+        f = [inf] * (n+1)
+        f[0] = 0
 
+        for i in range(1, n+1):
+            for j in range(1, int(i**0.5) + 1):
+                f[i] = min(f[i], f[i-j*j] + 1)
+        
+        return f[-1]
 ```
 ```java
 
 ```
 
-- question: lc 474 ：一和零 link:
+- question: lc 474 ：一和零 link: https://leetcode.cn/problems/ones-and-zeroes/
     - answer:
 ```python
+# 三维,当前值,0的个数,1的个数
+class Solution:
+    def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
 
+        f = [[[0] * (n + 1) for i in range(m + 1)] for j in range(len(strs) + 1)]
+
+        for i in range(1, len(strs) + 1):
+            ones = strs[i-1].count("1")
+            zeros = strs[i-1].count("0")
+            for x in range(m+1):
+                for y in range(n+1):
+                    if zeros <= x and ones <= y:
+                        f[i][x][y] = max(f[i-1][x-zeros][y-ones]+1, f[i-1][x][y])
+                    else:
+                        f[i][x][y] = f[i-1][x][y]
+        
+        return f[-1][-1][-1]
+# 二维数组,0的个数,1的个数,反向遍历
+class Solution:
+    def findMaxForm(self, strs: List[str], m: int, n: int) -> int:
+
+        f = [[0] * (n + 1) for _ in range(m + 1)]
+
+        for i in range(len(strs)):
+            ones = strs[i].count("1")
+            zeros = strs[i].count("0")
+            for x in reversed(range(zeros, m+1)):
+                for y in reversed(range(ones, n+1)):
+                    f[x][y] = max(f[x-zeros][y-ones]+1, f[x][y])
+        
+        return f[-1][-1]
+                    
 ```
 ```java
 
