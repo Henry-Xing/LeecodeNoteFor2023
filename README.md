@@ -4925,6 +4925,38 @@ class Solution:
 
 ```
 
+- question: lc 1760 : 袋子里最少数目的球 link: https://leetcode.cn/problems/minimum-limit-of-balls-in-a-bag/description/
+    - answer:
+```python
+class Solution:
+    def minimumSize(self, nums: List[int], maxOperations: int) -> int:
+        if not nums:
+            return 0
+
+        ans = 0
+        left, right = 1, max(nums)
+
+        while left <= right:
+            mid = left + (right - left)//2
+            ops = sum([(x-1)//mid for x in nums])
+
+            # mid越小操作数越多，需要找到操作数最后一个小于maxOperation的
+
+            if ops <= maxOperations:
+                # 说明操作数还够用，mid可以往小了减
+                ans = mid
+                right = mid - 1
+            else:
+                left = mid + 1
+
+        return ans
+```
+```java
+
+```
+
+
+
 ### 栈与队列
 
 - question: lc20 ：有效的括号 link: https://leetcode.cn/problems/valid-parentheses/
@@ -7992,7 +8024,44 @@ class Solution:
 - question: lc 679 ：24 点游戏 link: https://leetcode.cn/problems/24-game/
     - answer:
 ```python
+# 暴力遍历所有情况.
+class Solution:
+    def judgePoint24(self, nums: List[int]) -> bool:
+        TARGET = 24
+        EPSILON = 1e-6
+        ADD, MULTIPLY, SUBTRACT, DIVIDE = 0, 1, 2, 3
 
+        def solve(nums: List[float]) -> bool:
+            if not nums:
+                return False
+            if len(nums) == 1:
+                return abs(nums[0] - TARGET) < EPSILON
+            for i, x in enumerate(nums):
+                for j, y in enumerate(nums):
+                    if i != j:
+                        newNums = list()
+                        for k, z in enumerate(nums):
+                            if k != i and k != j:
+                                newNums.append(z)
+                        for k in range(4):
+                            if k < 2 and i > j:
+                                continue
+                            if k == ADD:
+                                newNums.append(x + y)
+                            elif k == MULTIPLY:
+                                newNums.append(x * y)
+                            elif k == SUBTRACT:
+                                newNums.append(x - y)
+                            elif k == DIVIDE:
+                                if abs(y) < EPSILON:
+                                    continue
+                                newNums.append(x / y)
+                            if solve(newNums):
+                                return True
+                            newNums.pop()
+            return False
+
+        return solve(nums)
 ```
 ```java
 
@@ -8790,19 +8859,43 @@ class Solution:
 
 ```
 
-- question: lc 139 ：单词拆分 link:
+- question: lc 139 ：单词拆分 link: https://leetcode.cn/problems/word-break/description/
     - answer:
 ```python
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        f = [False] * (len(s) + 1)
+        f[0] = True
 
+        for i in range(len(s) + 1):
+            for j in range(i):
+                if f[j] and (s[j:i] in wordDict):
+                    f[i] = True
+                    break
+        
+        return f[-1]
 ```
 ```java
-
+                res = maxN - nums[-1] 
+                nums.extend([res, divide])
+                nums.sort()
 ```
 
-- question: lc 62 ：不同路径 link:
+- question: lc 62 ：不同路径 link: https://leetcode.cn/problems/unique-paths/description/
     - answer:
 ```python
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        f = [[0] * n for _ in range(m)]
 
+        for i in range(m):
+            for j in range(n):
+                if i == 0 or j == 0:
+                    f[i][j] = 1
+                else:
+                    f[i][j] = f[i - 1][j] + f[i][j-1]
+        
+        return f[-1][-1]
 ```
 ```java
 
@@ -8989,3 +9082,144 @@ class Solution:
 
 ```
 
+### 华为机考 link: https://www.nowcoder.com/exam/oj/ta?page=1&tpId=37&type=37
+
+
+- question: HJ28 素数伴侣 link: https://www.nowcoder.com/practice/b9eae162e02f4f928eac37d7699b352e?tpId=37&tqId=21251&rp=1&ru=/exam/oj/ta&qru=/exam/oj/ta&sourceUrl=%2Fexam%2Foj%2Fta%3Fpage%3D1%26tpId%3D37%26type%3D37&difficulty=undefined&judgeStatus=undefined&tags=&title=
+    - answer:
+```python
+import sys
+
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def match(i):
+    for j in range(n):
+        if array[i][j] == 1 and not visited[j]:
+            visited[j] = True
+            if matched[j] == -1 or match(matched[j]):
+                matched[j] = i
+                return True
+    return False
+
+n = int(input())
+nums = []
+
+for line in sys.stdin:
+    nums = [int(i) for i in line.split()]
+
+evens, odds = [], []
+for i in nums:  # 对偶数和奇数进行分组。偶数加奇数才有可能是质数
+    if i % 2 == 0:
+        evens.append(i)
+    else:
+        odds.append(i)
+
+m = len(odds)
+n = len(evens)
+array = [[-1] * n for _ in range(m)]
+
+for i in range(m):
+    for j in range(n):
+        array[i][j] = is_prime(evens[j] + odds[i])
+    
+matched = [-1] * n
+cont = 0
+
+for i in range(m):
+    visited = [False] * n
+    if match(i):
+        cont += 1
+
+print(cont)
+```
+```java
+
+```
+
+- question: HJ89 24点运算 link: https://www.nowcoder.com/practice/7e124483271e4c979a82eb2956544f9d?tpId=37&tqId=21312&rp=1&ru=/exam/oj/ta&qru=/exam/oj/ta&sourceUrl=%2Fexam%2Foj%2Fta%3Fpage%3D2%26tpId%3D37%26type%3D37&difficulty=undefined&judgeStatus=undefined&tags=&title=
+    - answer:
+```python
+d = {
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+    "10": 10,
+    "J": 11,
+    "Q": 12,
+    "K": 13,
+    "A": 1,
+    "2": 2,
+}
+
+
+def f(nums, target):
+    if len(nums) == 1:
+        if d[nums[0]] == target:
+            res.append(nums[0])
+            return True
+        else:
+            return False
+    for i in range(len(nums)):
+        a = nums[i]
+        b = nums[:i] + nums[i + 1 :]
+        if f(b, target + d[a]):
+            res.append("-" + a)
+            return True
+        elif f(b, target - d[a]):
+            res.append("+" + a)
+            return True
+        elif f(b, target * d[a]):
+            res.append("/" + a)
+            return True
+        elif target % d[a] == 0 and f(b, target // d[a]):
+            res.append("*" + a)
+            return True
+    return False
+
+
+while True:
+    try:
+        nums = input().strip()
+        if "joker" in nums or "JOKER" in nums:
+            print("ERROR")
+        else:
+            nums = nums.split()
+            res = []
+            if f(nums, 24):
+                print("".join(res))
+            else:
+                print("NONE")
+    except:
+        break
+```
+```java
+
+```
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
+
+- question:  link:
+    - answer:
+```python
+
+```
+```java
+
+```
