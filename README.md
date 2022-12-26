@@ -5513,6 +5513,29 @@ class Solution:
 
 ```
 
+- question: lc 1759 ：统计同构子字符串的数目 link: https://leetcode.cn/problems/count-number-of-homogenous-substrings/description/
+    - answer:
+```python
+# 滑动窗口统计相同字符个数，累加得到同构字符串数目。
+class Solution:
+    def countHomogenous(self, s: str) -> int:
+        n = len(s)
+        base = pow(10, 9) + 7
+        left, right, ans = 0, 0, 0
+
+        while right < n:
+            if s[right] != s[left]:
+                left = right
+            else:
+                right += 1
+                ans += right - left
+
+        return ans % base
+```
+```java
+
+```
+
 ### 综合应用I
 
 - question: lc1 ：两数之和 link: https://leetcode.cn/problems/two-sum/
