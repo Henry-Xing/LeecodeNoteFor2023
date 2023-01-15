@@ -4238,7 +4238,48 @@ var merge = function(nums1, m, nums2, n) {
 - question: 剑指51 ：数组中的逆序对 link: https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/
     - answer:
 ```python
+# 归并排序的过程中，去统计逆序对，如果右边的分支比左边的小，那么说明可以构成n个逆序对，n是左分支的长度。
+class Solution:
+    def reversePairs(self, nums: List[int]) -> int:
+        if len(nums) < 2:
+            return 0
+        temp = nums[:]
+        return self.reverse(nums, 0, len(nums) - 1, temp)
+    
+    def reverse(self, nums, left, right, temp):
+        if left == right:
+            return 0
 
+        mid = left + (right - left) // 2
+        leftPairs = self.reverse(nums, left, mid, temp)
+        rightPairs = self.reverse(nums, mid+1, right, temp)
+        if nums[mid] < nums[mid+1]:
+            return leftPairs + rightPairs
+        
+        crossPairs = self.merge(nums, left, mid, right, temp)
+        return leftPairs + rightPairs + crossPairs
+    
+    def merge(self, nums, left, mid, right, temp):
+        temp = nums[:]
+
+        i, j, count = left, mid + 1, 0
+
+        for k in range(left, right+1):
+            if i == mid + 1:
+                nums[k] = temp[j]
+                j += 1
+            elif j == right + 1:
+                nums[k] = temp[i]
+                i += 1
+            elif temp[i] <= temp[j]:
+                nums[k] = temp[i]
+                i += 1
+            else:
+                nums[k] = temp[j]
+                j += 1
+                count += mid - i + 1
+        
+        return count
 ```
 ```java
 var reversePairs = function(nums) {
@@ -4296,11 +4337,6 @@ var reversePairs = function(nums) {
     }
   }
 };
-
-作者：11111111111-6
-链接：https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/solution/by-11111111111-6-tao9/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 ```
 
 - question: lc315 ：计算右侧小于当前元素的个数 link: https://leetcode.cn/problems/count-of-smaller-numbers-after-self/
@@ -4342,7 +4378,29 @@ var reversePairs = function(nums) {
 - question: lc75 ：颜色分类 link: https://leetcode.cn/problems/sort-colors/
     - answer:
 ```python
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        if n < 2:
+            return nums
+        
+        left, right, i = 0, n-1, 0
 
+        while i <= right:
+            if nums[i] == 0:
+                nums[left], nums[i] = nums[i], nums[left]
+                left += 1
+                i += 1
+            elif nums[i] == 1:
+                i += 1
+            else:
+                nums[i], nums[right] = nums[right], nums[i]
+                right -= 1
+            
+        return nums
 ```
 ```java
 /**
@@ -6647,16 +6705,41 @@ class Solution:
 
 ```
 
-- question: lc 114 ：二叉树展开为链表【top100】 link: https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/
+- question: lc 114 ：二叉树展开为链表 link: https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/
     - answer:
 ```python
+# 先单独存下来，再去更新。
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        nodes = []
 
+        def first(root):
+            if root:
+                nodes.append(root)
+                first(root.left)
+                first(root.right)
+        
+        first(root)
+        
+        for i in range(1, len(nodes)):
+            pre, cur = nodes[i-1], nodes[i]
+            pre.left = None
+            pre.right = cur
 ```
 ```java
 
 ```
 
-- question: lc 236 &amp; 剑指 68-2 ：二叉树的最近公共祖先【top100】 link: https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/
+- question: lc 236 ：二叉树的最近公共祖先 link: https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/
     - answer:
 ```python
 
