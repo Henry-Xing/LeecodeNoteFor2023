@@ -4833,6 +4833,52 @@ class Solution:
 - question: lc74 ：搜索二维矩阵 link: https://leetcode.cn/problems/search-a-2d-matrix/
     - answer:
 ```python
+# 写两个二分查找，根据每列第一个先搜索一次，然后在行内再搜索一次。或者将所有行合在一起，搜索一次。
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        # 两次搜索
+        def bisearch(nums, target):
+            index = -1
+            left, right = 0, len(nums)-1
+
+            while left <= right:
+                mid = left + (right - left) // 2
+                if nums[mid] < target:
+                    left = mid + 1
+                elif nums[mid] > target:
+                    right = mid - 1
+                else:
+                    return mid
+            return right
+        
+        head = [line[0] for line in matrix]
+        line_id = bisearch(head, target)
+        
+        return True if matrix[line_id][bisearch(matrix[line_id], target)] == target else False
+
+        # 一次搜索
+        def bisearch(nums, target):
+            index = -1
+            left, right = 0, len(nums)-1
+
+            while left <= right:
+                mid = left + (right - left) // 2
+                if nums[mid] < target:
+                    left = mid + 1
+                elif nums[mid] > target:
+                    right = mid - 1
+                else:
+                    index = mid
+                    break
+
+            return True if index != -1 else False
+        
+        tar_line = []
+        for line in matrix:
+            tar_line += line
+
+        
+        return bisearch(tar_line, target)
 
 ```
 ```java
@@ -4842,6 +4888,21 @@ class Solution:
 - question: lc240 ：搜索二维矩阵II link: https://leetcode.cn/problems/search-a-2d-matrix-ii/
     - answer:
 ```python
+# 从右上角开始搜索，到左下角。其中，如果target大于当前值，则往下挪一行，如果小于当前值，则往左挪一列。
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m, n = len(matrix), len(matrix[0])
+        x, y = 0 , n-1
+
+        while x < m and y >= 0:
+            if target == matrix[x][y]:
+                return True
+            elif target > matrix[x][y]:
+                x += 1
+            elif target < matrix[x][y]:
+                y -= 1
+        
+        return False
 
 ```
 ```java
@@ -4851,7 +4912,21 @@ class Solution:
 - question: lc69 ：x 的平方根 link: https://leetcode.cn/problems/sqrtx/
     - answer:
 ```python
+# 二分查找，从0~x
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        left, right = 0, x
 
+        while left <= right:
+            mid = left + (right - left) // 2
+            if mid * mid == x:
+                return mid
+            elif mid * mid > x:
+                right = mid - 1
+            else:
+                left = mid + 1
+        
+        return right
 ```
 ```java
 
