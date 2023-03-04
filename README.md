@@ -4944,7 +4944,14 @@ class Solution:
 - question: lc771 ：宝石与石头 link: https://leetcode.cn/problems/jewels-and-stones/
     - answer:
 ```python
-
+class Solution:
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:
+        count = 0
+        for c in stones:
+            if c in jewels:
+                count += 1
+        
+        return count
 ```
 ```java
 
@@ -4953,7 +4960,23 @@ class Solution:
 - question: lc888 ：公平的糖果棒交换 link: https://leetcode.cn/problems/fair-candy-swap/
     - answer:
 ```python
+# a_sum - ai + bj = b_sum - bj + ai
+# ai = bj + (a_sum - b_sum) // 2
+# for all bj check if ai in aliceSizes and return [ai, bj]
+class Solution:
+    def fairCandySwap(self, aliceSizes: List[int], bobSizes: List[int]) -> List[int]:
+        a_sum = sum(aliceSizes)
+        b_sum = sum(bobSizes)
+        half = (a_sum - b_sum) // 2
 
+        a = set(aliceSizes)
+
+        for b in bobSizes:
+            x = b + half
+            if x in a:
+                return[x, b]
+    
+        return []
 ```
 ```java
 
@@ -4962,7 +4985,24 @@ class Solution:
 - question: lc128 ：最长连续序列 link: https://leetcode.cn/problems/longest-consecutive-sequence/
     - answer:
 ```python
+# 每次检查当前n 的 n - 1是否在数组中，如果不在，则视作连续序列的起点，然后不停遍历n + 1直到 n + 1不存在数组中，把长度输出求最大值。
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        nums = set(nums)
+        ans = 0
 
+        for n in nums:
+            if n - 1 not in nums:
+                cur_n = n
+                length = 1
+            
+                while cur_n + 1 in nums:
+                    cur_n += 1
+                    length += 1
+            
+                ans = max(ans, length)
+
+        return ans
 ```
 ```java
 
@@ -4971,7 +5011,18 @@ class Solution:
 - question: lc136 ：只出现一次的数字 link: https://leetcode.cn/problems/single-number/
     - answer:
 ```python
+# 取异或，因为别的都是两次，异或之后是0，而只出现一次的值，异或之后只会剩下这个。
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        if len(nums) < 2:
+            return nums[0]
+            
+        ans = nums[0]
 
+        for i in range(1, len(nums)):
+            ans ^= nums[i]
+
+        return ans
 ```
 ```java
 
@@ -4980,7 +5031,21 @@ class Solution:
 - question: lc389 ：找不同 link: https://leetcode.cn/problems/find-the-difference/
     - answer:
 ```python
+# 两种方法，一种是合在一起求异或，类似上一题，一种是计数，然后向减，得到剩下为1的。
+from collections import Counter
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        # a = s + t
+        # ans = 0
 
+        # for c in a:
+        #     ans ^= ord(c)
+        
+        # return chr(ans)
+        s_con = Counter(s)
+        t_con = Counter(t)
+
+        return list(t_con - s_con)[0]
 ```
 ```java
 
