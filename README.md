@@ -12,7 +12,19 @@ Learning Time: 2:00-6:00 7:30-10:30 7h
 ### 数组字符串
 
 - question: input/output基础 link: https://www.nowcoder.com/test/27976983/summary#question
+```python
+# read one line from input
+# sys.stdin.readline() or input()
+import sys
+# just read one line
+n = int(sys.stdin.readline())
+# OR n = int(input()) 
+# this can also read one line from input
 
+for i in range(n):
+    print(sum([int(num) for num in sys.stdin.readline().split()]))
+    
+```
 - ACM模式下Java代码格式
 
 ```java
@@ -5054,7 +5066,26 @@ class Solution:
 - question: lc554 ：砖墙 link: https://leetcode.cn/problems/brick-wall/
     - answer:
 ```python
+# 根据每行砖的长度，进行统计，首先是累加出当前砖块右侧的位置sum_n，以此为键值在字典中进行统计，记录出现频率，最终找到出现频率最多的位置，表示穿过缝隙最多的次数，用总的行数减掉穿过缝隙的次数，就是穿过砖块的次数。
+class Solution:
+    def leastBricks(self, wall: List[List[int]]) -> int:
+        if not wall:
+            return 0
 
+        cnt = dict()
+        
+        for row in wall:
+            sum_len = 0
+            for i in range(len(row) - 1):
+                sum_len += row[i]
+                cnt[sum_len] = cnt.get(sum_len, 0) + 1
+        
+        if cnt:
+            ans = max(cnt.items(), key=lambda x : x[1])[1]
+        else:
+            ans = 0
+
+        return len(wall) - ans
 ```
 ```java
 
@@ -5343,7 +5374,21 @@ class Solution:
 - question: lc739 剑指038 ：每日温度 link: https://leetcode.cn/problems/daily-temperatures/
     - answer:
 ```python
+# 构建一个单调栈，遍历所有温度，如果当前stack为空或者栈顶温度大于当前温度，那么当前温度进栈，否则栈顶出栈，得到前一个index，对应的天数等于i-pre_index，存入ans中。
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        n = len(temperatures)
+        ans = [0] * n
+        stack = []
 
+        for i in range(n):
+            temp = temperatures[i]
+            while stack and temperatures[stack[-1]] < temp:
+                pre_index = stack.pop()
+                ans[pre_index] = i - pre_index
+            stack.append(i)
+        
+        return ans
 ```
 ```java
 
@@ -5352,7 +5397,23 @@ class Solution:
 - question: lc42 ：接雨水 link: https://leetcode.cn/problems/trapping-rain-water/
     - answer:
 ```python
+# 一种简单的思想，每个位置能接的水，是左右两边的最大值的二者最小值减掉当前位置的高度。所以做两次扫描，分别记录每个位置的左右最大高度。最后通过求和得到能接的雨水量。
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        n = len(height)
 
+        left_max = [0] * n
+        right_max = [0] * n
+
+        left_max[0] = height[0]
+        right_max[n-1] = height[n-1]
+
+        for i in range(1, n):
+            left_max[i] = max(left_max[i-1], height[i])
+            right_max[n-1-i] = max(right_max[n-i], height[n-1-i])
+        
+        ans = sum([min(left_max[i], right_max[i]) - height[i] for i in range(n)])
+        return ans
 ```
 ```java
 
