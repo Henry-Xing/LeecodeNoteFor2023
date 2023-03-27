@@ -5721,7 +5721,19 @@ class Solution:
 - question: lc1004 ：最大连续 1 的个数 III link: https://leetcode.cn/problems/max-consecutive-ones-iii/
     - answer:
 ```python
+class Solution:
+    def longestOnes(self, nums: List[int], k: int) -> int:
+        left, tempK, ans = 0, k, 0
 
+        for right in range(len(nums)):
+            if tempK == 0:
+                left = right + 1
+                tempK = k
+            elif nums[right] == 0:
+                tempK -= 1
+            ans = max(right - left + 1, ans)
+            
+        return ans 
 ```
 ```java
 
@@ -5739,7 +5751,27 @@ class Solution:
 - question: lc30 ：串联所有单词的子串 link: https://leetcode.cn/problems/substring-with-concatenation-of-all-words/
     - answer:
 ```python
+# 利用窗口和字典来识别，首先生成words的词频字典，然后在0 ~ 总长-词汇表长度的范围内滑动窗口，以词长m为步长，将字符串分割成单词，然后用Counter统计词频，与words的词频比对，如果相同，则将i加入返回的数组内。
+from collections import Counter
+class Solution:
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        n = len(words)
+        m = len(words[0])
+        ls = len(s)
+        check = Counter(words)
+        ans = []
 
+        for i in range(ls - m*n + 1):
+            if i + m*n > ls:
+                break
+            temp = []
+            for j in range(i, i + m*n, m):
+                temp.append(s[j:j+m])
+
+            if Counter(temp) == check:
+                ans.append(i)
+        
+        return ans
 ```
 ```java
 
