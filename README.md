@@ -217,29 +217,30 @@ class Solution:
         
         return ans
 ```
+CPP 两种方法，第一种方法交换法，因为每个元素都属于1~n， 那么当前元素nums[i]的位置应该是nums[i] - 1, 所以交换nums[nums[i] - 1]和nums[i]，最后再去遍历一次，如果出现位置没匹配的情况，也就是nums[i] - 1 != i，那么说明这个数i重复了。第二种方法， 遇到一个数nums[i]， 其对应的位置应该是nums[i] - 1，所以检查nums[nums[i] - 1]的正负，如果是负的，说明已经被遍历过了，则可以加入到结果中，如果是正的说明还没被遍历过，可以将其变为负的。
 ``` cpp
-// CPP 两种方法，第一种方法交换法，因为每个元素都属于1~n， 那么当前元素nums[i]的位置应该是nums[i] - 1, 所以交换nums[nums[i] - 1]和nums[i]，最后再去遍历一次，如果出现位置没匹配的情况，也就是nums[i] - 1 != i，那么说明这个数i重复了。
-// 第二种方法， 遇到一个数nums[i]， 其对应的位置应该是nums[i] - 1，所以检查nums[nums[i] - 1]的正负，如果是负的，说明已经被遍历过了，则可以加入到结果中，如果是正的说明还没被遍历过，可以将其变为负的。
-// class Solution {
-// public:
-//     vector<int> findDuplicates(vector<int>& nums) {
-//         int n = nums.size();
-//         vector<int> ans;
-//         for (int i = 0; i<n; i++){
-//             while(nums[i] != nums[nums[i] - 1]){
-//                 swap(nums[i], nums[nums[i] - 1]);
-//             }
-//         }
-//         for (int i = 0; i<n; i++){
-//             if (nums[i] - 1 != i){
-//                 ans.push_back(nums[i]);
-//             }
-//         }
+// first way
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> ans;
+        for (int i = 0; i<n; i++){
+            while(nums[i] != nums[nums[i] - 1]){
+                swap(nums[i], nums[nums[i] - 1]);
+            }
+        }
+        for (int i = 0; i<n; i++){
+            if (nums[i] - 1 != i){
+                ans.push_back(nums[i]);
+            }
+        }
 
-//         return ans;
-//     }
-// };
+        return ans;
+    }
+};
 
+// second way
 class Solution {
 public:
     vector<int> findDuplicates(vector<int>& nums) {
