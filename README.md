@@ -297,6 +297,27 @@ class Solution:
         return ans
 ```
 
+``` cpp
+// 通过原地加n，记录已经遍历过的数字，最后再遍历一次，如果小于n则说明没有遍历过。
+class Solution {
+public:
+    vector<int> findDisappearedNumbers(vector<int>& nums) {
+        int n = nums.size();
+        for (int i = 0; i < n; i++){
+            int x = (nums[i] - 1) % n;
+            nums[x] += n;
+        }
+        vector<int> ans;
+        for (int i = 0; i < n; i++){
+            if (nums[i] <= n){
+                ans.push_back(i + 1);
+            }
+        }
+        return ans;
+    }
+};
+```
+
 ``` js
 /**
  * 使用Js set不能存储重复值的特性以及set.has()方法判断nums中的缺失值
