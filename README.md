@@ -300,6 +300,7 @@ class Solution:
 
 ``` cpp
 // 通过原地加n，记录已经遍历过的数字，最后再遍历一次，如果小于n则说明没有遍历过。
+// 方法一：通过加n来标记是否出现过。
 class Solution {
 public:
     vector<int> findDisappearedNumbers(vector<int>& nums) {
@@ -315,6 +316,27 @@ public:
             }
         }
         return ans;
+    }
+};
+// 方法二：通过置负来标记是否出现过。
+class Solution {
+public:
+    vector<int> findDisappearedNumbers(vector<int>& nums) {
+        int n = nums.size();
+        for (int i = 0; i < n; i++) {
+            int index = abs(nums[i]);
+            if (nums[index - 1] > 0) {
+                nums[index - 1] = -nums[index - 1];
+            }
+        }
+        vector<int> ans;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > 0) {
+                ans.push_back(i + 1);
+            }
+        }
+        return ans;
+
     }
 };
 ```
@@ -364,9 +386,7 @@ class Solution:
             ans.extend([chr(i + ord("a"))] * minFreq[i])
 
         return ans
-```
-```python
-# python code
+
 class Solution:
     def commonChars(self, words: List[str]) -> List[str]:
         # enhanced version
@@ -382,6 +402,33 @@ class Solution:
         # more enhanced version
         # reduce叠加遍历 reduce(function, list)
         # return list(reduce(lambda x, y: x & y, map(collections.Counter, words)).elements())
+```
+
+```c++
+// 用一个minfreq来记录每个字母同时出现的最少次数。
+class Solution {
+public:
+    vector<string> commonChars(vector<string>& words) {
+        vector<int> minfreq(26, INT_MAX);
+        vector<int> freq(26);
+        for (const string& word: words) {
+            fill(freq.begin(), freq.end(), 0);
+            for (char ch: word) {
+                ++freq[ch - 'a'];
+            }
+            for (int i = 0; i < 26; i++) {
+                minfreq[i] = min(minfreq[i], freq[i]);
+            }
+        }
+        vector<string> ans;
+        for (int i = 0; i < 26; i++) {
+            for (int j = 0; j < minfreq[i]; j++) {
+                ans.emplace_back(1, i + 'a');
+            }
+        }
+        return ans;
+    }
+};
 ```
 
 ``` java
