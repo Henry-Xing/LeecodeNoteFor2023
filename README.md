@@ -539,6 +539,35 @@ class Solution:
         # "".join(list) can get a string combination
         return "".join(ans)
 ```
+```c++
+// 因为s中只含有字母，所以创建一个vector，长度为26，存储每个字母在s中出现的次数，递增时遍历计数的vector，取出加入到结果里。
+class Solution {
+public:
+    string sortString(string s) {
+        vector<int> ch_count(26);
+        for (char& ch: s) {
+            ch_count[ch - 'a']++;
+        }
+
+        string result;
+        while (result.length() < s.length()) {
+            for (int i = 0; i < 26; ++i) {
+                if (ch_count[i] > 0) {
+                    result.push_back(i+'a');
+                    ch_count[i]--;
+                }
+            }
+            for (int i = 25; i >=0; --i) {
+                if (ch_count[i] > 0) {
+                    result.push_back(i+'a');
+                    ch_count[i]--;
+                }
+            }
+        }
+        return result;
+    }
+};
+```
 
 ``` js
 /**
